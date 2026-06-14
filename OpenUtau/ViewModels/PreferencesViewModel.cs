@@ -633,11 +633,6 @@ namespace OpenUtau.App.ViewModels {
                     Preferences.Default.PreRender = preRender;
                     Preferences.Save();
                 });
-            this.WhenAnyValue(vm => vm.PenPlusDefault)
-                .Subscribe(penPlusDefault => {
-                    Preferences.Default.PenPlusDefault = penPlusDefault;
-                    Preferences.Save();
-                });
             this.WhenAnyValue(vm => vm.Language)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(lang => {

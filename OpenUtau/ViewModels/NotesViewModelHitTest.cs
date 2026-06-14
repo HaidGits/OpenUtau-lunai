@@ -46,6 +46,8 @@ namespace OpenUtau.App.ViewModels {
         public bool hitPosition;
         public bool hitPreutter;
         public bool hitOverlap;
+        public bool hitAttackTime;
+        public bool hitReleaseTime;
         public Point point;
     }
 
@@ -370,6 +372,24 @@ namespace OpenUtau.App.ViewModels {
                     int p1Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[1].X) - viewModel.Part.position;
                     double p1x = viewModel.TickToneToPoint(p1Tick, 0).X;
                     pt = new Point(p1x, 60 - phoneme.envelope.data[1].Y * 0.24);
+                    if (WithIn(pt, mousePos, 3)) {
+                        result.phoneme = phoneme;
+                        result.hit = true;
+                        result.hitAttackTime = true;
+                        return result;
+                    }
+                    int p3Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[3].X) - viewModel.Part.position;
+                    double p3x = viewModel.TickToneToPoint(p3Tick, 0).X;
+                    pt = new Point(p3x, 60 - phoneme.envelope.data[3].Y * 0.24);
+                    if (WithIn(pt, mousePos, 3)) {
+                        result.phoneme = phoneme;
+                        result.hit = true;
+                        result.hitReleaseTime = true;
+                        return result;
+                    }
+                    int p4Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[4].X) - viewModel.Part.position;
+                    double p4x = viewModel.TickToneToPoint(p4Tick, 0).X;
+                    pt = new Point(p4x, 60 - phoneme.envelope.data[4].Y * 0.24 - 1);
                     if (WithIn(pt, mousePos, 3)) {
                         result.phoneme = phoneme;
                         result.hit = true;

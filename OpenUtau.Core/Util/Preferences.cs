@@ -455,6 +455,8 @@ namespace OpenUtau.Core.Util {
                 new ShortcutBinding { ActionId = "Open Singers Window", KeyName = "O", ModifiersName = "Alt" },
                 new ShortcutBinding { ActionId = "Open Expressions", KeyName = "E", ModifiersName = "Alt" },
             };
+            public bool LyricLivePreview = true;
+            public bool LyricApplySelectionOnly = true;
             public bool VoicebankPublishUseIgnore = true;
             public string VoicebankPublishIgnores = @"#Adobe Audition
 *.pkf

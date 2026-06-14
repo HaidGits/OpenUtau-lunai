@@ -1543,7 +1543,19 @@ namespace OpenUtau.App.Controls {
                         editState = new PhonemeChangePreutterState(
                             control, ViewModel, this, note.Extends ?? note, phoneme, index);
                     } else if (hitInfo.hitOverlap) {
+                        if (phoneme.Next == null || !phoneme.Next.adjacent) {
+                            return;
+                        }
+                        phoneme = hitInfo.phoneme.Next;
+                        note = phoneme.Parent;
+                        index = phoneme.index;
                         editState = new PhonemeChangeOverlapState(
+                            control, ViewModel, this, note.Extends ?? note, phoneme, index);
+                    } else if (hitInfo.hitAttackTime) {
+                        editState = new PhonemeChangeAttackTimeState(
+                            control, ViewModel, this, note.Extends ?? note, phoneme, index);
+                    } else if (hitInfo.hitReleaseTime) {
+                        editState = new PhonemeChangeReleaseTimeState(
                             control, ViewModel, this, note.Extends ?? note, phoneme, index);
                     }
                 }
@@ -1589,7 +1601,9 @@ namespace OpenUtau.App.Controls {
             }
             
             var hitInfo = ViewModel.NotesViewModel.HitTest.HitTestPhoneme(point.Position);
-            if (hitInfo.hit) {
+            var adjacent = hitInfo.phoneme != null && hitInfo.phoneme.Next != null && hitInfo.phoneme.Next.adjacent;
+            if (hitInfo.hitPosition || hitInfo.hitPreutter || (hitInfo.hitOverlap && adjacent)
+                || hitInfo.hitAttackTime || hitInfo.hitReleaseTime) {
                 Cursor = ViewConstants.cursorSizeWE;
                 ViewModel.MouseoverPhoneme(null);
                 ((IValueTip)this).HideValueTip();

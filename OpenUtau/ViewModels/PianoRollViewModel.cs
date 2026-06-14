@@ -265,6 +265,15 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(_ => UpdatePitchFocusDim());
             UpdatePitchFocusDim();
 
+            this.WhenAnyValue(vm => vm.ToolIndex)
+                .Subscribe(index => EditTool.BaseTool = index);
+            this.WhenAnyValue(vm => vm.PenToolIndex)
+                .Subscribe(index => EditTool.PenToolVariation = index);
+            this.WhenAnyValue(vm => vm.DrawPitchToolIndex)
+                .Subscribe(index => EditTool.DrawPitchToolVariation = index);
+            this.WhenAnyValue(vm => vm.DrawLinePitchToolIndex)
+                .Subscribe(index => EditTool.DrawLinePitchToolVariation = index);
+
             NoteDeleteCommand = ReactiveCommand.Create<NoteHitInfo>(info => {
                 NotesViewModel.DeleteSelectedNotes();
             });
