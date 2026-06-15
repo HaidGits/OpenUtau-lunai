@@ -142,7 +142,7 @@ namespace OpenUtau.Core.G2p {
 }
 
 namespace OpenUtau.Core.DiffSinger {
-    [Phonemizer("DiffSinger Rule-based Filipino Phonemizer", "DIFFS FIL", "UtaUtaUtau", "FIL")]
+    [Phonemizer("DiffSinger Rule-based Filipino Phonemizer", "Filipino", "UtaUtaUtau", "DiffSinger")]
     public class DiffSingerRuleBasedFilipinoPhonemizer : DiffSingerG2pPhonemizer {
         protected override string GetDictionaryName() => "dsdict-fil.yaml";
 
