@@ -22,6 +22,36 @@ namespace OpenUtau.App.Controls {
             return langCode;
         }
 
+        public static bool IsDiffSingerTrack(UTrack? track) {
+            return track?.Singer != null && track.Singer.Found && track.Singer.SingerType == USingerType.DiffSinger;
+        }
+
+        /// <summary>
+        /// Whether to hide the language prefix in the phoneme panel for the open track (display only; does not change preferences).
+        /// DiffSinger bank: follows "Hide language prefix" preference.
+        /// UTAU bank with DiffSinger-friendly panel: always hidden visually.
+        /// Classic phoneme panel: never hidden via these rules.
+        /// </summary>
+        public static bool ShouldHideLangPrefixForDisplay(UTrack? track) {
+            if (!Preferences.Default.DiffSingerPhonemePanelMode) {
+                return false;
+            }
+            if (track == null) {
+                return false;
+            }
+            if (IsDiffSingerTrack(track)) {
+                return Preferences.Default.DiffSingerLangCodeHide;
+            }
+            return true;
+        }
+
+        static UTrack? TrackForPart(UVoicePart? part) {
+            if (part == null || DocManager.Inst.Project.tracks.Count <= part.trackNo) {
+                return null;
+            }
+            return DocManager.Inst.Project.tracks[part.trackNo];
+        }
+
         /// <summary>
         /// Splits phoneme text into language tag (e.g. "ja") and phoneme without tag (e.g. "a").
         /// Same logic as "hide language prefix" preference: prefix is langCode + "/".
@@ -52,7 +82,8 @@ namespace OpenUtau.App.Controls {
             AliasPosition(NotesViewModel viewModel, UPhoneme phoneme, string? langCode, ref double lastTextEndX, ref bool raiseText){
 
             string phonemeText = !string.IsNullOrEmpty(phoneme.phonemeMapped) ? phoneme.phonemeMapped : phoneme.phoneme;
-            if (Preferences.Default.DiffSingerLangCodeHide && !string.IsNullOrEmpty(langCode)) {
+            var track = TrackForPart(viewModel.Part);
+            if (ShouldHideLangPrefixForDisplay(track) && !string.IsNullOrEmpty(langCode)) {
                 var prefix = langCode + "/";
                 if (phonemeText.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) {
                     phonemeText = phonemeText.Substring(prefix.Length);
@@ -66,7 +97,7 @@ namespace OpenUtau.App.Controls {
             } else {
                 raiseText = false;
             }
-            double textY = raiseText ? 2 : 18;
+            double textY = raiseText ? ViewConstants.PhonemeAliasRaisedTextY : ViewConstants.PhonemeAliasNormalTextY;
             var size = new Size(textLayout.Width + 4, textLayout.Height - 2);
             //var rect = new Rect(new Point(x - 2, textY + 1.5), size);
             /*if (rect.Contains(mousePos)) {

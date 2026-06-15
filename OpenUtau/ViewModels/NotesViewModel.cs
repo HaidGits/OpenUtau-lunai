@@ -12,6 +12,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using DynamicData;
 using DynamicData.Binding;
+using OpenUtau.App.Controls;
 using OpenUtau.App.Views;
 using OpenUtau.Core;
 using OpenUtau.Core.Ustx;
@@ -82,13 +83,34 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public double PhonemePanelHeight { get; set; }
         [Reactive] public double PhonemePanelHeightMin { get; set; }
         [Reactive] public double PhonemePanelHeightMax { get; set; }
-        // Tag strip (20px) only in DiffSinger panel mode; in normal mode never add it (avoids white strip, keeps height)
-        public double PhonemePanelTagStripHeight => (Preferences.Default.DiffSingerPhonemePanelMode && !Preferences.Default.DiffSingerLangCodeHide) ? ViewConstants.PhonemeTagStripHeight : 0;
-        public Thickness PianoRollHScrollBottomMargin => new Thickness(0, 0, 0, 4);
-        public GridLength PhonemeGapGridLength => ShowPhoneme ? new GridLength(8) : new GridLength(0);
+        public bool PhonemePanelResizeEnabled => Preferences.Default.DiffSingerPhonemePanelMode;
+        public bool PhonemePanelDetached => ShowPhoneme && Preferences.Default.DiffSingerPhonemePanelMode;
+        public bool ShowEmbeddedPhoneme => ShowPhoneme && !Preferences.Default.DiffSingerPhonemePanelMode;
+        public double PhonemeEmbeddedHeight => ViewConstants.PhonemeEmbeddedHeight;
+        public double WaveformBottomMargin => ShowEmbeddedPhoneme ? ViewConstants.PhonemeEmbeddedHeight + 4 : 4;
+        public double SearchBarBottomMargin => ShowEmbeddedPhoneme ? 70 + ViewConstants.PhonemeEmbeddedHeight : 70;
+        public Thickness WaveformBottomMarginThickness => new Thickness(0, 0, 0, WaveformBottomMargin);
+        public Thickness SearchBarBottomMarginThickness => new Thickness(12, 12, 12, SearchBarBottomMargin);
+        // Tag strip (20px) only in DiffSinger panel mode when lang prefix is shown for the open track.
+        public double PhonemePanelTagStripHeight {
+            get {
+                if (!Preferences.Default.DiffSingerPhonemePanelMode || Part == null) {
+                    return 0;
+                }
+                var track = Part.trackNo < Project.tracks.Count ? Project.tracks[Part.trackNo] : null;
+                if (PhonemeUIRender.ShouldHideLangPrefixForDisplay(track)) {
+                    return 0;
+                }
+                return ViewConstants.PhonemeTagStripHeight;
+            }
+        }
+        public Thickness PianoRollHScrollBottomMargin => new Thickness(0, 0, 0, ShowEmbeddedPhoneme ? ViewConstants.PhonemeEmbeddedHeight + 4 : 4);
+        public GridLength PhonemeGapGridLength => ShowPhoneme && PhonemePanelDetached ? new GridLength(8) : new GridLength(0);
         public double PhonemePanelOuterHeight => PhonemePanelHeight + PhonemePanelTagStripHeight;
-        public GridLength PhonemePanelOuterGridLength => ShowPhoneme ? new GridLength(PhonemePanelOuterHeight) : new GridLength(0);
-        public double PhonemePanelOuterMinHeight => ShowPhoneme
+        public GridLength PhonemePanelOuterGridLength => ShowPhoneme && PhonemePanelDetached
+            ? new GridLength(PhonemePanelOuterHeight)
+            : new GridLength(0);
+        public double PhonemePanelOuterMinHeight => ShowPhoneme && PhonemePanelDetached
             ? PhonemePanelHeightMin + PhonemePanelTagStripHeight
             : 0;
         public GridLength ExpGapGridLength => ShowExpressions ? new GridLength(8) : new GridLength(0);
@@ -289,9 +311,7 @@ namespace OpenUtau.App.ViewModels {
                 Preferences.Save();
             });
             ShowPhoneme = Preferences.Default.ShowPhoneme;
-            PhonemePanelHeight = ViewConstants.PhonemePanelHeightDefault;
-            PhonemePanelHeightMin = ViewConstants.PhonemePanelHeightMin;
-            PhonemePanelHeightMax = ViewConstants.PhonemePanelHeightMax;
+            UpdatePhonemePanelLayoutConstraints();
             this.WhenAnyValue(x => x.PhonemePanelHeight)
                 .Subscribe(_ => {
                     this.RaisePropertyChanged(nameof(PhonemePanelOuterHeight));
@@ -300,17 +320,21 @@ namespace OpenUtau.App.ViewModels {
                 });
             MessageBus.Current.Listen<NotesRefreshEvent>()
                 .Subscribe(_ => {
-                    this.RaisePropertyChanged(nameof(PhonemePanelTagStripHeight));
-                    this.RaisePropertyChanged(nameof(PhonemePanelOuterHeight));
-                    this.RaisePropertyChanged(nameof(PhonemePanelOuterGridLength));
-                    this.RaisePropertyChanged(nameof(PhonemePanelOuterMinHeight));
-                    this.RaisePropertyChanged(nameof(PhonemePanelHeightGridLength));
+                    UpdatePhonemePanelLayoutConstraints();
+                    RaisePhonemePanelLayoutChanged();
                 });
             this.WhenAnyValue(x => x.ShowPhoneme)
             .Subscribe(showPhoneme => {
                 Preferences.Default.ShowPhoneme = showPhoneme;
                 Preferences.Save();
                 this.RaisePropertyChanged(nameof(PhonemeGapGridLength));
+                this.RaisePropertyChanged(nameof(PhonemePanelDetached));
+                this.RaisePropertyChanged(nameof(ShowEmbeddedPhoneme));
+                this.RaisePropertyChanged(nameof(WaveformBottomMargin));
+                this.RaisePropertyChanged(nameof(SearchBarBottomMargin));
+                this.RaisePropertyChanged(nameof(WaveformBottomMarginThickness));
+                this.RaisePropertyChanged(nameof(SearchBarBottomMarginThickness));
+            this.RaisePropertyChanged(nameof(PianoRollHScrollBottomMargin));
                 this.RaisePropertyChanged(nameof(PhonemePanelOuterHeight));
                 this.RaisePropertyChanged(nameof(PhonemePanelOuterGridLength));
                 this.RaisePropertyChanged(nameof(PhonemePanelOuterMinHeight));
@@ -540,6 +564,7 @@ namespace OpenUtau.App.ViewModels {
             }
             UnloadPart();
             Part = part as UVoicePart;
+            UpdatePhonemePanelLayoutConstraints();
             OnPartModified();
             LoadPortrait(part, project);
             LoadWindowTitle(part, project);
@@ -668,7 +693,48 @@ namespace OpenUtau.App.ViewModels {
                 return;
             }
             TickOrigin = Part.position;
+            RaisePhonemePanelLayoutChanged();
             Notify();
+        }
+
+        void UpdatePhonemePanelLayoutConstraints() {
+            if (Preferences.Default.DiffSingerPhonemePanelMode) {
+                PhonemePanelHeightMin = ViewConstants.PhonemePanelHeightMin;
+                PhonemePanelHeightMax = ViewConstants.PhonemePanelHeightMax;
+                if (PhonemePanelHeight < PhonemePanelHeightMin) {
+                    PhonemePanelHeight = PhonemePanelHeightMin;
+                }
+            } else {
+                PhonemePanelHeightMin = ViewConstants.PhonemeEmbeddedHeight;
+                PhonemePanelHeightMax = ViewConstants.PhonemeEmbeddedHeight;
+                PhonemePanelHeight = ViewConstants.PhonemeEmbeddedHeight;
+            }
+            this.RaisePropertyChanged(nameof(PhonemePanelResizeEnabled));
+            this.RaisePropertyChanged(nameof(PhonemePanelDetached));
+            this.RaisePropertyChanged(nameof(ShowEmbeddedPhoneme));
+            this.RaisePropertyChanged(nameof(PhonemeEmbeddedHeight));
+            this.RaisePropertyChanged(nameof(WaveformBottomMargin));
+            this.RaisePropertyChanged(nameof(SearchBarBottomMargin));
+            this.RaisePropertyChanged(nameof(WaveformBottomMarginThickness));
+            this.RaisePropertyChanged(nameof(SearchBarBottomMarginThickness));
+            this.RaisePropertyChanged(nameof(PianoRollHScrollBottomMargin));
+        }
+
+        void RaisePhonemePanelLayoutChanged() {
+            this.RaisePropertyChanged(nameof(PhonemePanelTagStripHeight));
+            this.RaisePropertyChanged(nameof(PhonemePanelDetached));
+            this.RaisePropertyChanged(nameof(ShowEmbeddedPhoneme));
+            this.RaisePropertyChanged(nameof(PhonemeEmbeddedHeight));
+            this.RaisePropertyChanged(nameof(WaveformBottomMargin));
+            this.RaisePropertyChanged(nameof(SearchBarBottomMargin));
+            this.RaisePropertyChanged(nameof(WaveformBottomMarginThickness));
+            this.RaisePropertyChanged(nameof(SearchBarBottomMarginThickness));
+            this.RaisePropertyChanged(nameof(PianoRollHScrollBottomMargin));
+            this.RaisePropertyChanged(nameof(PhonemeGapGridLength));
+            this.RaisePropertyChanged(nameof(PhonemePanelOuterHeight));
+            this.RaisePropertyChanged(nameof(PhonemePanelOuterGridLength));
+            this.RaisePropertyChanged(nameof(PhonemePanelOuterMinHeight));
+            this.RaisePropertyChanged(nameof(PhonemePanelHeightGridLength));
         }
 
         private void DeselectNote(UNote note) {

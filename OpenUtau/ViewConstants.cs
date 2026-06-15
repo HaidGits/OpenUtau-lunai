@@ -58,10 +58,26 @@ namespace OpenUtau.App {
         public const double ExpHeightMin = 132;
         public const double ExpHeightMax = 600;
 
-        public const double PhonemePanelHeightDefault = 44;
+        public const double PhonemePanelHeightDefault = 58;
         public const double PhonemePanelHeightMin = 44;
         public const double PhonemePanelHeightMax = 250;
         public const double PhonemePanelResizeHandleHeight = 8;
         public const double PhonemeTagStripHeight = 20;  // DiffSinger: space for tag above bars
+
+        // Embedded (classic) phoneme strip inside the piano roll — top to bottom.
+        // Alias strip height is fixed; row Y positions are inside it. Normal row may extend slightly into the gap below.
+        public const double PhonemeAliasRaisedTextY = 0;
+        public const double PhonemeAliasNormalTextY = 17;
+        public const double PhonemeAliasChipHeight = 15;
+        public const double PhonemeAliasStripHeight = 27;
+        public const double PhonemeAliasEnvelopeGap = 10;
+        public const double PhonemeClassicEnvelopeHeight = 24;
+        public const double PhonemeEmbeddedBackgroundBottomOpacity = 0.75;
+        public const double PhonemeEmbeddedHeight = PhonemeAliasStripHeight + PhonemeAliasEnvelopeGap + PhonemeClassicEnvelopeHeight;
+
+        /// <summary>Classic phoneme strip envelope band inside the piano roll.</summary>
+        public static (double barY, double barHeight) GetClassicPhonemeEnvelopeLayout() {
+            return (PhonemeAliasStripHeight + PhonemeAliasEnvelopeGap, PhonemeClassicEnvelopeHeight);
+        }
     }
 }

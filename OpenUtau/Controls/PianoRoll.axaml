@@ -227,7 +227,7 @@
       <Image Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,100,0"
              Source="{Binding NotesViewModel.Portrait}" OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"/>
       <Border Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-              Margin="0,0,0,4" Height="72" IsHitTestVisible="False">
+              Margin="{Binding NotesViewModel.WaveformBottomMarginThickness}" Height="72" IsHitTestVisible="False">
         <c:WaveformImage DataContext="{Binding NotesViewModel, Mode=OneWay}"
                          TickWidth="{Binding TickWidth, Mode=OneWay}"
                          TickOffset="{Binding TickOffset, Mode=OneWay}"
@@ -647,7 +647,7 @@
       </Grid>
       </Border>
       <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                  Margin="12,12,12,70" Orientation="Horizontal">
+                  Margin="{Binding NotesViewModel.SearchBarBottomMarginThickness}" Orientation="Horizontal">
         <Border>
           <c:SearchBar Name="SearchBar"/>
         </Border>
@@ -680,6 +680,18 @@
           <c:LyricBox Name="LyricBox" Width="360" LostFocus="LyricBoxLostFocus"/>
         </Border>
       </Grid>
+      <c:PhonemeCanvas Grid.Row="2" Grid.Column="1" ZIndex="3"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0"
+                       Height="{Binding NotesViewModel.PhonemeEmbeddedHeight}"
+                       TickWidth="{Binding NotesViewModel.TickWidth}"
+                       TickOffset="{Binding NotesViewModel.TickOffset}"
+                       Part="{Binding NotesViewModel.Part}"
+                       IsVisible="{Binding NotesViewModel.ShowEmbeddedPhoneme}"
+                       DoubleTapped="PhonemeCanvasDoubleTapped"
+                       PointerPressed="PhonemeCanvasPointerPressed"
+                       PointerMoved="PhonemeCanvasPointerMoved"
+                       PointerExited="PhonemeCanvasPointerLeave"
+                       PointerReleased="PhonemeCanvasPointerReleased"/>
       <Border Grid.Row="1" Grid.Column="2" Background="Transparent"
               HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" Width="24" Height="24"
               PointerWheelChanged="ViewScalerPointerWheelChanged">
@@ -689,13 +701,13 @@
     </Grid>
     </Border>
         <Border Grid.Row="1" Background="Transparent" Cursor="SizeNorthSouth"
-                IsVisible="{Binding NotesViewModel.ShowPhoneme}" Focusable="False"
+                IsVisible="{Binding NotesViewModel.PhonemePanelResizeEnabled}" Focusable="False"
                 PointerPressed="PhonemePanelResizePointerPressed"
                 PointerMoved="PhonemePanelResizePointerMoved"
                 PointerReleased="PhonemePanelResizePointerReleased"/>
         <Border Grid.Row="2" Classes="workspaceCard workspaceDockPianoRollPhoneme"
                 Classes.FlushRight="{Binding NotesViewModel.NotePropsHidden}"
-                IsVisible="{Binding NotesViewModel.ShowPhoneme}">
+                IsVisible="{Binding NotesViewModel.PhonemePanelDetached}">
       <Grid x:Name="PhonemePanelGrid">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="60"/>

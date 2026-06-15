@@ -342,7 +342,8 @@ namespace OpenUtau.App.ViewModels {
         }
 
         public PhonemeHitInfo HitTestPhoneme(Point mousePos) {
-            if (viewModel.Part == null || !viewModel.ShowPhoneme) {
+            var part = viewModel.Part;
+            if (part == null || !viewModel.ShowPhoneme) {
                 return default;
             }
             var timeAxis = viewModel.Project.timeAxis;
@@ -350,8 +351,8 @@ namespace OpenUtau.App.ViewModels {
             result.point = mousePos;
             double leftTick = viewModel.TickOffset - 480;
             double rightTick = leftTick + viewModel.ViewportTicks + 480;
-            foreach (var phoneme in viewModel.Part.phonemes) {
-                double leftBound = timeAxis.MsPosToTickPos(phoneme.PositionMs - phoneme.preutter) - viewModel.Part.position;
+            foreach (var phoneme in part.phonemes) {
+                double leftBound = timeAxis.MsPosToTickPos(phoneme.PositionMs - phoneme.preutter) - part.position;
                 double rightBound = phoneme.End;
                 var note = phoneme.Parent;
                 if (leftBound >= rightTick || rightBound <= leftTick || note.Error || note.OverlapError) {
@@ -360,36 +361,37 @@ namespace OpenUtau.App.ViewModels {
                 Point point;
                 // In DiffSinger phoneme panel mode, preutter/overlap handles are not shown or draggable
                 if (!Preferences.Default.DiffSingerPhonemePanelMode) {
-                    int p0Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[0].X) - viewModel.Part.position;
+                    var (barY, barHeight) = ViewConstants.GetClassicPhonemeEnvelopeLayout();
+                    int p0Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[0].X) - part.position;
                     double p0x = viewModel.TickToneToPoint(p0Tick, 0).X;
-                    var pt = new Point(p0x, 60 - phoneme.envelope.data[0].Y * 0.24 - 1);
+                    var pt = new Point(p0x, barY + (1 - phoneme.envelope.data[0].Y / 100) * barHeight - 1);
                     if (WithIn(pt, mousePos, 3)) {
                         result.phoneme = phoneme;
                         result.hit = true;
                         result.hitPreutter = true;
                         return result;
                     }
-                    int p1Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[1].X) - viewModel.Part.position;
+                    int p1Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[1].X) - part.position;
                     double p1x = viewModel.TickToneToPoint(p1Tick, 0).X;
-                    pt = new Point(p1x, 60 - phoneme.envelope.data[1].Y * 0.24);
+                    pt = new Point(p1x, barY + (1 - phoneme.envelope.data[1].Y / 100) * barHeight);
                     if (WithIn(pt, mousePos, 3)) {
                         result.phoneme = phoneme;
                         result.hit = true;
                         result.hitAttackTime = true;
                         return result;
                     }
-                    int p3Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[3].X) - viewModel.Part.position;
+                    int p3Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[3].X) - part.position;
                     double p3x = viewModel.TickToneToPoint(p3Tick, 0).X;
-                    pt = new Point(p3x, 60 - phoneme.envelope.data[3].Y * 0.24);
+                    pt = new Point(p3x, barY + (1 - phoneme.envelope.data[3].Y / 100) * barHeight);
                     if (WithIn(pt, mousePos, 3)) {
                         result.phoneme = phoneme;
                         result.hit = true;
                         result.hitReleaseTime = true;
                         return result;
                     }
-                    int p4Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[4].X) - viewModel.Part.position;
+                    int p4Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[4].X) - part.position;
                     double p4x = viewModel.TickToneToPoint(p4Tick, 0).X;
-                    pt = new Point(p4x, 60 - phoneme.envelope.data[4].Y * 0.24 - 1);
+                    pt = new Point(p4x, barY + (1 - phoneme.envelope.data[4].Y / 100) * barHeight - 1);
                     if (WithIn(pt, mousePos, 3)) {
                         result.phoneme = phoneme;
                         result.hit = true;
@@ -401,7 +403,13 @@ namespace OpenUtau.App.ViewModels {
                 double xLeft = point.X;
                 // DiffSinger: use rect-based hit (10px wide strip centered on bar) within bar Y bounds for reliable grabbing
                 if (Preferences.Default.DiffSingerPhonemePanelMode) {
-                    double tagStripH = Preferences.Default.DiffSingerLangCodeHide ? 0 : ViewConstants.PhonemeTagStripHeight;
+                    double tagStripH = 0;
+                    if (part.trackNo < viewModel.Project.tracks.Count) {
+                        var track = viewModel.Project.tracks[part.trackNo];
+                        if (!PhonemeUIRender.ShouldHideLangPrefixForDisplay(track)) {
+                            tagStripH = ViewConstants.PhonemeTagStripHeight;
+                        }
+                    }
                     double barY = tagStripH;
                     double barH = viewModel.PhonemePanelHeight;
                     const double grabWidth = 5;
@@ -423,7 +431,8 @@ namespace OpenUtau.App.ViewModels {
         }
 
         public AliasHitInfo HitTestAlias(Point mousePos) {
-            if (viewModel.Part == null || !viewModel.ShowPhoneme) {
+            var part = viewModel.Part;
+            if (part == null || !viewModel.ShowPhoneme) {
                 return default;
             }
             AliasHitInfo result = default;
@@ -432,10 +441,10 @@ namespace OpenUtau.App.ViewModels {
             bool raiseText = false;
             double leftTick = viewModel.TickOffset - 480;
             double rightTick = leftTick + viewModel.ViewportTicks + 480;
-            string langCode = PhonemeUIRender.getLangCode(viewModel.Part);
+            string langCode = PhonemeUIRender.getLangCode(part);
             // TODO: Rewrite with a faster searching algorithm, such as binary search.
-            foreach (var phoneme in viewModel.Part.phonemes) {
-                double leftBound = viewModel.Project.timeAxis.MsPosToTickPos(phoneme.PositionMs - phoneme.preutter) - viewModel.Part.position;
+            foreach (var phoneme in part.phonemes) {
+                double leftBound = viewModel.Project.timeAxis.MsPosToTickPos(phoneme.PositionMs - phoneme.preutter) - part.position;
                 double rightBound = phoneme.End;
                 var note = phoneme.Parent;
                 if (leftBound >= rightTick || rightBound <= leftTick) {
@@ -449,7 +458,13 @@ namespace OpenUtau.App.ViewModels {
                 }
                 // DiffSinger mode: tag above bars (tag strip +20px, hidden when DiffSingerLangCodeHide), phoneme inside bars; bar height = PhonemePanelHeight
                 if (Preferences.Default.DiffSingerPhonemePanelMode) {
-                    double tagStripHeight = Preferences.Default.DiffSingerLangCodeHide ? 0 : ViewConstants.PhonemeTagStripHeight;
+                    double tagStripHeight = 0;
+                    if (part.trackNo < viewModel.Project.tracks.Count) {
+                        var track = viewModel.Project.tracks[part.trackNo];
+                        if (!PhonemeUIRender.ShouldHideLangPrefixForDisplay(track)) {
+                            tagStripHeight = ViewConstants.PhonemeTagStripHeight;
+                        }
+                    }
                     double barY = tagStripHeight;
                     double barHeight = viewModel.PhonemePanelHeight;
                     const double leftEdgeWidth = 5;

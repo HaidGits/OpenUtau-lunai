@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.TextFormatting;
+using Avalonia.Styling;
 using OpenUtau.App;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Core;
@@ -71,10 +72,11 @@ namespace OpenUtau.App.Controls {
         private HashSet<UNote> selectedNotes = new HashSet<UNote>();
         private Geometry pointGeometry;
         private UPhoneme? mouseoverPhoneme;
+        private IBrush? embeddedBackgroundBrush;
 
         public PhonemeCanvas() {
             ClipToBounds = true;
-            pointGeometry = new EllipseGeometry(new Rect(0, 0, 0, 0));
+            pointGeometry = new EllipseGeometry(new Rect(-2.5, -2.5, 5, 5));
             MessageBus.Current.Listen<NotesRefreshEvent>()
                 .Subscribe(_ => InvalidateVisual());
             MessageBus.Current.Listen<NotesSelectionEvent>()
@@ -92,7 +94,33 @@ namespace OpenUtau.App.Controls {
                     }
                 });
             MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(_ => InvalidateVisual());
+                .Subscribe(_ => {
+                    embeddedBackgroundBrush = null;
+                    InvalidateVisual();
+                });
+        }
+
+        IBrush GetEmbeddedBackgroundBrush() {
+            if (embeddedBackgroundBrush != null) {
+                return embeddedBackgroundBrush;
+            }
+            var canvasColor = Avalonia.Media.Colors.Transparent;
+            if (Application.Current?.TryGetResource("WorkspaceCanvasColor", ActualThemeVariant, out var resource) == true
+                && resource is Color color) {
+                canvasColor = color;
+            }
+            var transparent = Color.FromArgb(0, canvasColor.R, canvasColor.G, canvasColor.B);
+            byte bottomAlpha = (byte)Math.Round(255 * ViewConstants.PhonemeEmbeddedBackgroundBottomOpacity);
+            var bottom = Color.FromArgb(bottomAlpha, canvasColor.R, canvasColor.G, canvasColor.B);
+            embeddedBackgroundBrush = new LinearGradientBrush {
+                StartPoint = new RelativePoint(0.5, 0, RelativeUnit.Relative),
+                EndPoint = new RelativePoint(0.5, 1, RelativeUnit.Relative),
+                GradientStops = {
+                    new GradientStop(transparent, 0),
+                    new GradientStop(bottom, 1),
+                },
+            };
+            return embeddedBackgroundBrush;
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change) {
@@ -111,8 +139,12 @@ namespace OpenUtau.App.Controls {
                 return;
             }
             bool diffSingerMode = Preferences.Default.DiffSingerPhonemePanelMode;
-            if (Background is SolidColorBrush { Color.A: > 0 } solidBg) {
-                context.DrawRectangle(solidBg, null, Bounds.WithX(0).WithY(0));
+            var track = Part.trackNo < viewModel.Project.tracks.Count ? viewModel.Project.tracks[Part.trackNo] : null;
+            bool hideLangPrefix = PhonemeUIRender.ShouldHideLangPrefixForDisplay(track);
+            if (!diffSingerMode) {
+                context.DrawRectangle(GetEmbeddedBackgroundBrush(), null, Bounds.WithX(0).WithY(0));
+            } else if (Background is IBrush bg) {
+                context.DrawRectangle(bg, null, Bounds.WithX(0).WithY(0));
             }
             double leftTick = TickOffset - 480;
             double rightTick = TickOffset + Bounds.Width / TickWidth + 480;
@@ -122,14 +154,11 @@ namespace OpenUtau.App.Controls {
             // In DiffSinger mode: tag strip at top (hidden when DiffSingerLangCodeHide), bars below; in UTAU mode: use original layout
             double tagStripHeight = 0, barY, barHeight;
             if (diffSingerMode) {
-                tagStripHeight = Preferences.Default.DiffSingerLangCodeHide ? 0 : ViewConstants.PhonemeTagStripHeight;
+                tagStripHeight = hideLangPrefix ? 0 : ViewConstants.PhonemeTagStripHeight;
                 barY = tagStripHeight;
                 barHeight = Math.Max(0, Bounds.Height - tagStripHeight);
             } else {
-                const double refHeight = 60;
-                double scale = Bounds.Height > 0 ? Bounds.Height / refHeight : 1;
-                barY = 35.5 * scale;
-                barHeight = 28 * scale;
+                (barY, barHeight) = ViewConstants.GetClassicPhonemeEnvelopeLayout();
             }
             foreach (var phoneme in Part.phonemes) {
                 double leftBound = viewModel.Project.timeAxis.MsPosToTickPos(phoneme.PositionMs - phoneme.preutter) - Part.position;
@@ -231,7 +260,7 @@ namespace OpenUtau.App.Controls {
                             var bold = phoneme.phoneme != phoneme.rawPhoneme;
                             const int fontSize = 14;
                             // Tag above bars (in tag strip)
-                            if (!Preferences.Default.DiffSingerLangCodeHide && !string.IsNullOrEmpty(tagText)) {
+                            if (!hideLangPrefix && !string.IsNullOrEmpty(tagText)) {
                                 var tagRect = new Rect(xLeft, 0, barWidth, tagStripHeight);
                                 using (context.PushClip(tagRect)) {
                                     var tagLayout = TextLayoutCache.Get(tagText, brush, fontSize, false);

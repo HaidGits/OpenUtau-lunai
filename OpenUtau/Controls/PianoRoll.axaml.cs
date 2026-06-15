@@ -1637,7 +1637,8 @@ namespace OpenUtau.App.Controls {
         }
 
         public void PhonemePanelResizePointerPressed(object sender, PointerPressedEventArgs args) {
-            if (ViewModel?.NotesViewModel == null || args.GetCurrentPoint((Control)sender).Pointer.Type != PointerType.Mouse) {
+            if (ViewModel?.NotesViewModel == null || !ViewModel.NotesViewModel.PhonemePanelResizeEnabled
+                || args.GetCurrentPoint((Control)sender).Pointer.Type != PointerType.Mouse) {
                 return;
             }
             if (args.GetCurrentPoint((Control)sender).Properties.IsLeftButtonPressed) {

@@ -14,6 +14,8 @@
   <SolidColorBrush x:Key="ToolTipForegroundBrush" Color="{DynamicResource ToolTipForegroundColor}"/>
   <SolidColorBrush x:Key="WorkspaceCanvasBrush"
                    Color="{DynamicResource WorkspaceCanvasColor}"/>
+  <SolidColorBrush x:Key="WorkspaceCanvasBrushSemi"
+                   Color="{DynamicResource WorkspaceCanvasColor}" Opacity="0.6"/>
   <SolidColorBrush x:Key="WorkspaceCardBrush"
                    Color="{DynamicResource WorkspaceCardColor}"/>
   <SolidColorBrush x:Key="WorkspaceElevatedSurfaceBrush"
