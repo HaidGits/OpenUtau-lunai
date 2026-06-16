@@ -183,20 +183,20 @@
       </Border>
       <Carousel Grid.Row="1" SelectedIndex="{Binding Page}" >
         <!--Welcome page-->
-        <Grid Classes="workspaceLayout" Margin="8" ColumnDefinitions="*,8,380" RowDefinitions="*">
+        <Grid Classes="workspaceLayout" Margin="8,0,8,8" ColumnDefinitions="*,8,380" RowDefinitions="*">
           <Grid Grid.Column="0" RowDefinitions="Auto,8,*" ColumnDefinitions="*,8,*">
             <Border Grid.Row="0" Grid.ColumnSpan="3" Classes="welcomeCard">
               <StackPanel Spacing="8">
                 <Button Classes="welcomeRecoveryButton"
                         Click="OnWelcomeRecovery" Content="{Binding RecoveryString}"
                         IsVisible="{Binding HasRecovery}" Background="{DynamicResource WarningBrush}"/>
-                <TextBlock Text="{DynamicResource welcome.start}" Classes="notePropsPanelTitle" Height="32" VerticalAlignment="Center"/>
-                <Grid ColumnDefinitions="*,8,*">
+                <Grid RowDefinitions="Auto,24,Auto">
+                  <TextBlock Grid.Row="0" Text="{DynamicResource welcome.start}" Classes="notePropsPanelTitle" VerticalAlignment="Center"/>
+                  <Grid Grid.Row="2" ColumnDefinitions="*,8,*">
                   <Button Grid.Column="0" Classes="welcomeActionButton" Click="OnMenuNew" HorizontalAlignment="Stretch">
                     <Grid ColumnDefinitions="Auto,*">
                       <Viewbox Grid.Column="0" Width="22" Height="22" Margin="0,0,10,0" VerticalAlignment="Center">
-                        <Path Classes="clear" Data="M4.00024 7H3.00024V4H0.000244141V3H3.00024V0H4.00024V3H7.00024V4H4.00024V7ZM10.5002 1.09998L13.9003 4.59998L14.0002 5V13.5L13.5002 14H3.50024L3.00024 13.5V8H4.00024V13H13.0002V6H9.00024V2H5.00024V1H10.2002L10.5002 1.09998ZM10.0002 2V5H12.9003L10.0002 2Z"
-                              Fill="{DynamicResource PianoRollSideIconOffBrush}"/>
+                        <Path Classes="clear welcomeActionIcon" Data="M4.00024 7H3.00024V4H0.000244141V3H3.00024V0H4.00024V3H7.00024V4H4.00024V7ZM10.5002 1.09998L13.9003 4.59998L14.0002 5V13.5L13.5002 14H3.50024L3.00024 13.5V8H4.00024V13H13.0002V6H9.00024V2H5.00024V1H10.2002L10.5002 1.09998ZM10.0002 2V5H12.9003L10.0002 2Z"/>
                       </Viewbox>
                       <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
                         <TextBlock Classes="welcomeActionTitle" Text="{DynamicResource welcome.new}"/>
@@ -207,8 +207,7 @@
                   <Button Grid.Column="2" Classes="welcomeActionButton" Click="OnMenuOpen" HorizontalAlignment="Stretch">
                     <Grid ColumnDefinitions="Auto,*">
                       <Viewbox Grid.Column="0" Width="22" Height="22" Margin="0,0,10,0" VerticalAlignment="Center">
-                        <Path Classes="clear" Data="M6 5.9142L8.06065 3.85356L8.06065 3.14645L5.91421 1L5.2071 1.70711L5.25 1.75L5.24998 1.75002L5.49997 2H5.5L6.49999 3H3.5C2.83696 3 2.20107 3.2634 1.73223 3.73224C1.26339 4.20108 1 4.83696 1 5.5C1 6.16305 1.26339 6.79893 1.73223 7.26777C2.20107 7.73661 2.83696 8 3.5 8H4V7H3.5C3.10218 7 2.72064 6.84197 2.43934 6.56066C2.15804 6.27936 2 5.89783 2 5.5C2 5.10218 2.15804 4.72065 2.43934 4.43934C2.72064 4.15804 3.10218 4 3.5 4H5V4.00003H5.49996L5.49999 4H6.49999L5.2071 5.29289L5.20711 5.29291L5.2071 5.29292L5.91421 6.00003L6 5.91423V5.9142ZM11 2H8.32838L7.32839 1H12L12.71 1.29L15.71 4.29L16 5V14L15 15H6L5 14V9.00003V6.50003L6 7.34699V14H15V6H11V2ZM12 2V5H15L12 2Z"
-                              Fill="{DynamicResource PianoRollSideIconOffBrush}"/>
+                        <Path Classes="clear welcomeActionIcon" Data="M6 5.9142L8.06065 3.85356L8.06065 3.14645L5.91421 1L5.2071 1.70711L5.25 1.75L5.24998 1.75002L5.49997 2H5.5L6.49999 3H3.5C2.83696 3 2.20107 3.2634 1.73223 3.73224C1.26339 4.20108 1 4.83696 1 5.5C1 6.16305 1.26339 6.79893 1.73223 7.26777C2.20107 7.73661 2.83696 8 3.5 8H4V7H3.5C3.10218 7 2.72064 6.84197 2.43934 6.56066C2.15804 6.27936 2 5.89783 2 5.5C2 5.10218 2.15804 4.72065 2.43934 4.43934C2.72064 4.15804 3.10218 4 3.5 4H5V4.00003H5.49996L5.49999 4H6.49999L5.2071 5.29289L5.20711 5.29291L5.2071 5.29292L5.91421 6.00003L6 5.91423V5.9142ZM11 2H8.32838L7.32839 1H12L12.71 1.29L15.71 4.29L16 5V14L15 15H6L5 14V9.00003V6.50003L6 7.34699V14H15V6H11V2ZM12 2V5H15L12 2Z"/>
                       </Viewbox>
                       <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
                         <TextBlock Classes="welcomeActionTitle" Text="{DynamicResource welcome.open}"/>
@@ -216,6 +215,7 @@
                       </StackPanel>
                     </Grid>
                   </Button>
+                  </Grid>
                 </Grid>
               </StackPanel>
             </Border>
@@ -258,10 +258,12 @@
 
           <!-- Singer Hub shell only; SingerHubPane content is unchanged -->
           <Border Grid.Column="2" Classes="welcomeHubShell" VerticalAlignment="Stretch">
-            <Grid RowDefinitions="Auto,Auto,8,*">
-              <TextBlock Grid.Row="0" Text="{DynamicResource lunai.caption}" Classes="notePropsPanelTitle" Height="32" VerticalAlignment="Center"/>
-              <TextBlock Grid.Row="1" Text="{DynamicResource welcome.singerhub.description}" Classes="welcomeActionDescription"/>
-              <views:SingerHubPane Grid.Row="3"/>
+            <Grid RowDefinitions="Auto,8,*">
+              <StackPanel Grid.Row="0" Spacing="4">
+                <TextBlock Text="{DynamicResource lunai.caption}" Classes="notePropsPanelTitle" VerticalAlignment="Center"/>
+                <TextBlock Text="{DynamicResource welcome.singerhub.description}" Classes="welcomeActionDescription"/>
+              </StackPanel>
+              <views:SingerHubPane Grid.Row="2"/>
             </Grid>
           </Border>
         </Grid>
