@@ -463,7 +463,7 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="lunai.tab.ufr">UFR</system:String>
   <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
   <system:String x:Key="lunai.company">LUNAI Project</system:String>
-  <system:String x:Key="lunai.openpage">Открыть страницу</system:String>
+  <system:String x:Key="lunai.website">Сайт</system:String>
   <system:String x:Key="lunai.col.name">Имя</system:String>
   <system:String x:Key="lunai.col.version">Версия</system:String>
   <system:String x:Key="lunai.col.installed">Установлено</system:String>
@@ -932,7 +932,7 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="welcome.open">Открыть</system:String>
   <system:String x:Key="welcome.open.description">Открыть локальный проект</system:String>
   <system:String x:Key="welcome.recent">Недавние</system:String>
-  <system:String x:Key="welcome.singerhub.description">Установите или обновите голосовые банки от проверенных источников (LUNAI, UFR, BRAPA).</system:String>
+  <system:String x:Key="welcome.singerhub.description">Установите или обновите голосовые библиотеки от проверенных источников</system:String>
   <system:String x:Key="welcome.singerhub.open">Открыть центр исполнителей</system:String>
   <system:String x:Key="welcome.start">Начать</system:String>
   <system:String x:Key="welcome.template">Шаблон</system:String>

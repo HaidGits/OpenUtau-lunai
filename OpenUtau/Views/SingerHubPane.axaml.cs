@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Threading;
@@ -65,6 +66,14 @@ namespace OpenUtau.App.Views {
             return lifetime?.MainWindow;
         }
 
+        void OnSearchBoxGotFocus(object? sender, GotFocusEventArgs e) {
+            SearchChrome.Classes.Add("focused");
+        }
+
+        void OnSearchBoxLostFocus(object? sender, RoutedEventArgs e) {
+            SearchChrome.Classes.Remove("focused");
+        }
+
         async void OnPrimaryActionClick(object sender, RoutedEventArgs e) {
             try {
                 if (DataContext is SingerHubViewModel vm &&
@@ -90,22 +99,29 @@ namespace OpenUtau.App.Views {
             }
         }
 
-        void OnOpenPageClick(object? sender, RoutedEventArgs e) {
-            var dc = (sender as Control)?.DataContext as SingerHubRowViewModel;
-            if (dc != null && !string.IsNullOrEmpty(dc.PageUrl)) {
-                try {
-                    if (!Uri.TryCreate(dc.PageUrl, UriKind.Absolute, out var uri)) {
-                        return;
-                    }
-                    // Only allow http/https links to be opened.
-                    if (!string.Equals(uri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) &&
-                        !string.Equals(uri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)) {
-                        return;
-                    }
-                    OS.OpenWeb(uri.ToString());
-                } catch (Exception ex) {
-                    DocManager.Inst.ExecuteCmd(new ErrorMessageNotification(ex));
+        void OnOpenWebsiteClick(object? sender, RoutedEventArgs e) {
+            OpenHttpUrl((sender as Control)?.DataContext as SingerHubRowViewModel, row => row.PageUrl);
+        }
+
+        static void OpenHttpUrl(SingerHubRowViewModel? row, Func<SingerHubRowViewModel, string> urlSelector) {
+            if (row == null) {
+                return;
+            }
+            var url = urlSelector(row);
+            if (string.IsNullOrEmpty(url)) {
+                return;
+            }
+            try {
+                if (!Uri.TryCreate(url, UriKind.Absolute, out var uri)) {
+                    return;
                 }
+                if (!string.Equals(uri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(uri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)) {
+                    return;
+                }
+                OS.OpenWeb(uri.ToString());
+            } catch (Exception ex) {
+                DocManager.Inst.ExecuteCmd(new ErrorMessageNotification(ex));
             }
         }
     }

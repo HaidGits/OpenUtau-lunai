@@ -492,6 +492,7 @@
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="Margin" Value="0" />
     <Setter Property="Padding" Value="8" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -503,14 +504,122 @@
   <Style Selector="Button.welcomeActionButton:pressed">
     <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}" />
   </Style>
-  <Style Selector="Button.singerHubInstallButton">
+  <Style Selector="Button.welcomeActionButton Path.welcomeActionIcon">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollSideIconOffBrush}" />
+  </Style>
+  <Style Selector="Button.welcomeActionButton:pointerover Path.welcomeActionIcon,
+          Button.welcomeActionButton:pressed Path.welcomeActionIcon">
+    <Setter Property="Fill" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+  </Style>
+  <Style Selector="Button.singerHubActionButton">
     <Setter Property="Margin" Value="0" />
-    <Setter Property="Padding" Value="8,5,8,3" />
+    <Setter Property="Padding" Value="6,2" />
     <Setter Property="Height" Value="24" />
     <Setter Property="MinHeight" Value="24" />
-    <Setter Property="FontSize" Value="11" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="CornerRadius" Value="6" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Button.singerHubActionButton:pointerover">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}" />
+  </Style>
+  <Style Selector="Button.singerHubActionButton:pressed">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}" />
+  </Style>
+  <Style Selector="Button.singerHubLinkButton">
+    <Setter Property="Foreground" Value="{DynamicResource AccentBrush1}" />
+  </Style>
+  <Style Selector="Button.singerHubInstallButton">
+    <Setter Property="MinWidth" Value="52" />
+    <Setter Property="Width" Value="52" />
+    <Setter Property="MaxWidth" Value="52" />
+  </Style>
+  <Style Selector="Border.singerHubCompanyChip">
+    <Setter Property="Padding" Value="0,2" />
+    <Setter Property="Height" Value="24" />
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="CornerRadius" Value="6" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.singerHubCompanyChip TextBlock">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="Border.singerHubRow">
+    <Setter Property="Background" Value="{DynamicResource WorkspaceElevatedSurfaceBrush}" />
+  </Style>
+  <Style Selector="Border.singerHubRow:pointerover">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrushPointerOver}" />
+  </Style>
+  <Style Selector="Border.singerHubSearchChrome">
+    <Setter Property="Margin" Value="0,0,0,10" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="26" />
+    <Setter Property="CornerRadius" Value="6" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="ClipToBounds" Value="False" />
+  </Style>
+  <Style Selector="Border.singerHubSearchChrome.focused">
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox">
+    <Setter Property="Height" Value="24" />
+    <Setter Property="MinHeight" Value="24" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="6,2" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+    <Setter Property="Background" Value="{DynamicResource TrackBackgroundAltBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:pointerover">
+    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrushPointerOver}" />
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrushPointerOver}" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:pressed">
+    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrushPointerOver}" />
+    <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:focus">
+    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrushPointerOver}" />
+    <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox /template/ TextBlock#PART_Watermark">
+    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:pointerover /template/ TextBlock#PART_Watermark,
+          TextBox.singerHubSearchBox:pressed /template/ TextBlock#PART_Watermark,
+          TextBox.singerHubSearchBox:focus /template/ TextBlock#PART_Watermark">
+    <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrushPointerOver}" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource TrackBackgroundAltBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:pointerover /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrushPointerOver}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:pressed /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+  </Style>
+  <Style Selector="TextBox.singerHubSearchBox:focus /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
   </Style>
   <Style Selector="TextBlock.welcomeActionTitle">
     <Setter Property="FontSize" Value="13" />

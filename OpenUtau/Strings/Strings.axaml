@@ -474,7 +474,7 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="lunai.tab.ufr">UFR</system:String>
   <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
   <system:String x:Key="lunai.company">LUNAI Project</system:String>
-  <system:String x:Key="lunai.openpage">Open page</system:String>
+  <system:String x:Key="lunai.website">Website</system:String>
   <system:String x:Key="lunai.col.name">Name</system:String>
   <system:String x:Key="lunai.col.version">Version</system:String>
   <system:String x:Key="lunai.col.installed">Installed</system:String>
@@ -1047,7 +1047,7 @@ General
   <system:String x:Key="welcome.recent">Recent</system:String>
   <system:String x:Key="welcome.start">Start</system:String>
   <system:String x:Key="welcome.template">Template</system:String>
-  <system:String x:Key="welcome.singerhub.description">Install or update voicebanks from trusted sources (LUNAI, UFR, BRAPA).</system:String>
+  <system:String x:Key="welcome.singerhub.description">Install or update voice libraries from trusted sources</system:String>
   <system:String x:Key="welcome.singerhub.open">Open Singer Hub</system:String>
 
   <system:String x:Key="themeeditor.title">Theme Editor</system:String>

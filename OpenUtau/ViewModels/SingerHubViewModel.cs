@@ -34,6 +34,8 @@ namespace OpenUtau.App.ViewModels {
         public string Host { get; }
         public bool IsLunai { get; }
         public string IconUrl { get; }
+        /// <summary>LUNAI: falls back to icon.png when iconou.png is unavailable.</summary>
+        public string IconFallbackUrl { get; }
         public string PageUrl { get; }
         public string Company { get; }
         /// <summary>Terms of use URL. Empty if none. LUNAI default: https://lunaiproject.github.io/termsofuse</summary>
@@ -47,7 +49,6 @@ namespace OpenUtau.App.ViewModels {
 
         public bool HasPageLink => !string.IsNullOrEmpty(PageUrl);
         public bool HasCompany => !string.IsNullOrEmpty(Company);
-        public bool ShowCompanyPageSeparator => HasCompany && HasPageLink;
         public bool HasRegistry => Registry != null;
         /// <summary>Install when not installed or when installed version is older than latest, and download is available.</summary>
         public bool CanInstall => HasRegistry && HasDownloadUrl && (!IsInstalled || SingerHubClient.CompareVersions(InstalledVersion, Version) < 0);
@@ -106,9 +107,11 @@ namespace OpenUtau.App.ViewModels {
             if (Host == "ufr") {
                 PageUrl = string.IsNullOrEmpty(code) ? string.Empty : (UfrVoicebankBaseUrl + codeLower + "/");
                 IconUrl = icon;
+                IconFallbackUrl = string.Empty;
             } else if (Host == "brapa") {
                 // BRAPA: icon из JSON, страница — tos или сайт команды.
                 IconUrl = icon;
+                IconFallbackUrl = string.Empty;
                 var page = (entry.Tos ?? string.Empty).Trim();
                 if (string.IsNullOrEmpty(page) || page.Equals("none", StringComparison.OrdinalIgnoreCase)) {
                     PageUrl = "https://www.teambrapa.com.br/";
@@ -117,10 +120,13 @@ namespace OpenUtau.App.ViewModels {
                 }
             } else {
                 if (!string.IsNullOrEmpty(codeLower)) {
-                    IconUrl = SingersBaseUrl + codeLower + "/icon.png";
-                    PageUrl = SingersBaseUrl + codeLower + "/";
+                    var singerBase = SingersBaseUrl + codeLower + "/";
+                    IconUrl = singerBase + "iconou.png";
+                    IconFallbackUrl = singerBase + "icon.png";
+                    PageUrl = singerBase;
                 } else {
                     IconUrl = string.Empty;
+                    IconFallbackUrl = string.Empty;
                     PageUrl = string.Empty;
                 }
             }
@@ -155,6 +161,7 @@ namespace OpenUtau.App.ViewModels {
             Host = string.Empty;
             IsLunai = isLunai;
             IconUrl = string.Empty;
+            IconFallbackUrl = string.Empty;
             PageUrl = string.Empty;
             Company = string.Empty;
             TosUrl = isLunai ? "https://lunaiproject.github.io/termsofuse" : string.Empty;
@@ -240,23 +247,58 @@ namespace OpenUtau.App.ViewModels {
             http.DefaultRequestHeaders.Add("User-Agent", "OpenUtau-LUNAI");
             foreach (var row in rows.Where(r => !string.IsNullOrEmpty(r.IconUrl))) {
                 try {
-                    if (iconCache.TryGetValue(row.IconUrl, out var cached)) {
+                    Bitmap? cachedBitmap = null;
+                    foreach (var url in IconUrlsFor(row)) {
+                        if (iconCache.TryGetValue(url, out var cached)) {
+                            cachedBitmap = cached;
+                            break;
+                        }
+                    }
+                    if (cachedBitmap != null) {
                         await Dispatcher.UIThread.InvokeAsync(() => {
-                            row.IconBitmap = cached;
+                            row.IconBitmap = cachedBitmap;
                         });
                         continue;
                     }
 
-                    var bytes = await http.GetByteArrayAsync(row.IconUrl);
+                    byte[]? bytes = null;
+                    string? loadedUrl = null;
+                    foreach (var url in IconUrlsFor(row)) {
+                        try {
+                            using var response = await http.GetAsync(url);
+                            if (!response.IsSuccessStatusCode) {
+                                continue;
+                            }
+                            bytes = await response.Content.ReadAsByteArrayAsync();
+                            loadedUrl = url;
+                            break;
+                        } catch {
+                            /* try next URL */
+                        }
+                    }
+                    if (bytes == null || loadedUrl == null) {
+                        continue;
+                    }
+
                     await Dispatcher.UIThread.InvokeAsync(() => {
                         try {
                             using var ms = new MemoryStream(bytes);
                             var bmp = new Bitmap(ms);
                             row.IconBitmap = bmp;
-                            iconCache[row.IconUrl] = bmp;
+                            iconCache[loadedUrl] = bmp;
                         } catch { /* ignore decode errors */ }
                     });
                 } catch { /* ignore load errors */ }
+            }
+        }
+
+        static IEnumerable<string> IconUrlsFor(SingerHubRowViewModel row) {
+            if (!string.IsNullOrEmpty(row.IconUrl)) {
+                yield return row.IconUrl;
+            }
+            if (!string.IsNullOrEmpty(row.IconFallbackUrl)
+                && !string.Equals(row.IconFallbackUrl, row.IconUrl, StringComparison.OrdinalIgnoreCase)) {
+                yield return row.IconFallbackUrl;
             }
         }
 
