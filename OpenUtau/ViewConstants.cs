@@ -29,6 +29,7 @@ namespace OpenUtau.App {
 
         public static readonly Cursor cursorCross = new Cursor(StandardCursorType.Cross);
         public static readonly Cursor cursorHand = new Cursor(StandardCursorType.Hand);
+        public static readonly Cursor cursorHandGrab = new Cursor(StandardCursorType.SizeWestEast);
         public static readonly Cursor cursorNo = new Cursor(StandardCursorType.No);
         public static readonly Cursor cursorSizeAll = new Cursor(StandardCursorType.SizeAll);
         public static readonly Cursor cursorSizeNS = new Cursor(StandardCursorType.SizeNorthSouth);

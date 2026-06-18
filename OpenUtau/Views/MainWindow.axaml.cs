@@ -1106,6 +1106,13 @@ namespace OpenUtau.App.Views {
                         Cursor = ViewConstants.cursorSizeAll;
                     }
                 } else if (hitControl is PartControl partControl) {
+                    var localOnPart = args.GetCurrentPoint(partControl).Position;
+                    var notesVm = pianoRoll?.ViewModel?.NotesViewModel;
+                    if (partControl.TryHitViewport(localOnPart)
+                        && notesVm != null && notesVm.Part == partControl.part) {
+                        partEditState = new PartViewportScrollState(control, viewModel, notesVm, partControl);
+                        Cursor = ViewConstants.cursorHandGrab;
+                    } else {
                     bool fadein = false;
                     bool fadeout = false;
                     if (partControl.part is UWavePart wavePart && point.Position.Y < partControl.Bounds.Top + 6) {
@@ -1131,6 +1138,7 @@ namespace OpenUtau.App.Views {
                     } else {
                         partEditState = new PartMoveEditState(control, viewModel, partControl.part);
                         Cursor = ViewConstants.cursorSizeAll;
+                    }
                     }
                 }
             } else if (point.Properties.IsRightButtonPressed) {
@@ -1185,11 +1193,19 @@ namespace OpenUtau.App.Views {
             var control = (Control)sender;
             var point = args.GetCurrentPoint(control);
             if (partEditState != null) {
+                if (partEditState is PartViewportScrollState) {
+                    Cursor = ViewConstants.cursorHandGrab;
+                }
                 partEditState.Update(point.Pointer, point.Position);
                 return;
             }
             var hitControl = control.InputHitTest(point.Position);
             if (hitControl is PartControl partControl) {
+                var localOnPart = args.GetCurrentPoint(partControl).Position;
+                if (partControl.TryHitViewport(localOnPart)) {
+                    Cursor = ViewConstants.cursorHand;
+                    return;
+                }
                 bool fadein = false;
                 bool fadeout = false;
                 if (partControl.part is UWavePart wavePart && point.Position.Y < partControl.Bounds.Top + 6) {

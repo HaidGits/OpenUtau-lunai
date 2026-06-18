@@ -286,4 +286,41 @@ namespace OpenUtau.App.Views {
             tracksVm.TrackOffset = Math.Max(0, tracksVm.TrackOffset - deltaY);
         }
     }
+
+    class PartViewportScrollState : PartEditState {
+        readonly NotesViewModel notesVm;
+        readonly PartControl partControl;
+        double startLocalX;
+        double startTickOffset;
+
+        public PartViewportScrollState(
+            Control control, MainWindowViewModel vm, NotesViewModel notesVm, PartControl partControl)
+            : base(control, vm) {
+            this.notesVm = notesVm;
+            this.partControl = partControl;
+        }
+
+        Point CanvasToPartLocal(Point canvasPoint) {
+            var topLeft = partControl.TranslatePoint(new Point(0, 0), control)
+                ?? new Point(Canvas.GetLeft(partControl), Canvas.GetTop(partControl));
+            return canvasPoint - topLeft;
+        }
+
+        public override void Begin(IPointer pointer, Point canvasPoint) {
+            pointer.Capture(control);
+            var local = CanvasToPartLocal(canvasPoint);
+            startLocalX = local.X;
+            startTickOffset = notesVm.TickOffset;
+        }
+
+        public override void End(IPointer pointer, Point point) {
+            pointer.Capture(null);
+        }
+
+        public override void Update(IPointer pointer, Point canvasPoint) {
+            var local = CanvasToPartLocal(canvasPoint);
+            double deltaTicks = (local.X - startLocalX) / vm.TracksViewModel.TickWidth;
+            notesVm.TickOffset = Math.Clamp(startTickOffset + deltaTicks, 0, notesVm.HScrollBarMax);
+        }
+    }
 }

@@ -200,6 +200,22 @@ namespace OpenUtau.App.Controls {
             Canvas.SetTop(this, Offset.Y + part.trackNo * trackHeight);
         }
 
+        public bool TryHitViewport(Point localPoint) {
+            if (partsCanvas.PianoRollOpenPart != part || pianoRollViewViewportTicks <= 0 || tickWidth <= 0) {
+                return false;
+            }
+            const double inset = 1;
+            double outerWidth = Math.Max(0, Width - 2 * inset);
+            double vpLeft = Math.Max(0, pianoRollViewTickOffset * tickWidth);
+            double vpRight = Math.Min(outerWidth,
+                (pianoRollViewTickOffset + pianoRollViewViewportTicks) * tickWidth);
+            if (vpRight <= vpLeft + 1) {
+                return false;
+            }
+            return localPoint.X >= inset + vpLeft && localPoint.X <= inset + vpRight
+                && localPoint.Y >= inset && localPoint.Y <= Height - inset;
+        }
+
         public void SetSize() {
             Width = TickWidth * part.Duration;
             Height = trackHeight;
@@ -262,7 +278,7 @@ namespace OpenUtau.App.Controls {
                     (pianoRollViewTickOffset + pianoRollViewViewportTicks) * tickWidth);
                 if (vpRight > vpLeft + 1) {
                     var vpRect = new Rect(outerRect.X + vpLeft, outerRect.Y, vpRight - vpLeft, outerRect.Height);
-                    var vpFill = new SolidColorBrush(Color.FromArgb(48, 255, 255, 255));
+                    var vpFill = new SolidColorBrush(Color.FromArgb(28, 255, 255, 255));
                     var vpPen = new Pen(Brushes.White, 2);
                     context.DrawRectangle(vpFill, vpPen, new RoundedRect(vpRect, new CornerRadius(3)));
                 }
