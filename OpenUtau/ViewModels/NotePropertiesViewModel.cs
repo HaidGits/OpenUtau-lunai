@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -39,10 +39,6 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public float AutoVibratoNoteLength { get; set; }
         [Reactive] public bool AutoVibratoToggle { get; set; }
         [Reactive] public bool IsNoteSelected { get; set; } = false;
-        [Reactive] public IBrush SectionHeaderBackground { get; private set; } = Brushes.Transparent;
-        [Reactive] public IBrush SectionHeaderBackgroundPointerOver { get; private set; } = Brushes.Transparent;
-        [Reactive] public IBrush SectionHeaderBackgroundPressed { get; private set; } = Brushes.Transparent;
-        [Reactive] public IBrush SectionContentBackground { get; private set; } = Brushes.Transparent;
         [Reactive] public IReadOnlyList<MenuItemViewModel>? PhonemizerMenuItems { get; set; }
         public ReactiveCommand<string?, System.Reactive.Unit> SelectPhonemizerCommand { get; }
         [Reactive] public bool IsPhonemizerEnabled { get; set; } = true;
@@ -167,39 +163,7 @@ namespace OpenUtau.App.ViewModels {
                 });
 
             DocManager.Inst.AddSubscriber(this);
-
-            MessageBus.Current.Listen<PianorollRefreshEvent>()
-                .Subscribe(_ => UpdateSectionHeaderBrushes());
-            MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(_ => UpdateSectionHeaderBrushes());
-
-            UpdateSectionHeaderBrushes();
         }
-
-        public void UpdateSectionHeaderBrushes() {
-            if (Preferences.Default.UseTrackColor) {
-                Color noteColor = ThemeManager.GetTrackColor(GetTrackColorName()).NoteColor.Color;
-                SectionHeaderBackground = new SolidColorBrush(NoteColorWithOpacity(noteColor, 0.25));
-                SectionHeaderBackgroundPointerOver = new SolidColorBrush(NoteColorWithOpacity(noteColor, 0.55));
-                SectionHeaderBackgroundPressed = new SolidColorBrush(NoteColorWithOpacity(noteColor, 0.80));
-            } else {
-                var brushes = WorkspaceSectionExpanderChrome.CreateThemeAccentHeaderBrushes();
-                SectionHeaderBackground = brushes.Normal;
-                SectionHeaderBackgroundPointerOver = brushes.PointerOver;
-                SectionHeaderBackgroundPressed = brushes.Pressed;
-            }
-            SectionContentBackground = ThemeManager.WorkspaceElevatedSurfaceBrush;
-        }
-
-        string GetTrackColorName() {
-            if (Part != null && DocManager.Inst.Project != null) {
-                return DocManager.Inst.Project.tracks[Part.trackNo].TrackColor;
-            }
-            return "Blue";
-        }
-
-        static Color NoteColorWithOpacity(Color color, double opacity) =>
-            Controls.WorkspaceSectionExpanderChrome.NoteColorWithOpacity(color, opacity);
 
         // note -> panel
         private void OnSelectNotes() {
@@ -285,7 +249,6 @@ namespace OpenUtau.App.ViewModels {
             } else {
                 this.Part = null;
             }
-            UpdateSectionHeaderBrushes();
         }
 
         private string GetPhonemizerDisplayName(string? targetId) {

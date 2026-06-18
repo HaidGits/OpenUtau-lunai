@@ -1,19 +1,15 @@
 using System;
-using System.ComponentModel;
 using System.Linq;
-using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Media;
-using Avalonia.VisualTree;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
+using Avalonia.Threading;
+using Avalonia.VisualTree;
+using OpenUtau.App;
 using OpenUtau.App.ViewModels;
 using OpenUtau.App.Views;
-using Avalonia.Threading;
-using OpenUtau.App;
 using OpenUtau.Core;
 using OpenUtau.Core.Ustx;
 using OpenUtau.Core.Util;
@@ -24,9 +20,7 @@ using SharpCompress;
 namespace OpenUtau.App.Controls {
     public partial class NotePropertiesControl : UserControl, ICmdSubscriber {
         private readonly NotePropertiesViewModel ViewModel;
-        private readonly WorkspaceSectionExpanderChrome sectionChrome = new();
         private int scrollStyleApplyGeneration;
-        private int sectionBrushApplyGeneration;
 
         public NotePropertiesControl() {
             InitializeComponent();
@@ -55,7 +49,6 @@ foreach (var box in this.GetLogicalDescendants().OfType<TextBox>()) {
             Loaded += (_, _) => RefreshWorkspaceChrome();
             DetachedFromVisualTree += (_, _) => {
                 scrollStyleApplyGeneration++;
-                sectionBrushApplyGeneration++;
             };
             this.GetObservable(IsVisibleProperty).Subscribe(visible => {
                 if (visible) {
@@ -70,13 +63,6 @@ foreach (var box in this.GetLogicalDescendants().OfType<TextBox>()) {
                         RefreshWorkspaceChrome();
                     }
                 });
-            MessageBus.Current.Listen<PianorollRefreshEvent>()
-                .Subscribe(e => {
-                    if (IsVisible && e.refreshItem is "TrackColor" or "Part") {
-                        ScheduleApplySectionBrushes(retryIfNeeded: true);
-                    }
-                });
-            ViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         public void RefreshWorkspaceChrome() {
@@ -84,53 +70,7 @@ foreach (var box in this.GetLogicalDescendants().OfType<TextBox>()) {
                 return;
             }
             ClosePanelButton.IsVisible = IsHostedInPianoRollDock();
-            ViewModel.UpdateSectionHeaderBrushes();
             ScheduleApplyNotePropsScrollStyle();
-            ScheduleApplySectionBrushes(retryIfNeeded: true);
-        }
-
-        void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-            if (e.PropertyName is nameof(NotePropertiesViewModel.SectionHeaderBackground)
-                or nameof(NotePropertiesViewModel.SectionHeaderBackgroundPointerOver)
-                or nameof(NotePropertiesViewModel.SectionHeaderBackgroundPressed)
-                or nameof(NotePropertiesViewModel.SectionContentBackground)) {
-                ApplySectionBrushes();
-            }
-        }
-
-        void ScheduleApplySectionBrushes(bool retryIfNeeded = false) {
-            if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
-                return;
-            }
-            int generation = ++sectionBrushApplyGeneration;
-            Dispatcher.UIThread.Post(() => {
-                if (generation != sectionBrushApplyGeneration
-                    || !WorkspaceScrollbarHelper.IsInVisualTree(this)) {
-                    return;
-                }
-                ApplySectionBrushes();
-                if (retryIfNeeded
-                    && generation == sectionBrushApplyGeneration
-                    && !sectionChrome.HasAppliedNotePropsExpanders(this)) {
-                    Dispatcher.UIThread.Post(() => {
-                        if (generation == sectionBrushApplyGeneration) {
-                            ApplySectionBrushes();
-                        }
-                    }, DispatcherPriority.Render);
-                }
-            }, DispatcherPriority.Loaded);
-        }
-
-        void ApplySectionBrushes() {
-            if (!IsLoaded) {
-                return;
-            }
-            sectionChrome.Apply(
-                this,
-                ViewModel.SectionHeaderBackground,
-                ViewModel.SectionHeaderBackgroundPointerOver,
-                ViewModel.SectionHeaderBackgroundPressed,
-                ViewModel.SectionContentBackground);
         }
 
         void ScheduleApplyNotePropsScrollStyle() {
@@ -179,7 +119,6 @@ foreach (var box in this.GetLogicalDescendants().OfType<TextBox>()) {
             }
 
             NotePropertiesViewModel.NoteLoading = false;
-            ScheduleApplySectionBrushes(retryIfNeeded: true);
         }
 
         private string textBoxValue = string.Empty;
