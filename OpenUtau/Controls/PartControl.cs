@@ -64,6 +64,16 @@ namespace OpenUtau.App.Controls {
                 nameof(FadeOut),
                 o => o.FadeOut,
                 (o, v) => o.FadeOut = v);
+        public static readonly DirectProperty<PartControl, double> PianoRollViewTickOffsetProperty =
+            AvaloniaProperty.RegisterDirect<PartControl, double>(
+                nameof(PianoRollViewTickOffset),
+                o => o.PianoRollViewTickOffset,
+                (o, v) => o.PianoRollViewTickOffset = v);
+        public static readonly DirectProperty<PartControl, double> PianoRollViewViewportTicksProperty =
+            AvaloniaProperty.RegisterDirect<PartControl, double>(
+                nameof(PianoRollViewViewportTicks),
+                o => o.PianoRollViewViewportTicks,
+                (o, v) => o.PianoRollViewViewportTicks = v);
 
         // Tick width in pixel.
         public double TickWidth {
@@ -102,6 +112,14 @@ namespace OpenUtau.App.Controls {
             get { return Width - (fadeOut * TickWidth); }
             set { SetAndRaise(FadeOutProperty, ref fadeOut, value); }
         }
+        public double PianoRollViewTickOffset {
+            get => pianoRollViewTickOffset;
+            set => SetAndRaise(PianoRollViewTickOffsetProperty, ref pianoRollViewTickOffset, value);
+        }
+        public double PianoRollViewViewportTicks {
+            get => pianoRollViewViewportTicks;
+            set => SetAndRaise(PianoRollViewViewportTicksProperty, ref pianoRollViewViewportTicks, value);
+        }
 
         private double tickWidth;
         private double trackHeight;
@@ -112,6 +130,8 @@ namespace OpenUtau.App.Controls {
         private bool selected;
         private double fadeIn;
         private double fadeOut;
+        private double pianoRollViewTickOffset;
+        private double pianoRollViewViewportTicks;
         private Geometry pointGeometry;
 
         public readonly UPart part;
@@ -136,6 +156,8 @@ namespace OpenUtau.App.Controls {
                 (tick, track) => new Point(-tick * TickWidth, -track * TrackHeight))));
             unbinds.Add(this.Bind(ViewWidthProperty, canvas.WhenAnyValue(x => x.Bounds).Select(bounds => bounds.Width)));
             unbinds.Add(this.Bind(TickOffsetProperty, canvas.WhenAnyValue(x => x.TickOffset).Select(tickOffset => tickOffset)));
+            unbinds.Add(this.Bind(PianoRollViewTickOffsetProperty, canvas.GetObservable(PartsCanvas.PianoRollViewTickOffsetProperty)));
+            unbinds.Add(this.Bind(PianoRollViewViewportTicksProperty, canvas.GetObservable(PartsCanvas.PianoRollViewViewportTicksProperty)));
 
             SetPosition();
             Refersh();
@@ -160,7 +182,9 @@ namespace OpenUtau.App.Controls {
                 SetPosition();
             }
             if (change.Property == TickOffsetProperty ||
-                change.Property == ViewWidthProperty) {
+                change.Property == ViewWidthProperty ||
+                change.Property == PianoRollViewTickOffsetProperty ||
+                change.Property == PianoRollViewViewportTicksProperty) {
                 InvalidateVisual();
             }
             if (change.Property == SelectedProperty ||
@@ -231,6 +255,18 @@ namespace OpenUtau.App.Controls {
                     (TickOffset + ViewWidth / TickWidth - part.position) * TickWidth);
             }
             context.DrawRectangle(null, borderPen, borderRect, cornerRadius, cornerRadius);
+
+            if (isOpenInPianoRoll && pianoRollViewViewportTicks > 0) {
+                double vpLeft = Math.Max(0, pianoRollViewTickOffset * tickWidth);
+                double vpRight = Math.Min(outerRect.Width,
+                    (pianoRollViewTickOffset + pianoRollViewViewportTicks) * tickWidth);
+                if (vpRight > vpLeft + 1) {
+                    var vpRect = new Rect(outerRect.X + vpLeft, outerRect.Y, vpRight - vpLeft, outerRect.Height);
+                    var vpFill = new SolidColorBrush(Color.FromArgb(48, 255, 255, 255));
+                    var vpPen = new Pen(Brushes.White, 2);
+                    context.DrawRectangle(vpFill, vpPen, new RoundedRect(vpRect, new CornerRadius(3)));
+                }
+            }
 
             var textLayout = TextLayoutCache.Get(Text, Brushes.White, 12);
             double labelX = outerRect.X + Math.Max(6, visibleLeft + 6);

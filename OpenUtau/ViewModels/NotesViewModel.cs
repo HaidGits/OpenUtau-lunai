@@ -429,7 +429,13 @@ namespace OpenUtau.App.ViewModels {
             DocManager.Inst.AddSubscriber(this);
 
             this.WhenAnyValue(x => x.Part)
-                .Subscribe(p => MessageBus.Current.SendMessage(new PianoRollOpenPartChangedEvent(p)));
+                .Subscribe(p => {
+                    MessageBus.Current.SendMessage(new PianoRollOpenPartChangedEvent(p));
+                    PublishPianoRollViewport();
+                });
+
+            this.WhenAnyValue(x => x.TickOffset, x => x.ViewportTicks, x => x.Bounds)
+                .Subscribe(_ => PublishPianoRollViewport());
 
             MessageBus.Current.Listen<PianorollRefreshEvent>()
                 .Subscribe(e => {
@@ -516,6 +522,15 @@ namespace OpenUtau.App.ViewModels {
             this.RaisePropertyChanged(nameof(TrackCount));
             this.RaisePropertyChanged(nameof(VScrollBarMax));
             this.RaisePropertyChanged(nameof(ViewportTracks));
+            PublishPianoRollViewport();
+        }
+
+        void PublishPianoRollViewport() {
+            if (Part == null || ViewportTicks <= 0) {
+                MessageBus.Current.SendMessage(new PianoRollViewportChangedEvent(0, 0));
+                return;
+            }
+            MessageBus.Current.SendMessage(new PianoRollViewportChangedEvent(TickOffset, ViewportTicks));
         }
 
         /// <summary>

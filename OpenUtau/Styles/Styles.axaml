@@ -491,14 +491,13 @@
     <Setter Property="CornerRadius" Value="4"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="Opacity" Value="0.65"/>
   </Style>
-  <Style Selector="Button.workspacePanelClose:pointerover">
-    <Setter Property="Opacity" Value="1"/>
-    <Setter Property="Background" Value="{DynamicResource NeutralAccentBrushSemi2}"/>
+  <Style Selector="Button.workspacePanelClose:pointerover,
+          Button.workspacePanelClose:pressed">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}"/>
   </Style>
   <Style Selector="Button.workspacePanelClose Path">
-    <Setter Property="Stroke" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+    <Setter Property="Stroke" Value="{DynamicResource ToolbarToolIconOnAccentBrush}"/>
     <Setter Property="StrokeThickness" Value="1.5"/>
     <Setter Property="Stretch" Value="Uniform"/>
     <Setter Property="Width" Value="10"/>

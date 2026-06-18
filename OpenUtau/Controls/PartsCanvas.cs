@@ -42,6 +42,16 @@ namespace OpenUtau.App.Controls {
                 nameof(PianoRollOpenPart),
                 o => o.PianoRollOpenPart,
                 (o, v) => o.PianoRollOpenPart = v);
+        public static readonly DirectProperty<PartsCanvas, double> PianoRollViewTickOffsetProperty =
+            AvaloniaProperty.RegisterDirect<PartsCanvas, double>(
+                nameof(PianoRollViewTickOffset),
+                o => o.PianoRollViewTickOffset,
+                (o, v) => o.PianoRollViewTickOffset = v);
+        public static readonly DirectProperty<PartsCanvas, double> PianoRollViewViewportTicksProperty =
+            AvaloniaProperty.RegisterDirect<PartsCanvas, double>(
+                nameof(PianoRollViewViewportTicks),
+                o => o.PianoRollViewViewportTicks,
+                (o, v) => o.PianoRollViewViewportTicks = v);
 
         public double TickWidth {
             get => tickWidth;
@@ -73,6 +83,22 @@ namespace OpenUtau.App.Controls {
                 }
             }
         }
+        public double PianoRollViewTickOffset {
+            get => _pianoRollViewTickOffset;
+            set {
+                if (SetAndRaise(PianoRollViewTickOffsetProperty, ref _pianoRollViewTickOffset, value)) {
+                    InvalidatePartViewport();
+                }
+            }
+        }
+        public double PianoRollViewViewportTicks {
+            get => _pianoRollViewViewportTicks;
+            set {
+                if (SetAndRaise(PianoRollViewViewportTicksProperty, ref _pianoRollViewViewportTicks, value)) {
+                    InvalidatePartViewport();
+                }
+            }
+        }
 
         private double tickWidth;
         private double trackHeight;
@@ -80,6 +106,8 @@ namespace OpenUtau.App.Controls {
         private double trackOffset;
         private ObservableCollection<UPart>? _items;
         private UPart? _pianoRollOpenPart;
+        private double _pianoRollViewTickOffset;
+        private double _pianoRollViewViewportTicks;
 
         Dictionary<UPart, PartControl> partControls = new Dictionary<UPart, PartControl>();
 
@@ -177,6 +205,12 @@ namespace OpenUtau.App.Controls {
             control.Dispose();
             partControls.Remove(part);
             Children.Remove(control);
+        }
+
+        void InvalidatePartViewport() {
+            if (_pianoRollOpenPart != null && partControls.TryGetValue(_pianoRollOpenPart, out var control)) {
+                control.InvalidateVisual();
+            }
         }
     }
 }
