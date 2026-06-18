@@ -701,12 +701,13 @@ namespace OpenUtau.App.Views {
         void OnMenuPreferences(object sender, RoutedEventArgs args) {
             PreferencesViewModel dataContext;
             try {
-                dataContext = new PreferencesViewModel();
+                dataContext = PianoRollViewModel.GetSharedPreferencesViewModel();
             } catch (Exception e) {
                 Log.Error(e, "Failed to load prefs. Initialize it.");
                 MessageBox.ShowError(this, new MessageCustomizableException("Failed to load prefs. Initialize it.", "<translate:errors.failed.loadprefs>", e));
                 Preferences.Reset();
-                dataContext = new PreferencesViewModel();
+                PianoRollViewModel.ResetSharedPreferencesViewModel();
+                dataContext = PianoRollViewModel.GetSharedPreferencesViewModel();
             }
             var dialog = new PreferencesDialog() {
                 DataContext = dataContext

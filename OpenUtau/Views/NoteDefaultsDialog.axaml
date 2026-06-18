@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:OpenUtau.App.ViewModels"
         xmlns:c="using:OpenUtau.Controls"
+        xmlns:ac="using:OpenUtau.App.Controls"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="560"
         x:Class="OpenUtau.App.Views.NoteDefaultsDialog"
         Icon="/Assets/open-utau.ico"
@@ -20,11 +21,11 @@
               <StackPanel>
                   <Grid ColumnDefinitions="173,20,*">
                       <Label Content="{DynamicResource notedefaults.lyric.enter}"/>
-                      <TextBox Grid.Column="2" Text="{Binding DefaultLyric}" />
+                      <ac:WorkspacePanelTextBox Grid.Column="2" Classes="workspacePanelTextBox" Text="{Binding DefaultLyric}" />
                   </Grid>
                   <Grid ColumnDefinitions="173,20,*">
                       <Label Content="{DynamicResource notedefaults.lyric.knife}"/>
-                      <TextBox Grid.Column="2" Text="{Binding SplittedLyric}" />
+                      <ac:WorkspacePanelTextBox Grid.Column="2" Classes="workspacePanelTextBox" Text="{Binding SplittedLyric}" />
                   </Grid>
               </StackPanel>
           </HeaderedContentControl>
@@ -32,7 +33,7 @@
               <StackPanel>
                   <Grid ColumnDefinitions="173,20,*,20,80,20,80">
                       <Label Content="{DynamicResource notedefaults.preset}"/>
-                      <ComboBox Grid.Column="2" ItemsSource="{Binding PortamentoPresets}"
+                      <ac:WorkspacePanelComboBox Grid.Column="2" Classes="workspacePanelCombo" ItemsSource="{Binding PortamentoPresets}"
                       SelectedItem="{Binding ApplyPortamentoPreset}" HorizontalAlignment="Stretch"/>
                       <Button Grid.Column="4" Content="{DynamicResource notedefaults.preset.save}"
                       HorizontalAlignment="Stretch" Click="OnSavePortamentoPreset"
@@ -55,14 +56,14 @@
                   </Grid>
                   <Grid ColumnDefinitions="173,20,*">
                       <Label Content="{DynamicResource context.pitch.shape}"/>
-                      <ComboBox Grid.Column="2" ItemsSource="{Binding PortamentoPresets}"
+                      <ac:WorkspacePanelComboBox Grid.Column="2" Classes="workspacePanelCombo"
                         SelectedIndex="{Binding CurrentPitchShape}" HorizontalAlignment="Stretch">
                         <ComboBoxItem Content="{DynamicResource context.pitch.easeinout}"/>
                         <ComboBoxItem Content="{DynamicResource context.pitch.linear}"/>
                         <ComboBoxItem Content="{DynamicResource context.pitch.easein}"/>
                         <ComboBoxItem Content="{DynamicResource context.pitch.easeout}"/>
                         <ComboBoxItem Content="{DynamicResource context.pitch.smooth}"/>
-                      </ComboBox>
+                      </ac:WorkspacePanelComboBox>
                   </Grid>
               </StackPanel>
           </HeaderedContentControl>
@@ -70,7 +71,7 @@
               <StackPanel>
                   <Grid ColumnDefinitions="173,20,*,20,80,20,80">
                       <Label Content="{DynamicResource notedefaults.preset}"/>
-                      <ComboBox Grid.Column="2" ItemsSource="{Binding VibratoPresets}"
+                      <ac:WorkspacePanelComboBox Grid.Column="2" Classes="workspacePanelCombo" ItemsSource="{Binding VibratoPresets}"
                       SelectedItem="{Binding ApplyVibratoPreset}" HorizontalAlignment="Stretch" />
                       <Button Grid.Column="4" Content="{DynamicResource notedefaults.preset.save}"
                       HorizontalAlignment="Stretch" Click="OnSaveVibratoPreset"

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
@@ -96,6 +96,15 @@ namespace OpenUtau.App.ViewModels {
                 return;
             }
             sharedAppearancePreferences = new PreferencesViewModel();
+        }
+
+        public static void ResetSharedPreferencesViewModel() {
+            sharedAppearancePreferences = null;
+        }
+
+        public static PreferencesViewModel GetSharedPreferencesViewModel() {
+            WarmUpAppearancePreferences();
+            return sharedAppearancePreferences!;
         }
 
         public PreferencesViewModel AppearancePreferences =>

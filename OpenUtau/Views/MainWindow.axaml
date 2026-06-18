@@ -127,7 +127,10 @@
                 <Viewbox>
                   <Canvas Width="14" Height="14" RenderTransformOrigin="0.5,0.5">
                     <Canvas.RenderTransform>
-                      <ScaleTransform ScaleX="1" ScaleY="1.08"/>
+                      <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1.08"/>
+                        <TranslateTransform X="-1"/>
+                      </TransformGroup>
                     </Canvas.RenderTransform>
                     <Path Classes="filled"
                           Data="M 3 3 L 10 7 L 3 11 Z M 10 2 L 13 2 L 13 12 L 10 12 Z"/>
@@ -401,7 +404,8 @@
                             DataContext="{Binding TracksViewModel}"
                             Bounds="{Binding Bounds, Mode=OneWayToSource}"
                             TrackHeight="{Binding TrackHeight}"
-                            TrackOffset="{Binding TrackOffset}"/>
+                            TrackOffset="{Binding TrackOffset}"
+                            PianoRollHighlightTrackNo="{Binding PianoRollHighlightTrackNo}"/>
           <c:TickBackground Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Margin="0" IsHitTestVisible="False"
                             Foreground="{DynamicResource TickLineBrush}"
                             Background="{DynamicResource TickLineBrushLow}"

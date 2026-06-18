@@ -4,6 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:OpenUtau.App.ViewModels"
         xmlns:c="using:OpenUtau.Controls"
+        xmlns:ac="using:OpenUtau.App.Controls"
+        xmlns:pe="using:OpenUtau.Controls"
         mc:Ignorable="d"
         x:Class="OpenUtau.App.Views.ExpressionsDialog"
         Icon="/Assets/open-utau.ico"
@@ -41,28 +43,28 @@
             <Setter Property="Margin" Value="0,0,10,4"/>
             <Setter Property="DockPanel.Dock" Value="Left"/>
         </Style>
-        <Style Selector="TextBox">
+        <Style Selector="TextBox.workspacePanelTextBox, pe|FloatEditor">
             <Setter Property="Margin" Value="0,0,0,4"/>
         </Style>
       </StackPanel.Styles>
 
       <DockPanel>
         <TextBlock Text="{DynamicResource exps.name}" Classes="label" DockPanel.Dock="Left"/>
-        <TextBox IsEnabled="{Binding Expression.IsCustom}" Text="{Binding Expression.Name}"/>
+        <ac:WorkspacePanelTextBox IsEnabled="{Binding Expression.IsCustom}" Text="{Binding Expression.Name}" Classes="workspacePanelTextBox"/>
       </DockPanel>
       <DockPanel>
         <TextBlock Text="{DynamicResource exps.abbr}" Classes="label"/>
-        <TextBox IsEnabled="{Binding Expression.IsCustom}" Text="{Binding Expression.Abbr}"/>
+        <ac:WorkspacePanelTextBox IsEnabled="{Binding Expression.IsCustom}" Text="{Binding Expression.Abbr}" Classes="workspacePanelTextBox"/>
       </DockPanel>
       <DockPanel>
         <TextBlock Text="{DynamicResource exps.type}" Classes="label"/>
-        <ComboBox Margin="0,0,0,4" HorizontalAlignment="Stretch"
+        <ac:WorkspacePanelComboBox Margin="0,0,0,4" Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
                   IsEnabled="{Binding Expression.IsCustom}"
                   SelectedIndex="{Binding Expression.ExpressionType}">
           <ComboBoxItem Content="{DynamicResource exps.type.numerical}"/>
           <ComboBoxItem Content="{DynamicResource exps.type.options}"/>
           <ComboBoxItem Content="{DynamicResource exps.type.curve}"/>
-        </ComboBox>
+        </ac:WorkspacePanelComboBox>
       </DockPanel>
       <DockPanel IsVisible="{Binding Expression.IsOptions}">
         <TextBlock Text="{DynamicResource exps.isflag}" Classes="label"/>
@@ -70,7 +72,7 @@
       </DockPanel>
       <DockPanel IsVisible="{Binding Expression.IsNumerical}">
         <TextBlock Text="{DynamicResource exps.flag}" Classes="label"/>
-        <TextBox IsEnabled="{Binding Expression.IsCustom}" Text="{Binding Expression.Flag}"/>
+        <ac:WorkspacePanelTextBox IsEnabled="{Binding Expression.IsCustom}" Text="{Binding Expression.Flag}" Classes="workspacePanelTextBox"/>
       </DockPanel>
       <DockPanel IsVisible="{Binding !Expression.IsOptions}">
         <TextBlock Text="{DynamicResource exps.minvalue}" Classes="label"/>
@@ -94,7 +96,7 @@
       </DockPanel>
       <DockPanel IsVisible="{Binding Expression.IsOptions}">
         <TextBlock Text="{DynamicResource exps.optionvalues}" Classes="label"/>
-        <TextBox Text="{Binding Expression.OptionValues}" Margin="0"/>
+        <ac:WorkspacePanelTextBox Text="{Binding Expression.OptionValues}" Classes="workspacePanelTextBox" Margin="0"/>
       </DockPanel>
       <TextBlock  IsVisible="{Binding Expression.IsOptions}" Margin="150,0,0,4" Text="{DynamicResource exps.sepbycomma}"/>
       <DockPanel IsVisible="{Binding Expression.IsNumerical}">

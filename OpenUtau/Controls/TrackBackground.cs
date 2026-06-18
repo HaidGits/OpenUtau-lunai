@@ -128,11 +128,6 @@ namespace OpenUtau.App.Controls {
                     brush,
                     null,
                     rowRect);
-                if (!IsKeyboard && !IsPianoRoll && track == PianoRollHighlightTrackNo && PianoRollHighlightTrackNo >= 0) {
-                    using (context.PushClip(rowRect)) {
-                        context.DrawRectangle(null, ThemeManager.NoteBorderPen, rowRect);
-                    }
-                }
                 if (IsKeyboard && TrackHeight >= 12) {
                     brush = isCenterKey ? ThemeManager.CenterKeyNameBrush
                         : isAltTrack ? ThemeManager.BlackKeyNameBrush

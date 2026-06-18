@@ -862,6 +862,11 @@
         </Border>
       </Canvas>
     </Grid>
+    <Border Grid.Column="7" Background="Transparent" Cursor="SizeWestEast"
+            IsVisible="{Binding NotesViewModel.ShowNoteParams}"
+            PointerPressed="NotePropsPanelResizePointerPressed"
+            PointerMoved="NotePropsPanelResizePointerMoved"
+            PointerReleased="NotePropsPanelResizePointerReleased"/>
     <Border Grid.Column="8" Classes="workspaceCard workspaceDockNoteProps"
             IsEnabled="{Binding NotesViewModel.ShowNoteParams}"
             IsVisible="{Binding NotesViewModel.ShowNoteParams}">

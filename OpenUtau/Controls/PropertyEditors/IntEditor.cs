@@ -4,12 +4,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Interactivity;
+using OpenUtau.App.Controls;
 using ReactiveUI;
 
 namespace OpenUtau.Controls{
-    public class IntEditor : TextBox
+    public class IntEditor : WorkspacePanelTextBox
     {
-        protected override Type StyleKeyOverride => typeof(TextBox);
         public static readonly DirectProperty<IntEditor, int> ValueProperty =
             AvaloniaProperty.RegisterDirect<IntEditor, int>(
                 nameof(Value),
@@ -20,6 +20,7 @@ namespace OpenUtau.Controls{
 
         public IntEditor()
         {
+            Classes.Add("workspacePanelTextBox");
             Text = "0";
             this.WhenAnyValue(x => x.Text)
                 .Subscribe((text => { 

@@ -66,6 +66,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool ShowWaveform { get; set; }
         [Reactive] public bool ShowPhoneme { get; set; }
         [Reactive] public bool ShowNoteParams { get; set; }
+        [Reactive] public double NotePropertiesPanelWidth { get; set; }
         [Reactive] public bool ShowExpressions { get; set; }
         [Reactive] public bool ShowRealCurves { get; set; }
         [Reactive] public bool IsSnapOn { get; set; }
@@ -117,7 +118,9 @@ namespace OpenUtau.App.ViewModels {
         public GridLength ExpPanelGridLength => ShowExpressions ? new GridLength(ViewConstants.ExpPanelHeightDefault) : new GridLength(0);
         public GridLength PhonemePanelHeightGridLength => new GridLength(PhonemePanelHeight + PhonemePanelTagStripHeight);
         public GridLength NotePropsGapGridLength => ShowNoteParams ? new GridLength(8) : new GridLength(0);
-        public GridLength NotePropsColumnWidth => ShowNoteParams ? new GridLength(400) : new GridLength(0);
+        public GridLength NotePropsColumnWidth => ShowNoteParams
+            ? new GridLength(NotePropsPanelMetrics.ClampWidth(NotePropertiesPanelWidth))
+            : new GridLength(0);
         public bool NotePropsHidden => !ShowNoteParams;
         [Reactive] public UVoicePart? Part { get; set; }
         [Reactive] public Bitmap? Avatar { get; set; }
@@ -358,6 +361,7 @@ namespace OpenUtau.App.ViewModels {
                 Preferences.Save();
             });
             ShowNoteParams = Preferences.Default.ShowNoteParams;
+            NotePropertiesPanelWidth = NotePropsPanelMetrics.ClampWidth(Preferences.Default.NotePropertiesPanelWidth);
             this.WhenAnyValue(x => x.ShowNoteParams)
             .Subscribe(showNoteParams => {
                 Preferences.Default.ShowNoteParams = showNoteParams;
@@ -365,6 +369,17 @@ namespace OpenUtau.App.ViewModels {
                 this.RaisePropertyChanged(nameof(NotePropsGapGridLength));
                 this.RaisePropertyChanged(nameof(NotePropsColumnWidth));
                 this.RaisePropertyChanged(nameof(NotePropsHidden));
+            });
+            this.WhenAnyValue(x => x.NotePropertiesPanelWidth)
+            .Subscribe(width => {
+                var clamped = NotePropsPanelMetrics.ClampWidth(width);
+                if (System.Math.Abs(clamped - width) > 0.01) {
+                    NotePropertiesPanelWidth = clamped;
+                    return;
+                }
+                Preferences.Default.NotePropertiesPanelWidth = clamped;
+                Preferences.Save();
+                this.RaisePropertyChanged(nameof(NotePropsColumnWidth));
             });
             UseSolidPlaybackLine = Preferences.Default.UseSolidPlaybackLine;
             MessageBus.Current.Listen<PlaybackLineModeChangedEvent>()

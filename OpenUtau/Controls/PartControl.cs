@@ -196,7 +196,6 @@ namespace OpenUtau.App.Controls {
             const byte grayAlphaFull = 0xC8;
             const byte grayAlphaDim = 0x52;
             const double cornerRadius = 5;
-            const double headerHeight = 18;
 
             const byte accentAlphaFull = 255;
             const byte accentAlphaDim = 210;
@@ -231,21 +230,13 @@ namespace OpenUtau.App.Controls {
                 visibleRight = Math.Min(outerRect.Width,
                     (TickOffset + ViewWidth / TickWidth - part.position) * TickWidth);
             }
-            var headerRect = new Rect(outerRect.X, outerRect.Y, outerRect.Width, Math.Min(headerHeight, outerRect.Height));
-            if (visibleLeft > 0 && visibleLeft < outerRect.Width) {
-                double stickyHeaderWidth = Math.Max(0, visibleRight - visibleLeft);
-                headerRect = new Rect(outerRect.X + visibleLeft, outerRect.Y, stickyHeaderWidth, headerRect.Height);
-            }
-            double headerTopLeftRadius = Math.Abs(headerRect.X - outerRect.X) < 0.01 ? cornerRadius : 0;
-            double headerTopRightRadius = Math.Abs(headerRect.Right - outerRect.Right) < 0.01 ? cornerRadius : 0;
-            context.DrawRectangle(accentBrush, null,
-                new RoundedRect(headerRect, new CornerRadius(headerTopLeftRadius, headerTopRightRadius, 0, 0)));
             context.DrawRectangle(null, borderPen, borderRect, cornerRadius, cornerRadius);
 
             var textLayout = TextLayoutCache.Get(Text, Brushes.White, 12);
             double labelX = outerRect.X + Math.Max(6, visibleLeft + 6);
+            double labelY = outerRect.Y + (Math.Min(18, outerRect.Height) - textLayout.Height) * 0.5;
             using (var clip = context.PushClip(new Rect(visibleLeft, 0, Math.Max(0, visibleRight - visibleLeft), outerRect.Height))) {
-                using (var state = context.PushTransform(Matrix.CreateTranslation(labelX, outerRect.Y + 2))) {
+                using (var state = context.PushTransform(Matrix.CreateTranslation(labelX, labelY))) {
                     textLayout.Draw(context, new Point());
                 }
             }

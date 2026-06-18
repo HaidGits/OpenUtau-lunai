@@ -14,6 +14,7 @@ using OpenUtau.App;
 using OpenUtau.App.Views;
 using OpenUtau.Core;
 using OpenUtau.Core.DiffSinger;
+using OpenUtau.Core.Render;
 using OpenUtau.Core.Ustx;
 using OpenUtau.Core.Util;
 using ReactiveUI;
@@ -26,15 +27,12 @@ namespace OpenUtau.App.ViewModels {
         public USinger Singer => track.Singer;
         public Phonemizer Phonemizer => track.Phonemizer;
         public string PhonemizerTag => track.Phonemizer.Tag;
-        public Core.Render.IRenderer Renderer => track.RendererSettings.Renderer;
         public IReadOnlyList<MenuItemViewModel>? SingerMenuItems { get; set; }
         public ReactiveCommand<USinger, Unit> SelectSingerCommand { get; }
         public ReactiveCommand<USinger?, Unit> AllSetSingerCommand { get; }
         public IReadOnlyList<MenuItemViewModel>? PhonemizerMenuItems { get; set; }
         public ReactiveCommand<PhonemizerFactory, Unit> SelectPhonemizerCommand { get; }
         public ReactiveCommand<PhonemizerFactory, Unit> AllSetPhonemizerCommand { get; }
-        public IReadOnlyList<MenuItemViewModel>? RenderersMenuItems { get; set; }
-        public ReactiveCommand<string, Unit> SelectRendererCommand { get; }
         [Reactive] public string TrackName { get; set; } = string.Empty;
         [Reactive] public SolidColorBrush TrackAccentColor { get; set; } = ThemeManager.GetTrackColor("Blue").AccentColor;
         [Reactive] public TrackColor TrackColor { get; set; } = ThemeManager.GetTrackColor("Blue");
@@ -44,29 +42,28 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool Muted { get; set; }
         [Reactive] public bool Solo { get; set; }
         [Reactive] public bool IsSelected { get; set; }
+        [Reactive] public bool IsOpenInPianoRoll { get; set; }
         [Reactive] public Bitmap? Avatar { get; set; }
         [Reactive] public bool IsSingerVisible { get; set; }
         [Reactive] public bool IsPhonemizerVisible { get; set; }
-        [Reactive] public bool IsRendererVisible { get; set; }
+        [Reactive] public bool IsTrackSettingsVisible { get; set; }
+        [Reactive] public bool IsTrackSettingsFlyoutVisible { get; set; }
         [Reactive] public IBrush HeaderBorderBrush { get; set; } = ThemeManager.NeutralAccentBrushSemi;
         [Reactive] public IBrush HeaderBackgroundBrush { get; set; } = Brushes.Transparent;
 
         public ViewModelActivator Activator { get; }
 
         private readonly UTrack track;
+        private bool trackSettingsHeightVisible;
         // Parameterless constructor for Avalonia preview only.
         public TrackHeaderViewModel() {
             SelectSingerCommand = ReactiveCommand.Create<USinger>(_ => { });
             AllSetSingerCommand = ReactiveCommand.Create<USinger?>(_ => { });
             SelectPhonemizerCommand = ReactiveCommand.Create<PhonemizerFactory>(_ => { });
             AllSetPhonemizerCommand = ReactiveCommand.Create<PhonemizerFactory>(_ => { });
-            SelectRendererCommand = ReactiveCommand.Create<string>(_ => { });
             Activator = new ViewModelActivator();
             track = new UTrack(DocManager.Inst.Project);
-            this.WhenAnyValue(x => x.IsSelected)
-                .Subscribe(_ => RefreshSelectionStyle());
-            MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(_ => RefreshSelectionStyle());
+            SubscribeSelectionStyle();
             RefreshSelectionStyle();
         }
 
@@ -84,8 +81,8 @@ namespace OpenUtau.App.ViewModels {
                 }
                 MessageBus.Current.SendMessage(new TracksRefreshEvent());
                 this.RaisePropertyChanged(nameof(Singer));
-                this.RaisePropertyChanged(nameof(Renderer));
                 RefreshAvatar();
+                UpdateTrackSettingsVisibility();
             });
             AllSetSingerCommand = ReactiveCommand.Create<USinger?>(singer => {
                 var targetTracks = GetBatchTargetTracks();
@@ -100,8 +97,8 @@ namespace OpenUtau.App.ViewModels {
                 MessageBus.Current.SendMessage(new PianorollRefreshEvent("Part"));
                 MessageBus.Current.SendMessage(new TracksRefreshEvent());
                 this.RaisePropertyChanged(nameof(Singer));
-                this.RaisePropertyChanged(nameof(Renderer));
                 RefreshAvatar();
+                UpdateTrackSettingsVisibility();
             });
             SelectPhonemizerCommand = ReactiveCommand.Create<PhonemizerFactory>(factory => {
                 if (track.Phonemizer.GetType() != factory.type) {
@@ -155,16 +152,6 @@ namespace OpenUtau.App.ViewModels {
                 this.RaisePropertyChanged(nameof(Phonemizer));
                 this.RaisePropertyChanged(nameof(PhonemizerTag));
             });
-            SelectRendererCommand = ReactiveCommand.Create<string>(name => {
-                var settings = new URenderSettings {
-                    renderer = name,
-                };
-                DocManager.Inst.StartUndoGroup("command.track.setting");
-                DocManager.Inst.ExecuteCmd(new TrackChangeRenderSettingCommand(DocManager.Inst.Project, track, settings));
-                DocManager.Inst.EndUndoGroup();
-                this.RaisePropertyChanged(nameof(Renderer));
-            });
-
             Activator = new ViewModelActivator();
 
             TrackName = track.TrackName;
@@ -200,19 +187,25 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(solo => {
                     track.Solo = solo;
                 });
-            this.WhenAnyValue(x => x.IsSelected)
-                .Subscribe(_ => RefreshSelectionStyle());
-            MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(_ => RefreshSelectionStyle());
+            SubscribeSelectionStyle();
 
             RefreshAvatar();
             RefreshSelectionStyle();
+            UpdateTrackSettingsVisibility();
+        }
+
+        void SubscribeSelectionStyle() {
+            this.WhenAnyValue(x => x.IsOpenInPianoRoll)
+                .Subscribe(_ => RefreshSelectionStyle());
+            MessageBus.Current.Listen<ThemeChangedEvent>()
+                .Subscribe(_ => RefreshSelectionStyle());
+            MessageBus.Current.Listen<PianoRollOpenPartChangedEvent>()
+                .Subscribe(e => IsOpenInPianoRoll = e.Part?.trackNo == track.TrackNo);
         }
 
         public void RefreshSelectionStyle() {
-            HeaderBorderBrush = IsSelected ? TrackAccentColor : ThemeManager.TrackHeaderBorderBrush;
-            HeaderBackgroundBrush = IsSelected
-                ? ThemeManager.WorkspaceElevatedSurfaceBrush
+            HeaderBackgroundBrush = IsOpenInPianoRoll
+                ? ThemeManager.TrackBackgroundAltBrush
                 : ThemeManager.WorkspaceCardBrush;
         }
 
@@ -585,20 +578,6 @@ namespace OpenUtau.App.ViewModels {
             this.RaisePropertyChanged(nameof(PhonemizerMenuItems));
         }
 
-        public void RefreshRenderers() {
-            var items = new List<MenuItemViewModel>();
-            if (track != null && track.Singer != null && track.Singer.Found) {
-                items.AddRange(Core.Render.Renderers.GetSupportedRenderers(track.Singer.SingerType)
-                    .Select(name => new MenuItemViewModel() {
-                        Header = name,
-                        Command = SelectRendererCommand,
-                        CommandParameter = name,
-                    }));
-            }
-            RenderersMenuItems = items.ToArray();
-            this.RaisePropertyChanged(nameof(RenderersMenuItems));
-        }
-
         public void RefreshAvatar() {
             var singer = track?.Singer;
             if (singer == null || singer.AvatarData == null) {
@@ -612,6 +591,17 @@ namespace OpenUtau.App.ViewModels {
                 Avatar = null;
                 Log.Error(e, "Failed to decode avatar.");
             }
+        }
+
+        public void SetTrackSettingsHeightVisible(bool visible) {
+            trackSettingsHeightVisible = visible;
+            UpdateTrackSettingsVisibility();
+        }
+
+        void UpdateTrackSettingsVisibility() {
+            bool allowed = track.Singer is { Found: true, SingerType: USingerType.Classic };
+            IsTrackSettingsVisible = allowed && trackSettingsHeightVisible;
+            IsTrackSettingsFlyoutVisible = allowed && !trackSettingsHeightVisible;
         }
 
         public void ManuallyRaise() {
@@ -633,7 +623,7 @@ namespace OpenUtau.App.ViewModels {
             this.RaisePropertyChanged(nameof(TrackColor));
             this.RaisePropertyChanged(nameof(Phonemizer));
             this.RaisePropertyChanged(nameof(PhonemizerTag));
-            this.RaisePropertyChanged(nameof(Renderer));
+            UpdateTrackSettingsVisibility();
             this.RaisePropertyChanged(nameof(Mute));
             this.RaisePropertyChanged(nameof(Muted));
             this.RaisePropertyChanged(nameof(Solo));

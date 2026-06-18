@@ -59,7 +59,7 @@
                 Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
       <Button Content="{DynamicResource singers.location}" Margin="0" Width="100"
               IsEnabled="{Binding Singer, Converter={x:Static ObjectConverters.IsNotNull}}" Command="{Binding OpenLocation}"/>
-      <Button Margin="0" Padding="0"
+      <Button Classes="iconButton" Margin="0" Padding="0"
               IsEnabled="{Binding Singer, Converter={x:Static ObjectConverters.IsNotNull}}"
               Click="OnSingerMenuButton">
         <Path Classes="clear"
@@ -92,7 +92,7 @@
           </ContextMenu>
         </Button.ContextMenu>
       </Button>
-      <TextBox Text="{Binding SearchAlias}" Watermark="{DynamicResource singers.editoto.searchalias}" Margin="0"
+      <c:WorkspacePanelTextBox Text="{Binding SearchAlias}" Classes="workspacePanelTextBox" Watermark="{DynamicResource singers.editoto.searchalias}" Margin="0"
                MinWidth="160" HorizontalAlignment="Stretch" Focusable="True" IsVisible="{Binding UseSearchAlias}" />
     </StackPanel>
     <StackPanel Grid.Row="0" Spacing="5" Margin="0,0,0,0" Height="20"

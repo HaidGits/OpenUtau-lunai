@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Core.Ustx;
 using ReactiveUI;
@@ -113,6 +114,17 @@ namespace OpenUtau.App.Controls {
                         header.ViewModel?.RefreshSelectionStyle();
                     }
                 });
+            MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
+                .Subscribe(_ => Dispatcher.UIThread.Post(
+                    RefreshTrackHeaderLayout, DispatcherPriority.Background));
+        }
+
+        void RefreshTrackHeaderLayout() {
+            foreach (var (_, header) in trackHeaders) {
+                header.RefreshLayout();
+            }
+            InvalidateMeasure();
+            InvalidateArrange();
         }
 
         protected override void OnInitialized() {
@@ -170,6 +182,7 @@ namespace OpenUtau.App.Controls {
             var vm = new TrackHeaderViewModel(track);
             if (DataContext is TracksViewModel tracksViewModel) {
                 vm.IsSelected = tracksViewModel.SelectedTracks.Contains(track);
+                vm.IsOpenInPianoRoll = tracksViewModel.PianoRollOpenPart?.trackNo == track.TrackNo;
             }
             var header = new TrackHeader() {
                 DataContext = vm,

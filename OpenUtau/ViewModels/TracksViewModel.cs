@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -151,7 +151,12 @@ namespace OpenUtau.App.ViewModels {
             Notify();
 
             MessageBus.Current.Listen<PianoRollOpenPartChangedEvent>()
-                .Subscribe(e => PianoRollOpenPart = e.Part);
+                .Subscribe(e => {
+                    PianoRollOpenPart = e.Part;
+                    PianoRollHighlightTrackNo = e.Part != null && e.Part.trackNo >= 0
+                        ? e.Part.trackNo
+                        : -1;
+                });
 
             UseSolidPlaybackLine = Preferences.Default.UseSolidPlaybackLine;
             MessageBus.Current.Listen<NotesViewModel.PlaybackLineModeChangedEvent>()
@@ -531,10 +536,6 @@ namespace OpenUtau.App.ViewModels {
                     if (0 <= loadPartNotif.part.trackNo && loadPartNotif.part.trackNo < Project.tracks.Count) {
                         SelectTrack(Project.tracks[loadPartNotif.part.trackNo]);
                     }
-                    PianoRollHighlightTrackNo =
-                        loadPartNotif.part != null && loadPartNotif.part.trackNo >= 0 && loadPartNotif.part.trackNo < Project.tracks.Count
-                            ? loadPartNotif.part.trackNo
-                            : -1;
                 }
                 Notify();
             }

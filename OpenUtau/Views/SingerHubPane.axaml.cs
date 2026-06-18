@@ -66,14 +66,6 @@ namespace OpenUtau.App.Views {
             return lifetime?.MainWindow;
         }
 
-        void OnSearchBoxGotFocus(object? sender, GotFocusEventArgs e) {
-            SearchChrome.Classes.Add("focused");
-        }
-
-        void OnSearchBoxLostFocus(object? sender, RoutedEventArgs e) {
-            SearchChrome.Classes.Remove("focused");
-        }
-
         async void OnPrimaryActionClick(object sender, RoutedEventArgs e) {
             try {
                 if (DataContext is SingerHubViewModel vm &&

@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OpenUtau.App.ViewModels"
+             xmlns:c="using:OpenUtau.App.Controls"
              mc:Ignorable="d"
              x:Class="OpenUtau.App.Views.SingerHubPane">
 
@@ -25,11 +26,8 @@
       <TabItem Header="{DynamicResource lunai.tab.brapa}"><Panel/></TabItem>
     </TabControl>
 
-    <Border x:Name="SearchChrome" Grid.Row="1" Classes="singerHubSearchChrome">
-      <TextBox x:Name="SearchBox" Classes="singerHubSearchBox"
-               Watermark="{DynamicResource lunai.search}" Text="{Binding SearchText}"
-               GotFocus="OnSearchBoxGotFocus" LostFocus="OnSearchBoxLostFocus"/>
-    </Border>
+    <c:WorkspacePanelTextBox Grid.Row="1" Classes="workspacePanelTextBox" HorizontalAlignment="Stretch" Margin="0,0,0,10"
+                             Watermark="{DynamicResource lunai.search}" Text="{Binding SearchText}"/>
 
     <ScrollViewer x:Name="ContentScroll" Grid.Row="2" Classes="workspaceScroll singerHubScroll" VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled" AllowAutoHide="False" Padding="0">
@@ -96,7 +94,7 @@
 
     <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12" Margin="0,10,0,0">
       <TextBlock Text="{Binding Status}" VerticalAlignment="Center" Opacity="0.9"/>
-      <Button Content="{DynamicResource lunai.refresh}" Command="{Binding RefreshCommand}"/>
+      <Button Classes="singerHubActionButton" Content="{DynamicResource lunai.refresh}" Command="{Binding RefreshCommand}"/>
     </StackPanel>
   </Grid>
 </UserControl>

@@ -3,14 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OpenUtau.App.ViewModels"
+             xmlns:c="using:OpenUtau.App.Controls"
              x:Class="OpenUtau.App.Controls.SearchBar" Focusable="False">
   <Grid ColumnDefinitions="Auto,Auto,100,40,28,28,28,28" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
     <RadioButton Grid.Column="0" Content="{DynamicResource pianoroll.menu.searchnote.note}" Margin="2,0,0,0" IsChecked="{Binding NoteMode}"/>
     
     <RadioButton Grid.Column="1" Content="{DynamicResource pianoroll.menu.searchnote.alias}" Margin="2,0,4,0" IsChecked="{Binding !NoteMode, Mode=OneWay}"/>
     
-    <TextBox Grid.Column="2" Name="box" Padding="4,3" Margin="0" Height="24" VerticalAlignment="Center" HorizontalAlignment="Stretch"
-             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+    <c:WorkspacePanelTextBox Grid.Column="2" Name="box" Classes="workspacePanelTextBox" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
              Text="{Binding SearchWord}" Focusable="True" Watermark="{Binding Watermark}"
              GotFocus="Box_GotFocus"  KeyDown="Box_KeyDown"/>
     

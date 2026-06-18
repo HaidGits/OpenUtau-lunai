@@ -52,6 +52,7 @@ namespace OpenUtau.App.Controls {
         private ThemeEditorPane? themeEditorPane;
         private bool appearancePanelResizing;
         private bool themeEditorPanelResizing;
+        private bool notePropsPanelResizing;
         private double dockPanelResizeStartX;
         private double dockPanelResizeStartWidth;
 
@@ -139,7 +140,6 @@ namespace OpenUtau.App.Controls {
             if (AppearancePaneHost.Content != appearancePane) {
                 AppearancePaneHost.Content = appearancePane;
             }
-            appearancePane.ScheduleUpdateSectionBrushes(retryIfNeeded: true);
         }
 
         void UpdateAppearancePane() {
@@ -147,9 +147,6 @@ namespace OpenUtau.App.Controls {
                 return;
             }
             EnsureAppearancePanePreloaded();
-            if (ViewModel.IsAppearancePanelVisible) {
-                appearancePane?.ScheduleUpdateSectionBrushes(retryIfNeeded: true);
-            }
         }
 
         void UpdateThemeEditorPane() {
@@ -218,6 +215,32 @@ namespace OpenUtau.App.Controls {
         public void ThemeEditorPanelResizePointerReleased(object? sender, PointerReleasedEventArgs args) {
             if (args.GetCurrentPoint((Control)sender!).Pointer.Type == PointerType.Mouse) {
                 themeEditorPanelResizing = false;
+            }
+        }
+
+        public void NotePropsPanelResizePointerPressed(object? sender, PointerPressedEventArgs args) {
+            if (ViewModel?.NotesViewModel == null || !ViewModel.NotesViewModel.ShowNoteParams) {
+                return;
+            }
+            if (args.GetCurrentPoint(this).Properties.IsLeftButtonPressed) {
+                notePropsPanelResizing = true;
+                dockPanelResizeStartX = args.GetPosition(this).X;
+                dockPanelResizeStartWidth = ViewModel.NotesViewModel.NotePropertiesPanelWidth;
+            }
+        }
+
+        public void NotePropsPanelResizePointerMoved(object? sender, PointerEventArgs args) {
+            if (!notePropsPanelResizing || ViewModel?.NotesViewModel == null) {
+                return;
+            }
+            var deltaX = args.GetPosition(this).X - dockPanelResizeStartX;
+            ViewModel.NotesViewModel.NotePropertiesPanelWidth =
+                NotePropsPanelMetrics.ClampWidth(dockPanelResizeStartWidth - deltaX);
+        }
+
+        public void NotePropsPanelResizePointerReleased(object? sender, PointerReleasedEventArgs args) {
+            if (args.GetCurrentPoint((Control)sender!).Pointer.Type == PointerType.Mouse) {
+                notePropsPanelResizing = false;
             }
         }
 

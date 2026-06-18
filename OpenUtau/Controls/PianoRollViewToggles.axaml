@@ -4,9 +4,9 @@
              x:Class="OpenUtau.App.Controls.PianoRollViewToggles">
   <Grid RowDefinitions="*,Auto,Auto,Auto,Auto">
     <c:PianoRollMainViewToggles Grid.Row="0" LayoutOrientation="Vertical"/>
-    <Border Grid.Row="1" Height="1" Margin="6,6,6,4" Background="{DynamicResource TickLineBrushLow}"/>
+    <Border Grid.Row="1" Height="1" Margin="2,6,2,4" Background="{DynamicResource TickLineBrushLow}"/>
     <c:PianoRollDiffSingerQualityToggles Grid.Row="2" LayoutOrientation="Vertical"/>
-    <Border Grid.Row="3" Height="1" Margin="6,6,6,4" Background="{DynamicResource TickLineBrushLow}"/>
+    <Border Grid.Row="3" Height="1" Margin="2,6,2,4" Background="{DynamicResource TickLineBrushLow}"/>
     <ToggleButton Grid.Row="4" Classes="sideToolbarToggle appearanceToggle" Margin="0" Padding="0"
                   IsChecked="{Binding ShowAppearancePanel}">
       <ToolTip.Tip>

@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Interactivity;
+using OpenUtau.App.Controls;
 using ReactiveUI;
 
 namespace OpenUtau.Controls{
-    public class FloatEditor : TextBox
+    public class FloatEditor : WorkspacePanelTextBox
     {
-        protected override Type StyleKeyOverride => typeof(TextBox);
         public static readonly DirectProperty<FloatEditor, float> ValueProperty =
             AvaloniaProperty.RegisterDirect<FloatEditor, float>(
                 nameof(Value),
@@ -20,6 +20,7 @@ namespace OpenUtau.Controls{
 
         public FloatEditor()
         {
+            Classes.Add("workspacePanelTextBox");
             Text = "0";
             this.WhenAnyValue(x => x.Text)
                 .Subscribe((text => { 

@@ -32,6 +32,20 @@
   <Style Selector="ComboBoxItem:selected /template/ ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource SelectedTrackAccentLightBrushSemi}"/>
   </Style>
+  <Style Selector="ComboBox.workspacePanelCombo ComboBoxItem /template/ ContentPresenter#PART_ContentPresenter,
+          ComboBox.workspacePanelCombo ComboBoxItem /template/ ContentPresenter">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="CornerRadius" Value="0"/>
+  </Style>
+  <Style Selector="ComboBox.workspacePanelCombo ComboBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ComboBox.workspacePanelCombo ComboBoxItem:pointerover /template/ ContentPresenter,
+          ComboBox.workspacePanelCombo ComboBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter,
+          ComboBox.workspacePanelCombo ComboBoxItem:selected /template/ ContentPresenter,
+          ComboBox.workspacePanelCombo ComboBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ComboBox.workspacePanelCombo ComboBoxItem:selected:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="CornerRadius" Value="0"/>
+  </Style>
 
   <Style Selector="Grid.toolbarIconHost, Border.toolbarIconHost">
     <Setter Property="Width" Value="24" />
@@ -491,7 +505,7 @@
   </Style>
   <Style Selector="StackPanel[Orientation=Vertical] > Border.sideToolbarSeparator">
     <Setter Property="Height" Value="1"/>
-    <Setter Property="Margin" Value="6,6,6,4"/>
+    <Setter Property="Margin" Value="2,6,2,4"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
   </Style>
   <Style Selector="StackPanel[Orientation=Horizontal] > Border.sideToolbarSeparator">

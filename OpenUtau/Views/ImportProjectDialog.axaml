@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
         xmlns:vm="using:OpenUtau.App.ViewModels"
+        xmlns:c="using:OpenUtau.App.Controls"
 
         x:Class="OpenUtau.App.Views.ImportProjectDialog"
 
@@ -76,7 +77,7 @@
 
                          TextWrapping="Wrap" VerticalAlignment="Center"/>
 
-              <ComboBox Grid.Column="1" ItemsSource="{Binding GapThresholdOptions}"
+              <c:WorkspacePanelComboBox Grid.Column="1" Classes="workspacePanelCombo" ItemsSource="{Binding GapThresholdOptions}"
 
                         SelectedItem="{Binding SelectedGapThreshold}" Margin="8,0,0,0"
 
@@ -106,7 +107,7 @@
 
                          TextWrapping="Wrap" VerticalAlignment="Center"/>
 
-              <ComboBox Grid.Column="1" ItemsSource="{Binding LeadingPaddingOptions}"
+              <c:WorkspacePanelComboBox Grid.Column="1" Classes="workspacePanelCombo" ItemsSource="{Binding LeadingPaddingOptions}"
 
                         SelectedItem="{Binding SelectedLeadingPadding}" Margin="8,0,0,0"
 
@@ -124,7 +125,7 @@
 
                        VerticalAlignment="Center" Margin="0,0,8,0"/>
 
-            <ComboBox Grid.Column="1" ItemsSource="{Binding JapaneseLyricsOptions}"
+            <c:WorkspacePanelComboBox Grid.Column="1" Classes="workspacePanelCombo" ItemsSource="{Binding JapaneseLyricsOptions}"
 
                       SelectedItem="{Binding SelectedJapaneseLyrics}" HorizontalAlignment="Stretch"/>
 

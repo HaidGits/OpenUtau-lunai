@@ -110,13 +110,21 @@ namespace OpenUtau.App.Controls {
             SetPosition();
         }
 
+        internal void RefreshLayout() {
+            SyncAvatarChromeSize();
+            InvalidateMeasure();
+            InvalidateArrange();
+        }
+
         void SyncAvatarChromeSize() {
             if (AvatarChrome is null) {
                 return;
             }
-            const double cap = 101;
+            const double verticalInset = 2; // outer header margin top + bottom
+            double cap = ViewConstants.TrackHeightMax - verticalInset;
             double h = TrackHeight;
-            double side = h > 0 ? Math.Min(h, cap) : cap;
+            double available = h > 0 ? h - verticalInset : cap;
+            double side = Math.Max(0, Math.Min(available, cap));
             AvatarChrome.Width = side;
             AvatarChrome.Height = side;
         }
@@ -127,7 +135,7 @@ namespace OpenUtau.App.Controls {
             if (ViewModel != null) {
                 ViewModel.IsSingerVisible = trackHeight >= ViewConstants.TrackHeightDelta * 3;
                 ViewModel.IsPhonemizerVisible = trackHeight >= ViewConstants.TrackHeightDelta * 4;
-                ViewModel.IsRendererVisible = trackHeight >= ViewConstants.TrackHeightDelta * 5;
+                ViewModel.SetTrackSettingsHeightVisible(trackHeight >= ViewConstants.TrackHeightDelta * 4);
             }
         }
 
@@ -190,18 +198,6 @@ namespace OpenUtau.App.Controls {
             args.Handled = true;
         }
 
-        void RendererButtonClicked(object sender, RoutedEventArgs args) {
-            ViewModel?.RefreshRenderers();
-            if (ViewModel?.RenderersMenuItems?.Count > 0) {
-                RenderersMenu.Open((Control)sender);
-            }
-            args.Handled = true;
-        }
-
-        void RendererButtonContextRequested(object sender, ContextRequestedEventArgs args) {
-            args.Handled = true;
-        }
-
         void VolumeFaderPointerPressed(object sender, PointerPressedEventArgs args) {
             if (args.GetCurrentPoint((Visual?)sender).Properties.IsRightButtonPressed && ViewModel != null) {
                 ViewModel.Volume = 0;
@@ -231,11 +227,12 @@ namespace OpenUtau.App.Controls {
         }
 
         void TrackSettingsButtonClicked(object sender, RoutedEventArgs args) {
-            if (track?.Singer != null && track.Singer.Found) {
-                if (VisualRoot is Window window) {
-                    var dialog = new Views.TrackSettingsDialog(track);
-                    dialog.ShowDialog(window);
-                }
+            if (track?.Singer is not { Found: true, SingerType: USingerType.Classic }) {
+                return;
+            }
+            if (VisualRoot is Window window) {
+                var dialog = new Views.TrackSettingsDialog(track);
+                dialog.ShowDialog(window);
             }
         }
 
