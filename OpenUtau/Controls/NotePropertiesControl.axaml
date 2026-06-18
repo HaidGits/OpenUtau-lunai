@@ -68,7 +68,7 @@
 
             ToolTip.Tip="{DynamicResource workspace.panel.close}">
 
-      <Path/>
+      <Path Classes="stroked"/>
 
     </Button>
 

@@ -109,7 +109,7 @@
             HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0"
             IsVisible="False" Click="OnCloseDockedPanel"
             ToolTip.Tip="{DynamicResource workspace.panel.close}">
-      <Path/>
+      <Path Classes="stroked"/>
     </Button>
     <ScrollViewer x:Name="ContentScroll" Classes="workspaceScroll workspaceDockPanelScroll"
                   Margin="10,48,10,10"

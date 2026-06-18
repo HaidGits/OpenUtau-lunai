@@ -482,6 +482,7 @@
     <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
+  <!-- Close panel -->
   <Style Selector="Button.workspacePanelClose">
     <Setter Property="Width" Value="32"/>
     <Setter Property="Height" Value="32"/>
@@ -492,17 +493,30 @@
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
   </Style>
-  <Style Selector="Button.workspacePanelClose:pointerover,
-          Button.workspacePanelClose:pressed">
-    <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}"/>
+  <Style Selector="Button.workspacePanelClose /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="CornerRadius" Value="4"/>
+    <Setter Property="Margin" Value="0"/>
+    <Setter Property="BorderThickness" Value="0"/>
   </Style>
-  <Style Selector="Button.workspacePanelClose Path">
-    <Setter Property="Stroke" Value="{DynamicResource ToolbarToolIconOnAccentBrush}"/>
+  <Style Selector="Button.workspacePanelClose:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          Button.workspacePanelClose:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}"/>
+    <Setter Property="CornerRadius" Value="4"/>
+    <Setter Property="Margin" Value="0"/>
+    <Setter Property="BorderThickness" Value="0"/>
+  </Style>
+  <Style Selector="Button.workspacePanelClose Path.stroked">
+    <Setter Property="Stroke" Value="{DynamicResource MutedIconBrush}"/>
     <Setter Property="StrokeThickness" Value="1.5"/>
     <Setter Property="Stretch" Value="Uniform"/>
     <Setter Property="Width" Value="10"/>
     <Setter Property="Height" Value="10"/>
     <Setter Property="Data" Value="M3,3 L11,11 M11,3 L3,11"/>
+  </Style>
+  <Style Selector="Button.workspacePanelClose:pointerover Path.stroked,
+          Button.workspacePanelClose:pressed Path.stroked">
+    <Setter Property="Stroke" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
   </Style>
 
   <!-- Welcome (home) screen -->
