@@ -209,7 +209,7 @@
                         TickOffset="{Binding NotesViewModel.TickOffset}"
                         SnapDiv="{Binding NotesViewModel.SnapDiv, Mode=OneWay}"
                         SnapTicks="{Binding NotesViewModel.SnapTicks}"
-                        ShowBarNumber="True"/>
+                        ShowBar="True"/>
       <Canvas Name="PlayPosOverlay" Grid.Row="1" Grid.Column="1" ClipToBounds="True" IsHitTestVisible="False" ZIndex="200">
         <Path Name="PlayPos"
               Canvas.Left="{Binding NotesViewModel.PlayPosX}"
@@ -224,8 +224,9 @@
               IsVisible="{Binding NotesViewModel.UseSolidPlaybackLine, Mode=OneWay}"
               Data="M -6.5 0 L 6.5 0 L 6.5 3 L 0 9 L -6.5 3 Z"/>
       </Canvas>
-      <Image Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,100,0"
-             Source="{Binding NotesViewModel.Portrait}" OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"/>
+      <Canvas Name="PortraitCanvas" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" IsHitTestVisible="False">
+        <Image Name="PortraitImage" Source="{Binding NotesViewModel.Portrait}" OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"/>
+      </Canvas>
       <Border Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
               Margin="{Binding NotesViewModel.WaveformBottomMarginThickness}" Height="72" IsHitTestVisible="False">
         <c:WaveformImage DataContext="{Binding NotesViewModel, Mode=OneWay}"
@@ -724,7 +725,7 @@
                             TickOrigin="{Binding NotesViewModel.TickOrigin}"
                             TickOffset="{Binding NotesViewModel.TickOffset}"
                             SnapDiv="{Binding NotesViewModel.SnapDiv, Mode=OneWay}"
-                            ShowBarNumber="False"/>
+                            ShowBar="False"/>
           <c:PhonemeCanvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"
                          TickWidth="{Binding NotesViewModel.TickWidth}"
                          TickOffset="{Binding NotesViewModel.TickOffset}"
@@ -789,7 +790,7 @@
                               TickOffset="{Binding NotesViewModel.TickOffset}"
                               SnapDiv="{Binding NotesViewModel.SnapDiv, Mode=OneWay}"
                               SnapTicks="{Binding NotesViewModel.SnapTicks}"
-                              ShowBarNumber="True"/>
+                              ShowBar="True"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,0,0">
               <Button Classes="expToolButton" Width="24" Height="24" Margin="0" Padding="0"
                       Click="OnExpButtonClick"
@@ -823,7 +824,7 @@
                             TickOrigin="{Binding NotesViewModel.TickOrigin}"
                             TickOffset="{Binding NotesViewModel.TickOffset}"
                             SnapDiv="{Binding NotesViewModel.SnapDiv, Mode=OneWay}"
-                            ShowBarNumber="False"/>
+                            ShowBar="False"/>
           <c:ExpressionCanvas Opacity="{Binding NotesViewModel.ExpShadowOpacity}"
                               TickWidth="{Binding NotesViewModel.TickWidth}"
                               TickOffset="{Binding NotesViewModel.TickOffset}"

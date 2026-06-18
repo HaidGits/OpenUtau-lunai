@@ -43,11 +43,11 @@ namespace OpenUtau.App.Controls {
                 nameof(SnapTicks),
                 o => o.SnapTicks,
                 (o, v) => o.SnapTicks = v);
-        public static readonly DirectProperty<TickBackground, bool> ShowBarNumberProperty =
+        public static readonly DirectProperty<TickBackground, bool> ShowBarProperty =
             AvaloniaProperty.RegisterDirect<TickBackground, bool>(
-                nameof(ShowBarNumber),
-                o => o.ShowBarNumber,
-                (o, v) => o.ShowBarNumber = v);
+                nameof(ShowBar),
+                o => o.ShowBar,
+                (o, v) => o.ShowBar = v);
         public int Resolution {
             get => _resolution;
             private set => SetAndRaise(ResolutionProperty, ref _resolution, value);
@@ -73,9 +73,9 @@ namespace OpenUtau.App.Controls {
             get => _snapTicks;
             set => SetAndRaise(SnapTicksProperty, ref _snapTicks, value);
         }
-        public bool ShowBarNumber {
-            get => _showBarNumber;
-            set => SetAndRaise(ShowBarNumberProperty, ref _showBarNumber, value);
+        public bool ShowBar {
+            get => _showBar;
+            set => SetAndRaise(ShowBarProperty, ref _showBar, value);
         }
         private int _resolution = 480;
         private double _tickWidth;
@@ -83,7 +83,7 @@ namespace OpenUtau.App.Controls {
         private int _tickOrigin;
         private int _snapDiv;
         private ObservableCollection<int>? _snapTicks;
-        private bool _showBarNumber;
+        private bool _showBar = true;
 
         private Pen penBar = null!;
         private Pen penBeatUnit = null!;
@@ -144,7 +144,7 @@ namespace OpenUtau.App.Controls {
                 change.Property == TickWidthProperty ||
                 change.Property == TickOffsetProperty ||
                 change.Property == SnapDivProperty ||
-                change.Property == ShowBarNumberProperty) {
+                change.Property == ShowBarProperty) {
                 InvalidateVisual();
             }
         }
@@ -153,8 +153,8 @@ namespace OpenUtau.App.Controls {
             if (TickWidth <= 0) {
                 return;
             }
-            bool showBarNumber = ShowBarNumber;
-            double subLineY = showBarNumber ? 24 : 0;
+            bool showBar = ShowBar;
+            double subLineY = showBar ? 24 : 0;
             var project = Core.DocManager.Inst.Project;
             int snapUnit = project.resolution * 4 / SnapDiv;
             while (snapUnit * TickWidth < ViewConstants.MinTicklineWidth) {
@@ -176,13 +176,13 @@ namespace OpenUtau.App.Controls {
                 // Bar lines and numbers.
                 double x = Math.Round(barTick * TickWidth - pixelOffset) + 0.5;
                 double y = -0.5;
-                if (showBarNumber) {
+                if (showBar) {
                     var textLayout = TextLayoutCache.Get((bar + 1).ToString(), ThemeManager.BarNumberBrush, 10);
                     using (var state = context.PushTransform(Matrix.CreateTranslation(x + 3, 10))) {
                         textLayout.Draw(context, new Point());
                     }
+                    context.DrawLine(penBar, new Point(x, y), new Point(x, Bounds.Height + 0.5f));
                 }
-                context.DrawLine(penBar, new Point(x, y), new Point(x, Bounds.Height + 0.5f));
                 // Lines between bars.
                 var timeSig = project.timeAxis.TimeSignatureAtBar(bar);
                 int nextBarTick = project.timeAxis.BarBeatToTickPos(bar + 1, 0);
@@ -211,7 +211,7 @@ namespace OpenUtau.App.Controls {
             }
             SnapTicks?.Add(barTick);
 
-            if (showBarNumber) {
+            if (showBar) {
                 foreach (var tempo in project.tempos) {
                     double x = Math.Round(tempo.position * TickWidth - pixelOffset) + 0.5;
                     context.DrawLine(penDanshed, new Point(x, 0), new Point(x, 24));

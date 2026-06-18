@@ -110,6 +110,17 @@ namespace OpenUtau.App.Controls {
                 .Subscribe(_ => ScheduleApplyPianoRollScrollStyle());
 
             ScheduleUpdateDetachedLayout();
+            this.LayoutUpdated += PianoRollLayoutUpdated;
+        }
+
+        private void PianoRollLayoutUpdated(object? sender, EventArgs e) {
+            UpdatePortraitPosition();
+        }
+
+        private void UpdatePortraitPosition() {
+            if (PortraitImage.DesiredSize.Width == 0 || PortraitCanvas.Bounds.Width == 0) return;
+            Canvas.SetTop(PortraitImage, 0);
+            Canvas.SetLeft(PortraitImage, PortraitCanvas.Bounds.Width - PortraitImage.DesiredSize.Width - 100);
         }
 
         void SchedulePreloadAppearancePane() {

@@ -414,7 +414,7 @@
                             TickOffset="{Binding TracksViewModel.TickOffset}"
                             SnapDiv="{Binding TracksViewModel.SnapDiv}"
                             SnapTicks="{Binding TracksViewModel.SnapTicks}"
-                            ShowBarNumber="True"/>
+                            ShowBar="True"/>
           <Canvas Name="PlayPosOverlay" Grid.Row="0" Grid.Column="1" ClipToBounds="True" IsHitTestVisible="False" ZIndex="200">
             <Path Name="PlayPos"
                   Canvas.Left="{Binding TracksViewModel.PlayPosX}"
