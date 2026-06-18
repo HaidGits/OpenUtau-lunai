@@ -16,4 +16,13 @@ namespace OpenUtau.App.Controls {
         public static double ClampWidth(double width) =>
             System.Math.Clamp(width, MinWidth, MaxWidth);
     }
+
+    public static class NotePropsPanelMetrics {
+        public const double DefaultWidth = 350;
+        public const double MinWidth = 350;
+        public const double MaxWidth = 450;
+
+        public static double ClampWidth(double width) =>
+            System.Math.Clamp(width, MinWidth, MaxWidth);
+    }
 }
