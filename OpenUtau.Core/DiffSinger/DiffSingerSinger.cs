@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using K4os.Hash.xxHash;
 using OpenUtau.Classic;
+using OpenUtau.Core.SingerHub;
 using OpenUtau.Core.Ustx;
 using OpenUtau.Core.Util;
 using Serilog;
@@ -182,26 +183,36 @@ namespace OpenUtau.Core.DiffSinger {
             }
             string path = Path.Combine(Location, dsConfig.unvoiced_phonemes);
             if (!File.Exists(path)) {
+                if (SingerHubClient.IsLunaiSinger(Location)
+                    && LunaiDsUnvoicedDefaults.TryLoadPhonemes(unvoicedPhonemes)) {
+                    Log.Information(
+                        "Loaded {Count} bundled Lunai unvoiced phonemes (no {File} in voicebank)",
+                        unvoicedPhonemes.Count, dsConfig.unvoiced_phonemes);
+                    return;
+                }
                 Log.Information("Unvoiced phoneme list not found at {Path}", path);
                 return;
             }
             try {
-                var config = Core.Yaml.DefaultDeserializer.Deserialize<DsUnvoicedConfig>(
-                    File.ReadAllText(path, Encoding.UTF8));
-                if (config?.phonemes == null) {
-                    return;
-                }
-                foreach (var phoneme in config.phonemes) {
-                    if (string.IsNullOrWhiteSpace(phoneme)) {
-                        continue;
-                    }
-                    unvoicedPhonemes.Add(phoneme.Trim());
-                }
-                Log.Information("Loaded {Count} unvoiced phonemes from {Path}", unvoicedPhonemes.Count, path);
+                LoadUnvoicedPhonemesFromYaml(File.ReadAllText(path, Encoding.UTF8), path);
             } catch (Exception e) {
                 Log.Error(e, "Failed to load unvoiced phoneme list from {Path}", path);
                 errors.Add($"Failed to load unvoiced phoneme list: {e.Message}");
             }
+        }
+
+        void LoadUnvoicedPhonemesFromYaml(string yamlText, string sourceLabel) {
+            var config = Core.Yaml.DefaultDeserializer.Deserialize<DsUnvoicedConfig>(yamlText);
+            if (config?.phonemes == null) {
+                return;
+            }
+            foreach (var phoneme in config.phonemes) {
+                if (string.IsNullOrWhiteSpace(phoneme)) {
+                    continue;
+                }
+                unvoicedPhonemes.Add(phoneme.Trim());
+            }
+            Log.Information("Loaded {Count} unvoiced phonemes from {Path}", unvoicedPhonemes.Count, sourceLabel);
         }
 
         public InferenceSession getAcousticSession() {

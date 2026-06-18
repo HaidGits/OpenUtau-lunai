@@ -74,5 +74,14 @@ namespace OpenUtau.Core {
             Assert.Equal(9, ranges[1].start);
             Assert.Equal(12, ranges[1].end);
         }
+
+        [Fact]
+        public void BundledLunaiDefaultsIncludeCommonPhonemes() {
+            var phonemes = new HashSet<string>(System.StringComparer.Ordinal);
+            Assert.True(LunaiDsUnvoicedDefaults.TryLoadPhonemes(phonemes));
+            Assert.Contains("ru/s", phonemes);
+            Assert.Contains("ja/t", phonemes);
+            Assert.True(phonemes.Count > 100);
+        }
     }
 }
