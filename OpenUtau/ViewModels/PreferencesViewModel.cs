@@ -10,6 +10,7 @@ using OpenUtau.Audio;
 using OpenUtau.Classic;
 using OpenUtau.Core;
 using OpenUtau.Core.Util;
+using OpenUtau.Colors;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using OpenUtau.Core.Render;
@@ -141,6 +142,9 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public double NoteCornerRadius { get; set; }
         [Reactive] public bool ThemeEditable { get; set; }
         public List<string> ThemeItems => ThemeManager.GetAvailableThemes();
+        public ObservableCollection<ThemePickerItemViewModel> BuiltInThemePickerItems { get; } = new();
+        public ObservableCollection<ThemePickerItemViewModel> BuiltInCustomThemePickerItems { get; } = new();
+        public ObservableCollection<ThemePickerItemViewModel> CustomThemePickerItems { get; } = new();
         public bool IsThemeEditorOpen => Views.ThemeEditorWindow.IsOpen || ThemeEditorDockState.IsOpen;
 
         // UTAU
@@ -544,7 +548,8 @@ namespace OpenUtau.App.ViewModels {
             DiffSingerShowRenderPhraseBoundaries = Preferences.Default.DiffSingerShowRenderPhraseBoundaries;
             SkipRenderingMutedTracks = Preferences.Default.SkipRenderingMutedTracks;
             ThemeName = Preferences.Default.ThemeName;
-            ThemeEditable = ThemeName != "Light" && ThemeName != "Dark";
+            ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(ThemeName);
+            RefreshThemePickerItems();
             PenPlusDefault = Preferences.Default.PenPlusDefault;
             DegreeStyle = Preferences.Default.DegreeStyle;
             UseTrackColor = Preferences.Default.UseTrackColor;
@@ -571,6 +576,10 @@ namespace OpenUtau.App.ViewModels {
             MessageBus.Current.Listen<ThemeEditorStateChangedEvent>()
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => this.RaisePropertyChanged(nameof(IsThemeEditorOpen)));
+
+            MessageBus.Current.Listen<ThemeEditorSavedEvent>()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => RefreshThemes());
             
             this.WhenAnyValue(vm => vm.UseSystemDefaultDevice)
                 .Subscribe(useDefault => {
@@ -646,10 +655,12 @@ namespace OpenUtau.App.ViewModels {
                     Preferences.Save();
                 });
             this.WhenAnyValue(vm => vm.ThemeName)
+                .Subscribe(_ => SyncThemePickerSelection());
+            this.WhenAnyValue(vm => vm.ThemeName)
                 .Skip(1)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(themeName => {
-                    ThemeEditable = themeName != "Light" && themeName != "Dark";
+                    ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(themeName);
                     if (!IsThemeEditorOpen) {
                         Preferences.Default.ThemeName = themeName;
                         Preferences.Save();
@@ -727,6 +738,7 @@ namespace OpenUtau.App.ViewModels {
                     MessageBus.Current.SendMessage(new ExpressionCurveStyleChangedEvent());
                 });
             this.WhenAnyValue(vm => vm.UseOverlayScrollbars)
+                .Skip(1)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(overlay => {
                     Preferences.Default.UseOverlayScrollbars = overlay;
@@ -920,6 +932,39 @@ namespace OpenUtau.App.ViewModels {
 
         public void RefreshThemes() {
             this.RaisePropertyChanged(nameof(ThemeItems));
+            RefreshThemePickerItems();
+        }
+
+        void RefreshThemePickerItems() {
+            BuiltInThemePickerItems.Clear();
+            foreach (var name in BuiltInThemeLoader.BaseThemeNames) {
+                BuiltInThemePickerItems.Add(ThemePickerItemViewModel.FromThemeName(name));
+            }
+
+            BuiltInCustomThemePickerItems.Clear();
+            foreach (var name in BuiltInThemeLoader.BuiltInCustomThemeNames) {
+                BuiltInCustomThemePickerItems.Add(ThemePickerItemViewModel.FromThemeName(name));
+            }
+
+            CustomThemePickerItems.Clear();
+            Colors.CustomTheme.ListThemes();
+            foreach (var name in Colors.CustomTheme.Themes.Keys.OrderBy(key => key, StringComparer.OrdinalIgnoreCase)) {
+                CustomThemePickerItems.Add(ThemePickerItemViewModel.FromThemeName(name));
+            }
+            CustomThemePickerItems.Add(ThemePickerItemViewModel.CreateAddTile());
+            SyncThemePickerSelection();
+        }
+
+        void SyncThemePickerSelection() {
+            foreach (var item in BuiltInThemePickerItems) {
+                item.IsSelected = item.Name == ThemeName;
+            }
+            foreach (var item in BuiltInCustomThemePickerItems) {
+                item.IsSelected = item.Name == ThemeName;
+            }
+            foreach (var item in CustomThemePickerItems) {
+                item.IsSelected = !item.IsCreateTile && item.Name == ThemeName;
+            }
         }
 
         public void ToggleOnnxGpuDisplay(bool show) {

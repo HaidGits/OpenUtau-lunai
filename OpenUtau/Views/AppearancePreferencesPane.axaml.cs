@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
@@ -17,82 +18,19 @@ using ReactiveUI;
 namespace OpenUtau.App.Views {
     public partial class AppearancePreferencesPane : UserControl {
         PreferencesViewModel ViewModel => EnsureViewModel();
-        readonly WorkspaceSectionExpanderChrome sectionChrome = new();
         int scrollStyleApplyGeneration;
-        int sectionBrushApplyGeneration;
 
         public AppearancePreferencesPane() {
             InitializeComponent();
             AttachedToVisualTree += (_, _) => {
                 ClosePanelButton.IsVisible = IsHostedInPianoRollDock();
                 ScheduleApplyScrollStyle();
-                ScheduleUpdateSectionBrushes(retryIfNeeded: true);
             };
-            Loaded += (_, _) => ScheduleUpdateSectionBrushes(retryIfNeeded: true);
             DetachedFromVisualTree += (_, _) => {
                 scrollStyleApplyGeneration++;
-                sectionBrushApplyGeneration++;
             };
-            this.GetObservable(IsVisibleProperty).Subscribe(visible => {
-                if (visible) {
-                    ScheduleUpdateSectionBrushes(retryIfNeeded: true);
-                }
-            });
             MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
                 .Subscribe(_ => ScheduleApplyScrollStyle());
-            MessageBus.Current.Listen<PianorollRefreshEvent>()
-                .Subscribe(e => {
-                    if (e.refreshItem is "TrackColor" or "Part") {
-                        ScheduleUpdateSectionBrushes(retryIfNeeded: true);
-                    }
-                });
-            MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(_ => ScheduleUpdateSectionBrushes(retryIfNeeded: true));
-        }
-
-        public void ScheduleUpdateSectionBrushes(bool retryIfNeeded = false) {
-            if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
-                return;
-            }
-            int generation = ++sectionBrushApplyGeneration;
-            Dispatcher.UIThread.Post(() => {
-                if (generation != sectionBrushApplyGeneration
-                    || !WorkspaceScrollbarHelper.IsInVisualTree(this)) {
-                    return;
-                }
-                ApplySectionBrushes();
-                if (retryIfNeeded
-                    && generation == sectionBrushApplyGeneration
-                    && !sectionChrome.HasAppliedNotePropsExpanders(this)) {
-                    Dispatcher.UIThread.Post(() => {
-                        if (generation == sectionBrushApplyGeneration) {
-                            ApplySectionBrushes();
-                        }
-                    }, DispatcherPriority.Render);
-                }
-            }, DispatcherPriority.Loaded);
-        }
-
-        void ApplySectionBrushes() {
-            if (!IsLoaded) {
-                return;
-            }
-            sectionChrome.UpdateFromWorkspace(GetTrackColorName());
-            sectionChrome.Apply(
-                this,
-                sectionChrome.SectionHeaderBackground,
-                sectionChrome.SectionHeaderBackgroundPointerOver,
-                sectionChrome.SectionHeaderBackgroundPressed,
-                sectionChrome.SectionContentBackground);
-        }
-
-        string GetTrackColorName() {
-            var pianoRoll = this.GetVisualAncestors().OfType<PianoRoll>().FirstOrDefault();
-            var part = pianoRoll?.ViewModel?.NotesViewModel?.Part;
-            if (part != null && DocManager.Inst.Project != null) {
-                return DocManager.Inst.Project.tracks[part.trackNo].TrackColor;
-            }
-            return "Blue";
         }
 
         void ScheduleApplyScrollStyle() {
@@ -137,9 +75,8 @@ namespace OpenUtau.App.Views {
             }
         }
 
-        void OpenCustomThemeEditor(object? sender, RoutedEventArgs e) {
-            var vm = ViewModel;
-            if (string.IsNullOrEmpty(vm.ThemeName) || !CustomTheme.Themes.TryGetValue(vm.ThemeName, out var path)) {
+        void OpenCustomThemeEditor(string themeName) {
+            if (string.IsNullOrEmpty(themeName) || !CustomTheme.Themes.TryGetValue(themeName, out var path)) {
                 return;
             }
             if (IsHostedInPianoRollDock()) {
@@ -149,6 +86,64 @@ namespace OpenUtau.App.Views {
                 MessageBus.Current.SendMessage(new CloseDockedThemeEditorEvent());
                 ThemeEditorWindow.Show(path);
             }
+        }
+
+        void OnThemeTilePointerPressed(object? sender, PointerPressedEventArgs e) {
+            if (e.Source is Button) {
+                return;
+            }
+            if (sender is not Border { DataContext: ThemePickerItemViewModel item }) {
+                return;
+            }
+            if (item.IsCreateTile) {
+                OnCustomThemeCreate(sender, e);
+                e.Handled = true;
+                return;
+            }
+            ViewModel.ThemeName = item.Name;
+            e.Handled = true;
+        }
+
+        void OnThemeEditClick(object? sender, RoutedEventArgs e) {
+            if (sender is not Button { DataContext: ThemePickerItemViewModel item } || !item.IsEditable) {
+                return;
+            }
+            ViewModel.ThemeName = item.Name;
+            OpenCustomThemeEditor(item.Name);
+            e.Handled = true;
+        }
+
+        void OnThemeDeleteClick(object? sender, RoutedEventArgs e) {
+            if (sender is not Button { DataContext: ThemePickerItemViewModel item } || !item.IsEditable) {
+                return;
+            }
+            _ = DeleteCustomThemeAsync(item.Name);
+            e.Handled = true;
+        }
+
+        async System.Threading.Tasks.Task DeleteCustomThemeAsync(string themeName) {
+            var vm = ViewModel;
+            var owner = GetOwnerWindow();
+            if (owner == null) {
+                return;
+            }
+            var result = await MessageBox.Show(
+                owner,
+                ThemeManager.GetString("prefs.appearance.customtheme.delete.message"),
+                ThemeManager.GetString("prefs.appearance.customtheme.delete.title"),
+                MessageBox.MessageBoxButtons.YesNo);
+            if (result != MessageBox.MessageBoxResult.Yes) {
+                return;
+            }
+            if (string.IsNullOrEmpty(themeName) || !CustomTheme.Themes.TryGetValue(themeName, out var path)) {
+                return;
+            }
+            string previousTheme = vm.ThemeItems.TakeWhile(x => x != themeName).LastOrDefault()
+                ?? vm.ThemeItems.FirstOrDefault()
+                ?? "Dark";
+            File.Delete(path);
+            vm.RefreshThemes();
+            vm.ThemeName = previousTheme;
         }
 
         void OnCustomThemeCreate(object? sender, RoutedEventArgs e) {
@@ -169,6 +164,14 @@ namespace OpenUtau.App.Views {
                     .Replace(" ", "-").ToLower() + ".yaml";
 
                 string themePath = Path.Join(PathManager.Inst.ThemesPath, filename);
+                if (File.Exists(themePath)) {
+                    if (owner != null) {
+                        MessageBox.ShowModal(owner,
+                            ThemeManager.GetString("prefs.appearance.customtheme.create.exists"),
+                            ThemeManager.GetString("prefs.appearance.customtheme.create.title"));
+                    }
+                    return;
+                }
                 var themeYaml = BuiltInThemeLoader.CreateFromBuiltIn(baseTheme, name);
                 themeYaml.SaveToFile(themePath);
                 CustomTheme.ListThemes();
@@ -184,30 +187,5 @@ namespace OpenUtau.App.Views {
                 dialog.Show();
             }
         }
-
-        async void OnCustomThemeDelete(object? sender, RoutedEventArgs e) {
-            var vm = ViewModel;
-            var owner = GetOwnerWindow();
-            if (owner == null) {
-                return;
-            }
-            var result = await MessageBox.Show(
-                owner,
-                ThemeManager.GetString("prefs.appearance.customtheme.delete.message"),
-                ThemeManager.GetString("prefs.appearance.customtheme.delete.title"),
-                MessageBox.MessageBoxButtons.YesNo);
-            if (result == MessageBox.MessageBoxResult.Yes) {
-                if (string.IsNullOrEmpty(vm.ThemeName) || !CustomTheme.Themes.TryGetValue(vm.ThemeName, out var path)) {
-                    return;
-                }
-                string previousTheme = vm.ThemeItems.TakeWhile(x => x != vm.ThemeName).LastOrDefault()
-                    ?? vm.ThemeItems.FirstOrDefault()
-                    ?? "Dark";
-                File.Delete(path);
-                vm.RefreshThemes();
-                vm.ThemeName = previousTheme;
-            }
-        }
     }
 }
-

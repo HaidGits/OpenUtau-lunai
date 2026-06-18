@@ -19,22 +19,22 @@
                     Margin="10,0,10,0"
                     HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                     AllowAutoHide="False">
-        <StackPanel Spacing="5" HorizontalAlignment="Stretch">
+        <StackPanel Classes="workspacePanelSections" Spacing="5" HorizontalAlignment="Stretch">
           <Grid ColumnDefinitions="*,auto" Margin="0,0,0,4">
             <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="IsDarkMode"/>
             <ToggleSwitch Grid.Column="1" IsChecked="{Binding IsDarkMode}"/>
           </Grid>
-          <Separator Margin="0"/>
+          <Separator Classes="workspacePanelSectionDivider"/>
           <ItemsControl ItemsSource="{Binding Sections}">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
-                <StackPanel Spacing="5" Margin="0,0,0,8">
-                  <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                <StackPanel Classes="workspacePanelSection" Spacing="5" Margin="0,0,0,8">
+                  <TextBlock Classes="workspacePanelSectionTitle" Text="{Binding Title}"/>
                   <ItemsControl ItemsSource="{Binding Fields}">
                     <ItemsControl.ItemTemplate>
                       <DataTemplate>
                         <Grid ColumnDefinitions="*,auto,auto" Margin="0,0,0,4">
-                          <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding Key}" TextWrapping="Wrap"/>
+                          <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding DisplayName}" TextWrapping="Wrap"/>
                           <TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="8,0,8,0" Opacity="0.7"
                                      Text="{Binding HexCode}"/>
                           <ColorPicker Grid.Column="2" Color="{Binding Color, Mode=TwoWay}" ColorSpectrumShape="Ring"/>
@@ -42,7 +42,7 @@
                       </DataTemplate>
                     </ItemsControl.ItemTemplate>
                   </ItemsControl>
-                  <Separator Margin="0"/>
+                  <Separator Classes="workspacePanelSectionDivider"/>
                 </StackPanel>
               </DataTemplate>
             </ItemsControl.ItemTemplate>

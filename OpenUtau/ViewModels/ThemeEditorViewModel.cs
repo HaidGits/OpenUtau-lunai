@@ -11,6 +11,8 @@ namespace OpenUtau.App.ViewModels;
 
 public class ThemeEditorStateChangedEvent { }
 
+public class ThemeEditorSavedEvent { }
+
 public class OpenDockedThemeEditorEvent {
     public required string Path { get; init; }
 }
@@ -64,15 +66,17 @@ public class ThemeEditorViewModel : ViewModelBase {
     }
 
     ThemeYaml BuildCurrentYaml() {
-        var yaml = new ThemeYaml {
-            Name = themeName,
-            IsDarkMode = IsDarkMode,
-        };
+        var yaml = ThemeYaml.LoadFromFile(customThemePath);
+        yaml.Name = themeName;
+        yaml.IsDarkMode = IsDarkMode;
         foreach (var section in Sections) {
             foreach (var field in section.Fields) {
                 yaml.SetColor(field.Key, ThemeColorStorage.ToStorageString(field.Color));
             }
         }
+        var defaults = BuiltInThemeLoader.CreateFromBuiltIn(IsDarkMode ? "Dark" : "Light", themeName);
+        yaml.FillMissingFrom(defaults);
+        ThemePaletteNormalizer.Normalize(yaml);
         return yaml;
     }
 

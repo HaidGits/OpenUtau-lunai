@@ -129,6 +129,8 @@ namespace OpenUtau.App.Views {
 
             (DataContext as ThemeEditorViewModel)?.Save();
 
+            MessageBus.Current.SendMessage(new ThemeEditorSavedEvent());
+
             Finished?.Invoke(this, new ThemeEditorFinishedEventArgs(saved: true));
 
         }
