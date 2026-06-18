@@ -139,14 +139,35 @@ namespace OpenUtau.Core.SingerHub {
             });
         }
 
-        /// <summary>Returns true if the singer folder contains credits.txt whose first two words are "LUNAI Project".</summary>
+        /// <summary>
+        /// Returns true when credits.txt in the singer folder or its parent (voicebank root)
+        /// identifies a LUNAI Project voicebank.
+        /// </summary>
         public static bool IsLunaiSinger(string folderPath) {
-            if (string.IsNullOrEmpty(folderPath)) return false;
-            var path = Path.Combine(folderPath, "credits.txt");
-            if (!File.Exists(path)) return false;
+            if (string.IsNullOrEmpty(folderPath)) {
+                return false;
+            }
+            if (CreditsFileIndicatesLunai(Path.Combine(folderPath, "credits.txt"))) {
+                return true;
+            }
+            var parent = Path.GetDirectoryName(folderPath);
+            return !string.IsNullOrEmpty(parent)
+                && CreditsFileIndicatesLunai(Path.Combine(parent, "credits.txt"));
+        }
+
+        static bool CreditsFileIndicatesLunai(string creditsPath) {
+            if (!File.Exists(creditsPath)) {
+                return false;
+            }
             try {
-                var line = File.ReadAllText(path).Trim();
-                return line.StartsWith("LUNAI Project", StringComparison.OrdinalIgnoreCase);
+                foreach (var line in File.ReadLines(creditsPath)) {
+                    var trimmed = line.Trim().TrimStart('\uFEFF');
+                    if (trimmed.Length == 0) {
+                        continue;
+                    }
+                    return trimmed.StartsWith("LUNAI Project", StringComparison.OrdinalIgnoreCase);
+                }
+                return false;
             } catch {
                 return false;
             }

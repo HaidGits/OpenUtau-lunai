@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using OpenUtau.Core.DiffSinger;
+using OpenUtau.Core.SingerHub;
 using OpenUtau.Core.Util;
 using Xunit;
 
@@ -82,6 +84,19 @@ namespace OpenUtau.Core {
             Assert.Contains("ru/s", phonemes);
             Assert.Contains("ja/t", phonemes);
             Assert.True(phonemes.Count > 100);
+        }
+
+        [Fact]
+        public void IsLunaiSinger_ReadsCreditsFromVoicebankRoot() {
+            var root = Path.Combine(Path.GetTempPath(), "ou-lunai-" + System.Guid.NewGuid());
+            var configs = Path.Combine(root, "configs");
+            Directory.CreateDirectory(configs);
+            File.WriteAllText(Path.Combine(root, "credits.txt"), "LUNAI Project voice model credits:\n");
+            try {
+                Assert.True(SingerHubClient.IsLunaiSinger(configs));
+            } finally {
+                Directory.Delete(root, true);
+            }
         }
     }
 }

@@ -178,26 +178,26 @@ namespace OpenUtau.Core.DiffSinger {
 
         void LoadUnvoicedPhonemes() {
             unvoicedPhonemes.Clear();
-            if (string.IsNullOrWhiteSpace(dsConfig.unvoiced_phonemes)) {
-                return;
-            }
-            string path = Path.Combine(Location, dsConfig.unvoiced_phonemes);
-            if (!File.Exists(path)) {
-                if (SingerHubClient.IsLunaiSinger(Location)
-                    && LunaiDsUnvoicedDefaults.TryLoadPhonemes(unvoicedPhonemes)) {
-                    Log.Information(
-                        "Loaded {Count} bundled Lunai unvoiced phonemes (no {File} in voicebank)",
-                        unvoicedPhonemes.Count, dsConfig.unvoiced_phonemes);
-                    return;
+            string relativePath = string.IsNullOrWhiteSpace(dsConfig.unvoiced_phonemes)
+                ? "dsunvoiced.yaml"
+                : dsConfig.unvoiced_phonemes.Trim();
+            string path = Path.Combine(Location, relativePath);
+            if (File.Exists(path)) {
+                try {
+                    LoadUnvoicedPhonemesFromYaml(File.ReadAllText(path, Encoding.UTF8), path);
+                } catch (Exception e) {
+                    Log.Error(e, "Failed to load unvoiced phoneme list from {Path}", path);
+                    errors.Add($"Failed to load unvoiced phoneme list: {e.Message}");
                 }
-                Log.Information("Unvoiced phoneme list not found at {Path}", path);
-                return;
             }
-            try {
-                LoadUnvoicedPhonemesFromYaml(File.ReadAllText(path, Encoding.UTF8), path);
-            } catch (Exception e) {
-                Log.Error(e, "Failed to load unvoiced phoneme list from {Path}", path);
-                errors.Add($"Failed to load unvoiced phoneme list: {e.Message}");
+            if (unvoicedPhonemes.Count == 0 && SingerHubClient.IsLunaiSinger(Location)) {
+                if (LunaiDsUnvoicedDefaults.TryLoadPhonemes(unvoicedPhonemes)) {
+                    Log.Information(
+                        "Loaded {Count} bundled Lunai unvoiced phonemes (fallback for {File})",
+                        unvoicedPhonemes.Count, relativePath);
+                }
+            } else if (unvoicedPhonemes.Count == 0 && !File.Exists(path)) {
+                Log.Information("Unvoiced phoneme list not found at {Path}", path);
             }
         }
 
