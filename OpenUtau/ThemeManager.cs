@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Styling;
 using OpenUtau.App.Controls;
+using OpenUtau.Colors;
 using OpenUtau.Core.Util;
 using ReactiveUI;
 
@@ -107,7 +108,11 @@ namespace OpenUtau.App {
 
         public static List<string> GetAvailableThemes() {
             Colors.CustomTheme.ListThemes();
-            return ["Light", "Dark", ..Colors.CustomTheme.Themes.Select(v => v.Key)];
+            return [
+                ..BuiltInThemeLoader.BaseThemeNames,
+                ..BuiltInThemeLoader.BuiltInCustomThemeNames,
+                ..Colors.CustomTheme.Themes.Select(v => v.Key),
+            ];
         }
 
         public static void LoadTheme() {

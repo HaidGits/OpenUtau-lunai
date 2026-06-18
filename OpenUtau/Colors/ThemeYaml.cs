@@ -31,6 +31,7 @@ public class ThemeYaml {
     public string ForegroundColorPointerOver = "#000000";
     public string ForegroundColorPressed = "#202020";
     public string ForegroundColorDisabled = "#808080";
+    public string TextControlBorderColorDisabled = "#BDBDBD";
 
     public string BorderColor = "#707070";
     public string BorderColorPointerOver = "#B0B0B0";
@@ -73,7 +74,6 @@ public class ThemeYaml {
 
     public string WhiteKeyColorLeft = "Transparent";
     public string WhiteKeyColorRight = "Transparent";
-    public string ToolbarCheckedPianoLightColor = "#FCFCFC";
     public string WhiteKeyNameColor = "#343434";
 
     public string CenterKeyColorLeft = "#A9A6CD";
@@ -126,6 +126,7 @@ public class ThemeYaml {
         }
         var defaults = BuiltInThemeLoader.CreateFromBuiltIn(IsDarkMode ? "Dark" : "Light", Name);
         FillMissingFrom(defaults);
+        ThemePaletteNormalizer.Normalize(this);
 
         ThemeApplicator.ApplyCustomBase();
         Application.Current.Resources["IsDarkMode"] = IsDarkMode;
@@ -145,6 +146,7 @@ public class ThemeYaml {
             }
             var defaults = BuiltInThemeLoader.CreateFromBuiltIn(yaml.IsDarkMode ? "Dark" : "Light", yaml.Name);
             yaml.FillMissingFrom(defaults);
+            ThemePaletteNormalizer.Normalize(yaml);
             return yaml;
         } catch (Exception exception) {
             Log.Error(exception, "Failed to parse yaml in {Path}", path);
