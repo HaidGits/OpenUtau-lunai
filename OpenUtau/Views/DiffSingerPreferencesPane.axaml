@@ -9,10 +9,17 @@
              x:Name="DiffSingerPrefsRoot">
   <UserControl.Styles>
     <Style Selector="StackPanel.diffSingerSectionContent">
-      <Setter Property="Spacing" Value="4"/>
+      <Setter Property="Spacing" Value="6"/>
     </Style>
     <Style Selector="TextBlock">
       <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="TextBlock.prefSubgroupTitle">
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Margin" Value="0,8,0,0"/>
+    </Style>
+    <Style Selector="StackPanel.diffSingerSectionContent > TextBlock.prefSubgroupTitle:first-child">
+      <Setter Property="Margin" Value="0"/>
     </Style>
     <Style Selector="ToggleSwitch">
       <Setter Property="OnContent" Value="{DynamicResource prefs.on}"/>
@@ -22,7 +29,7 @@
       <Setter Property="IsTabStop" Value="False"/>
     </Style>
     <Style Selector="Grid.prefRow">
-      <Setter Property="Margin" Value="0,0,0,0"/>
+      <Setter Property="Margin" Value="0"/>
     </Style>
     <Style Selector="Grid.prefRow > TextBlock">
       <Setter Property="Grid.Column" Value="0"/>
@@ -33,6 +40,9 @@
     <Style Selector="Grid.prefRow > ToggleSwitch">
       <Setter Property="Grid.Column" Value="1"/>
       <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Grid.prefSliderRow">
+      <Setter Property="Margin" Value="0,2,0,0"/>
     </Style>
     <Style Selector="Slider.fader">
       <Setter Property="Focusable" Value="True"/>
@@ -52,34 +62,46 @@
       <Path Classes="stroked"/>
     </Button>
     <ScrollViewer x:Name="ContentScroll" Classes="workspaceScroll workspaceDockPanelScroll"
-                  Margin="10,48,10,10"
+                  Margin="10,48,10,16"
                   HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                   AllowAutoHide="False">
       <StackPanel Classes="workspacePanelSections" Margin="0" HorizontalAlignment="Stretch">
         <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
-                  Header="{DynamicResource prefs.diffsinger.section.steps}">
-          <StackPanel Classes="workspacePanelSection diffSingerSectionContent">
-            <TextBlock Text="{DynamicResource prefs.rendering.diffsingersteps}" FontWeight="SemiBold"/>
-            <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
-                                      ItemsSource="{Binding DiffSingerStepsOptions}"
-                                      SelectedItem="{Binding DiffSingerSteps}"/>
-            <TextBlock Text="{DynamicResource prefs.rendering.diffsingerstepsvariance}" FontWeight="SemiBold" Margin="0,8,0,0"/>
-            <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
-                                      ItemsSource="{Binding DiffSingerStepsVarianceOptions}"
-                                      SelectedItem="{Binding DiffSingerStepsVariance}"/>
-            <TextBlock Text="{DynamicResource prefs.rendering.diffsingerstepspitch}" FontWeight="SemiBold" Margin="0,8,0,0"/>
-            <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
-                                      ItemsSource="{Binding DiffSingerStepsPitchOptions}"
-                                      SelectedItem="{Binding DiffSingerStepsPitch}"/>
+                  Header="{DynamicResource prefs.diffsinger.section.general}">
+          <StackPanel Classes="diffSingerSectionContent">
+            <Grid Classes="prefRow" ColumnDefinitions="*,Auto">
+              <TextBlock Text="{DynamicResource prefs.rendering.prerender}"/>
+              <ToggleSwitch IsChecked="{Binding PreRender}"/>
+            </Grid>
+            <Grid Classes="prefRow" ColumnDefinitions="*,Auto">
+              <TextBlock Text="{DynamicResource prefs.rendering.skipmuted}"/>
+              <ToggleSwitch IsChecked="{Binding SkipRenderingMutedTracks}"/>
+            </Grid>
           </StackPanel>
         </Expander>
         <Separator Classes="workspacePanelSectionDivider"/>
 
         <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
-                  Header="{DynamicResource prefs.diffsinger.section.quality}">
-          <StackPanel Classes="workspacePanelSection diffSingerSectionContent">
-            <Grid ColumnDefinitions="Auto,8,44,8,*">
-              <TextBlock Grid.Column="0" Text="{DynamicResource prefs.rendering.diffsingerdepth}" FontWeight="SemiBold"/>
+                  Header="{DynamicResource prefs.diffsinger.section.renderquality}">
+          <StackPanel Classes="diffSingerSectionContent">
+            <TextBlock Classes="prefSubgroupTitle"
+                       Text="{DynamicResource prefs.rendering.diffsingersteps}"/>
+            <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
+                                      ItemsSource="{Binding DiffSingerStepsOptions}"
+                                      SelectedItem="{Binding DiffSingerSteps}"/>
+            <TextBlock Classes="prefSubgroupTitle"
+                       Text="{DynamicResource prefs.rendering.diffsingerstepsvariance}"/>
+            <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
+                                      ItemsSource="{Binding DiffSingerStepsVarianceOptions}"
+                                      SelectedItem="{Binding DiffSingerStepsVariance}"/>
+            <TextBlock Classes="prefSubgroupTitle"
+                       Text="{DynamicResource prefs.rendering.diffsingerstepspitch}"/>
+            <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
+                                      ItemsSource="{Binding DiffSingerStepsPitchOptions}"
+                                      SelectedItem="{Binding DiffSingerStepsPitch}"/>
+            <Grid Classes="prefSliderRow" ColumnDefinitions="Auto,8,44,8,*">
+              <TextBlock Grid.Column="0" Text="{DynamicResource prefs.rendering.diffsingerdepth}"
+                         FontWeight="SemiBold"/>
               <TextBlock Grid.Column="2" TextAlignment="Right">
                 <TextBlock.Text>
                   <MultiBinding StringFormat="{}{0:#0}%">
@@ -96,7 +118,7 @@
 
         <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
                   Header="{DynamicResource prefs.diffsinger.section.cache}">
-          <StackPanel Classes="workspacePanelSection diffSingerSectionContent">
+          <StackPanel Classes="diffSingerSectionContent">
             <Grid Classes="prefRow" ColumnDefinitions="*,Auto">
               <TextBlock Text="{DynamicResource prefs.cache.diffsingertensorcache}"/>
               <ToggleSwitch IsChecked="{Binding DiffSingerTensorCache}"/>
@@ -111,7 +133,7 @@
 
         <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
                   Header="{DynamicResource prefs.diffsinger.section.pitch}">
-          <StackPanel Classes="workspacePanelSection diffSingerSectionContent">
+          <StackPanel Classes="diffSingerSectionContent">
             <Grid Classes="prefRow" ColumnDefinitions="*,Auto">
               <TextBlock Text="{DynamicResource prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate}"/>
               <ToggleSwitch IsChecked="{Binding DiffSingerUnvoicedConsonantAcousticF0Interpolate}"/>
@@ -125,6 +147,13 @@
               <TextBlock Text="{DynamicResource prefs.rendering.diffsingerpitchlocalretaking}"/>
               <ToggleSwitch IsChecked="{Binding DiffSingerLocalRetaking}"/>
             </Grid>
+          </StackPanel>
+        </Expander>
+        <Separator Classes="workspacePanelSectionDivider"/>
+
+        <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
+                  Header="{DynamicResource prefs.diffsinger.section.debug}">
+          <StackPanel Classes="diffSingerSectionContent">
             <Grid Classes="prefRow" ColumnDefinitions="*,Auto">
               <TextBlock Text="{DynamicResource prefs.diffsinger.renderphraseboundaries}"/>
               <ToggleSwitch IsChecked="{Binding DiffSingerShowRenderPhraseBoundaries}"/>
