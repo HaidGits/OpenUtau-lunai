@@ -106,9 +106,31 @@ jobs:
 
       - name: Download VC Redist (Windows)
         if: matrix.arch.os == 'win'
-        shell: cmd
+        shell: pwsh
         run: |
-          curl -L https://aka.ms/vs/17/release/vc_redist.${{ matrix.arch.arch }}.exe -o vc_redist.${{ matrix.arch.arch }}.exe
+          $arch = '${{ matrix.arch.arch }}'
+          $url = "https://aka.ms/vs/17/release/vc_redist.$arch.exe"
+          $out = "vc_redist.$arch.exe"
+          $minBytes = switch ($arch) {
+            'x64'   { 20MB }
+            'x86'   { 10MB }
+            'arm64' { 10MB }
+            default { throw "Unknown architecture: $arch" }
+          }
+          for ($attempt = 1; $attempt -le 5; $attempt++) {
+            Write-Host "Downloading VC redist ($arch), attempt $attempt..."
+            Remove-Item $out -ErrorAction SilentlyContinue
+            curl.exe -L --fail --http1.1 --retry 3 --retry-all-errors --retry-delay 5 `
+              --connect-timeout 30 --max-time 600 -o $out $url
+            $size = (Get-Item $out).Length
+            if ($size -ge $minBytes) {
+              Write-Host "Downloaded $size bytes."
+              exit 0
+            }
+            Write-Host "Download incomplete ($size bytes, expected at least $minBytes), retrying..."
+            Start-Sleep -Seconds 5
+          }
+          throw "Failed to download VC redist for $arch after 5 attempts"
 
       # Linux specific
       - name: Set Linux executable permissions
