@@ -420,7 +420,6 @@ namespace OpenUtau.Core {
         private void Render(UProject project, int tick, int endTick, int trackNo) {
             Task.Run(() => {
                 try {
-                    OpenUtau.Classic.ClassicRenderer.LiveWaveformCache.Clear();
                     RenderEngine engine = new RenderEngine(project, startTick: tick, endTick: endTick, trackNo: trackNo);
                     var result = engine.RenderMixdown(DocManager.Inst.MainScheduler, ref renderCancellation, wait: false);
                     var playbackAdapter = new MasterAdapter(new PlaybackMix(result.Item1, metronomeEngine));

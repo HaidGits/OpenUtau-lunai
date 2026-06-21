@@ -7,11 +7,15 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using OpenUtau.App;
 using OpenUtau.App.ViewModels;
+using OpenUtau.Core.Render;
+using OpenUtau.Core.Ustx;
 using ReactiveUI;
 using Serilog;
 
 namespace OpenUtau.App.Controls {
     class WaveformImage : Control {
+        const float DiffSingerAmplitudeGain = 1.2f;
+        const float VerticalFill = 0.92f;
         public static readonly DirectProperty<WaveformImage, double> TickWidthProperty =
             AvaloniaProperty.RegisterDirect<WaveformImage, double>(
                 nameof(TickWidth),
@@ -47,18 +51,28 @@ namespace OpenUtau.App.Controls {
 
         private WriteableBitmap? bitmap;
         private float[] sampleData = new float[0];
+        private float[] mixScratch = new float[0];
         private int sampleCount;
         private int[] bitmapData = new int[0];
         private DateTime mixUnlockTime = DateTime.MinValue;
         private bool wasRendering = false;
 
         public WaveformImage() {
+            PhraseWaveformCache.Changed += OnPhraseWaveformCacheChanged;
             MessageBus.Current.Listen<WaveformRefreshEvent>()
-                .Subscribe(e => {
-                    InvalidateVisual();
-                });
+                .Subscribe(e => RequestRedraw());
             MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(e => InvalidateVisual());
+                .Subscribe(e => RequestRedraw());
+        }
+
+        void OnPhraseWaveformCacheChanged() {
+            RequestRedraw();
+        }
+
+        void RequestRedraw() {
+            Avalonia.Threading.Dispatcher.UIThread.Post(
+                InvalidateVisual,
+                Avalonia.Threading.DispatcherPriority.Render);
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change) {
@@ -88,39 +102,24 @@ namespace OpenUtau.App.Controls {
                         double rightMs = project.timeAxis.TickPosToMsPos(viewModel.TickOrigin + viewModel.TickOffset + viewModel.ViewportTicks);
                         int samplePos = (int)(leftMs * 44100 / 1000) * 2;
                         sampleCount = (int)((rightMs - leftMs) * 44100 / 1000) * 2;
-                        
+
                         if (sampleData.Length < sampleCount) {
                             Array.Resize(ref sampleData, sampleCount);
                         }
-                        
+                        if (mixScratch.Length < sampleCount) {
+                            Array.Resize(ref mixScratch, sampleCount);
+                        }
+
                         bool needsAnotherFrame = false;
                         Array.Clear(sampleData, 0, sampleData.Length);
-                        
-                        if (part.Mix != null && !OpenUtau.Core.PlaybackManager.Inst.StartingToPlay) {
-                            part.Mix.Mix(samplePos, sampleData, 0, sampleCount);
-                        } else {
-                            foreach (var cacheItem in OpenUtau.Classic.ClassicRenderer.LiveWaveformCache.Values) {
-                                if (cacheItem.trackNo != part.trackNo) continue;
-                                double phraseStartMs = cacheItem.posMs;
-                                float[] phraseSamples = cacheItem.samples;
-                                int phraseStartSampleIdx = (int)((phraseStartMs - leftMs) * 44100 / 1000);
-                                
-                                double ageMs = (DateTime.Now - cacheItem.renderTime).TotalMilliseconds;
-                                double animProgress = Math.Clamp(ageMs / 300.0, 0.0, 1.0); 
-                                
-                                if (animProgress < 1.0) needsAnotherFrame = true; 
-                                
-                                float ease = 1.0f - (float)Math.Pow(1.0 - animProgress, 3);
-                                float visualScale = 1.0f * ease; 
-                                int startJ = Math.Max(0, -phraseStartSampleIdx);
-                                int endJ = Math.Min(phraseSamples.Length, (sampleCount / 2) - phraseStartSampleIdx);
-                                for (int j = startJ; j < endJ; j++) {
-                                    int targetIdx = (phraseStartSampleIdx + j) * 2; 
-                                    float scaledSample = phraseSamples[j] * visualScale;
-                                    sampleData[targetIdx] += scaledSample;     
-                                    sampleData[targetIdx + 1] += scaledSample; 
-                                }
-                            }
+
+                        FillFromPhraseCache(part.trackNo, leftMs, ref needsAnotherFrame);
+
+                        bool hasCachedPhrases = PhraseWaveformCache.GetForTrack(part.trackNo).Any();
+                        if (part.Mix != null && !hasCachedPhrases) {
+                            Array.Clear(mixScratch, 0, sampleCount);
+                            part.Mix.Mix(samplePos, mixScratch, 0, sampleCount);
+                            Array.Copy(mixScratch, sampleData, sampleCount);
                         }
 
                         bool isRendering = OpenUtau.Core.PlaybackManager.Inst.StartingToPlay;
@@ -128,19 +127,22 @@ namespace OpenUtau.App.Controls {
                             mixUnlockTime = DateTime.Now;
                         }
                         wasRendering = isRendering;
-                        
-                        double snapAgeMs = (DateTime.Now - mixUnlockTime).TotalMilliseconds;
-                        double snapProgress = Math.Clamp(snapAgeMs / 300.0, 0.0, 1.0);
-                        float snapEase = 1.0f - (float)Math.Pow(1.0 - snapProgress, 3);
 
-                        if (snapProgress < 1.0) needsAnotherFrame = true;
+                        float snapEase = 1.0f;
+                        if (part.RenderMixComplete) {
+                            double snapAgeMs = (DateTime.Now - mixUnlockTime).TotalMilliseconds;
+                            double snapProgress = Math.Clamp(snapAgeMs / PhraseWaveformCache.FadeDurationMs, 0.0, 1.0);
+                            snapEase = 1.0f - (float)Math.Pow(1.0 - snapProgress, 3);
+                            if (snapProgress < 1.0) needsAnotherFrame = true;
+                        }
 
+                        float amplitudeGain = GetAmplitudeGain(part, project);
                         int startSample = 0;
                         for (int i = 0; i < bitmap.PixelSize.Width; ++i) {
                             double endTick = viewModel.TickOrigin + viewModel.TickOffset + (i + 1.0) / viewModel.TickWidth;
                             double endMs = project.timeAxis.TickPosToMsPos(endTick);
                             int endSample = Math.Clamp((int)((endMs - leftMs) * 44100 / 1000) * 2, 0, sampleCount);
-                            
+
                             if (endSample > startSample) {
                                 float rawMin = float.MaxValue;
                                 float rawMax = float.MinValue;
@@ -151,10 +153,10 @@ namespace OpenUtau.App.Controls {
                                 }
                                 if (rawMin == float.MaxValue) rawMin = 0;
                                 if (rawMax == float.MinValue) rawMax = 0;
-                                rawMin *= snapEase;
-                                rawMax *= snapEase;
-                                float min = 0.5f + rawMin * 0.5f;
-                                float max = 0.5f + rawMax * 0.5f;
+                                rawMin = Math.Clamp(rawMin * amplitudeGain * snapEase, -1f, 1f);
+                                rawMax = Math.Clamp(rawMax * amplitudeGain * snapEase, -1f, 1f);
+                                float min = 0.5f + rawMin * 0.5f * VerticalFill;
+                                float max = 0.5f + rawMax * 0.5f * VerticalFill;
                                 float yMax = Math.Clamp(max * bitmap.PixelSize.Height, 0, bitmap.PixelSize.Height - 1);
                                 float yMin = Math.Clamp(min * bitmap.PixelSize.Height, 0, bitmap.PixelSize.Height - 1);
                                 if (Math.Abs(yMax - yMin) > 0.01) {
@@ -165,7 +167,7 @@ namespace OpenUtau.App.Controls {
                         }
 
                         if (needsAnotherFrame) {
-                            Avalonia.Threading.Dispatcher.UIThread.Post(InvalidateVisual, Avalonia.Threading.DispatcherPriority.Background);
+                            RequestRedraw();
                         }
                     }
                 }
@@ -178,6 +180,35 @@ namespace OpenUtau.App.Controls {
                 var rect = Bounds.WithX(0).WithY(0);
                 context.DrawImage(bitmap, rect, rect);
             }
+        }
+
+        void FillFromPhraseCache(int trackNo, double leftMs, ref bool needsAnotherFrame) {
+            foreach (var cacheItem in PhraseWaveformCache.GetForTrack(trackNo)) {
+                float visualScale = PhraseWaveformCache.GetVisualScale(in cacheItem, ref needsAnotherFrame);
+                if (visualScale <= 0.001f) {
+                    continue;
+                }
+                double phraseStartMs = cacheItem.PosMs;
+                float[] phraseSamples = cacheItem.Samples;
+                int phraseStartSampleIdx = (int)((phraseStartMs - leftMs) * 44100 / 1000);
+                int startJ = Math.Max(0, -phraseStartSampleIdx);
+                int endJ = Math.Min(phraseSamples.Length, (sampleCount / 2) - phraseStartSampleIdx);
+                for (int j = startJ; j < endJ; j++) {
+                    int targetIdx = (phraseStartSampleIdx + j) * 2;
+                    float scaledSample = phraseSamples[j] * visualScale;
+                    sampleData[targetIdx] += scaledSample;
+                    sampleData[targetIdx + 1] += scaledSample;
+                }
+            }
+        }
+
+        static float GetAmplitudeGain(UVoicePart part, UProject project) {
+            if (part.trackNo < 0 || part.trackNo >= project.tracks.Count) {
+                return 1f;
+            }
+            return project.tracks[part.trackNo].Singer?.SingerType == USingerType.DiffSinger
+                ? DiffSingerAmplitudeGain
+                : 1f;
         }
 
         private WriteableBitmap? GetBitmap() {
@@ -204,7 +235,7 @@ namespace OpenUtau.App.Controls {
                 && resource is Color color) {
                 return unchecked((int)(((uint)color.A << 24) | ((uint)color.R << 16) | ((uint)color.G << 8) | color.B));
             }
-            return unchecked((int)0x59B5B5B5);
+            return unchecked((int)0x3BFFFFFF);
         }
 
         private void DrawPeak(int[] data, int width, int x, int y1, int y2) {

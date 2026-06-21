@@ -1347,6 +1347,10 @@ namespace OpenUtau.App.ViewModels {
                 } else if (cmd is PhonemizedNotification) {
                     OnPartModified();
                     MessageBus.Current.SendMessage(new NotesRefreshEvent());
+                } else if (notif is WaveformReadyNotification) {
+                    MessageBus.Current.SendMessage(new WaveformRefreshEvent());
+                } else if (notif is PhraseRenderedNotification phraseRendered && phraseRendered.part == Part) {
+                    MessageBus.Current.SendMessage(new WaveformRefreshEvent());
                 } else if (notif is PartRenderedNotification && notif.part == Part) {
                     MessageBus.Current.SendMessage(new WaveformRefreshEvent());
                 } else if (notif is RealCurvesUpdatedNotification && notif.part == Part) {

@@ -227,8 +227,9 @@
       <Canvas Name="PortraitCanvas" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" IsHitTestVisible="False">
         <Image Name="PortraitImage" Source="{Binding NotesViewModel.Portrait}" OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"/>
       </Canvas>
-      <Border Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-              Margin="{Binding NotesViewModel.WaveformBottomMarginThickness}" Height="72" IsHitTestVisible="False">
+      <Border Grid.Row="2" Grid.Column="1" ZIndex="0"
+              HorizontalAlignment="Stretch" VerticalAlignment="Bottom" ClipToBounds="True"
+              Margin="{Binding NotesViewModel.WaveformBottomMarginThickness}" Height="86" IsHitTestVisible="False">
         <c:WaveformImage DataContext="{Binding NotesViewModel, Mode=OneWay}"
                          TickWidth="{Binding TickWidth, Mode=OneWay}"
                          TickOffset="{Binding TickOffset, Mode=OneWay}"

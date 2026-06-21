@@ -236,6 +236,14 @@ namespace OpenUtau.Core.Render {
             if (requests.Length == 0 || cancellation.IsCancellationRequested) {
                 return;
             }
+            foreach (var request in requests) {
+                PhraseWaveformCache.RemoveStaleForTrack(
+                    request.trackNo,
+                    request.phrases.Select(phrase => phrase.hash));
+                SeedRequestFromCache(request);
+                request.part.SetRenderMixComplete(request.sources.All(source => source.HasSamples));
+                request.part.SetMix(request.mix);
+            }
             var tuples = requests
                 .SelectMany(req => req.phrases
                     .Zip(req.sources, (phrase, source) => Tuple.Create(phrase, source, req)))
@@ -266,16 +274,36 @@ namespace OpenUtau.Core.Render {
                 }
                 var result = task.Result;
                 source.SetSamples(result.samples);
+                request.part.SetMix(request.mix);
+                if (result.samples != null) {
+                    var layout = phrase.renderer.Layout(phrase);
+                    PhraseWaveformCache.Put(
+                        request.trackNo,
+                        phrase.hash,
+                        layout.positionMs - layout.leadingMs,
+                        result.samples);
+                    DocManager.Inst.ExecuteCmd(new WaveformReadyNotification());
+                }
                 DocManager.Inst.ExecuteCmd(new PhraseRenderedNotification(request.part, phrase, result, request.trackNo));
                 if (!realCurvesPublished) {
                     PublishRealCurveUpdates(request.part, phrase);
                 }
                 if (request.sources.All(s => s.HasSamples)) {
+                    request.part.SetRenderMixComplete(true);
                     request.part.SetMix(request.mix);
                     DocManager.Inst.ExecuteCmd(new PartRenderedNotification(request.part));
                 }
             }
             progress.Clear();
+        }
+
+        private static void SeedRequestFromCache(RenderPartRequest request) {
+            for (int i = 0; i < request.phrases.Length; i++) {
+                var phrase = request.phrases[i];
+                if (PhraseWaveformCache.TryGet(phrase.hash, out var entry) && entry.TrackNo == request.trackNo) {
+                    request.sources[i].SetSamples(entry.Samples);
+                }
+            }
         }
 
         private bool PublishRealCurveUpdates(UVoicePart part, RenderPhrase phrase) {

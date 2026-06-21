@@ -55,9 +55,11 @@ namespace OpenUtau.Core.Ustx {
         [YamlIgnore] private long phonemesTimestamp;
 
         [YamlIgnore] private ISignalSource mix;
+        [YamlIgnore] private bool renderMixComplete = true;
 
         [YamlIgnore] public bool PhonemesUpToDate => notesTimestamp == phonemesTimestamp;
         [YamlIgnore] public ISignalSource Mix => mix;
+        [YamlIgnore] public bool RenderMixComplete => renderMixComplete;
 
         public override string DisplayName => name;
         public override int Duration { get => duration; set => duration = value; }
@@ -308,6 +310,12 @@ namespace OpenUtau.Core.Ustx {
         internal void SetMix(ISignalSource mix) {
             lock (this) {
                 this.mix = mix;
+            }
+        }
+
+        internal void SetRenderMixComplete(bool complete) {
+            lock (this) {
+                renderMixComplete = complete;
             }
         }
 
