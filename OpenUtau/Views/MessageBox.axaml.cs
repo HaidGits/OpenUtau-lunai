@@ -149,10 +149,10 @@ namespace OpenUtau.App.Views {
             }
 
             if (buttons == MessageBoxButtons.Ok || buttons == MessageBoxButtons.OkCancel || buttons == MessageBoxButtons.OkCopy)
-                AddButton(ThemeManager.GetString("dialogs.messagebox.ok"), MessageBoxResult.Ok, true);
+                AddButton(ThemeManager.GetString("button.ok"), MessageBoxResult.Ok, true);
             if (buttons == MessageBoxButtons.YesNo || buttons == MessageBoxButtons.YesNoCancel) {
-                AddButton(ThemeManager.GetString("dialogs.messagebox.yes"), MessageBoxResult.Yes);
-                AddButton(ThemeManager.GetString("dialogs.messagebox.no"), MessageBoxResult.No, true);
+                AddButton(ThemeManager.GetString("button.yes"), MessageBoxResult.Yes);
+                AddButton(ThemeManager.GetString("button.no"), MessageBoxResult.No, true);
             }
             if (buttons == MessageBoxButtons.DropProjectOpenImportCancel) {
                 AddButton(ThemeManager.GetString("dialogs.dropproject.open"), MessageBoxResult.Yes);
@@ -161,7 +161,7 @@ namespace OpenUtau.App.Views {
             }
 
             if (buttons == MessageBoxButtons.OkCancel || buttons == MessageBoxButtons.YesNoCancel)
-                AddButton(ThemeManager.GetString("dialogs.messagebox.cancel"), MessageBoxResult.Cancel, true);
+                AddButton(ThemeManager.GetString("button.cancel"), MessageBoxResult.Cancel, true);
             if (buttons == MessageBoxButtons.OkCopy) {
                 var btn = new Button { Content = ThemeManager.GetString("dialogs.messagebox.copy") };
                 btn.Click += (_, __) => {
@@ -229,7 +229,7 @@ namespace OpenUtau.App.Views {
                 }
             }, scheduler);
 
-            var btn = new Button { Content = ThemeManager.GetString("dialogs.messagebox.cancel") };
+            var btn = new Button { Content = ThemeManager.GetString("button.cancel") };
             btn.Click += (_, __) => {
                 msgbox.Close();
             };

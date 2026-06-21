@@ -142,19 +142,14 @@ namespace OpenUtau.App.ViewModels {
         public EditTool EditTool { get; set; } = Preferences.Default.EditTool;
         [Reactive] public int ToolIndex { get; set; } = Preferences.Default.EditTool.BaseTool;
         [Reactive] public int PenToolIndex { get; set; } = Preferences.Default.EditTool.PenToolVariation;
-        [Reactive] public int DrawPitchToolIndex { get; set; } = Preferences.Default.EditTool.DrawPitchToolVariation;
-        [Reactive] public int DrawLinePitchToolIndex { get; set; } = Preferences.Default.EditTool.DrawLinePitchToolVariation;
+        [Reactive] public bool PitchOverwrite { get; set; } = Preferences.Default.EditTool.OverwritePitch;
         [Reactive] public bool PitchFocusDim { get; private set; }
 
         public bool CursorTool => ToolIndex == 0;
         public bool PenTool => ToolIndex == 1 && PenToolIndex == 0;
         public bool PenPlusTool => ToolIndex == 1 && PenToolIndex == 1;
         public bool EraserTool => ToolIndex == 2;
-        public bool DrawPitchTool => ToolIndex == 3 && DrawPitchToolIndex == 0;
-        public bool OverwritePitchTool => ToolIndex == 3 && DrawPitchToolIndex == 1;
-        public bool DrawLinePitchTool => ToolIndex == 4 && DrawLinePitchToolIndex == 0;
-        public bool OverwriteLinePitchTool => ToolIndex == 4 && DrawLinePitchToolIndex == 1;
-        public bool KnifeTool => ToolIndex == 5;
+        public bool KnifeTool => ToolIndex == 3;
 
         public ObservableCollectionExtended<MenuItemViewModel> LegacyPlugins { get; private set; }
             = new ObservableCollectionExtended<MenuItemViewModel>();
@@ -291,22 +286,11 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(index => EditTool.BaseTool = index);
             this.WhenAnyValue(vm => vm.PenToolIndex)
                 .Subscribe(index => EditTool.PenToolVariation = index);
-            this.WhenAnyValue(vm => vm.DrawPitchToolIndex)
-                .Subscribe(index => EditTool.DrawPitchToolVariation = index);
-            this.WhenAnyValue(vm => vm.DrawLinePitchToolIndex)
-                .Subscribe(index => EditTool.DrawLinePitchToolVariation = index);
-            this.WhenAnyValue(vm => vm.ToolIndex, vm => vm.DrawPitchToolIndex, vm => vm.DrawLinePitchToolIndex)
+            this.WhenAnyValue(vm => vm.PitchOverwrite)
+                .Subscribe(val => { EditTool.OverwritePitch = val; Preferences.Default.EditTool.OverwritePitch = val; Preferences.Save(); });
+            this.WhenAnyValue(vm => vm.ToolIndex, vm => vm.PitchOverwrite)
                 .Subscribe(_ => UpdatePitchFocusDim());
             UpdatePitchFocusDim();
-
-            this.WhenAnyValue(vm => vm.ToolIndex)
-                .Subscribe(index => EditTool.BaseTool = index);
-            this.WhenAnyValue(vm => vm.PenToolIndex)
-                .Subscribe(index => EditTool.PenToolVariation = index);
-            this.WhenAnyValue(vm => vm.DrawPitchToolIndex)
-                .Subscribe(index => EditTool.DrawPitchToolVariation = index);
-            this.WhenAnyValue(vm => vm.DrawLinePitchToolIndex)
-                .Subscribe(index => EditTool.DrawLinePitchToolVariation = index);
 
             NoteDeleteCommand = ReactiveCommand.Create<NoteHitInfo>(info => {
                 NotesViewModel.DeleteSelectedNotes();
@@ -485,12 +469,7 @@ namespace OpenUtau.App.ViewModels {
         }
 
         void UpdatePitchFocusDim() {
-            bool active = EditTool.IsMatch([
-                EditTools.DrawPitchTool,
-                EditTools.OverwritePitchTool,
-                EditTools.DrawLinePitchTool,
-                EditTools.OverwriteLinePitchTool,
-            ]);
+            bool active = EditTool.IsPitchTool;
             if (PitchFocusDim == active) {
                 return;
             }

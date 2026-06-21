@@ -83,11 +83,7 @@ namespace OpenUtau.App.Controls {
             DataContext = ViewModel = model;
             ValueTip.IsVisible = false;
             SetPenToolIcon();
-            SetDrawPitchToolIcon();
-            SetDrawLinePitchToolIcon();
             penTool.AddHandler(PointerPressedEvent, OnToolButtonPointerPressed, RoutingStrategies.Tunnel | RoutingStrategies.Bubble, true);
-            drawPitchTool.AddHandler(PointerPressedEvent, OnToolButtonPointerPressed, RoutingStrategies.Tunnel | RoutingStrategies.Bubble, true);
-            drawLinePitchTool.AddHandler(PointerPressedEvent, OnToolButtonPointerPressed, RoutingStrategies.Tunnel | RoutingStrategies.Bubble, true);
 
             ViewModel.WhenAnyValue(x => x.ShowAppearancePanel, x => x.ShowDiffSingerPanel)
                 .ObserveOn(RxApp.MainThreadScheduler)
@@ -786,28 +782,10 @@ namespace OpenUtau.App.Controls {
             FlyoutBase.GetAttachedFlyout(penTool)?.Hide(); ;
             SetPenToolIcon();
         }
-        void DrawPitchToolListBox_PointerReleased(object? sender, PointerReleasedEventArgs args) {
-            FlyoutBase.GetAttachedFlyout(drawPitchTool)?.Hide();
-            SetDrawPitchToolIcon();
-        }
-        void DrawLinePitchToolListBox_PointerReleased(object? sender, PointerReleasedEventArgs args) {
-            FlyoutBase.GetAttachedFlyout(drawLinePitchTool)?.Hide();
-            SetDrawLinePitchToolIcon();
-        }
         void SetPenToolIcon() {
             penTool.Classes.Remove("penTool");
             penTool.Classes.Remove("penPlusTool");
             penTool.Classes.Add(ViewModel.EditTool.PenToolVariation == 1 ? "penPlusTool" : "penTool");
-        }
-        void SetDrawPitchToolIcon() {
-            drawPitchTool.Classes.Remove("drawPitchTool");
-            drawPitchTool.Classes.Remove("overwritePitchTool");
-            drawPitchTool.Classes.Add(ViewModel.EditTool.DrawPitchToolVariation == 1 ? "overwritePitchTool" : "drawPitchTool");
-        }
-        void SetDrawLinePitchToolIcon() {
-            drawLinePitchTool.Classes.Remove("drawLinePitchTool");
-            drawLinePitchTool.Classes.Remove("overwriteLinePitchTool");
-            drawLinePitchTool.Classes.Add(ViewModel.EditTool.DrawLinePitchToolVariation == 1 ? "overwriteLinePitchTool" : "drawLinePitchTool");
         }
 
         void SearchNote() {
@@ -1092,7 +1070,19 @@ namespace OpenUtau.App.Controls {
             var control = (Control)sender;
             var point = args.GetCurrentPoint(control);
             if (editState != null) {
-                return;
+                // Finalize pitch curve in adjusting phase before starting a new edit
+                if (editState is PitchCurveState pcs2 && pcs2.IsInAdjustingPhase) {
+                    if (point.Properties.IsLeftButtonPressed) {
+                        pcs2.Apply();
+                        pcs2.End(pointer: args.Pointer, point: point.Position);
+                    } else {
+                        // Right-click during adjusting: cancel the edit
+                        pcs2.Cancel(args.Pointer);
+                    }
+                    editState = null;
+                } else {
+                    return;
+                }
             }
             if (point.Properties.IsLeftButtonPressed) {
                 NotesCanvasLeftPointerPressed(control, point, args);
@@ -1109,20 +1099,21 @@ namespace OpenUtau.App.Controls {
         }
 
         private void NotesCanvasLeftPointerPressed(Control control, PointerPoint point, PointerPressedEventArgs args) {
-            if (ViewModel.DrawPitchTool || ViewModel.DrawLinePitchTool || ViewModel.OverwritePitchTool || ViewModel.OverwriteLinePitchTool) {
+            if (ViewModel.EditTool.IsPitchTool) {
                 ViewModel.NotesViewModel.DeselectNotes();
-                if (args.KeyModifiers == KeyModifiers.Alt) {
-                    editState = new SmoothenPitchState(control, ViewModel, this);
-                    return;
-                } else if (args.KeyModifiers != cmdKey) {
-                    if (ViewModel.DrawPitchTool) {
-                        editState = new DrawPitchState(control, ViewModel, this);
-                    } else if (ViewModel.DrawLinePitchTool) {
-                        editState = new DrawLinePitchState(control, ViewModel, this);
-                    } else if (ViewModel.OverwritePitchTool) {
-                        editState = new OverwritePitchState(control, ViewModel, this);
-                    } else if (ViewModel.OverwriteLinePitchTool) {
-                        editState = new OverwriteAdaptivePitchState(control, ViewModel, this);
+                if (args.KeyModifiers != cmdKey) {
+                    bool overwrite = ViewModel.EditTool.OverwritePitch;
+                    EditTools tool = ViewModel.EditTool.CurrentTool;
+                    if (tool == EditTools.PitchSmoothenTool) {
+                        editState = new SmoothenPitchState(control, ViewModel, this, overwrite);
+                    } else if (tool == EditTools.DrawPitchTool) {
+                        editState = new DrawPitchState(control, ViewModel, this, overwrite);
+                    } else if (tool == EditTools.PitchLineTool) {
+                        editState = new PitchCurveState(control, ViewModel, this, PitchPreviewLine, PitchCurveState.CurveMode.Line, overwrite);
+                    } else if (tool == EditTools.PitchSCurveTool) {
+                        editState = new PitchCurveState(control, ViewModel, this, PitchPreviewLine, PitchCurveState.CurveMode.SCurve, overwrite);
+                    } else if (tool == EditTools.PitchSineWaveTool) {
+                        editState = new PitchCurveState(control, ViewModel, this, PitchPreviewLine, PitchCurveState.CurveMode.Sine, overwrite);
                     }
                     return;
                 }
@@ -1221,7 +1212,7 @@ namespace OpenUtau.App.Controls {
                 ViewModel.NotesContextMenuItems.Clear();
             }
             var selectedNotes = ViewModel.NotesViewModel.Selection.ToList();
-            if (ViewModel.DrawPitchTool || ViewModel.DrawLinePitchTool || ViewModel.OverwritePitchTool || ViewModel.OverwriteLinePitchTool) {
+            if (ViewModel.EditTool.IsPitchTool) {
                 editState = new ResetPitchState(control, ViewModel, this);
                 return;
             }
@@ -1374,7 +1365,7 @@ namespace OpenUtau.App.Controls {
             if (ViewModel?.NotesViewModel?.HitTest == null) {
                 return;
             }
-            if((ViewModel.DrawPitchTool || ViewModel.DrawLinePitchTool || ViewModel.OverwritePitchTool || ViewModel.OverwriteLinePitchTool || ViewModel.EraserTool) && args.KeyModifiers != cmdKey) {
+            if (ViewModel.EditTool.IsMatch([EditTools.DrawPitchTool, EditTools.PitchLineTool, EditTools.PitchSCurveTool, EditTools.PitchSineWaveTool, EditTools.PitchSmoothenTool, EditTools.EraserTool]) && args.KeyModifiers != cmdKey) {
                 Cursor = null;
                 return;
             }
@@ -1419,7 +1410,26 @@ namespace OpenUtau.App.Controls {
             editState.ctrlHeld = args.KeyModifiers == cmdKey;
             editState.altHeld = args.KeyModifiers == KeyModifiers.Alt;
             editState.Update(point.Pointer, point.Position);
-            editState.End(point.Pointer, point.Position);
+
+            // Two-phase handling for S-curve and Sine wave tools:
+            // On first mouse up, transition to adjusting phase instead of ending.
+            if (editState is PitchCurveState pcs) {
+                if (pcs.Mode == PitchCurveState.CurveMode.Line) {
+                    // Line tool: apply immediately on mouse up
+                    pcs.Apply();
+                    pcs.End(pointer: args.Pointer, point: point.Position);
+                } else {
+                    // S-curve / Sine: transition to adjusting phase, keep pointer captured
+                    if (!pcs.TransitionToAdjusting(point.Position)) {
+                        // TransitionToAdjusting returned false (click without drag) — already cancelled
+                        editState = null;
+                        return;
+                    }
+                    return;
+                }
+            } else {
+                editState.End(point.Pointer, point.Position);
+            }
             editState = null;
             Cursor = null;
         }
@@ -1973,11 +1983,11 @@ namespace OpenUtau.App.Controls {
                 case "ToolSelect2Main": ViewModel.ToolIndex = 1; ViewModel.PenToolIndex = 0; SetPenToolIcon(); return true;
                 case "ToolSelect2Alt": ViewModel.ToolIndex = 1; ViewModel.PenToolIndex = 1; SetPenToolIcon(); return true;
                 case "ToolSelect3": ViewModel.ToolIndex = 2; return true;
-                case "ToolSelect4Main": ViewModel.ToolIndex = 3; ViewModel.DrawPitchToolIndex = 0; SetDrawPitchToolIcon(); return true;
-                case "ToolSelect4Overwrite": ViewModel.ToolIndex = 3; ViewModel.DrawPitchToolIndex = 1; SetDrawPitchToolIcon(); return true;
-                case "ToolSelect4Line": ViewModel.ToolIndex = 4; ViewModel.DrawLinePitchToolIndex = 0; SetDrawLinePitchToolIcon(); return true;
-                case "ToolSelect4LineOverwrite": ViewModel.ToolIndex = 4; ViewModel.DrawLinePitchToolIndex = 1; SetDrawLinePitchToolIcon(); return true;
-                case "ToolSelect5": ViewModel.ToolIndex = 5; return true;
+                case "ToolSelect4Main": ViewModel.ToolIndex = 4; ViewModel.PitchOverwrite = false; return true;
+                case "ToolSelect4Overwrite": ViewModel.ToolIndex = 4; ViewModel.PitchOverwrite = true; return true;
+                case "ToolSelect4Line": ViewModel.ToolIndex = 5; ViewModel.PitchOverwrite = false; return true;
+                case "ToolSelect4LineOverwrite": ViewModel.ToolIndex = 5; ViewModel.PitchOverwrite = true; return true;
+                case "ToolSelect5": ViewModel.ToolIndex = 3; return true;
 
                 // Expressions
                 case "ExpSelect1": expSelector1?.SelectExp(); return true;

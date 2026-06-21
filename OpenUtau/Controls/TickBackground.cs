@@ -173,7 +173,6 @@ namespace OpenUtau.App.Controls {
             SnapTicks?.Clear();
             while (barTick <= rightTick) {
                 SnapTicks?.Add(barTick);
-                // Bar lines and numbers.
                 double x = Math.Round(barTick * TickWidth - pixelOffset) + 0.5;
                 double y = -0.5;
                 if (showBar) {
