@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:pe="using:OpenUtau.Controls">
   <Style Selector="StackPanel.workspacePanelSections">
-    <Setter Property="Spacing" Value="5"/>
+    <Setter Property="Spacing" Value="8"/>
   </Style>
   <Style Selector="StackPanel.workspacePanelSection">
     <Setter Property="Spacing" Value="4"/>
@@ -27,7 +27,7 @@
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Padding" Value="0"/>
-    <Setter Property="Margin" Value="0,0,0,9"/>
+    <Setter Property="Margin" Value="0"/>
     <Setter Property="MinHeight" Value="0"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="ExpandDirection" Value="Down"/>
@@ -89,7 +89,7 @@
                   IsVisible="{TemplateBinding IsExpanded}"
                   Background="Transparent"
                   BorderThickness="0"
-                  Padding="0,4,0,0">
+                  Padding="0,2,0,0">
             <ContentPresenter Content="{TemplateBinding Content}"
                               ContentTemplate="{TemplateBinding ContentTemplate}"/>
           </Border>

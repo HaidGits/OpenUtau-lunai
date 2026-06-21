@@ -642,12 +642,6 @@ namespace OpenUtau.App.Controls {
             ViewModel.RaisePropertyChanged(nameof(ViewModel.ShowPortrait));
             MessageBus.Current.SendMessage(new PianorollRefreshEvent("Portrait"));
         }
-        void OnMenuShowIcon(object sender, RoutedEventArgs args) {
-            Preferences.Default.ShowIcon = !Preferences.Default.ShowIcon;
-            Preferences.Save();
-            ViewModel.RaisePropertyChanged(nameof(ViewModel.ShowIcon));
-            MessageBus.Current.SendMessage(new PianorollRefreshEvent("Portrait"));
-        }
         void OnMenuShowGhostNotes(object sender, RoutedEventArgs args) {
             Preferences.Default.ShowGhostNotes = !Preferences.Default.ShowGhostNotes;
             Preferences.Save();
@@ -2101,7 +2095,6 @@ namespace OpenUtau.App.Controls {
                 case "Lock Vibrato": OnMenuLockVibrato(this, new RoutedEventArgs()); return true;
                 case "Lock Expressions": OnMenuLockExpressions(this, new RoutedEventArgs()); return true;
                 case "Show Portrait": OnMenuShowPortrait(this, new RoutedEventArgs()); return true;
-                case "Show Icon": OnMenuShowIcon(this, new RoutedEventArgs()); return true;
                 case "Show Ghost Notes": OnMenuShowGhostNotes(this, new RoutedEventArgs()); return true;
                 case "Use Track Color": OnMenuUseTrackColor(this, new RoutedEventArgs()); return true;
                 case "Detach Piano Roll": OnMenuDetachPianoRoll(this, new RoutedEventArgs()); return true;

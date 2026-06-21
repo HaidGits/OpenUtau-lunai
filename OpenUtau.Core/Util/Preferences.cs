@@ -457,7 +457,6 @@ namespace OpenUtau.Core.Util {
                 new ShortcutBinding { ActionId = "Lock Vibrato", KeyName = "U", ModifiersName = "Control, Alt" },
                 new ShortcutBinding { ActionId = "Lock Expressions", KeyName = "E", ModifiersName = "Control, Alt" },
                 new ShortcutBinding { ActionId = "Show Portrait", KeyName = "P", ModifiersName = "Alt, Shift" },
-                new ShortcutBinding { ActionId = "Show Icon", KeyName = "I", ModifiersName = "Alt, Shift" },
                 new ShortcutBinding { ActionId = "Show Ghost Notes", KeyName = "G", ModifiersName = "Alt" },
                 new ShortcutBinding { ActionId = "Use Track Color", KeyName = "C", ModifiersName = "Alt" },
                 new ShortcutBinding { ActionId = "Detach Piano Roll", KeyName = "D", ModifiersName = "Alt, Shift" },

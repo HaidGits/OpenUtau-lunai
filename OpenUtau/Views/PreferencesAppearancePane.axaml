@@ -10,27 +10,20 @@
   <Design.DataContext>
     <vm:PreferencesViewModel/>
   </Design.DataContext>
-  <StackPanel>
+  <StackPanel Spacing="6">
     <TextBlock Text="{DynamicResource prefs.appearance.section.theme}" Margin="0,10,0,0" FontWeight="Bold"/>
     <views:ThemePickerControl DataContext="{Binding}"/>
 
-    <TextBlock Text="{DynamicResource prefs.appearance.section.pianoroll}" Margin="0,16,0,0" FontWeight="Bold"/>
-    <TextBlock Text="{DynamicResource prefs.appearance.degree}" Margin="0,10,0,0" FontWeight="Bold"/>
-    <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
-                              SelectedIndex="{Binding DegreeStyle}">
-      <ComboBoxItem Content="{DynamicResource prefs.appearance.degree.off}"/>
-      <ComboBoxItem Content="{DynamicResource prefs.appearance.degree.solfege}"/>
-      <ComboBoxItem Content="{DynamicResource prefs.appearance.degree.numbered}"/>
-    </c:WorkspacePanelComboBox>
-    <Grid>
+    <TextBlock Text="{DynamicResource prefs.appearance.section.trackcolors}" Margin="0,16,0,0" FontWeight="Bold"/>
+    <Grid ColumnDefinitions="*,Auto">
       <TextBlock Text="{DynamicResource prefs.appearance.trackcolor}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding UseTrackColor}"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding UseTrackColor}"/>
     </Grid>
-    <Grid IsEnabled="{Binding UseTrackColor}">
+    <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding UseTrackColor}">
       <TextBlock Text="{DynamicResource prefs.appearance.tintpianorollbackgroundwithtrackcolor}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding TintPianoRollBackgroundWithTrackColor}"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding TintPianoRollBackgroundWithTrackColor}"/>
     </Grid>
-    <TextBlock Text="{DynamicResource prefs.appearance.defaulttrackcolor}" Margin="0,10,0,0" FontWeight="Bold"/>
+    <TextBlock Text="{DynamicResource prefs.appearance.defaulttrackcolor}" Margin="0,4,0,0" FontWeight="SemiBold"/>
     <ListBox ItemsSource="{Binding TrackColors}" SelectedItem="{Binding DefaultTrackColor}"
              Classes="defaultTrackColorPicker" Background="Transparent" HorizontalAlignment="Stretch">
       <ListBox.ItemTemplate>
@@ -64,23 +57,28 @@
         </Style>
       </ListBox.Styles>
     </ListBox>
-    <Grid>
+
+    <TextBlock Text="{DynamicResource prefs.appearance.section.pianoroll}" Margin="0,16,0,0" FontWeight="Bold"/>
+    <TextBlock Text="{DynamicResource prefs.appearance.degree}" FontWeight="SemiBold"/>
+    <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
+                              SelectedIndex="{Binding DegreeStyle}">
+      <ComboBoxItem Content="{DynamicResource prefs.appearance.degree.off}"/>
+      <ComboBoxItem Content="{DynamicResource prefs.appearance.degree.solfege}"/>
+      <ComboBoxItem Content="{DynamicResource prefs.appearance.degree.numbered}"/>
+    </c:WorkspacePanelComboBox>
+    <Grid ColumnDefinitions="*,Auto">
       <TextBlock Text="{DynamicResource prefs.appearance.showportrait}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding ShowPortrait}"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowPortrait}"/>
     </Grid>
-    <Grid>
-      <TextBlock Text="{DynamicResource prefs.appearance.showicon}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding ShowIcon}"/>
-    </Grid>
-    <Grid>
+    <Grid ColumnDefinitions="*,Auto">
       <TextBlock Text="{DynamicResource prefs.appearance.showghostnotes}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding ShowGhostNotes}"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowGhostNotes}"/>
     </Grid>
-    <Grid>
+    <Grid ColumnDefinitions="*,Auto">
       <TextBlock Text="{DynamicResource prefs.appearance.shownoteborder}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding ShowNoteBorder}"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowNoteBorder}"/>
     </Grid>
-    <Grid ColumnDefinitions="Auto,8,20,8,*" Margin="0,10,0,0">
+    <Grid ColumnDefinitions="Auto,8,20,8,*" Margin="0,2,0,0">
       <TextBlock Grid.Column="0" Text="{DynamicResource prefs.appearance.notecornerradius}"/>
       <TextBlock Grid.Column="2">
         <TextBlock.Text>
@@ -91,29 +89,31 @@
               IsSnapToTickEnabled="true" Value="{Binding NoteCornerRadius}"/>
     </Grid>
 
-    <TextBlock Text="{DynamicResource prefs.appearance.section.grid}" Margin="0,16,0,0" FontWeight="Bold"/>
-    <Grid>
-      <TextBlock Text="{DynamicResource prefs.appearance.solidtickgridlines}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding SolidTickGridLines}"/>
-    </Grid>
-    <Grid>
-      <TextBlock Text="{DynamicResource prefs.appearance.overlayscrollbars}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding UseOverlayScrollbars}"/>
-    </Grid>
-    <TextBlock Classes="restart"/>
-
-    <TextBlock Text="{DynamicResource prefs.appearance.section.expressions}" Margin="0,16,0,0" FontWeight="Bold"/>
-    <Grid>
-      <TextBlock Text="{DynamicResource prefs.appearance.solidexppanelgridlines}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding SolidExpPanelGridLines}"/>
-    </Grid>
-    <Grid>
-      <TextBlock Text="{DynamicResource prefs.appearance.diffsingerlangcodehide}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding DiffSingerLangCodeHide}"/>
-    </Grid>
-    <Grid>
+    <TextBlock Text="{DynamicResource prefs.appearance.section.phonemepanel}" Margin="0,16,0,0" FontWeight="Bold"/>
+    <Grid ColumnDefinitions="*,Auto">
       <TextBlock Text="{DynamicResource prefs.diffsinger.phonemepanel}" HorizontalAlignment="Left"/>
-      <ToggleSwitch IsChecked="{Binding DiffSingerPhonemePanelMode}"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding DiffSingerPhonemePanelMode}"/>
     </Grid>
+    <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding DiffSingerPhonemePanelMode}">
+      <TextBlock Text="{DynamicResource prefs.appearance.diffsingerlangcodehide}" HorizontalAlignment="Left"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding DiffSingerLangCodeHide}"/>
+    </Grid>
+
+    <TextBlock Text="{DynamicResource prefs.appearance.section.displaylines}" Margin="0,16,0,0" FontWeight="Bold"/>
+    <Grid ColumnDefinitions="*,Auto">
+      <TextBlock Text="{DynamicResource prefs.appearance.solidtickgridlines}" HorizontalAlignment="Left"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding SolidTickGridLines}"/>
+    </Grid>
+    <Grid ColumnDefinitions="*,Auto">
+      <TextBlock Text="{DynamicResource prefs.appearance.solidexppanelgridlines}" HorizontalAlignment="Left"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding SolidExpPanelGridLines}"/>
+    </Grid>
+    <!-- Overlay scrollbars: hidden until we decide whether a toggle is needed.
+    <Grid ColumnDefinitions="*,Auto">
+      <TextBlock Text="{DynamicResource prefs.appearance.overlayscrollbars}" HorizontalAlignment="Left"/>
+      <ToggleSwitch Grid.Column="1" IsChecked="{Binding UseOverlayScrollbars}"/>
+    </Grid>
+    -->
+    <TextBlock Classes="restart"/>
   </StackPanel>
 </UserControl>
