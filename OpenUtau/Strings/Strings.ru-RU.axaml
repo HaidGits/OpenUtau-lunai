@@ -588,7 +588,8 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="pianoroll.toggle.vibrato">Отображать вибрато (U)</system:String>
   <system:String x:Key="pianoroll.toggle.waveform">Отображать форму волны (W)</system:String>
   <system:String x:Key="pianoroll.toggle.expressions">Показать выражения (L)</system:String>
-  <system:String x:Key="pianoroll.toggle.appearance">Настройки оформления</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Вид</system:String>
+  <system:String x:Key="pianoroll.toggle.render">Настройки рендера DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger: качество (акустика 50, вэриэнс 50, питч 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger: баланс (акустика 20, вэриэнс 20, питч 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger: низкое качество (акустика 10, вэриэнс 10, питч 20)</system:String>
@@ -660,6 +661,7 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="prefs.appearance.theme.name.warm">Теплая</system:String>
   <system:String x:Key="prefs.appearance.section.pianoroll">Пианоролл</system:String>
   <system:String x:Key="prefs.appearance.section.grid">Сетка и прокрутка</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Воспроизведение</system:String>
   <system:String x:Key="prefs.appearance.section.expressions">Параметры и фонемы</system:String>
   <system:String x:Key="prefs.appearance.solidtickgridlines">Сплошные линии сетки такта (пианоролл, треки и панель параметров)</system:String>
   <system:String x:Key="prefs.appearance.solidexppanelgridlines">Сплошные линии стандартного значения в панели параметров</system:String>
@@ -684,6 +686,8 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="prefs.appearance.customtheme.create.empty">Название темы не может быть пустым.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Тема с таким именем уже существует.</system:String>
   <system:String x:Key="workspace.panel.close">Закрыть панель</system:String>
+  <system:String x:Key="workspace.panel.view">Вид</system:String>
+  <system:String x:Key="workspace.panel.render">Рендер</system:String>
   <system:String x:Key="themeditor.title">Редактор темы</system:String>
   <system:String x:Key="themeditor.cancel">Отмена</system:String>
   <system:String x:Key="themeditor.save">Сохранить</system:String>
@@ -695,6 +699,10 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="prefs.cache.diffsingertensorcache">Тензорный кэш DiffSinger</system:String>
   <system:String x:Key="prefs.caption">Параметры</system:String>
   <system:String x:Key="prefs.diffsinger">DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Шаги рендера</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Качество</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Кэш</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Pitch и F0</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Удобный режим панели фонем для DiffSinger</system:String>
   <system:String x:Key="prefs.editing">Редактирование</system:String>
   <system:String x:Key="prefs.general">Общее</system:String>
@@ -730,6 +738,12 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="prefs.playback.lockstarttime.on">Переместить курсор и вид обратно в исходную позицию воспроизведения</system:String>
   <system:String x:Key="prefs.playback.lockstarttime.onlycursor">Переместить только курсор обратно в исходную позицию воспроизведения</system:String>
   <system:String x:Key="prefs.playback.test">Тест</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Вертикальное слежение за нотами</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Следовать за высотой нот при воспроизведении</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Показывать траекторию камеры</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Порог в полутонах</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Вертикальная позиция ноты</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Плавность кадра</system:String>
   <system:String x:Key="prefs.rendering">Рендеринг</system:String>
   <system:String x:Key="prefs.rendering.defaultrenderer">Рендерер по-умолчанию (для классических войсбанков)</system:String>
   <system:String x:Key="prefs.rendering.diffsingerdepth">Глубина рендеринга DiffSinger</system:String>

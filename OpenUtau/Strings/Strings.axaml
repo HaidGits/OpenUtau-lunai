@@ -601,7 +601,8 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="pianoroll.toggle.waveform">View Waveform (W)</system:String>
   <system:String x:Key="pianoroll.toggle.expressions">View Expressions (L)</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">View Real Curves</system:String>
-  <system:String x:Key="pianoroll.toggle.appearance">Appearance Settings</system:String>
+  <system:String x:Key="pianoroll.toggle.view">View</system:String>
+  <system:String x:Key="pianoroll.toggle.render">DiffSinger render settings</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger quality (acoustic 50, variance 50, pitch 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger balanced (acoustic 20, variance 20, pitch 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger low quality (acoustic 10, variance 10, pitch 20)</system:String>
@@ -769,6 +770,7 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Warm</system:String>
   <system:String x:Key="prefs.appearance.section.pianoroll">Piano roll</system:String>
   <system:String x:Key="prefs.appearance.section.grid">Grid &amp; scrolling</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Playback</system:String>
   <system:String x:Key="prefs.appearance.section.expressions">Expressions &amp; phonemes</system:String>
   <system:String x:Key="prefs.appearance.solidtickgridlines">Solid timeline grid lines (piano roll, tracks &amp; expression panel)</system:String>
   <system:String x:Key="prefs.appearance.solidexppanelgridlines">Solid default-value lines in expression panel</system:String>
@@ -793,6 +795,8 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.empty">Theme name cannot be empty.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">A theme with this name already exists.</system:String>
   <system:String x:Key="workspace.panel.close">Close panel</system:String>
+  <system:String x:Key="workspace.panel.view">View</system:String>
+  <system:String x:Key="workspace.panel.render">Render</system:String>
   <system:String x:Key="themeditor.title">Theme Editor</system:String>
   <system:String x:Key="themeditor.cancel">Cancel</system:String>
   <system:String x:Key="themeditor.save">Save</system:String>
@@ -804,6 +808,10 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.cache.diffsingertensorcache">DiffSinger Tensor Cache</system:String>
   <system:String x:Key="prefs.caption">Preferences</system:String>
   <system:String x:Key="prefs.diffsinger">DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Render steps</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Quality</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Pitch &amp; F0</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Show render phrase boundaries</system:String>
   <system:String x:Key="prefs.editing">Editing</system:String>
   <system:String x:Key="prefs.general">General</system:String>
@@ -840,6 +848,12 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.playback.solidline">Solid playback line</system:String>
   <system:String x:Key="prefs.playback.systemdefault">Use system default device</system:String>
   <system:String x:Key="prefs.playback.test">Test</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Pitch Follow Scroll</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Follow notes vertically during playback</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Show camera path preview</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Semitone threshold</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Note vertical position</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Frame smoothing</system:String>
   <system:String x:Key="prefs.rendering">Rendering</system:String>
   <system:String x:Key="prefs.rendering.defaultrenderer">Default renderer (for classic voicebanks)</system:String>
   <system:String x:Key="prefs.rendering.diffsingerdepth">DiffSinger Render Depth</system:String>

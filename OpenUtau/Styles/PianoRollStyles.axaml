@@ -619,6 +619,11 @@
           ToggleButton.sideToolbarToggle.appearanceToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentExpressionsCheckedBrush}" />
   </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle.diffSingerPanelToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.diffSingerPanelToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.diffSingerPanelToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentLivePitchCheckedBrush}" />
+  </Style>
   <Style Selector="Button.sideToolbarAction">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderThickness" Value="0" />
@@ -780,6 +785,14 @@
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.phonemizerTagsToggle Path.filled">
     <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentPhonemizerTagsBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle.diffSingerPanelToggle TextBlock.sideToolbarGlyph">
+    <Setter Property="FontSize" Value="9" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.diffSingerPanelToggle TextBlock.sideToolbarGlyph,
+          ToggleButton.sideToolbarToggle:checked.diffSingerPanelToggle:pointerover TextBlock.sideToolbarGlyph,
+          ToggleButton.sideToolbarToggle:checked.diffSingerPanelToggle:pressed TextBlock.sideToolbarGlyph">
+    <Setter Property="Foreground" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.appearanceToggle Path.filled">
     <Setter Property="Fill" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />

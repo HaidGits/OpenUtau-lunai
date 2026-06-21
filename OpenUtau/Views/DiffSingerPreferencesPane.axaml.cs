@@ -11,11 +11,10 @@ using OpenUtau.Core.Util;
 using ReactiveUI;
 
 namespace OpenUtau.App.Views {
-    public partial class AppearancePreferencesPane : UserControl {
-        PreferencesViewModel ViewModel => EnsureViewModel();
+    public partial class DiffSingerPreferencesPane : UserControl {
         int scrollStyleApplyGeneration;
 
-        public AppearancePreferencesPane() {
+        public DiffSingerPreferencesPane() {
             InitializeComponent();
             AttachedToVisualTree += (_, _) => {
                 ClosePanelButton.IsVisible = IsHostedInPianoRollDock();
@@ -48,15 +47,6 @@ namespace OpenUtau.App.Views {
             WorkspaceScrollbarHelper.ApplyScrollViewer(ContentScroll, !Preferences.Default.UseOverlayScrollbars);
         }
 
-        PreferencesViewModel EnsureViewModel() {
-            if (DataContext is PreferencesViewModel vm) {
-                return vm;
-            }
-            var prefs = new PreferencesViewModel();
-            DataContext = prefs;
-            return prefs;
-        }
-
         bool IsHostedInPianoRollDock() {
             return this.GetVisualAncestors().OfType<PianoRoll>().Any();
         }
@@ -64,7 +54,7 @@ namespace OpenUtau.App.Views {
         void OnCloseDockedPanel(object? sender, RoutedEventArgs e) {
             var pianoRoll = this.GetVisualAncestors().OfType<PianoRoll>().FirstOrDefault();
             if (pianoRoll?.ViewModel != null) {
-                pianoRoll.ViewModel.ShowAppearancePanel = false;
+                pianoRoll.ViewModel.ShowDiffSingerPanel = false;
             }
         }
     }

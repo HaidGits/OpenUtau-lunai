@@ -78,12 +78,16 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool PianoRollFullscreen { get; set; }
         public bool UsesExpandedPianoRollLayout => PianoRollDetached || PianoRollFullscreen;
         public bool IsSidePanelVisible => !UsesExpandedPianoRollLayout;
+        public bool IsLeftDockPanelVisible => (ShowAppearancePanel || ShowDiffSingerPanel) && !UsesExpandedPianoRollLayout;
         public bool IsAppearancePanelVisible => ShowAppearancePanel && !UsesExpandedPianoRollLayout;
+        public bool IsDiffSingerPanelVisible => ShowDiffSingerPanel && !UsesExpandedPianoRollLayout;
         public bool IsThemeEditorPanelVisible => ShowThemeEditorPanel && IsAppearancePanelVisible;
-        public bool IsAppearanceOnlyGapResizeVisible => IsAppearancePanelVisible && !IsThemeEditorPanelVisible;
+        public bool IsAppearanceOnlyGapResizeVisible => IsLeftDockPanelVisible && !IsThemeEditorPanelVisible;
         public GridLength PianoRollSideColumnWidth => UsesExpandedPianoRollLayout ? new GridLength(0) : new GridLength(48);
         public GridLength PianoRollSideGapWidth => UsesExpandedPianoRollLayout ? new GridLength(0) : new GridLength(8);
         [Reactive] public bool ShowAppearancePanel { get; set; }
+        [Reactive] public bool ShowDiffSingerPanel { get; set; }
+        [Reactive] public bool IsDiffSingerTrack { get; private set; }
         [Reactive] public bool ShowThemeEditorPanel { get; set; }
         [Reactive] public string? ThemeEditorPath { get; set; }
         [Reactive] public double AppearancePanelWidth { get; set; }
@@ -110,9 +114,9 @@ namespace OpenUtau.App.ViewModels {
         public PreferencesViewModel AppearancePreferences =>
             appearancePreferences ??= sharedAppearancePreferences ??= new PreferencesViewModel();
         public GridLength AppearancePanelLeadingGapWidth =>
-            UsesExpandedPianoRollLayout || !ShowAppearancePanel ? new GridLength(0) : new GridLength(8);
+            UsesExpandedPianoRollLayout || !IsLeftDockPanelVisible ? new GridLength(0) : new GridLength(8);
         public GridLength AppearancePanelColumnWidth =>
-            UsesExpandedPianoRollLayout || !ShowAppearancePanel
+            UsesExpandedPianoRollLayout || !IsLeftDockPanelVisible
                 ? new GridLength(0)
                 : new GridLength(WorkspaceDockPanelMetrics.ClampWidth(AppearancePanelWidth));
         public GridLength ThemeEditorPanelLeadingGapWidth =>
@@ -207,11 +211,17 @@ namespace OpenUtau.App.ViewModels {
             Hotkeys = newHotkeys;
         }
 
+        bool suppressDockPanelExclusion;
+
         public PianoRollViewModel() {
             ReloadShortcuts();
             NotesViewModel = new NotesViewModel();
             CurveViewModel = new CurveViewModel();
             ShowAppearancePanel = Preferences.Default.ShowAppearancePanel;
+            ShowDiffSingerPanel = Preferences.Default.ShowDiffSingerPanel;
+            if (ShowAppearancePanel && ShowDiffSingerPanel) {
+                ShowDiffSingerPanel = false;
+            }
             AppearancePanelWidth = WorkspaceDockPanelMetrics.ClampWidth(Preferences.Default.AppearancePanelWidth);
             ThemeEditorPanelWidth = WorkspaceDockPanelMetrics.ClampWidth(Preferences.Default.ThemeEditorPanelWidth);
             this.WhenAnyValue(vm => vm.AppearancePanelWidth)
@@ -244,14 +254,29 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(show => {
                     Preferences.Default.ShowAppearancePanel = show;
                     Preferences.Save();
+                    if (show && ShowDiffSingerPanel) {
+                        suppressDockPanelExclusion = true;
+                        ShowDiffSingerPanel = false;
+                        suppressDockPanelExclusion = false;
+                    }
                     if (!show) {
                         CloseThemeEditor();
                     }
-                    RaiseThemeEditorLayoutProperties();
-                    this.RaisePropertyChanged(nameof(IsAppearanceOnlyGapResizeVisible));
-                    this.RaisePropertyChanged(nameof(IsAppearancePanelVisible));
-                    this.RaisePropertyChanged(nameof(AppearancePanelLeadingGapWidth));
-                    this.RaisePropertyChanged(nameof(AppearancePanelColumnWidth));
+                    RaiseLeftDockLayoutProperties();
+                });
+            this.WhenAnyValue(vm => vm.ShowDiffSingerPanel)
+                .Subscribe(show => {
+                    Preferences.Default.ShowDiffSingerPanel = show;
+                    Preferences.Save();
+                    if (show && ShowAppearancePanel && !suppressDockPanelExclusion) {
+                        suppressDockPanelExclusion = true;
+                        ShowAppearancePanel = false;
+                        suppressDockPanelExclusion = false;
+                    }
+                    if (show) {
+                        CloseThemeEditor();
+                    }
+                    RaiseLeftDockLayoutProperties();
                 });
             this.WhenAnyValue(vm => vm.ShowThemeEditorPanel)
                 .Subscribe(_ => RaiseThemeEditorLayoutProperties());
@@ -370,6 +395,9 @@ namespace OpenUtau.App.ViewModels {
             LoadLegacyPlugins();
             MessageBus.Current.Listen<ShortcutsRefreshEvent>()
                 .Subscribe(_ => ReloadShortcuts());
+            NotesViewModel.WhenAnyValue(vm => vm.Part)
+                .Subscribe(_ => UpdateDiffSingerTrackVisibility());
+            UpdateDiffSingerTrackVisibility();
             DocManager.Inst.AddSubscriber(this);
         }
 
@@ -532,6 +560,36 @@ namespace OpenUtau.App.ViewModels {
             App.SetTheme();
         }
 
+        void UpdateDiffSingerTrackVisibility() {
+            var singer = GetOpenTrackSinger();
+            bool isDiffSinger = singer is { Found: true, SingerType: USingerType.DiffSinger };
+            if (IsDiffSingerTrack == isDiffSinger) {
+                return;
+            }
+            IsDiffSingerTrack = isDiffSinger;
+            if (!isDiffSinger && ShowDiffSingerPanel) {
+                ShowDiffSingerPanel = false;
+            }
+        }
+
+        USinger? GetOpenTrackSinger() {
+            var part = NotesViewModel.Part;
+            var project = NotesViewModel.Project;
+            if (part == null || project == null || part.trackNo < 0 || part.trackNo >= project.tracks.Count) {
+                return null;
+            }
+            return project.tracks[part.trackNo].Singer;
+        }
+
+        void RaiseLeftDockLayoutProperties() {
+            RaiseThemeEditorLayoutProperties();
+            this.RaisePropertyChanged(nameof(IsLeftDockPanelVisible));
+            this.RaisePropertyChanged(nameof(IsAppearancePanelVisible));
+            this.RaisePropertyChanged(nameof(IsDiffSingerPanelVisible));
+            this.RaisePropertyChanged(nameof(AppearancePanelLeadingGapWidth));
+            this.RaisePropertyChanged(nameof(AppearancePanelColumnWidth));
+        }
+
         void RaiseThemeEditorLayoutProperties() {
             this.RaisePropertyChanged(nameof(IsThemeEditorPanelVisible));
             this.RaisePropertyChanged(nameof(IsAppearanceOnlyGapResizeVisible));
@@ -542,6 +600,12 @@ namespace OpenUtau.App.ViewModels {
         #region ICmdSubscriber
 
         public void OnNext(UCommand cmd, bool isUndo) {
+            if (cmd is TrackChangeSingerCommand trackChangeSinger) {
+                var part = NotesViewModel.Part;
+                if (part != null && trackChangeSinger.track.TrackNo == part.trackNo) {
+                    UpdateDiffSingerTrackVisibility();
+                }
+            }
             if (cmd is ProgressBarNotification progressBarNotification) {
                 if (PianoRollDetached) {
                     Dispatcher.UIThread.InvokeAsync(() => {

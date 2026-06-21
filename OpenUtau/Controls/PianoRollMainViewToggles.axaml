@@ -145,26 +145,29 @@
         </Grid>
       </Border>
     </ToggleButton>
-    <Border Classes="sideToolbarSeparator"/>
-    <ToggleButton Classes="sideToolbarToggle livePitchToggle" Margin="0" Padding="0" IsChecked="{Binding NotesViewModel.LivePitchNormal}">
-      <ToolTip.Tip>
-        <TextBlock Text="{DynamicResource pianoroll.toggle.livepitch}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
-      </ToolTip.Tip>
-      <Grid Classes="toolbarIconHostSide">
-        <Grid Classes="toolbarIconHostSideLayout">
-          <TextBlock Classes="sideToolbarGlyph livePitchLabel" Text="Live"/>
+    <StackPanel Spacing="0"
+                IsVisible="{Binding ShowDiffSingerToolbar, RelativeSource={RelativeSource AncestorType=c:PianoRollMainViewToggles}}">
+      <Border Classes="sideToolbarSeparator"/>
+      <ToggleButton Classes="sideToolbarToggle livePitchToggle" Margin="0" Padding="0" IsChecked="{Binding NotesViewModel.LivePitchNormal}">
+        <ToolTip.Tip>
+          <TextBlock Text="{DynamicResource pianoroll.toggle.livepitch}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
+        </ToolTip.Tip>
+        <Grid Classes="toolbarIconHostSide">
+          <Grid Classes="toolbarIconHostSideLayout">
+            <TextBlock Classes="sideToolbarGlyph livePitchLabel" Text="Live"/>
+          </Grid>
         </Grid>
-      </Grid>
-    </ToggleButton>
-    <ToggleButton Classes="sideToolbarToggle livePitchFastToggle" Margin="0" Padding="0" IsChecked="{Binding NotesViewModel.LivePitchSuperFast}">
-      <ToolTip.Tip>
-        <TextBlock Text="{DynamicResource pianoroll.toggle.livepitch.fast}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
-      </ToolTip.Tip>
-      <Grid Classes="toolbarIconHostSide">
-        <Grid Classes="toolbarIconHostSideLayout">
-          <TextBlock Classes="sideToolbarGlyph livePitchLabel livePitchFastLabel" Text="Live+"/>
+      </ToggleButton>
+      <ToggleButton Classes="sideToolbarToggle livePitchFastToggle" Margin="0" Padding="0" IsChecked="{Binding NotesViewModel.LivePitchSuperFast}">
+        <ToolTip.Tip>
+          <TextBlock Text="{DynamicResource pianoroll.toggle.livepitch.fast}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
+        </ToolTip.Tip>
+        <Grid Classes="toolbarIconHostSide">
+          <Grid Classes="toolbarIconHostSideLayout">
+            <TextBlock Classes="sideToolbarGlyph livePitchLabel livePitchFastLabel" Text="Live+"/>
+          </Grid>
         </Grid>
-      </Grid>
-    </ToggleButton>
+      </ToggleButton>
+    </StackPanel>
   </StackPanel>
 </UserControl>
