@@ -64,6 +64,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool ShowPitch { get; set; }
         [Reactive] public bool ShowFinalPitch { get; set; }
         [Reactive] public bool ShowWaveform { get; set; }
+        [Reactive] public bool ShowPitchFollowPath { get; set; }
         [Reactive] public bool ShowPhoneme { get; set; }
         [Reactive] public bool ShowNoteParams { get; set; }
         [Reactive] public double NotePropertiesPanelWidth { get; set; }
@@ -146,13 +147,24 @@ namespace OpenUtau.App.ViewModels {
         // See the comments on TracksViewModel.playPosXToTickOffset
         private double playPosXToTickOffset => Bounds.Width != 0 ? ViewportTicks / Bounds.Width : 0;
 
-        // Smooth scroll for Stationary Cursor (PlaybackAutoScroll == 1): lerp toward target instead of jumping.
-        private const double SmoothScrollLerpFactor = 0.25;
-        private const double SmoothScrollSnapThreshold = 0.5;
+        // Smooth scroll for Stationary Cursor (PlaybackAutoScroll == 1): exponential ease toward target.
+        private const double SmoothScrollSnapThreshold = 0.05;
         /// <summary>Target TickOffset for smooth stationary-cursor scroll; null when not in use.</summary>
         private double? smoothScrollTargetTickOffset;
+        /// <summary>True after playback-driven smooth scroll was active; used to discard stale targets on pause/EOF.</summary>
+        private bool stationaryCursorFollowedPlayback;
         /// <summary>True while SmoothScrollStep is updating TickOffset, so we don't treat that as user scroll.</summary>
         private bool _inSmoothScrollStep;
+
+        private readonly PlaybackPitchFollowPath pitchFollowPath = new PlaybackPitchFollowPath();
+        private readonly List<PitchFollowPathSamplePoint> pitchFollowPathSamples = new();
+        public IReadOnlyList<PitchFollowPathSamplePoint> PitchFollowPathSamples => pitchFollowPathSamples;
+        public bool PitchFollowPathIsBuilt => pitchFollowPath.IsBuilt;
+        private bool _inPitchFollowScrollStep;
+        private bool pitchFollowUserOverride;
+        private bool pitchFollowWasPlaying;
+        private DateTime pitchFollowLastStepUtc;
+        private bool pitchFollowRenderingActive;
 
         private readonly ObservableAsPropertyHelper<double> viewportTicks;
         private readonly ObservableAsPropertyHelper<double> viewportTracks;
@@ -327,6 +339,16 @@ namespace OpenUtau.App.ViewModels {
                 Preferences.Default.ShowWaveform = showWaveform;
                 Preferences.Save();
             });
+            ShowPitchFollowPath = IsPitchFollowPathPreviewVisible();
+            this.WhenAnyValue(x => x.ShowPitchFollowPath)
+            .Subscribe(showPath => {
+                if (!Preferences.Default.PlaybackPitchFollowEnabled) {
+                    return;
+                }
+                Preferences.Default.PlaybackPitchFollowShowPath = showPath;
+                Preferences.Save();
+                RefreshPitchFollowPathPreview();
+            });
             ShowPhoneme = Preferences.Default.ShowPhoneme;
             UpdatePhonemePanelLayoutConstraints();
             this.WhenAnyValue(x => x.PhonemePanelHeight)
@@ -413,7 +435,25 @@ namespace OpenUtau.App.ViewModels {
                     }
                 });
             this.WhenAnyValue(x => x.Part)
-                .Subscribe(_ => smoothScrollTargetTickOffset = null);
+                .Subscribe(_ => {
+                    smoothScrollTargetTickOffset = null;
+                    stationaryCursorFollowedPlayback = false;
+                });
+
+            this.WhenAnyValue(x => x.ViewportTracks)
+                .Subscribe(_ => RebuildPitchFollowPath());
+            this.WhenAnyValue(x => x.TrackOffset)
+                .Skip(1)
+                .Subscribe(_ => {
+                    if (!_inPitchFollowScrollStep && Preferences.Default.PlaybackPitchFollowEnabled) {
+                        pitchFollowUserOverride = true;
+                    }
+                });
+            MessageBus.Current.Listen<PlaybackPitchFollowSettingsChangedEvent>()
+                .Subscribe(_ => {
+                    RebuildPitchFollowPath();
+                    ShowPitchFollowPath = IsPitchFollowPathPreviewVisible();
+                });
 
             TickWidth = ViewConstants.PianoRollTickWidthDefault;
             TrackHeight = ViewConstants.NoteHeightDefault;
@@ -614,6 +654,8 @@ namespace OpenUtau.App.ViewModels {
             LoadWindowTitle(part, project);
             LoadTrackColor(part, project);
             UpdateKey();
+            RebuildPitchFollowPath();
+            pitchFollowUserOverride = false;
         }
 
         //If PortraitHeight is 0, the default behaviour is resizing any image taller than 800px to 800px,
@@ -728,6 +770,7 @@ namespace OpenUtau.App.ViewModels {
         private void UnloadPart() {
             DeselectNotes();
             Part = null;
+            pitchFollowPath.Build(null, 0, 0, 0, 0, Project.resolution);
             LoadPortrait(null, null);
             LoadWindowTitle(null, null);
         }
@@ -738,6 +781,7 @@ namespace OpenUtau.App.ViewModels {
             }
             TickOrigin = Part.position;
             RaisePhonemePanelLayoutChanged();
+            RebuildPitchFollowPath();
             Notify();
         }
 
@@ -1337,6 +1381,7 @@ namespace OpenUtau.App.ViewModels {
             } else if (cmd is NoteCommand noteCommand) {
                 CleanupSelectedNotes();
                 if (noteCommand.Part == Part) {
+                    RebuildPitchFollowPath();
                     MessageBus.Current.SendMessage(new NotesRefreshEvent());
 
                     if (noteCommand is RemoveNoteCommand && isUndo) {
@@ -1370,6 +1415,9 @@ namespace OpenUtau.App.ViewModels {
         }
 
         private void MaybeAutoScroll(double positionX) {
+            if (PlaybackManager.Inst.StartingToPlay || PlayPosWaitingRendering) {
+                return;
+            }
             var autoScrollPreference = Convert.ToBoolean(Preferences.Default.PlaybackAutoScroll);
             if (autoScrollPreference) {
                 AutoScroll(positionX);
@@ -1379,30 +1427,200 @@ namespace OpenUtau.App.ViewModels {
         private void AutoScroll(double positionX) {
             double scrollDelta = GetScrollValueDelta(positionX);
             if (Preferences.Default.PlaybackAutoScroll == 1) {
-                smoothScrollTargetTickOffset = Math.Clamp(TickOffset + scrollDelta, 0, HScrollBarMax);
+                bool playing = PlaybackManager.Inst.PlayingMaster || PlaybackManager.Inst.StartingToPlay;
+                if (!playing) {
+                    smoothScrollTargetTickOffset = Math.Clamp(TickOffset + scrollDelta, 0, HScrollBarMax);
+                }
             } else {
                 smoothScrollTargetTickOffset = null;
                 TickOffset = Math.Clamp(TickOffset + scrollDelta, 0, HScrollBarMax);
             }
         }
 
-        /// <summary>Called periodically (e.g. from main window timer) to lerp TickOffset toward smoothScrollTargetTickOffset for stationary cursor.</summary>
-        public void SmoothScrollStep() {
-            if (Part == null || Preferences.Default.PlaybackAutoScroll != 1 || !smoothScrollTargetTickOffset.HasValue) {
+        /// <summary>Smooth stationary-cursor scroll; called from the piano roll render loop or timer fallback.</summary>
+        public void SmoothScrollStep(double deltaMs) {
+            if (Part == null || Preferences.Default.PlaybackAutoScroll != 1) {
                 return;
             }
-            double target = Math.Clamp(smoothScrollTargetTickOffset.Value, 0, HScrollBarMax);
+            double? desiredTickOffset = GetStationaryCursorDesiredTickOffset();
+            if (!desiredTickOffset.HasValue) {
+                return;
+            }
+            deltaMs = Math.Clamp(deltaMs, 0.5, 50);
+            double target = Math.Clamp(desiredTickOffset.Value, 0, HScrollBarMax);
             double diff = target - TickOffset;
             _inSmoothScrollStep = true;
             try {
                 if (Math.Abs(diff) < SmoothScrollSnapThreshold) {
                     TickOffset = target;
                 } else {
-                    TickOffset = Math.Clamp(TickOffset + diff * SmoothScrollLerpFactor, 0, HScrollBarMax);
+                    double alpha = 1 - Math.Exp(-deltaMs / PitchFollowScrollMath.SmoothScrollTimeConstantMs);
+                    TickOffset = Math.Clamp(TickOffset + diff * alpha, 0, HScrollBarMax);
                 }
             } finally {
                 _inSmoothScrollStep = false;
             }
+        }
+
+        /// <summary>Fallback when the piano roll is not on a render loop (e.g. minimized).</summary>
+        public void SmoothScrollStepFallback() {
+            if (pitchFollowRenderingActive) {
+                return;
+            }
+            SmoothScrollStep(PitchFollowScrollMath.ReferenceStepMs);
+        }
+
+        double? GetStationaryCursorDesiredTickOffset() {
+            if (Bounds.Width <= 0 || TickWidth <= 0) {
+                return null;
+            }
+            if (IsLivePlaybackScrollActive()) {
+                stationaryCursorFollowedPlayback = true;
+                return ComputeStationaryCursorDesiredTickOffset(GetStationaryCursorPlayPosX());
+            }
+            var playback = PlaybackManager.Inst;
+            if (playback.PlayingMaster || playback.StartingToPlay) {
+                return null;
+            }
+            if (stationaryCursorFollowedPlayback) {
+                stationaryCursorFollowedPlayback = false;
+                smoothScrollTargetTickOffset = null;
+                return null;
+            }
+            if (!smoothScrollTargetTickOffset.HasValue) {
+                return null;
+            }
+            return smoothScrollTargetTickOffset.Value;
+        }
+
+        /// <summary>True only while audio is audibly playing — not during pre-playback render or buffer wait.</summary>
+        bool IsLivePlaybackScrollActive() {
+            var playback = PlaybackManager.Inst;
+            return playback.PlayingMaster
+                && playback.OutputActive
+                && !playback.StartingToPlay
+                && !PlayPosWaitingRendering;
+        }
+
+        double GetStationaryCursorPlayPosX() {
+            if (Part != null && PlaybackManager.Inst.TryGetSmoothPlayTick(out double absTick)) {
+                double localTick = absTick - Part.position;
+                return (localTick - TickOffset) * TickWidth;
+            }
+            return PlayPosX;
+        }
+
+        double ComputeStationaryCursorDesiredTickOffset(double positionX) {
+            double rightMargin = Preferences.Default.PlayPosMarkerMargin * Bounds.Width;
+            if (positionX <= rightMargin && positionX >= 0) {
+                return TickOffset;
+            }
+            double localTick = TickOffset + positionX / TickWidth;
+            if (positionX > rightMargin) {
+                return Math.Clamp(localTick - rightMargin / TickWidth, 0, HScrollBarMax);
+            }
+            return Math.Clamp(localTick, 0, HScrollBarMax);
+        }
+
+        void RebuildPitchFollowPath() {
+            var prefs = Preferences.Default;
+            if (!prefs.PlaybackPitchFollowEnabled || Part == null) {
+                ClearPitchFollowPath();
+                return;
+            }
+            pitchFollowPath.Build(
+                Part,
+                ViewportTracks,
+                VScrollBarMax,
+                prefs.PlaybackPitchFollowSemitoneThreshold,
+                prefs.PlaybackPitchFollowVerticalPosition,
+                Project.resolution);
+            RefreshPitchFollowPathPreview();
+        }
+
+        void ClearPitchFollowPath() {
+            pitchFollowPath.Build(null, 0, 0, 0, 0, Project.resolution);
+            pitchFollowPathSamples.Clear();
+            this.RaisePropertyChanged(nameof(PitchFollowPathSamples));
+            this.RaisePropertyChanged(nameof(PitchFollowPathIsBuilt));
+            MessageBus.Current.SendMessage(new PitchFollowPathPreviewChangedEvent());
+        }
+
+        void RefreshPitchFollowPathPreview() {
+            pitchFollowPathSamples.Clear();
+            if (Preferences.Default.PlaybackPitchFollowEnabled && pitchFollowPath.IsBuilt && Part != null) {
+                pitchFollowPath.SampleSmoothedPoints(
+                    Preferences.Default.PlaybackPitchFollowFrameSmoothing,
+                    Project.resolution,
+                    pitchFollowPathSamples);
+            }
+            this.RaisePropertyChanged(nameof(PitchFollowPathSamples));
+            this.RaisePropertyChanged(nameof(PitchFollowPathIsBuilt));
+            MessageBus.Current.SendMessage(new PitchFollowPathPreviewChangedEvent());
+        }
+
+        /// <summary>Whether the preview overlay is drawn (playback still uses smoothed samples when follow is enabled).</summary>
+        static bool IsPitchFollowPathPreviewVisible() {
+            var prefs = Preferences.Default;
+            return prefs.PlaybackPitchFollowEnabled && prefs.PlaybackPitchFollowShowPath;
+        }
+
+        public double EvaluatePitchFollowPath(double localTick) {
+            if (pitchFollowPathSamples.Count > 0) {
+                return pitchFollowPath.EvaluateSmoothedAtTick(pitchFollowPathSamples, localTick);
+            }
+            return pitchFollowPath.Evaluate(localTick);
+        }
+
+        public double GetPitchFollowCameraOffset(double localTick, bool playing) {
+            if (playing && Preferences.Default.PlaybackPitchFollowEnabled
+                && !pitchFollowUserOverride && pitchFollowPath.IsBuilt) {
+                return TrackOffset;
+            }
+            return EvaluatePitchFollowPath(localTick);
+        }
+
+        public bool PianoRollRenderingActive => pitchFollowRenderingActive;
+
+        public void NotifyPitchFollowRendering(bool active) {
+            pitchFollowRenderingActive = active;
+        }
+
+        public void PitchFollowAnimationStep(double deltaMs) {
+            bool playing = IsLivePlaybackScrollActive();
+            if (playing && !pitchFollowWasPlaying) {
+                pitchFollowUserOverride = false;
+                pitchFollowLastStepUtc = DateTime.UtcNow;
+                RebuildPitchFollowPath();
+            }
+            pitchFollowWasPlaying = playing;
+
+            if (!playing || !Preferences.Default.PlaybackPitchFollowEnabled || Part == null
+                || pitchFollowUserOverride || !pitchFollowPath.IsBuilt) {
+                return;
+            }
+
+            int localTick = DocManager.Inst.playPosTick - Part.position;
+            double target = EvaluatePitchFollowPath(localTick);
+            _inPitchFollowScrollStep = true;
+            try {
+                TrackOffset = Math.Clamp(target, 0, VScrollBarMax);
+            } finally {
+                _inPitchFollowScrollStep = false;
+            }
+            pitchFollowLastStepUtc = DateTime.UtcNow;
+        }
+
+        /// <summary>Fallback when the piano roll is not on a render loop (e.g. minimized).</summary>
+        public void PitchFollowAnimationStepFallback() {
+            if (pitchFollowRenderingActive) {
+                return;
+            }
+            double deltaMs = PitchFollowScrollMath.ReferenceStepMs;
+            if (pitchFollowLastStepUtc != default) {
+                deltaMs = Math.Clamp((DateTime.UtcNow - pitchFollowLastStepUtc).TotalMilliseconds, 0.5, 40);
+            }
+            PitchFollowAnimationStep(deltaMs);
         }
 
         private double GetScrollValueDelta(double positionX) {

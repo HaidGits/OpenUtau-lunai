@@ -614,6 +614,11 @@
           ToggleButton.sideToolbarToggle.phonemizerTagsToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentPhonemizerTagsCheckedBrush}" />
   </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle.pitchFollowToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.pitchFollowToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.pitchFollowToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentPitchFollowCheckedBrush}" />
+  </Style>
   <Style Selector="ToggleButton.sideToolbarToggle.appearanceToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
           ToggleButton.sideToolbarToggle.appearanceToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
           ToggleButton.sideToolbarToggle.appearanceToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
@@ -785,6 +790,9 @@
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.phonemizerTagsToggle Path.filled">
     <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentPhonemizerTagsBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.pitchFollowToggle Path.stroked">
+    <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentPitchFollowBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle.diffSingerPanelToggle TextBlock.sideToolbarGlyph">
     <Setter Property="FontSize" Value="9" />

@@ -135,6 +135,19 @@
         </Grid>
       </Grid>
     </ToggleButton>
+    <ToggleButton Classes="sideToolbarToggle pitchFollowToggle" Margin="0" Padding="0"
+                  IsChecked="{Binding AppearancePreferences.PlaybackPitchFollowEnabled, Mode=TwoWay}">
+      <ToolTip.Tip>
+        <TextBlock Text="{DynamicResource pianoroll.toggle.pitchfollow}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
+      </ToolTip.Tip>
+      <Grid Classes="toolbarIconHostSide">
+        <Grid Classes="toolbarIconHostSideLayout">
+          <Path Classes="stroked" Data="M 9 4.5 L 9 12.5"/>
+          <Path Classes="stroked" Data="M 6.5 7 L 9 4.5 L 11.5 7"/>
+          <Path Classes="stroked" Data="M 6.5 10 L 9 12.5 L 11.5 10"/>
+        </Grid>
+      </Grid>
+    </ToggleButton>
     <ToggleButton Name="SnapToggle" Classes="sideToolbarToggle snapToggle" Margin="0" Padding="0" IsChecked="{Binding NotesViewModel.IsSnapOn}">
       <ToolTip.Tip>
         <TextBlock Text="{DynamicResource pianoroll.toggle.snap}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>

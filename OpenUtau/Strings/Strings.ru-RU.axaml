@@ -577,6 +577,7 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="pianoroll.toggle.noteparams">Показать параметры ноты (\)</system:String>
   <system:String x:Key="pianoroll.toggle.phoneme">Показать фонемы (O)</system:String>
   <system:String x:Key="pianoroll.toggle.phonemizer">Показать теги фонемайзера</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Следовать за высотой нот при воспроизведении</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Показать кривую питча (I)</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Привязка (P)</system:String>
   <system:String x:Key="pianoroll.toggle.snap.auto">Авто</system:String>

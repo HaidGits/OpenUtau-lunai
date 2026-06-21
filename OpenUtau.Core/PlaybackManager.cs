@@ -453,6 +453,28 @@ namespace OpenUtau.Core {
             }
         }
 
+        /// <summary>Fractional project tick from the audio clock for smooth UI scrolling.</summary>
+        public bool TryGetSmoothPlayTick(out double tick) {
+            tick = 0;
+            if (AudioOutput == null || AudioOutput.PlaybackState != PlaybackState.Playing || !PlayingMaster) {
+                return false;
+            }
+            var currentMasterMix = masterMix;
+            if (currentMasterMix == null) {
+                return false;
+            }
+            double ms = (AudioOutput.GetPosition() / sizeof(float) - currentMasterMix.Waited / 2) * 1000.0 / 44100;
+            double currentMs = startMs + ms;
+            var timeAxis = DocManager.Inst.Project.timeAxis;
+            int baseTick = timeAxis.MsPosToTickPos(currentMs);
+            double tickStartMs = timeAxis.TickPosToMsPos(baseTick);
+            double tickEndMs = timeAxis.TickPosToMsPos(baseTick + 1);
+            double span = tickEndMs - tickStartMs;
+            double frac = span > 1e-6 ? Math.Clamp((currentMs - tickStartMs) / span, 0, 1) : 0;
+            tick = baseTick + frac;
+            return true;
+        }
+
         public static float DecibelToVolume(double db) {
             return (db <= -24) ? 0 : (float)MusicMath.DecibelToLinear((db < -16) ? db * 2 + 16 : db);
         }

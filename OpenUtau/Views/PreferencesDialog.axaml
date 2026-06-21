@@ -174,6 +174,55 @@
             <Slider Grid.Column="4" Classes="fader" Value="{Binding PlayPosMarkerMargin}" Minimum="0" Maximum="1"
                     TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="true"/>
           </Grid>
+          <TextBlock Text="{DynamicResource prefs.playback.pitchfollow}" Margin="0,16,0,0" FontWeight="Bold"/>
+          <Grid>
+            <TextBlock Text="{DynamicResource prefs.playback.pitchfollow.enabled}" HorizontalAlignment="Left"/>
+            <ToggleSwitch IsChecked="{Binding PlaybackPitchFollowEnabled}"/>
+          </Grid>
+          <Grid IsEnabled="{Binding PlaybackPitchFollowEnabled}">
+            <TextBlock Text="{DynamicResource prefs.playback.pitchfollow.showpath}" HorizontalAlignment="Left"/>
+            <ToggleSwitch IsChecked="{Binding PlaybackPitchFollowShowPath}"/>
+          </Grid>
+          <Grid ColumnDefinitions="Auto,8,20,8,*" Margin="0,10,0,0">
+            <TextBlock Grid.Column="0" Text="{DynamicResource prefs.playback.pitchfollow.threshold}"/>
+            <TextBlock Grid.Column="2">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0:#0}">
+                  <Binding Path="PlaybackPitchFollowSemitoneThreshold"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+            <Slider Grid.Column="4" Classes="fader" Value="{Binding PlaybackPitchFollowSemitoneThreshold}" Minimum="0" Maximum="12"
+                    TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="true"/>
+          </Grid>
+          <Grid ColumnDefinitions="Auto,8,20,8,*" Margin="0,10,0,0">
+            <TextBlock Grid.Column="0" Text="{DynamicResource prefs.playback.pitchfollow.verticalposition}"/>
+            <TextBlock Grid.Column="2">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0:#0.0}">
+                  <Binding Path="PlaybackPitchFollowVerticalPosition"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+            <Slider Grid.Column="4" Classes="fader" Value="{Binding PlaybackPitchFollowVerticalPosition}" Minimum="0.15" Maximum="0.85"
+                    TickPlacement="BottomRight" TickFrequency="0.05" IsSnapToTickEnabled="true"/>
+          </Grid>
+          <Grid ColumnDefinitions="Auto,8,20,8,*" Margin="0,10,0,0">
+            <TextBlock Grid.Column="0" Text="{DynamicResource prefs.playback.pitchfollow.framesmoothing}"/>
+            <TextBlock Grid.Column="2">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0:#0.0}">
+                  <Binding Path="PlaybackPitchFollowFrameSmoothing"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+            <Slider Grid.Column="4" Classes="fader" Value="{Binding PlaybackPitchFollowFrameSmoothing}" Minimum="0.05" Maximum="1"
+                    TickPlacement="BottomRight" TickFrequency="0.05" IsSnapToTickEnabled="true"/>
+          </Grid>
+          <Grid>
+            <TextBlock Text="{DynamicResource prefs.playback.solidline}" HorizontalAlignment="Left"/>
+            <ToggleSwitch IsChecked="{Binding UseSolidPlaybackLine}"/>
+          </Grid>
         </StackPanel>
 
         <!-- Paths -->
@@ -255,7 +304,7 @@
         </StackPanel>
 
         <!-- Appearance -->
-        <views:AppearancePreferencesPane/>
+        <views:PreferencesAppearancePane/>
 
         <!-- UTAU -->
         <StackPanel>

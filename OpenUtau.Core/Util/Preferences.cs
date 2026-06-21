@@ -137,6 +137,9 @@ namespace OpenUtau.Core.Util {
                     if (!ValidString(new Action(() => CultureInfo.GetCultureInfo(Default.Language)))) Default.Language = string.Empty;
                     if (!ValidString(new Action(() => CultureInfo.GetCultureInfo(Default.SortingOrder)))) Default.SortingOrder = string.Empty;
                     Default.NoteCornerRadius = Math.Clamp(Default.NoteCornerRadius, 0, 12);
+                    Default.PlaybackPitchFollowSemitoneThreshold = Math.Clamp(Default.PlaybackPitchFollowSemitoneThreshold, 0, 24);
+                    Default.PlaybackPitchFollowVerticalPosition = Math.Clamp(Default.PlaybackPitchFollowVerticalPosition, 0.15, 0.85);
+                    Default.PlaybackPitchFollowFrameSmoothing = Math.Clamp(Default.PlaybackPitchFollowFrameSmoothing, 0.05, 1);
                     Default.AppearancePanelWidth = Math.Clamp(Default.AppearancePanelWidth, 300, 450);
                     Default.ThemeEditorPanelWidth = Math.Clamp(Default.ThemeEditorPanelWidth, 300, 450);
                     Default.NotePropertiesPanelWidth = Math.Clamp(Default.NotePropertiesPanelWidth, 350, 450);
@@ -229,6 +232,16 @@ namespace OpenUtau.Core.Util {
             public double PlayPosMarkerMargin = 0.9;
             public int LockStartTime = 0;
             public int PlaybackAutoScroll = 2;
+            /// <summary>When true, piano roll vertically follows note pitch during playback using a pre-planned smooth path.</summary>
+            public bool PlaybackPitchFollowEnabled = false;
+            /// <summary>Minimum semitone difference between note groups before vertical scroll moves.</summary>
+            public int PlaybackPitchFollowSemitoneThreshold = 2;
+            /// <summary>Vertical position (0–1) where followed notes are placed in the viewport.</summary>
+            public double PlaybackPitchFollowVerticalPosition = 0.5;
+            /// <summary>Per-frame lerp factor (0–1) toward the pre-planned pitch-follow path.</summary>
+            public double PlaybackPitchFollowFrameSmoothing = 0.1;
+            /// <summary>When true, draw the planned pitch-follow camera center path on the piano roll.</summary>
+            public bool PlaybackPitchFollowShowPath = false;
             public bool ReverseLogOrder = true;
             public bool ShowPortrait = true;
             public bool ShowIcon = true;
@@ -258,6 +271,7 @@ namespace OpenUtau.Core.Util {
             public bool ShowPhonemizerTags = true;
             public bool ShowNoteParams = true;
             public bool ShowAppearancePanel = false;
+            public bool ShowDiffSingerPanel = false;
             public double AppearancePanelWidth = 300;
             public double ThemeEditorPanelWidth = 300;
             public double NotePropertiesPanelWidth = 350;

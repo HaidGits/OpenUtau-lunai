@@ -49,12 +49,15 @@ namespace OpenUtau.App.Controls {
         private int scrollStyleApplyGeneration;
         private int detachedLayoutGeneration;
         private AppearancePreferencesPane? appearancePane;
+        private DiffSingerPreferencesPane? diffSingerPane;
         private ThemeEditorPane? themeEditorPane;
         private bool appearancePanelResizing;
         private bool themeEditorPanelResizing;
         private bool notePropsPanelResizing;
         private double dockPanelResizeStartX;
         private double dockPanelResizeStartWidth;
+        private bool compositionRenderingHooked;
+        private DateTime pitchFollowRenderLastUtc;
 
         private ReactiveCommand<Unit, Unit>? lyricsDialogCommand;
         private ReactiveCommand<Unit, Unit>? noteDefaultsCommand;
@@ -86,7 +89,7 @@ namespace OpenUtau.App.Controls {
             drawPitchTool.AddHandler(PointerPressedEvent, OnToolButtonPointerPressed, RoutingStrategies.Tunnel | RoutingStrategies.Bubble, true);
             drawLinePitchTool.AddHandler(PointerPressedEvent, OnToolButtonPointerPressed, RoutingStrategies.Tunnel | RoutingStrategies.Bubble, true);
 
-            ViewModel.WhenAnyValue(x => x.ShowAppearancePanel)
+            ViewModel.WhenAnyValue(x => x.ShowAppearancePanel, x => x.ShowDiffSingerPanel)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => ScheduleUpdateDetachedLayout());
             ViewModel.WhenAnyValue(x => x.ShowThemeEditorPanel, x => x.ThemeEditorPath)
@@ -104,8 +107,19 @@ namespace OpenUtau.App.Controls {
                 ScheduleApplyPianoRollScrollStyle();
                 ScheduleUpdateDetachedLayout();
                 SchedulePreloadAppearancePane();
+                if (!compositionRenderingHooked) {
+                    compositionRenderingHooked = true;
+                    ViewModel.NotesViewModel.NotifyPitchFollowRendering(true);
+                    SchedulePitchFollowAnimationFrame();
+                }
             };
-            DetachedFromVisualTree += (_, _) => scrollStyleApplyGeneration++;
+            DetachedFromVisualTree += (_, _) => {
+                scrollStyleApplyGeneration++;
+                if (compositionRenderingHooked) {
+                    compositionRenderingHooked = false;
+                    ViewModel?.NotesViewModel.NotifyPitchFollowRendering(false);
+                }
+            };
             MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
                 .Subscribe(_ => ScheduleApplyPianoRollScrollStyle());
 
@@ -115,6 +129,34 @@ namespace OpenUtau.App.Controls {
 
         private void PianoRollLayoutUpdated(object? sender, EventArgs e) {
             UpdatePortraitPosition();
+        }
+
+        void SchedulePitchFollowAnimationFrame() {
+            if (!compositionRenderingHooked) {
+                return;
+            }
+            if (TopLevel.GetTopLevel(this) is { } topLevel) {
+                topLevel.RequestAnimationFrame(OnPitchFollowAnimationFrame);
+            }
+        }
+
+        void OnPitchFollowAnimationFrame(TimeSpan time) {
+            if (!compositionRenderingHooked) {
+                return;
+            }
+            var now = DateTime.UtcNow;
+            double deltaMs = pitchFollowRenderLastUtc == default
+                ? PitchFollowScrollMath.ReferenceStepMs
+                : (now - pitchFollowRenderLastUtc).TotalMilliseconds;
+            pitchFollowRenderLastUtc = now;
+            if (deltaMs >= 0.5) {
+                if (PlaybackManager.Inst.PlayingMaster || PlaybackManager.Inst.StartingToPlay) {
+                    PlaybackManager.Inst.UpdatePlayPos();
+                }
+                ViewModel.NotesViewModel.PitchFollowAnimationStep(deltaMs);
+                ViewModel.NotesViewModel.SmoothScrollStep(deltaMs);
+            }
+            SchedulePitchFollowAnimationFrame();
         }
 
         private void UpdatePortraitPosition() {
@@ -128,6 +170,7 @@ namespace OpenUtau.App.Controls {
                 PianoRollViewModel.WarmUpAppearancePreferences();
                 if (WorkspaceScrollbarHelper.IsInVisualTree(this)) {
                     EnsureAppearancePanePreloaded();
+                    EnsureDiffSingerPanePreloaded();
                 }
             }, DispatcherPriority.Background);
         }
@@ -148,16 +191,33 @@ namespace OpenUtau.App.Controls {
             appearancePane ??= new AppearancePreferencesPane {
                 DataContext = ViewModel.AppearancePreferences,
             };
-            if (AppearancePaneHost.Content != appearancePane) {
-                AppearancePaneHost.Content = appearancePane;
-            }
         }
 
-        void UpdateAppearancePane() {
+        void EnsureDiffSingerPanePreloaded() {
+            diffSingerPane ??= new DiffSingerPreferencesPane {
+                DataContext = ViewModel.AppearancePreferences,
+            };
+        }
+
+        void UpdateLeftDockPane() {
             if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
                 return;
             }
-            EnsureAppearancePanePreloaded();
+            if (ViewModel.ShowDiffSingerPanel) {
+                EnsureDiffSingerPanePreloaded();
+                if (AppearancePaneHost.Content != diffSingerPane) {
+                    AppearancePaneHost.Content = diffSingerPane;
+                }
+                return;
+            }
+            if (ViewModel.ShowAppearancePanel) {
+                EnsureAppearancePanePreloaded();
+                if (AppearancePaneHost.Content != appearancePane) {
+                    AppearancePaneHost.Content = appearancePane;
+                }
+                return;
+            }
+            AppearancePaneHost.Content = null;
         }
 
         void UpdateThemeEditorPane() {
@@ -264,7 +324,9 @@ namespace OpenUtau.App.Controls {
             ViewModel.RaisePropertyChanged(nameof(ViewModel.PianoRollFullscreen));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.UsesExpandedPianoRollLayout));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.IsSidePanelVisible));
+            ViewModel.RaisePropertyChanged(nameof(ViewModel.IsLeftDockPanelVisible));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.IsAppearancePanelVisible));
+            ViewModel.RaisePropertyChanged(nameof(ViewModel.IsDiffSingerPanelVisible));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.PianoRollSideColumnWidth));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.PianoRollSideGapWidth));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.AppearancePanelLeadingGapWidth));
@@ -275,7 +337,7 @@ namespace OpenUtau.App.Controls {
             ViewModel.RaisePropertyChanged(nameof(ViewModel.IsThemeEditorPanelVisible));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.ThemeEditorPanelLeadingGapWidth));
             ViewModel.RaisePropertyChanged(nameof(ViewModel.ThemeEditorPanelColumnWidth));
-            UpdateAppearancePane();
+            UpdateLeftDockPane();
             UpdateThemeEditorPane();
         }
 

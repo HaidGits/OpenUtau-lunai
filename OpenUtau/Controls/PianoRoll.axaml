@@ -31,7 +31,7 @@
       <c:PianoRollViewToggles Classes="sideLayout"/>
     </Border>
     <Border Grid.Column="2" Classes="workspaceCard workspaceDockAppearance"
-            IsVisible="{Binding IsAppearancePanelVisible}"
+            IsVisible="{Binding IsLeftDockPanelVisible}"
             VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
       <ContentControl x:Name="AppearancePaneHost"/>
     </Border>
@@ -270,6 +270,14 @@
           </ContextMenu>
         </c:NotesCanvas.ContextMenu>
       </c:NotesCanvas>
+      <c:PitchFollowPathCanvas Grid.Row="2" Grid.Column="1" ZIndex="4"
+                               ShowPath="{Binding NotesViewModel.ShowPitchFollowPath}"
+                               TickWidth="{Binding NotesViewModel.TickWidth}"
+                               TickOffset="{Binding NotesViewModel.TickOffset}"
+                               TrackHeight="{Binding NotesViewModel.TrackHeight}"
+                               TrackOffset="{Binding NotesViewModel.TrackOffset}"
+                               ViewportTracks="{Binding NotesViewModel.ViewportTracks}"
+                               NotesViewModel="{Binding NotesViewModel}"/>
       <Canvas Grid.Row="2" Grid.Column="1" IsHitTestVisible="False" ClipToBounds="True" ZIndex="2">
         <Rectangle Name="PlayPosHighlight"
                    Width="{Binding NotesViewModel.PlayPosHighlightWidth, Mode=OneWay}"

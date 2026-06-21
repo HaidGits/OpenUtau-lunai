@@ -91,6 +91,11 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public int PlaybackAutoScroll { get; set; }
         [Reactive] public double PlayPosMarkerMargin { get; set; }
         [Reactive] public bool UseSolidPlaybackLine { get; set; }
+        [Reactive] public bool PlaybackPitchFollowEnabled { get; set; }
+        [Reactive] public int PlaybackPitchFollowSemitoneThreshold { get; set; }
+        [Reactive] public double PlaybackPitchFollowVerticalPosition { get; set; }
+        [Reactive] public double PlaybackPitchFollowFrameSmoothing { get; set; }
+        [Reactive] public bool PlaybackPitchFollowShowPath { get; set; }
 
         // Paths
         public string SingerPath => PathManager.Inst.SingersPath;
@@ -507,6 +512,11 @@ namespace OpenUtau.App.ViewModels {
             PlaybackAutoScroll = Preferences.Default.PlaybackAutoScroll;
             PlayPosMarkerMargin = Preferences.Default.PlayPosMarkerMargin;
             UseSolidPlaybackLine = Preferences.Default.UseSolidPlaybackLine;
+            PlaybackPitchFollowEnabled = Preferences.Default.PlaybackPitchFollowEnabled;
+            PlaybackPitchFollowSemitoneThreshold = Preferences.Default.PlaybackPitchFollowSemitoneThreshold;
+            PlaybackPitchFollowVerticalPosition = Preferences.Default.PlaybackPitchFollowVerticalPosition;
+            PlaybackPitchFollowFrameSmoothing = Preferences.Default.PlaybackPitchFollowFrameSmoothing;
+            PlaybackPitchFollowShowPath = Preferences.Default.PlaybackPitchFollowShowPath;
             LockStartTime = Preferences.Default.LockStartTime;
             InstallToAdditionalSingersPath = Preferences.Default.InstallToAdditionalSingersPath;
             LoadDeepFolders = Preferences.Default.LoadDeepFolderSinger;
@@ -615,6 +625,43 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(playPosMarkerMargin => {
                     Preferences.Default.PlayPosMarkerMargin = playPosMarkerMargin;
                     Preferences.Save();
+                });
+            this.WhenAnyValue(vm => vm.PlaybackPitchFollowEnabled)
+                .Subscribe(enabled => {
+                    Preferences.Default.PlaybackPitchFollowEnabled = enabled;
+                    if (!enabled) {
+                        PlaybackPitchFollowShowPath = false;
+                        Preferences.Default.PlaybackPitchFollowShowPath = false;
+                    }
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PlaybackPitchFollowSettingsChangedEvent());
+                });
+            this.WhenAnyValue(vm => vm.PlaybackPitchFollowSemitoneThreshold)
+                .Subscribe(threshold => {
+                    Preferences.Default.PlaybackPitchFollowSemitoneThreshold = Math.Clamp(threshold, 0, 24);
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PlaybackPitchFollowSettingsChangedEvent());
+                });
+            this.WhenAnyValue(vm => vm.PlaybackPitchFollowVerticalPosition)
+                .Subscribe(position => {
+                    Preferences.Default.PlaybackPitchFollowVerticalPosition = Math.Clamp(position, 0.15, 0.85);
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PlaybackPitchFollowSettingsChangedEvent());
+                });
+            this.WhenAnyValue(vm => vm.PlaybackPitchFollowFrameSmoothing)
+                .Subscribe(smoothing => {
+                    Preferences.Default.PlaybackPitchFollowFrameSmoothing = Math.Clamp(smoothing, 0.05, 1);
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PlaybackPitchFollowSettingsChangedEvent());
+                });
+            this.WhenAnyValue(vm => vm.PlaybackPitchFollowShowPath)
+                .Subscribe(showPath => {
+                    if (!Preferences.Default.PlaybackPitchFollowEnabled) {
+                        return;
+                    }
+                    Preferences.Default.PlaybackPitchFollowShowPath = showPath;
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PlaybackPitchFollowSettingsChangedEvent());
                 });
             this.WhenAnyValue(vm => vm.UseSolidPlaybackLine)
                 .Subscribe(useSolidPlaybackLine => {
