@@ -243,7 +243,7 @@ namespace OpenUtau.App {
                 resDict["SelectedTrackCenterKeyBrush"] = tcolor.AccentColorCenterKey;
                 if (Preferences.Default.UseTrackColor) {
                     if (IsDarkMode) {
-                        resDict["CenterKeyNameColor"] = BlendColors(tcolor.AccentColorDark.Color, Color.Parse("#2F2F2F"));   // piano2 + dark gray 50/50
+                        resDict["CenterKeyNameColor"] = tcolor.AccentColorDark.Color;       // piano2; label darkening applied in SetKeyboardBrush
                         resDict["CenterKeyColorLeft"] = BlendColors(tcolor.AccentColorLight.Color, Color.Parse("#C0C0C0"));   // piano3 + gray 50/50
                         resDict["CenterKeyColorRight"] = BlendColors(tcolor.AccentColorCenterKey.Color, Color.Parse("#F0F0F0")); // piano4 + light gray 50/50
                         if (s_defaultBlackKeyColorLeft is Color bkl) { resDict["BlackKeyColorLeft"] = bkl; }
@@ -296,9 +296,7 @@ namespace OpenUtau.App {
                 if (resDict.TryGetResource("WhiteKeyNameBrush", themeVariant, out outVar)) {
                     WhiteKeyNameBrush = (IBrush)outVar!;
                 }
-                if (resDict.TryGetResource("SelectedTrackAccentBrush", themeVariant, out outVar)) {
-                    CenterKeyNameBrush = (IBrush)outVar!;
-                }
+                CenterKeyNameBrush = ResolveCenterKeyNameBrush(resDict, themeVariant);
                 if (resDict.TryGetResource("BlackKeyBrush", themeVariant, out outVar)) {
                     BlackKeyBrush = (IBrush)outVar!;
                 }
@@ -314,16 +312,14 @@ namespace OpenUtau.App {
                     ExpNameBrush = WhiteKeyNameBrush;
                     ExpActiveBrush = BlackKeyBrush;
                     ExpActiveNameBrush = BlackKeyNameBrush;
-                    ExpShadowBrush = CenterKeyBrush;
-                    ExpShadowNameBrush = CenterKeyNameBrush;
                 } else {
                     ExpBrush = BlackKeyBrush;
                     ExpNameBrush = BlackKeyNameBrush;
                     ExpActiveBrush = WhiteKeyBrush;
                     ExpActiveNameBrush = WhiteKeyNameBrush;
-                    ExpShadowBrush = CenterKeyBrush;
-                    ExpShadowNameBrush = CenterKeyNameBrush;
                 }
+                ExpShadowBrush = DarkenBrush(ExpActiveBrush, 0.5);
+                ExpShadowNameBrush = Brushes.White;
             } else { // DefColor
                 if (resDict.TryGetResource("WhiteKeyBrush", themeVariant, out outVar)) {
                     WhiteKeyBrush = (IBrush)outVar!;
@@ -334,9 +330,7 @@ namespace OpenUtau.App {
                 if (resDict.TryGetResource("CenterKeyBrush", themeVariant, out outVar)) {
                     CenterKeyBrush = (IBrush)outVar!;
                 }
-                if (resDict.TryGetResource("CenterKeyNameBrush", themeVariant, out outVar)) {
-                    CenterKeyNameBrush = (IBrush)outVar!;
-                }
+                CenterKeyNameBrush = ResolveCenterKeyNameBrush(resDict, themeVariant);
                 if (resDict.TryGetResource("BlackKeyBrush", themeVariant, out outVar)) {
                     BlackKeyBrush = (IBrush)outVar!;
                 }
@@ -348,18 +342,66 @@ namespace OpenUtau.App {
                     ExpNameBrush = WhiteKeyNameBrush;
                     ExpActiveBrush = BlackKeyBrush;
                     ExpActiveNameBrush = BlackKeyNameBrush;
-                    ExpShadowBrush = CenterKeyBrush;
-                    ExpShadowNameBrush = CenterKeyNameBrush;
                 } else {
                     ExpBrush = BlackKeyBrush;
                     ExpNameBrush = BlackKeyNameBrush;
                     ExpActiveBrush = WhiteKeyBrush;
                     ExpActiveNameBrush = WhiteKeyNameBrush;
-                    ExpShadowBrush = CenterKeyBrush;
-                    ExpShadowNameBrush = CenterKeyNameBrush;
                 }
+                ExpShadowBrush = DarkenBrush(ExpActiveBrush, 0.5);
+                ExpShadowNameBrush = Brushes.White;
             }
         }
+
+        /// <summary>Dark-theme C key label: 50% accent blended with dark gray.</summary>
+        private static Color DarkThemeAccentLabelColor(Color accent) =>
+            BlendColorsWeighted(accent, Color.Parse("#2F2F2F"), 0.5);
+
+        private static IBrush ResolveCenterKeyNameBrush(IResourceDictionary resDict, ThemeVariant themeVariant) {
+            if (resDict.TryGetResource("CenterKeyNameColor", themeVariant, out object? outVar) && outVar is Color c) {
+                if (IsDarkMode) {
+                    c = DarkThemeAccentLabelColor(c);
+                }
+                return new SolidColorBrush(c);
+            }
+            if (resDict.TryGetResource("CenterKeyNameBrush", themeVariant, out outVar)) {
+                return (IBrush)outVar!;
+            }
+            return Brushes.Black;
+        }
+
+        /// <summary>Blends two colors; <paramref name="weightA"/> is the fraction of <paramref name="a"/> (0–1).</summary>
+        private static Color BlendColorsWeighted(Color a, Color b, double weightA) {
+            weightA = System.Math.Clamp(weightA, 0, 1);
+            double weightB = 1 - weightA;
+            return Color.FromArgb(
+                (byte)(a.A * weightA + b.A * weightB),
+                (byte)(a.R * weightA + b.R * weightB),
+                (byte)(a.G * weightA + b.G * weightB),
+                (byte)(a.B * weightA + b.B * weightB));
+        }
+
+        /// <summary>Darkens a brush by blending its colors toward black; factor is the original color weight (e.g. 0.8 = 20% darker).</summary>
+        private static IBrush DarkenBrush(IBrush brush, double factor) {
+            if (brush is SolidColorBrush solid) {
+                return new SolidColorBrush(DarkenColor(solid.Color, factor)) { Opacity = solid.Opacity };
+            }
+            if (brush is LinearGradientBrush gradient) {
+                var stops = new GradientStops();
+                foreach (GradientStop stop in gradient.GradientStops) {
+                    stops.Add(new GradientStop(DarkenColor(stop.Color, factor), stop.Offset));
+                }
+                return new LinearGradientBrush {
+                    StartPoint = gradient.StartPoint,
+                    EndPoint = gradient.EndPoint,
+                    GradientStops = stops,
+                    Opacity = gradient.Opacity,
+                };
+            }
+            return brush;
+        }
+
+        private static Color DarkenColor(Color c, double factor) => BlendColorsWeighted(c, Color.Parse("#000000"), factor);
 
         /// <summary>Blends two colors 50/50 by component.</summary>
         private static Color BlendColors(Color a, Color b) {
