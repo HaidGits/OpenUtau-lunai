@@ -770,9 +770,12 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.appearance.theme.name.cold">Cold</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Warm</system:String>
   <system:String x:Key="prefs.appearance.section.pianoroll">Piano roll</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Track colors</system:String>
   <system:String x:Key="prefs.appearance.section.grid">Grid &amp; scrolling</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Display lines</system:String>
   <system:String x:Key="prefs.appearance.section.playback">Playback</system:String>
   <system:String x:Key="prefs.appearance.section.expressions">Expressions &amp; phonemes</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Phoneme panel</system:String>
   <system:String x:Key="prefs.appearance.solidtickgridlines">Solid timeline grid lines (piano roll, tracks &amp; expression panel)</system:String>
   <system:String x:Key="prefs.appearance.solidexppanelgridlines">Solid default-value lines in expression panel</system:String>
   <system:String x:Key="prefs.appearance.classicscrollbars">Classic scrollbars (dedicated track area)</system:String>
@@ -810,6 +813,9 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.caption">Preferences</system:String>
   <system:String x:Key="prefs.diffsinger">DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.section.steps">Render steps</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Render quality</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">General</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Debug</system:String>
   <system:String x:Key="prefs.diffsinger.section.quality">Quality</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
   <system:String x:Key="prefs.diffsinger.section.pitch">Pitch &amp; F0</system:String>
