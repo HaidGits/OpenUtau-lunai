@@ -20,9 +20,10 @@
 
   <UserControl.Styles>
 
-    <Style Selector="Button,CheckBox">
+    <Style Selector="Button,CheckBox,ToggleSwitch">
 
       <Setter Property="Focusable" Value="False"/>
+      <Setter Property="IsTabStop" Value="False"/>
 
     </Style>
 
