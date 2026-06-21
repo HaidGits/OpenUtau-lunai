@@ -150,12 +150,6 @@ OpenUtau aims to be an open source editing environment for UTAU community, with 
   <system:String x:Key="dialogs.splitpart.caption">Splitting Part</system:String>
   <system:String x:Key="dialogs.splitpart.intheway">There are one or more note(s) overlapping with the playhead.
 Do you want to continue by splitting at the nearest position after current playhead with no notes in the way?</system:String>
-  <system:String x:Key="dialogs.exportds.caption">Export DiffSinger Scripts</system:String>
-  <system:String x:Key="dialogs.exportds.curves">Curves</system:String>
-  <system:String x:Key="dialogs.exportds.pitch">Pitch (f0)</system:String>
-  <system:String x:Key="dialogs.exportds.variance">Variance expressions</system:String>
-  <system:String x:Key="dialogs.exportds.variance.hint">Enable DiffSinger Tensor Cache in Preferences to export variance curves.</system:String>
-  <system:String x:Key="dialogs.exportds.notrendered">Please render all parts before exporting.</system:String>
   <system:String x:Key="dialogs.messagebox.copy">Copy error to clipboard</system:String>
   <system:String x:Key="dialogs.noresampler.caption">No resampler</system:String>
   <system:String x:Key="dialogs.noresampler.message">No resampler! Put your favourite resampler exe or dll in the Resamplers folder and choose it in Preferences!</system:String>
@@ -616,27 +610,27 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger balanced (acoustic 20, variance 20, pitch 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger low quality (acoustic 10, variance 10, pitch 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger extra low quality (acoustic 1, variance 1, pitch 1)</system:String>
-  <system:String x:Key="pianoroll.tool.drawpitch">Draw Pitch Tool (Shift + 1)
+  <system:String x:Key="pianoroll.tool.drawpitch">Draw Pitch Tool (4)
     Left click to draw
     Right click to reset
     Hold Ctrl to select</system:String>
   <system:String x:Key="pianoroll.tool.eraser">Eraser Tool (3)</system:String>
-  <system:String x:Key="pianoroll.tool.knife">Knife Tool (4)</system:String>
-  <system:String x:Key="pianoroll.tool.pitchline">Pitch Line Tool (Shift + 2)
+  <system:String x:Key="pianoroll.tool.knife">Knife Tool (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Pitch Line Tool (Shift + 1)
     Left click to draw straight line
     Right click to reset
     Hold Ctrl to select</system:String>
-  <system:String x:Key="pianoroll.tool.pitchscurve">Pitch S-Curve Tool (Shift + 3)
+  <system:String x:Key="pianoroll.tool.pitchscurve">Pitch S-Curve Tool (Shift + 2)
     Drag to draw S-curve, release to enter adjusting mode
     Move mouse to tune S-curve strength, click to apply
     Right click to reset
     Hold Ctrl to select</system:String>
-  <system:String x:Key="pianoroll.tool.pitchesinewave">Pitch Sine Wave Tool (Shift + 4)
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Pitch Sine Wave Tool (Shift + 3)
     Drag to draw sine wave, release to enter adjusting mode
     Move mouse to adjust wavelength and amplitude, click to apply
     Right click to reset
     Hold Ctrl to select</system:String>
-  <system:String x:Key="pianoroll.tool.pitchsmoothen">Pitch Smoothen Tool (Shift + 5)
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Pitch Smoothen Tool (Shift + 4)
     Left click to smoothen pitch
     Right click to reset
     Hold Ctrl to select</system:String>
@@ -644,10 +638,10 @@ Warning: this option removes custom presets.</system:String>
     Left click to draw
     Right click to delete
     Hold Ctrl to select</system:String>
-  <system:String x:Key="pianoroll.tool.penv2">Pen Tool
+  <system:String x:Key="pianoroll.tool.penv2">Pen Tool (2)
     Left click to draw
     Hold Ctrl to select</system:String>
-  <system:String x:Key="pianoroll.tool.selectionv2">Selection Tool</system:String>
+  <system:String x:Key="pianoroll.tool.selectionv2">Selection Tool (1)</system:String>
   <system:String x:Key="pianoroll.tooltip.attack">Attack time delta</system:String>
   <system:String x:Key="pianoroll.tooltip.overlap">Overlap</system:String>
   <system:String x:Key="pianoroll.tooltip.preutter">Preutter</system:String>
@@ -680,10 +674,13 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="shortcut.ToolSelect2Alt">Pen Tool (Alt)</system:String>
   <system:String x:Key="shortcut.ToolSelect3">Eraser Tool</system:String>
   <system:String x:Key="shortcut.ToolSelect4Main">Draw Pitch Tool</system:String>
-  <system:String x:Key="shortcut.ToolSelect4Overwrite">Overwrite Pitch Tool</system:String>
-  <system:String x:Key="shortcut.ToolSelect4Line">Draw Line Pitch Tool</system:String>
-  <system:String x:Key="shortcut.ToolSelect4LineOverwrite">Overwrite Line Pitch Tool</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Draw Pitch Tool (Overwrite)</system:String>
   <system:String x:Key="shortcut.ToolSelect5">Knife Tool</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Pitch Line Tool</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Pitch Line Tool (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Pitch S-Curve Tool</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Pitch Sine Wave Tool</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Pitch Smoothen Tool</system:String>
   <system:String x:Key="shortcut.ExpSelect1">Select Expression 1</system:String>
   <system:String x:Key="shortcut.ExpSelect2">Select Expression 2</system:String>
   <system:String x:Key="shortcut.ExpSelect3">Select Expression 3</system:String>
@@ -991,8 +988,6 @@ The voicebank may not work on another OS.</system:String>
   <system:String x:Key="singersetup.textfileencoding">Text File Encoding</system:String>
   <system:String x:Key="singersetup.textfileencoding.prompt">Choose an encoding that make file contents look right.</system:String>
   <system:String x:Key="singersetup.title">Singer Setup</system:String>
-
-  <system:String x:Key="themeeditor.title">Theme Editor</system:String>
 
   <system:String x:Key="tip.aliasbox">Override Alias</system:String>
   <system:String x:Key="tip.exps">Numerical,Options Type

@@ -149,7 +149,7 @@ namespace OpenUtau.App.ViewModels {
         public bool PenTool => ToolIndex == 1 && PenToolIndex == 0;
         public bool PenPlusTool => ToolIndex == 1 && PenToolIndex == 1;
         public bool EraserTool => ToolIndex == 2;
-        public bool KnifeTool => ToolIndex == 3;
+        public bool KnifeTool => ToolIndex == 4;
 
         public ObservableCollectionExtended<MenuItemViewModel> LegacyPlugins { get; private set; }
             = new ObservableCollectionExtended<MenuItemViewModel>();

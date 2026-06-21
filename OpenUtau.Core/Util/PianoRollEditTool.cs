@@ -28,12 +28,16 @@ namespace OpenUtau.Core.Util {
                 switch (BaseTool) {
                     case 1:
                         return PenToolVariation == 1 ? EditTools.PenPlusTool : EditTools.PenTool;
+                    case 3:
+                        return EditTools.DrawPitchTool;
+                    case 4:
+                        return EditTools.KnifeTool;
                     default:
                         return (EditTools)(BaseTool * 10);
                 }
             }
         }
-        [JsonIgnore] public bool IsPitchTool => BaseTool >= 4 && BaseTool <= 8;
+        [JsonIgnore] public bool IsPitchTool => BaseTool == 3 || (BaseTool >= 5 && BaseTool <= 8);
         public bool IsMatch(IEnumerable<EditTools> tools) => tools.Contains(CurrentTool);
     }
 }

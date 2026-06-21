@@ -66,6 +66,7 @@
   <SolidColorBrush x:Key="PianoRollSideAccentVibratoBrush" Color="#B87FD4"/>
   <SolidColorBrush x:Key="PianoRollSideAccentPitchBrush" Color="#5BA8F2"/>
   <SolidColorBrush x:Key="PianoRollSideAccentFinalPitchBrush" Color="#4ABFA8"/>
+  <SolidColorBrush x:Key="PianoRollSideAccentPitchOverwriteBrush" Color="#E07A5F"/>
   <SolidColorBrush x:Key="PianoRollSideAccentWaveformBrush" Color="#6FA882"/>
   <SolidColorBrush x:Key="PianoRollSideAccentPhonemeBrush" Color="#D48AAF"/>
   <SolidColorBrush x:Key="PianoRollSideAccentExpressionsBrush" Color="#E07855"/>
@@ -80,6 +81,7 @@
   <SolidColorBrush x:Key="PianoRollSideAccentVibratoCheckedBrush" Color="#B87FD4" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentPitchCheckedBrush" Color="#5BA8F2" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentFinalPitchCheckedBrush" Color="#4ABFA8" Opacity="0.10"/>
+  <SolidColorBrush x:Key="PianoRollSideAccentPitchOverwriteCheckedBrush" Color="#E07A5F" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentWaveformCheckedBrush" Color="#6FA882" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentPhonemeCheckedBrush" Color="#D48AAF" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentExpressionsCheckedBrush" Color="#E07855" Opacity="0.10"/>

@@ -587,6 +587,11 @@
           ToggleButton.sideToolbarToggle.finalPitchToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentFinalPitchCheckedBrush}" />
   </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle.pitchOverwriteToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.pitchOverwriteToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.pitchOverwriteToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentPitchOverwriteCheckedBrush}" />
+  </Style>
   <Style Selector="ToggleButton.sideToolbarToggle.waveformToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
           ToggleButton.sideToolbarToggle.waveformToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
           ToggleButton.sideToolbarToggle.waveformToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
@@ -770,6 +775,9 @@
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.finalPitchToggle Path.stroked">
     <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentFinalPitchBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.pitchOverwriteToggle Path.filled">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentPitchOverwriteBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.waveformToggle Path.filled">
     <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentWaveformBrush}" />

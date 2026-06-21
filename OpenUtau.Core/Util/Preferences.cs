@@ -317,9 +317,12 @@ namespace OpenUtau.Core.Util {
                 new ShortcutBinding { ActionId = "ToolSelect3", KeyName = "D3", ModifiersName = "None" },
                 new ShortcutBinding { ActionId = "ToolSelect4Main", KeyName = "D4", ModifiersName = "None" },
                 new ShortcutBinding { ActionId = "ToolSelect4Overwrite", KeyName = "D4", ModifiersName = "Control" },
-                new ShortcutBinding { ActionId = "ToolSelect4Line", KeyName = "D4", ModifiersName = "Shift" },
-                new ShortcutBinding { ActionId = "ToolSelect4LineOverwrite", KeyName = "D4", ModifiersName = "Control, Shift" },
                 new ShortcutBinding { ActionId = "ToolSelect5", KeyName = "D5", ModifiersName = "None" },
+                new ShortcutBinding { ActionId = "ToolSelectPitchLine", KeyName = "D1", ModifiersName = "Shift" },
+                new ShortcutBinding { ActionId = "ToolSelectPitchLineOverwrite", KeyName = "D1", ModifiersName = "Control, Shift" },
+                new ShortcutBinding { ActionId = "ToolSelectPitchSCurve", KeyName = "D2", ModifiersName = "Shift" },
+                new ShortcutBinding { ActionId = "ToolSelectPitchSine", KeyName = "D3", ModifiersName = "Shift" },
+                new ShortcutBinding { ActionId = "ToolSelectPitchSmoothen", KeyName = "D4", ModifiersName = "Shift" },
 
                 // Expressions
                 new ShortcutBinding { ActionId = "ExpSelect1", KeyName = "D1", ModifiersName = "Alt" },

@@ -8,9 +8,18 @@ namespace OpenUtau.App.Controls {
             AvaloniaProperty.Register<PianoRollMainViewToggles, bool>(
                 nameof(ShowDiffSingerToolbar), true);
 
+        public static readonly StyledProperty<bool> ShowPitchOverwriteToggleProperty =
+            AvaloniaProperty.Register<PianoRollMainViewToggles, bool>(
+                nameof(ShowPitchOverwriteToggle), true);
+
         public bool ShowDiffSingerToolbar {
             get => GetValue(ShowDiffSingerToolbarProperty);
             set => SetValue(ShowDiffSingerToolbarProperty, value);
+        }
+
+        public bool ShowPitchOverwriteToggle {
+            get => GetValue(ShowPitchOverwriteToggleProperty);
+            set => SetValue(ShowPitchOverwriteToggleProperty, value);
         }
 
         public static readonly StyledProperty<Orientation> LayoutOrientationProperty =

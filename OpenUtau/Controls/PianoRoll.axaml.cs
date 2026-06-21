@@ -1983,11 +1983,14 @@ namespace OpenUtau.App.Controls {
                 case "ToolSelect2Main": ViewModel.ToolIndex = 1; ViewModel.PenToolIndex = 0; SetPenToolIcon(); return true;
                 case "ToolSelect2Alt": ViewModel.ToolIndex = 1; ViewModel.PenToolIndex = 1; SetPenToolIcon(); return true;
                 case "ToolSelect3": ViewModel.ToolIndex = 2; return true;
-                case "ToolSelect4Main": ViewModel.ToolIndex = 4; ViewModel.PitchOverwrite = false; return true;
-                case "ToolSelect4Overwrite": ViewModel.ToolIndex = 4; ViewModel.PitchOverwrite = true; return true;
-                case "ToolSelect4Line": ViewModel.ToolIndex = 5; ViewModel.PitchOverwrite = false; return true;
-                case "ToolSelect4LineOverwrite": ViewModel.ToolIndex = 5; ViewModel.PitchOverwrite = true; return true;
-                case "ToolSelect5": ViewModel.ToolIndex = 3; return true;
+                case "ToolSelect4Main": ViewModel.ToolIndex = 3; ViewModel.PitchOverwrite = false; return true;
+                case "ToolSelect4Overwrite": ViewModel.ToolIndex = 3; ViewModel.PitchOverwrite = true; return true;
+                case "ToolSelect5": ViewModel.ToolIndex = 4; return true;
+                case "ToolSelectPitchLine": ViewModel.ToolIndex = 5; ViewModel.PitchOverwrite = false; return true;
+                case "ToolSelectPitchLineOverwrite": ViewModel.ToolIndex = 5; ViewModel.PitchOverwrite = true; return true;
+                case "ToolSelectPitchSCurve": ViewModel.ToolIndex = 6; return true;
+                case "ToolSelectPitchSine": ViewModel.ToolIndex = 7; return true;
+                case "ToolSelectPitchSmoothen": ViewModel.ToolIndex = 8; return true;
 
                 // Expressions
                 case "ExpSelect1": expSelector1?.SelectExp(); return true;
