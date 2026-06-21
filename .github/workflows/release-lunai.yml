@@ -87,7 +87,12 @@ jobs:
         run: dotnet restore OpenUtau -r ${{ matrix.arch.rid }}
 
       - name: Publish
+        if: matrix.arch.os != 'osx'
         run: dotnet publish OpenUtau -c Release -r ${{ matrix.arch.rid }} --self-contained true -o bin/${{ matrix.arch.name }}
+
+      - name: Build (MacOS)
+        if: matrix.arch.os == 'osx'
+        run: dotnet msbuild OpenUtau -t:BundleApp -p:Configuration=Release -p:RuntimeIdentifier=${{ matrix.arch.rid }} -p:UseAppHost=true -p:SelfContained=true -p:OutputPath=../bin/${{ matrix.arch.name }}/
 
       # Write release channel info
       - name: Write release channel info
@@ -139,6 +144,7 @@ jobs:
 
       # Create packages (BEFORE installer creation to include DirectML)
       - name: Create portable package
+        if: matrix.arch.os != 'osx'
         run: |
           cd bin/${{ matrix.arch.name }}
           7z a ../../OpenUtau-${{ matrix.arch.name }}.zip *
@@ -160,10 +166,13 @@ jobs:
       - name: Create macOS DMG
         if: matrix.arch.os == 'osx'
         run: |
-          dotnet msbuild OpenUtau -t:BundleApp -p:Configuration=Release -p:RuntimeIdentifier=${{ matrix.arch.rid }} -p:UseAppHost=true -p:OutputPath=../bin/${{ matrix.arch.name }}/
           cp OpenUtau/Assets/OpenUtau.icns bin/${{ matrix.arch.name }}/publish/OpenUtau.app/Contents/Resources/
-          hdiutil create -fs HFS+ -srcfolder bin/${{ matrix.arch.name }}/publish/OpenUtau.app -volname "OpenUtau" OpenUtau-${{ matrix.arch.name }}.dmg
-          codesign -fvs - OpenUtau-${{ matrix.arch.name }}.dmg
+          rm -f OpenUtau-${{ matrix.arch.name }}.dmg *.dmg
+          hdiutil detach "/Volumes/OpenUtau" -force 2>/dev/null || true
+          npm install -g create-dmg
+          create-dmg "bin/${{ matrix.arch.name }}/publish/OpenUtau.app" || true
+          mv *.dmg "OpenUtau-${{ matrix.arch.name }}.dmg"
+          codesign -fvs - "OpenUtau-${{ matrix.arch.name }}.dmg"
 
       # Create Appimage
       - name: Install LinuxDeploy
