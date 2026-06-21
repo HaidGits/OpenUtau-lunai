@@ -82,9 +82,13 @@ namespace OpenUtau.App.Views {
                 TimeSpan.FromMilliseconds(15),
                 DispatcherPriority.Normal,
                 (sender, args) => {
-                    PlaybackManager.Inst.UpdatePlayPos();
+                    var notesVm = pianoRoll?.ViewModel?.NotesViewModel;
+                    if (notesVm == null || !notesVm.PianoRollRenderingActive) {
+                        PlaybackManager.Inst.UpdatePlayPos();
+                    }
                     viewModel.PlaybackViewModel.PollPlaybackActiveChanged();
-                    pianoRoll?.ViewModel?.NotesViewModel?.SmoothScrollStep();
+                    notesVm?.SmoothScrollStepFallback();
+                    notesVm?.PitchFollowAnimationStepFallback();
                 });
             timer.Start();
 
@@ -110,9 +114,12 @@ namespace OpenUtau.App.Views {
 
             DocManager.Inst.AddSubscriber(this);
 
-            ApplyTracksScrollStyle();
             MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
-                .Subscribe(_ => Dispatcher.UIThread.Post(ApplyTracksScrollStyle));
+                .Subscribe(_ => ScheduleApplyTracksScrollStyle());
+            Loaded += (_, _) => ScheduleApplyTracksScrollStyle();
+            Opened += (_, _) => ScheduleApplyTracksScrollStyle();
+            viewModel.WhenAnyValue(vm => vm.Page)
+                .Subscribe(_ => ScheduleApplyTracksScrollStyle());
 
             Log.Information("Main window checking Update.");
             UpdaterDialog.CheckForUpdate(
@@ -130,8 +137,12 @@ namespace OpenUtau.App.Views {
             viewModel.InitProject(this);
         }
 
+        void ScheduleApplyTracksScrollStyle() {
+            Dispatcher.UIThread.Post(ApplyTracksScrollStyle, DispatcherPriority.Loaded);
+        }
+
         void ApplyTracksScrollStyle() {
-            if (!IsLoaded) {
+            if (!WorkspaceScrollbarHelper.IsInVisualTree(VScrollBar)) {
                 return;
             }
             bool classic = !Preferences.Default.UseOverlayScrollbars;
