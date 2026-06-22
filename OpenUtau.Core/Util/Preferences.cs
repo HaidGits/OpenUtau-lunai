@@ -119,6 +119,14 @@ namespace OpenUtau.Core.Util {
                     && !jo.ContainsKey(nameof(SerializablePreferences.UseOverlayScrollbars))) {
                     Default.UseOverlayScrollbars = !jo["UseClassicScrollbars"]!.Value<bool>();
                 }
+                if (jo.ContainsKey("UseSolidPlaybackLine")
+                    && !jo.ContainsKey(nameof(SerializablePreferences.UseModernPlayhead))) {
+                    Default.UseModernPlayhead = jo["UseSolidPlaybackLine"]!.Value<bool>();
+                }
+                if (jo.ContainsKey("UseClassicPlaybackLine")
+                    && !jo.ContainsKey(nameof(SerializablePreferences.UseModernPlayhead))) {
+                    Default.UseModernPlayhead = !jo["UseClassicPlaybackLine"]!.Value<bool>();
+                }
             } catch {
                 // ignore migration errors
             }
@@ -195,7 +203,7 @@ namespace OpenUtau.Core.Util {
             public string DefaultTrackColor = "Blue";
             public bool ClearCacheOnQuit = false;
             public bool PreRender = false;
-            public bool UseSolidPlaybackLine = true;
+            public bool UseModernPlayhead = true;
             public int NumRenderThreads = 2;
             public string DefaultRenderer = string.Empty;
             public int WorldlineR = 0;

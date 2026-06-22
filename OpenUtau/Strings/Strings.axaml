@@ -849,7 +849,7 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.playback.lockstarttime.on">Move cursor and view position back to where you started playing</system:String>
   <system:String x:Key="prefs.playback.lockstarttime.onlycursor">Move only cursor back to where you started playing</system:String>
   <system:String x:Key="prefs.playback.metronome">Metronome</system:String>
-  <system:String x:Key="prefs.playback.solidline">Solid playback line</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Modern playhead</system:String>
   <system:String x:Key="prefs.playback.systemdefault">Use system default device</system:String>
   <system:String x:Key="prefs.playback.test">Test</system:String>
   <system:String x:Key="prefs.playback.pitchfollow">Pitch Follow Scroll</system:String>

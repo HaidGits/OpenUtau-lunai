@@ -90,7 +90,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public int LockStartTime { get; set; }
         [Reactive] public int PlaybackAutoScroll { get; set; }
         [Reactive] public double PlayPosMarkerMargin { get; set; }
-        [Reactive] public bool UseSolidPlaybackLine { get; set; }
+        [Reactive] public bool UseModernPlayhead { get; set; }
         [Reactive] public bool PlaybackPitchFollowEnabled { get; set; }
         [Reactive] public int PlaybackPitchFollowSemitoneThreshold { get; set; }
         [Reactive] public double PlaybackPitchFollowVerticalPosition { get; set; }
@@ -511,7 +511,7 @@ namespace OpenUtau.App.ViewModels {
             PreferPortAudio = Preferences.Default.PreferPortAudio ? 1 : 0;
             PlaybackAutoScroll = Preferences.Default.PlaybackAutoScroll;
             PlayPosMarkerMargin = Preferences.Default.PlayPosMarkerMargin;
-            UseSolidPlaybackLine = Preferences.Default.UseSolidPlaybackLine;
+            UseModernPlayhead = Preferences.Default.UseModernPlayhead;
             PlaybackPitchFollowEnabled = Preferences.Default.PlaybackPitchFollowEnabled;
             PlaybackPitchFollowSemitoneThreshold = Preferences.Default.PlaybackPitchFollowSemitoneThreshold;
             PlaybackPitchFollowVerticalPosition = Preferences.Default.PlaybackPitchFollowVerticalPosition;
@@ -663,11 +663,11 @@ namespace OpenUtau.App.ViewModels {
                     Preferences.Save();
                     MessageBus.Current.SendMessage(new PlaybackPitchFollowSettingsChangedEvent());
                 });
-            this.WhenAnyValue(vm => vm.UseSolidPlaybackLine)
-                .Subscribe(useSolidPlaybackLine => {
-                    Preferences.Default.UseSolidPlaybackLine = useSolidPlaybackLine;
+            this.WhenAnyValue(vm => vm.UseModernPlayhead)
+                .Subscribe(useModernPlayhead => {
+                    Preferences.Default.UseModernPlayhead = useModernPlayhead;
                     Preferences.Save();
-                    MessageBus.Current.SendMessage(new NotesViewModel.PlaybackLineModeChangedEvent(useSolidPlaybackLine));
+                    MessageBus.Current.SendMessage(new NotesViewModel.PlayheadModeChangedEvent(useModernPlayhead));
                 });
             this.WhenAnyValue(vm => vm.LockStartTime)
                 .Subscribe(lockStartTime => {

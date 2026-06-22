@@ -376,7 +376,8 @@
                   PointerWheelChanged="TimelinePointerWheelChanged"
                   PointerPressed="TimelinePointerPressed"
                   PointerMoved="TimelinePointerMoved"
-                  PointerReleased="TimelinePointerReleased">
+                  PointerReleased="TimelinePointerReleased"
+                  DoubleTapped="TimelineDoubleTapped">
             <Canvas.ContextMenu>
               <ContextMenu Name="TimelineContextMenu" ItemsSource="{Binding TimelineContextMenuItems}">
                 <ContextMenu.Styles>
@@ -416,18 +417,25 @@
                             SnapTicks="{Binding TracksViewModel.SnapTicks}"
                             ShowBar="True"/>
           <Canvas Name="PlayPosOverlay" Grid.Row="0" Grid.Column="1" ClipToBounds="True" IsHitTestVisible="False" ZIndex="200">
-            <Path Name="PlayPos"
+            <Path Name="PlayPosClassic"
                   Canvas.Left="{Binding TracksViewModel.PlayPosX}"
                   Canvas.Top="0" IsHitTestVisible="False"
                   Fill="{DynamicResource NeutralAccentBrushSemi}"
-                  IsVisible="{Binding TracksViewModel.ShowWidePlaybackHighlight, Mode=OneWay}"
+                  IsVisible="{Binding TracksViewModel.ShowClassicPlayPosMarker, Mode=OneWay}"
                   Data="M -6.5 0 L 6.5 0 L 6.5 3 L 0 9 L -6.5 3 Z"/>
-            <Path Name="PlayPosSolid"
+            <Path Name="PlayPosModern"
                   Canvas.Left="{Binding TracksViewModel.PlayPosX}"
                   Canvas.Top="0" IsHitTestVisible="False"
-                  Fill="{DynamicResource PlaybackLineSolidBrush}"
-                  IsVisible="{Binding TracksViewModel.UseSolidPlaybackLine, Mode=OneWay}"
-                  Data="M -6.5 0 L 6.5 0 L 6.5 3 L 0 9 L -6.5 3 Z"/>
+                  Fill="{DynamicResource PlaybackLineMarkerBrush}"
+                  IsVisible="{Binding TracksViewModel.ShowModernPlayPosMarker, Mode=OneWay}"
+                  Data="M -5.5 0 L 6.5 0 L 6.5 3 L 0.5 9 L -5.5 3 Z"/>
+            <Rectangle Name="PlayPosTimelineLine"
+                       Canvas.Left="{Binding TracksViewModel.PlayPosX}"
+                       Canvas.Top="0" Width="1"
+                       Height="{Binding $parent.Bounds.Height, Mode=OneWay}"
+                       IsHitTestVisible="False"
+                       IsVisible="{Binding TracksViewModel.ShowThinPlayPosLine, Mode=OneWay}"
+                       Fill="{DynamicResource PlaybackLineSolidBrush}"/>
           </Canvas>
           <c:PartsCanvas x:Name="partsCanvas" Grid.Row="1" Grid.Column="1" ClipToBounds="True" Background="Transparent"
                         DataContext="{Binding TracksViewModel}"
@@ -450,16 +458,15 @@
                       Canvas.Left="{Binding PlayPosHighlightX, Mode=OneWay}"
                       Canvas.Top="0"
                       Fill="{DynamicResource NeutralAccentBrushSemi2}"
-                      IsVisible="{Binding TracksViewModel.ShowWidePlaybackHighlight, Mode=OneWay}"
+                      IsVisible="{Binding TracksViewModel.ShowWidePlayPosBar, Mode=OneWay}"
                       IsHitTestVisible="False"/>
-            <Rectangle Name="PlayPosHighlightSolid"
-                      Width="{Binding PlayPosHighlightWidth, Mode=OneWay}"
-                      Height="{Binding $parent.Bounds.Height, Mode=OneWay}"
-                      Canvas.Left="{Binding PlayPosHighlightX, Mode=OneWay}"
-                      Canvas.Top="0" ZIndex="50"
-                      Fill="{DynamicResource PlaybackLineSolidBrush}"
-                      IsVisible="{Binding TracksViewModel.UseSolidPlaybackLine, Mode=OneWay}"
-                      IsHitTestVisible="False"/>
+            <Rectangle Name="PlayPosLine"
+                       Canvas.Left="{Binding PlayPosX}"
+                       Canvas.Top="0" Width="1"
+                       Height="{Binding $parent.Bounds.Height, Mode=OneWay}"
+                       ZIndex="99" IsHitTestVisible="False"
+                       IsVisible="{Binding TracksViewModel.ShowThinPlayPosLine, Mode=OneWay}"
+                       Fill="{DynamicResource PlaybackLineSolidBrush}"/>
             <Rectangle Name="SelectionBox" StrokeThickness="2"
                       Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}"
                       Fill="{DynamicResource TickLineBrushLow}" ZIndex="1000"

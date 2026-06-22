@@ -23,6 +23,9 @@ namespace OpenUtau.App.ViewModels {
 
         public bool IsPlaybackActive =>
             PlaybackManager.Inst.PlayingMaster || PlaybackManager.Inst.StartingToPlay;
+        public bool HasRangeSelection => DocManager.Inst.rangeEndTick > DocManager.Inst.rangeStartTick;
+        public bool IsPlaying => PlaybackManager.Inst.PlayingMaster;
+        public bool ShowPlayPosHighlight => !IsPlaying || HasRangeSelection;
 
         public PlaybackViewModel() {
             playbackActiveLast = IsPlaybackActive;
@@ -73,11 +76,15 @@ namespace OpenUtau.App.ViewModels {
             }
             playbackActiveLast = active;
             this.RaisePropertyChanged(nameof(IsPlaybackActive));
+            this.RaisePropertyChanged(nameof(IsPlaying));
+            this.RaisePropertyChanged(nameof(ShowPlayPosHighlight));
         }
 
         void NotifyPlaybackActiveChanged() {
             playbackActiveLast = IsPlaybackActive;
             this.RaisePropertyChanged(nameof(IsPlaybackActive));
+            this.RaisePropertyChanged(nameof(IsPlaying));
+            this.RaisePropertyChanged(nameof(ShowPlayPosHighlight));
         }
 
         public void MovePlayPos(int tick) {
@@ -128,11 +135,15 @@ namespace OpenUtau.App.ViewModels {
                 MessageBus.Current.SendMessage(new TimeAxisChangedEvent());
                 if (cmd is LoadProjectNotification) {
                     DocManager.Inst.ExecuteCmd(new SetPlayPosTickNotification(0));
+                    this.RaisePropertyChanged(nameof(ShowPlayPosHighlight));
+                    this.RaisePropertyChanged(nameof(IsPlaying));
                 }
             } else if (cmd is SeekPlayPosTickNotification ||
                 cmd is SetPlayPosTickNotification) {
                 this.RaisePropertyChanged(nameof(PlayPosTick));
                 this.RaisePropertyChanged(nameof(PlayPosTime));
+            } else if (cmd is SetRangeSelectionNotification) {
+                this.RaisePropertyChanged(nameof(ShowPlayPosHighlight));
             }
         }
     }

@@ -44,12 +44,18 @@ namespace OpenUtau.App.Views {
         private int tikTokSavedX;
         private int tikTokSavedY;
         private int tikTokSavedWindowState;
-        private bool tikTokSavedSolidLine;
+        private bool tikTokSavedModernPlayhead;
         private int tikTokSavedAutoScroll;
         private double tikTokSavedMargin;
         private bool tikTokStateWasSaved;
 
         private PartEditState? partEditState;
+
+        // Time range selection state
+        private bool isSelectingRange;
+        private Point rangeSelectStartPoint = default;
+        private const double RangeSelectThreshold = 5; // pixels
+
         private readonly DispatcherTimer timer;
         private readonly DispatcherTimer autosaveTimer;
         private bool forceClose;
@@ -86,7 +92,12 @@ namespace OpenUtau.App.Views {
                     if (notesVm == null || !notesVm.PianoRollRenderingActive) {
                         PlaybackManager.Inst.UpdatePlayPos();
                     }
-                    viewModel.PlaybackViewModel.PollPlaybackActiveChanged();
+                    var pvm = viewModel.PlaybackViewModel;
+                    pvm.PollPlaybackActiveChanged();
+                    pvm.RaisePropertyChanged(nameof(pvm.IsPlaying));
+                    pvm.RaisePropertyChanged(nameof(pvm.ShowPlayPosHighlight));
+                    notesVm?.RefreshPlaybackHighlightVisibility();
+                    viewModel.TracksViewModel.RefreshPlaybackHighlightVisibility();
                     notesVm?.SmoothScrollStepFallback();
                     notesVm?.PitchFollowAnimationStepFallback();
                 });
@@ -1078,8 +1089,9 @@ namespace OpenUtau.App.Views {
                 viewModel.TracksViewModel.PointToLineTick(point.Position, out int left, out int right);
                 viewModel.PlaybackViewModel.MovePlayPos(left);
             } else if (point.Properties.IsRightButtonPressed) {
-                int tick = viewModel.TracksViewModel.PointToTick(point.Position);
-                viewModel.RefreshTimelineContextMenu(tick);
+                isSelectingRange = true;
+                rangeSelectStartPoint = point.Position;
+                viewModel.RefreshTimelineContextMenu(viewModel.TracksViewModel.PointToTick(point.Position));
             }
         }
 
@@ -1089,12 +1101,39 @@ namespace OpenUtau.App.Views {
             if (point.Properties.IsLeftButtonPressed) {
                 viewModel.TracksViewModel.PointToLineTick(point.Position, out int left, out int right);
                 viewModel.PlaybackViewModel.MovePlayPos(left);
+            } else if (point.Properties.IsRightButtonPressed && isSelectingRange) {
+                double dx = Math.Abs(point.Position.X - rangeSelectStartPoint.X);
+                if (dx >= RangeSelectThreshold) {
+                    UpdateRangeSelection(point.Position);
+                }
             }
             Cursor = null;
         }
 
         public void TimelinePointerReleased(object sender, PointerReleasedEventArgs args) {
+            if (isSelectingRange && args.InitialPressMouseButton == MouseButton.Right) {
+                isSelectingRange = false;
+                var control = (Control)sender;
+                var point = args.GetCurrentPoint(control);
+                double dx = Math.Abs(point.Position.X - rangeSelectStartPoint.X);
+                if (dx >= RangeSelectThreshold) {
+                    UpdateRangeSelection(point.Position);
+                }
+            }
             args.Pointer.Capture(null);
+        }
+
+        public void TimelineDoubleTapped(object sender, TappedEventArgs args) {
+            DocManager.Inst.ExecuteCmd(new SetRangeSelectionNotification(0, 0));
+        }
+
+        private void UpdateRangeSelection(Point currentPoint) {
+            var tracksVm = viewModel.TracksViewModel;
+            tracksVm.PointToLineTick(rangeSelectStartPoint, out int startLeft, out int startRight);
+            tracksVm.PointToLineTick(currentPoint, out int endLeft, out int endRight);
+            int left = Math.Min(startLeft, endLeft);
+            int right = Math.Max(startRight, endRight);
+            DocManager.Inst.ExecuteCmd(new SetRangeSelectionNotification(left, right));
         }
 
         public void PartsCanvasPointerPressed(object sender, PointerPressedEventArgs args) {
@@ -1352,7 +1391,7 @@ namespace OpenUtau.App.Views {
             tikTokSavedX = prefs.PianorollWindowSize.PositionX ?? 0;
             tikTokSavedY = prefs.PianorollWindowSize.PositionY ?? 0;
             tikTokSavedWindowState = prefs.PianorollWindowSize.State;
-            tikTokSavedSolidLine = prefs.UseSolidPlaybackLine;
+            tikTokSavedModernPlayhead = prefs.UseModernPlayhead;
             tikTokSavedAutoScroll = prefs.PlaybackAutoScroll;
             tikTokSavedMargin = prefs.PlayPosMarkerMargin;
             tikTokStateWasSaved = true;
@@ -1364,16 +1403,16 @@ namespace OpenUtau.App.Views {
                 pianoRollWindow.SetTikTokMode(true);
             }
 
-            prefs.UseSolidPlaybackLine = true;
+            prefs.UseModernPlayhead = true;
             prefs.PlaybackAutoScroll = 1;
             prefs.PlayPosMarkerMargin = 0.5;
-            MessageBus.Current.SendMessage(new NotesViewModel.PlaybackLineModeChangedEvent(true));
+            MessageBus.Current.SendMessage(new NotesViewModel.PlayheadModeChangedEvent(true));
         }
 
         public void ExitTikTokMode() {
             if (pianoRoll == null) return;
             var prefs = Preferences.Default;
-            prefs.UseSolidPlaybackLine = tikTokSavedSolidLine;
+            prefs.UseModernPlayhead = tikTokSavedModernPlayhead;
             prefs.PlaybackAutoScroll = tikTokSavedAutoScroll;
             prefs.PlayPosMarkerMargin = tikTokSavedMargin;
             prefs.PianorollWindowSize.Set(tikTokSavedWidth, tikTokSavedHeight, tikTokSavedX, tikTokSavedY, tikTokSavedWindowState);
@@ -1382,7 +1421,7 @@ namespace OpenUtau.App.Views {
             if (pianoRollWindow != null) {
                 pianoRollWindow.SetTikTokMode(false);
             }
-            MessageBus.Current.SendMessage(new NotesViewModel.PlaybackLineModeChangedEvent(tikTokSavedSolidLine));
+            MessageBus.Current.SendMessage(new NotesViewModel.PlayheadModeChangedEvent(tikTokSavedModernPlayhead));
 
             if (!tikTokSavedDetach) {
                 SetPianoRollAttachment();
@@ -1395,7 +1434,7 @@ namespace OpenUtau.App.Views {
         private void RestoreTikTokPreferencesOnClose() {
             var prefs = Preferences.Default;
             prefs.DetachPianoRoll = tikTokSavedDetach;
-            prefs.UseSolidPlaybackLine = tikTokSavedSolidLine;
+            prefs.UseModernPlayhead = tikTokSavedModernPlayhead;
             prefs.PlaybackAutoScroll = tikTokSavedAutoScroll;
             prefs.PlayPosMarkerMargin = tikTokSavedMargin;
             Preferences.Save();

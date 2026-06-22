@@ -90,8 +90,32 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public double PlayPosHighlightX { get; set; }
         [Reactive] public double PlayPosHighlightWidth { get; set; }
         [Reactive] public bool PlayPosWaitingRendering { get; set; }
-        [Reactive] public bool UseSolidPlaybackLine { get; set; }
-        public bool ShowWidePlaybackHighlight => !UseSolidPlaybackLine;
+        [Reactive] public bool UseModernPlayhead { get; set; }
+        public bool HasRangeSelection => DocManager.Inst.rangeEndTick > DocManager.Inst.rangeStartTick;
+        public bool ShowPlaybackBarHighlight => !PlaybackManager.Inst.PlayingMaster || HasRangeSelection;
+        public bool ShowClassicPlayPosMarker => !UseModernPlayhead;
+        public bool ShowModernPlayPosMarker => UseModernPlayhead;
+        public bool ShowWidePlayPosBar =>
+            ShowPlaybackBarHighlight && (HasRangeSelection || !UseModernPlayhead);
+        public bool ShowThinPlayPosLine {
+            get {
+                if (PlayPosWaitingRendering) {
+                    return false;
+                }
+                if (UseModernPlayhead) {
+                    return true;
+                }
+                return PlaybackManager.Inst.PlayingMaster;
+            }
+        }
+
+        public void RefreshPlaybackHighlightVisibility() {
+            this.RaisePropertyChanged(nameof(ShowPlaybackBarHighlight));
+            this.RaisePropertyChanged(nameof(ShowClassicPlayPosMarker));
+            this.RaisePropertyChanged(nameof(ShowModernPlayPosMarker));
+            this.RaisePropertyChanged(nameof(ShowWidePlayPosBar));
+            this.RaisePropertyChanged(nameof(ShowThinPlayPosLine));
+        }
         /// <summary>Track row that has the part currently open in the piano roll; -1 if none.</summary>
         [Reactive] public int PianoRollHighlightTrackNo { get; set; } = -1;
         /// <summary>Voice part currently open in the piano roll; null if none.</summary>
@@ -178,11 +202,13 @@ namespace OpenUtau.App.ViewModels {
                     PianoRollViewViewportTicks = e.ViewportTicks;
                 });
 
-            UseSolidPlaybackLine = Preferences.Default.UseSolidPlaybackLine;
-            MessageBus.Current.Listen<NotesViewModel.PlaybackLineModeChangedEvent>()
+            UseModernPlayhead = Preferences.Default.UseModernPlayhead;
+            MessageBus.Current.Listen<NotesViewModel.PlayheadModeChangedEvent>()
                 .Subscribe(e => {
-                    UseSolidPlaybackLine = e.UseSolidLine;
-                    this.RaisePropertyChanged(nameof(ShowWidePlaybackHighlight));
+                    UseModernPlayhead = e.UseModernPlayhead;
+                    this.RaisePropertyChanged(nameof(ShowClassicPlayPosMarker));
+                    this.RaisePropertyChanged(nameof(ShowModernPlayPosMarker));
+                    RefreshPlaybackHighlightVisibility();
                     SetPlayPos(DocManager.Inst.playPosTick, false);
                 });
 
@@ -469,16 +495,27 @@ namespace OpenUtau.App.ViewModels {
         private void SetPlayPos(int tick, bool waitingRendering) {
             PlayPosWaitingRendering = waitingRendering;
             if (waitingRendering) {
+                this.RaisePropertyChanged(nameof(ShowThinPlayPosLine));
                 return;
             }
             PlayPosX = TickTrackToPoint(tick, 0).X;
-            if (UseSolidPlaybackLine) {
-                PlayPosHighlightX = PlayPosX - 1;
-                PlayPosHighlightWidth = 2;
-            } else {
-                TickToLineTick(tick, out int left, out int right);
+            UpdateHighlight();
+            this.RaisePropertyChanged(nameof(ShowThinPlayPosLine));
+        }
+
+        private void UpdateHighlight() {
+            if (DocManager.Inst.rangeEndTick > DocManager.Inst.rangeStartTick) {
+                int left = DocManager.Inst.rangeStartTick;
+                int right = DocManager.Inst.rangeEndTick;
                 PlayPosHighlightX = TickTrackToPoint(left, 0).X;
                 PlayPosHighlightWidth = (right - left) * TickWidth;
+            } else if (!UseModernPlayhead) {
+                TickToLineTick((int)(PlayPosX / TickWidth + TickOffset), out int left, out int right);
+                PlayPosHighlightX = TickTrackToPoint(left, 0).X;
+                PlayPosHighlightWidth = (right - left) * TickWidth;
+            } else {
+                PlayPosHighlightX = PlayPosX - 1;
+                PlayPosHighlightWidth = 0;
             }
         }
 
@@ -548,6 +585,9 @@ namespace OpenUtau.App.ViewModels {
                     if (!setPlayPosTick.pause || Preferences.Default.LockStartTime == 1) {
                         MaybeAutoScroll();
                     }
+                } else if (cmd is SetRangeSelectionNotification) {
+                    UpdateHighlight();
+                    RefreshPlaybackHighlightVisibility();
                 } else if (cmd is LoadPartNotification loadPartNotif) {
                     if (SelectedParts.Count != 1 || SelectedParts.First() != loadPartNotif.part) {
                         DeselectParts();
