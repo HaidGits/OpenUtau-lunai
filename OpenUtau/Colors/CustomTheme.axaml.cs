@@ -11,7 +11,18 @@ namespace OpenUtau.Colors;
 
 public class CustomTheme {
     public static Dictionary<string, string> Themes = [];
+    static HashSet<string> LocalThemes = [];
+    static HashSet<string> PackageThemes = [];
     public static ThemeYaml Default;
+
+    public static bool IsPackageTheme(string themeName) => PackageThemes.Contains(themeName);
+
+    public static void MarkPackageTheme(string themeName) => PackageThemes.Add(themeName);
+
+    internal static void ClearPackageThemes() {
+        foreach (var key in PackageThemes) Themes.Remove(key);
+        PackageThemes.Clear();
+    }
 
     static CustomTheme() {
         Default = BuiltInThemeLoader.CreateFromBuiltIn("Light", "Custom YAML");
@@ -29,7 +40,8 @@ public class CustomTheme {
     }
 
     public static void ListThemes() {
-        Themes.Clear();
+        foreach (var key in LocalThemes) Themes.Remove(key);
+        LocalThemes.Clear();
         Directory.CreateDirectory(PathManager.Inst.ThemesPath);
         foreach (var item in Directory.EnumerateFiles(PathManager.Inst.ThemesPath, "*.yaml")) {
             try {
@@ -41,6 +53,7 @@ public class CustomTheme {
                     dupIter++;
                 }
                 Themes.Add(resolvedName, item);
+                LocalThemes.Add(resolvedName);
             } catch (Exception exception) {
                 Log.Error(exception, "Failed to parse yaml in {Path}", item);
             }

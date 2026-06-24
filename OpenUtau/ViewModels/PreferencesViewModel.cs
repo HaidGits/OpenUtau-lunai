@@ -558,7 +558,7 @@ namespace OpenUtau.App.ViewModels {
             DiffSingerShowRenderPhraseBoundaries = Preferences.Default.DiffSingerShowRenderPhraseBoundaries;
             SkipRenderingMutedTracks = Preferences.Default.SkipRenderingMutedTracks;
             ThemeName = Preferences.Default.ThemeName;
-            ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(ThemeName);
+            ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(ThemeName) && !CustomTheme.IsPackageTheme(ThemeName);
             RefreshThemePickerItems();
             PenPlusDefault = Preferences.Default.PenPlusDefault;
             DegreeStyle = Preferences.Default.DegreeStyle;
@@ -707,7 +707,7 @@ namespace OpenUtau.App.ViewModels {
                 .Skip(1)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(themeName => {
-                    ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(themeName);
+                    ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(themeName) && !CustomTheme.IsPackageTheme(themeName);
                     if (!IsThemeEditorOpen) {
                         Preferences.Default.ThemeName = themeName;
                         Preferences.Save();
@@ -978,6 +978,8 @@ namespace OpenUtau.App.ViewModels {
         }
 
         public void RefreshThemes() {
+            Colors.CustomTheme.ListThemes();
+            _ = OudepLoaderRegistry.LoadAllAsync();
             this.RaisePropertyChanged(nameof(ThemeItems));
             RefreshThemePickerItems();
         }

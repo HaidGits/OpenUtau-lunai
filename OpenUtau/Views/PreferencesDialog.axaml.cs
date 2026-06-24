@@ -151,6 +151,5 @@ namespace OpenUtau.App.Views {
 
             ((PreferencesViewModel)DataContext!).SetWinePath(winePath);
         }
-
     }
 }

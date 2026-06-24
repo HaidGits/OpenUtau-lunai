@@ -29,6 +29,9 @@ namespace OpenUtau.App.Views {
         }
 
         void OpenCustomThemeEditor(string themeName) {
+            if (CustomTheme.IsPackageTheme(themeName)) {
+                return;
+            }
             if (string.IsNullOrEmpty(themeName) || !CustomTheme.Themes.TryGetValue(themeName, out var path)) {
                 return;
             }
@@ -78,6 +81,9 @@ namespace OpenUtau.App.Views {
             var vm = ViewModel;
             var owner = GetOwnerWindow();
             if (owner == null) {
+                return;
+            }
+            if (CustomTheme.IsPackageTheme(themeName)) {
                 return;
             }
             var result = await MessageBox.Show(

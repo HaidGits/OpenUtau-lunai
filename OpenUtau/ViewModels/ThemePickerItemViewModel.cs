@@ -8,8 +8,9 @@ namespace OpenUtau.App.ViewModels {
         public string Name { get; init; } = string.Empty;
         public string DisplayName { get; init; } = string.Empty;
         public bool IsBuiltIn { get; init; }
+        public bool IsPackageTheme { get; init; }
         public bool IsCreateTile { get; init; }
-        public bool IsEditable => !IsBuiltIn && !IsCreateTile;
+        public bool IsEditable => !IsBuiltIn && !IsPackageTheme && !IsCreateTile;
         [Reactive] public bool IsSelected { get; set; }
         public IBrush BackgroundBrush { get; init; } = Brushes.Transparent;
         public IBrush CanvasBrush { get; init; } = Brushes.Transparent;
@@ -25,6 +26,7 @@ namespace OpenUtau.App.ViewModels {
                 Name = name,
                 DisplayName = displayName,
                 IsBuiltIn = BuiltInThemeLoader.IsBuiltInTheme(name),
+                IsPackageTheme = CustomTheme.IsPackageTheme(name),
                 BackgroundBrush = colors.Background,
                 CanvasBrush = colors.Canvas,
                 CardBrush = colors.Card,
