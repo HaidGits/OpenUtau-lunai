@@ -135,6 +135,20 @@ namespace OpenUtau.App.Controls {
             InvalidateArrange();
         }
 
+        internal void UpdateTrackHeaderWidths() {
+            double width = ViewConstants.TrackHeaderBaseWidth;
+            foreach (var (_, header) in trackHeaders) {
+                width = Math.Max(width, header.Width);
+            }
+            if (trackAdder != null) {
+                trackAdder.Width = width;
+            }
+            if (DataContext is TracksViewModel tracksViewModel &&
+                Math.Abs(tracksViewModel.TrackHeaderColumnWidth.Value - width) > 0.5) {
+                tracksViewModel.TrackHeaderColumnWidth = new GridLength(width);
+            }
+        }
+
         protected override void OnInitialized() {
             base.OnInitialized();
             trackAdder = new TrackAdder();
@@ -199,6 +213,7 @@ namespace OpenUtau.App.Controls {
             header.Bind(track, this);
             Children.Add(header);
             trackHeaders.Add(track, header);
+            header.RefreshChipLayout();
             if (trackAdder != null) {
                 trackAdder.TrackNo = trackHeaders.Count;
             }
@@ -209,6 +224,7 @@ namespace OpenUtau.App.Controls {
             header.Dispose();
             trackHeaders.Remove(track);
             Children.Remove(header);
+            UpdateTrackHeaderWidths();
             if (trackAdder != null) {
                 trackAdder.TrackNo = trackHeaders.Count;
             }

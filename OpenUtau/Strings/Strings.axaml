@@ -1093,5 +1093,5 @@ General
   <system:String x:Key="mixfx.library.save">Save...</system:String>
   <system:String x:Key="mixfx.library.delete">Delete</system:String>
   <system:String x:Key="mixfx.library.default">Default</system:String>
-  <system:String x:Key="tracks.mixfx">Track Polish...</system:String>
+  <system:String x:Key="tracks.mixfx">Track Polish</system:String>
 </ResourceDictionary>

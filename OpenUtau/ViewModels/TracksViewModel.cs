@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using Avalonia;
+using Avalonia.Controls;
 using DynamicData;
 using DynamicData.Binding;
 using OpenUtau.Core;
@@ -87,6 +88,7 @@ namespace OpenUtau.App.ViewModels {
         public double TrackHeightMin => ViewConstants.TrackHeightMin;
         public double TrackHeightMax => ViewConstants.TrackHeightMax;
         [Reactive] public double TrackHeight { get; set; }
+        [Reactive] public GridLength TrackHeaderColumnWidth { get; set; } = new GridLength(ViewConstants.TrackHeaderBaseWidth);
         [Reactive] public double TickOffset { get; set; }
         [Reactive] public double TrackOffset { get; set; }
         [Reactive] public int SnapDiv { get; set; }

@@ -272,8 +272,12 @@
         </Grid>
       
         <!--Main page-->
-        <Grid Classes="workspaceLayout" ColumnDefinitions="300,*,16"
-              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Classes="workspaceLayout" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding TracksViewModel.TrackHeaderColumnWidth}"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="16"/>
+          </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
             <RowDefinition Height="{Binding TracksRowHeight}" MinHeight="{Binding TracksRowMinHeight}"/>
             <RowDefinition Height="{Binding PianoRollSplitterRowHeight}" MinHeight="0"/>
@@ -285,7 +289,12 @@
           </Grid.RowDefinitions>
           <Border Grid.Row="0" Grid.ColumnSpan="3" Classes="workspaceCard workspaceDockTracks"
                   IsVisible="{Binding ShowTracksArea}">
-            <Grid ColumnDefinitions="300,*,16">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding TracksViewModel.TrackHeaderColumnWidth}"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+              </Grid.ColumnDefinitions>
               <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
                 <RowDefinition Height="*" MinHeight="0.01"/>

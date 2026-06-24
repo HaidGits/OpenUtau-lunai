@@ -47,7 +47,6 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool IsSingerVisible { get; set; }
         [Reactive] public bool IsPhonemizerVisible { get; set; }
         [Reactive] public bool IsTrackSettingsVisible { get; set; }
-        [Reactive] public bool IsTrackSettingsFlyoutVisible { get; set; }
         [Reactive] public bool MixFxEnabled { get; set; }
         [Reactive] public IBrush HeaderBorderBrush { get; set; } = ThemeManager.NeutralAccentBrushSemi;
         [Reactive] public IBrush HeaderBackgroundBrush { get; set; } = Brushes.Transparent;
@@ -55,7 +54,6 @@ namespace OpenUtau.App.ViewModels {
         public ViewModelActivator Activator { get; }
 
         private readonly UTrack track;
-        private bool trackSettingsHeightVisible;
         // Parameterless constructor for Avalonia preview only.
         public TrackHeaderViewModel() {
             SelectSingerCommand = ReactiveCommand.Create<USinger>(_ => { });
@@ -599,15 +597,8 @@ namespace OpenUtau.App.ViewModels {
             }
         }
 
-        public void SetTrackSettingsHeightVisible(bool visible) {
-            trackSettingsHeightVisible = visible;
-            UpdateTrackSettingsVisibility();
-        }
-
         void UpdateTrackSettingsVisibility() {
-            bool allowed = track.Singer is { Found: true, SingerType: USingerType.Classic };
-            IsTrackSettingsVisible = allowed && trackSettingsHeightVisible;
-            IsTrackSettingsFlyoutVisible = allowed && !trackSettingsHeightVisible;
+            IsTrackSettingsVisible = track.Singer is { Found: true, SingerType: USingerType.Classic };
         }
 
         public void ManuallyRaise() {
