@@ -13,6 +13,30 @@
     <Style Selector="ToggleButton">
       <Setter Property="Background" Value="Transparent"/>
     </Style>
+    <Style Selector="Button.fxButton">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource NeutralAccentBrush}" />
+      </Style>
+      <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource NeutralAccentBrushPointerOver}" />
+      </Style>
+    </Style>
+    <Style Selector="Button.fxButton.fxOn">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource NeutralAccentBrushSemi}" />
+      </Style>
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource NeutralAccentBrush}" />
+      </Style>
+      <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource NeutralAccentBrushPointerOver}" />
+      </Style>
+    </Style>
     <Style Selector="Slider.fader">
       <Setter Property="Foreground" Value="{Binding TrackColor.AccentColor}"/>
       

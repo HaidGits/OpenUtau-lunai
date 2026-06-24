@@ -261,6 +261,10 @@ namespace OpenUtau.Core {
         private int loopStartTick = 0;
         private int loopEndTick = -1;
 
+        // Loop playback state
+        private int loopStartTick = 0;
+        private int loopEndTick = -1;
+
         public Audio.IAudioOutput AudioOutput { get; set; } = new Audio.DummyAudioOutput();
         public bool OutputActive => AudioOutput.PlaybackState == PlaybackState.Playing;
         public bool StartingToPlay { get; private set; }

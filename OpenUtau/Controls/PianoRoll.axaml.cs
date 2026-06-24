@@ -63,6 +63,10 @@ namespace OpenUtau.App.Controls {
         private Point rangeSelectStartPoint = default;
         private const double RangeSelectThreshold = 5; // pixels
 
+        private bool isSelectingRange;
+        private Point rangeSelectStartPoint = default;
+        private const double RangeSelectThreshold = 5; // pixels
+
         private ReactiveCommand<Unit, Unit>? lyricsDialogCommand;
         private ReactiveCommand<Unit, Unit>? noteDefaultsCommand;
         private ReactiveCommand<BatchEdit, Unit>? noteBatchEditCommand;
