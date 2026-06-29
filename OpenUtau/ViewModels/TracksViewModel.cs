@@ -107,9 +107,6 @@ namespace OpenUtau.App.ViewModels {
             ShowPlaybackBarHighlight && (HasRangeSelection || !UseModernPlayhead);
         public bool ShowThinPlayPosLine {
             get {
-                if (PlayPosWaitingRendering) {
-                    return false;
-                }
                 if (UseModernPlayhead) {
                     return true;
                 }
@@ -502,10 +499,6 @@ namespace OpenUtau.App.ViewModels {
 
         private void SetPlayPos(int tick, bool waitingRendering) {
             PlayPosWaitingRendering = waitingRendering;
-            if (waitingRendering) {
-                this.RaisePropertyChanged(nameof(ShowThinPlayPosLine));
-                return;
-            }
             PlayPosX = TickTrackToPoint(tick, 0).X;
             UpdateHighlight();
             this.RaisePropertyChanged(nameof(ShowThinPlayPosLine));
