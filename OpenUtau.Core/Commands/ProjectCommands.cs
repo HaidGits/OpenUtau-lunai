@@ -143,13 +143,23 @@ namespace OpenUtau.Core {
     public class KeyCommand : ProjectCommand{
         public readonly int oldKey;
         public readonly int newKey;
-        public KeyCommand(UProject project, int key) : base(project) {
+        public readonly bool oldIsMajor;
+        public readonly bool newIsMajor;
+        public KeyCommand(UProject project, int key, bool? isMajor = null) : base(project) {
             oldKey = project.key;
+            oldIsMajor = project.keyIsMajor;
             newKey = key;
+            newIsMajor = isMajor ?? project.keyIsMajor;
         }
-        public override string ToString() => $"Change key from {oldKey} to {newKey}";
-        public override void Execute() => project.key = newKey;
-        public override void Unexecute() => project.key = oldKey;
+        public override string ToString() => $"Change key from {oldKey} {(oldIsMajor ? "major" : "minor")} to {newKey} {(newIsMajor ? "major" : "minor")}";
+        public override void Execute() {
+            project.key = newKey;
+            project.keyIsMajor = newIsMajor;
+        }
+        public override void Unexecute() {
+            project.key = oldKey;
+            project.keyIsMajor = oldIsMajor;
+        }
     }
 
     public class ConfigureExpressionsCommand : ProjectCommand {

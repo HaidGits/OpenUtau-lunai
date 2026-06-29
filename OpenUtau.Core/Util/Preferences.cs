@@ -198,6 +198,7 @@ namespace OpenUtau.Core.Util {
             public string ThemeName = "Light";
             public bool PenPlusDefault = false;
             public int DegreeStyle;
+            public bool ShowKeyScaleOnPianoRoll = false;
             public bool UseTrackColor = true;
             public bool TintPianoRollBackgroundWithTrackColor = false;
             public string DefaultTrackColor = "Blue";
