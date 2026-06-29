@@ -155,13 +155,13 @@
   </Style>
   <Style Selector="ComboBox.workspacePanelCombo:pointerover:not(:pressed):not(:dropdownopen):not(:disabled) /template/ Border#Background">
     <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1Brush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource MutedIconBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="CornerRadius" Value="6"/>
   </Style>
   <Style Selector="ComboBox.workspacePanelCombo:pressed:not(:dropdownopen):not(:disabled) /template/ Border#Background">
     <Setter Property="Background" Value="{DynamicResource AppTopBarTransportHoverBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorLight1Brush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource MutedIconBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="CornerRadius" Value="6"/>
   </Style>
@@ -171,11 +171,11 @@
   </Style>
   <Style Selector="ComboBox.workspacePanelCombo:dropdownopen /template/ Border#Background:not(.openAbove)">
     <Setter Property="CornerRadius" Value="6,6,0,0"/>
-    <Setter Property="BorderThickness" Value="1,1,1,0"/>
+    <Setter Property="BorderThickness" Value="1,1,1,1"/>
   </Style>
   <Style Selector="ComboBox.workspacePanelCombo:dropdownopen /template/ Border#Background.openAbove">
     <Setter Property="CornerRadius" Value="0,0,6,6"/>
-    <Setter Property="BorderThickness" Value="1,0,1,1"/>
+    <Setter Property="BorderThickness" Value="1,1,1,1"/>
   </Style>
   <Style Selector="ComboBox.workspacePanelCombo /template/ Border#PopupBorder">
     <Setter Property="Background" Value="{DynamicResource TrackBackgroundAltBrush}"/>

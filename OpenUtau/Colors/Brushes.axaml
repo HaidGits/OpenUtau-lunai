@@ -58,6 +58,7 @@
   </LinearGradientBrush>
   <!-- Piano roll left sidebar toggles -->
   <SolidColorBrush x:Key="PianoRollSideIconOffBrush" Color="{DynamicResource MutedIconColor}"/>
+  <SolidColorBrush x:Key="PianoRollTopBarToolIconOffBrush" Color="{DynamicResource PianoRollTopBarToolIconOffColor}"/>
   <SolidColorBrush x:Key="PianoRollSideHoverBackgroundBrush" Color="{DynamicResource AppTopBarTransportStripColor}"/>
   <SolidColorBrush x:Key="PianoRollSideAccentTipsBrush" Color="#8E9AAB"/>
   <SolidColorBrush x:Key="PianoRollSideAccentPlayToneBrush" Color="#E5A84A"/>
@@ -165,7 +166,11 @@
   <SolidColorBrush x:Key="ButtonBackgroundDisabled"
                    Color="{DynamicResource BackgroundColorDisabled}" />
   <SolidColorBrush x:Key="MenuFlyoutPresenterBorderBrush"
-                   Color="{DynamicResource BorderColor}" />
+                   Color="{DynamicResource MutedIconColor}" />
+  <SolidColorBrush x:Key="ComboBoxBorderBrush"
+                   Color="{DynamicResource MutedIconColor}" />
+  <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush"
+                   Color="{DynamicResource MutedIconColor}" />
 
   <SolidColorBrush x:Key="TickLineBrush"
                    Color="{DynamicResource TickLineColor}" />

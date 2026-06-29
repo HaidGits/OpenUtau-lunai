@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -56,13 +56,13 @@ namespace OpenUtau.App.ViewModels {
         public PhonemizerMenuSeparatorViewModel() {
             Header = new Border {
                 Height = 1,
-                Margin = new Thickness(4, 0),
-                Background = Brushes.White,
+                Margin = new Thickness(0),
+                Background = ThemeManager.MutedIconBrush,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Center,
                 IsHitTestVisible = false,
             };
-            Height = 9;
+            Height = 1;
             IsEnabled = false;
         }
 

@@ -401,7 +401,7 @@
             </Canvas.ContextMenu>
           </Canvas>
           <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" IsHitTestVisible="False"
-                  Background="{DynamicResource PianoRollTimelineStripFillBrush}"/>
+                  Background="{DynamicResource WorkspaceCanvasBrush}"/>
           <c:TrackHeaderCanvas Grid.Row="1" Grid.Column="0" ClipToBounds="True" Background="Transparent"
                               DataContext="{Binding TracksViewModel}"
                               TrackHeight="{Binding TrackHeight}"

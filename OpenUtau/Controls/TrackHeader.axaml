@@ -94,10 +94,10 @@
       <Setter Property="Background" Value="Transparent"/>
     </Style>
     <Style Selector="ContextMenu#PhonemizersMenu MenuItem.phonemizerMenuSeparator">
-      <Setter Property="Padding" Value="0,4"/>
-      <Setter Property="Height" Value="9"/>
-      <Setter Property="MinHeight" Value="9"/>
-      <Setter Property="MaxHeight" Value="9"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="Height" Value="1"/>
+      <Setter Property="MinHeight" Value="1"/>
+      <Setter Property="MaxHeight" Value="1"/>
       <Setter Property="IsEnabled" Value="False"/>
       <Setter Property="Background" Value="Transparent"/>
     </Style>
