@@ -243,7 +243,7 @@ namespace OpenUtau.App.Controls {
             Color bodyRgb = Color.FromRgb(0x52, 0x52, 0x52);
             byte accentAlpha = isOpenInPianoRoll ? accentAlphaFull : accentAlphaDim;
             byte bodyAlpha = isOpenInPianoRoll ? grayAlphaFull : grayAlphaDim;
-            if (Core.Util.Preferences.Default.UseTrackColor && part != null) {
+            if (part != null) {
                 var project = DocManager.Inst.Project;
                 if (project != null && part.trackNo >= 0 && part.trackNo < project.tracks.Count) {
                     var track = project.tracks[part.trackNo];
