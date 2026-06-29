@@ -135,7 +135,6 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public int DegreeStyle { get; set; }
         [Reactive] public bool UseTrackColor { get; set; }
         [Reactive] public bool TintPianoRollBackgroundWithTrackColor { get; set; }
-        public ObservableCollection<TrackColor> TrackColors { get; } = new ObservableCollection<TrackColor>(ThemeManager.TrackColors);
         [Reactive] public TrackColor DefaultTrackColor { get; set; }
         [Reactive] public bool ShowPortrait { get; set; }
         [Reactive] public bool ShowIcon { get; set; }
@@ -564,8 +563,7 @@ namespace OpenUtau.App.ViewModels {
             DegreeStyle = Preferences.Default.DegreeStyle;
             UseTrackColor = Preferences.Default.UseTrackColor;
             TintPianoRollBackgroundWithTrackColor = Preferences.Default.TintPianoRollBackgroundWithTrackColor;
-            DefaultTrackColor = TrackColors.FirstOrDefault(c => c.Name == Preferences.Default.DefaultTrackColor)
-                ?? TrackColors.First(c => c.Name == "Blue");
+            DefaultTrackColor = ThemeManager.GetTrackColor(Preferences.Default.DefaultTrackColor);
             ShowPortrait = Preferences.Default.ShowPortrait;
             ShowIcon = Preferences.Default.ShowIcon;
             ShowGhostNotes = Preferences.Default.ShowGhostNotes;

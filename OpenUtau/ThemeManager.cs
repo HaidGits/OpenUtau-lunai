@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
@@ -85,8 +86,8 @@ namespace OpenUtau.App {
         private static Color? s_defaultBlackKeyColorRight;
         private static IPen? s_defaultFinalPitchPen;
 
-        public static List<TrackColor> TrackColors = new List<TrackColor>(){
-                new TrackColor("Flamingo", "#D491AA", "#E06C96", "#EBB7CC", "#F4D4E3", "#66AC7288", "#C2708E", "#D491AA", "#EBCFDC", "#1AAC7288"), // piano1, piano2, piano3, piano4, note, note pressed, border, border pressed, note empty
+        static readonly TrackColor[] BuiltInTrackColors = {
+                new TrackColor("Flamingo", "#D491AA", "#E06C96", "#EBB7CC", "#F4D4E3", "#66AC7288", "#C2708E", "#D491AA", "#EBCFDC", "#1AAC7288"),
                 new TrackColor("Cherry", "#D93A3F", "#C02A2F", "#DB555A", "#F8CCCE", "#669E2E32", "#AF3136", "#C02A2F", "#F5B7B9", "#1A9E2E32"),
                 new TrackColor("Peach", "#FF8A65", "#FF7043", "#FFB59E", "#FFE2D9", "#70F5683D", "#E07352", "#FFAB91", "#FFD5C8", "#1AF5683D"),
                 new TrackColor("Banana", "#FBC13A", "#FBAB32", "#FCD569", "#FFF7D7", "#70FAC038", "#DFAD49", "#FFD97F", "#FFF4C0", "#1AFAC038"),
@@ -105,6 +106,21 @@ namespace OpenUtau.App {
                 new TrackColor("Violet", "#7B1FA2", "#4A148C", "#B45FC2", "#F6D4F7", "#704A148C", "#7B1FA2", "#AB47BC", "#D5A3DE", "#1A4A148C"),
                 new TrackColor("Moon", "#707070", "#4A4A4A", "#A7A7A7", "#EAEAEA", "#6B4A4A47", "#707070", "#808080", "#C9C9C9", "#45454540"),
             };
+
+        public static List<TrackColor> TrackColors = new List<TrackColor>();
+
+        static ThemeManager() {
+            ReloadTrackColors();
+        }
+
+        public static void ReloadTrackColors() {
+            TrackColors.Clear();
+            TrackColors.AddRange(BuiltInTrackColors);
+            TrackColors.AddRange(CustomTrackColorStore.LoadAll());
+        }
+
+        public static bool IsBuiltInTrackColorName(string name) =>
+            BuiltInTrackColors.Any(color => string.Equals(color.Name, name, StringComparison.OrdinalIgnoreCase));
 
         public static List<string> GetAvailableThemes() {
             Colors.CustomTheme.ListThemes();
@@ -432,15 +448,15 @@ namespace OpenUtau.App {
         }
 
         public static TrackColor GetTrackColor(string name) {
-            if (TrackColors.Any(c => c.Name == name)) {
-                return TrackColors.First(c => c.Name == name);
-            }
-            return TrackColors.First(c => c.Name == "Blue");
+            var match = TrackColors.FirstOrDefault(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase));
+            return match ?? TrackColors.First(c => c.Name == "Blue");
         }
     }
 
     public class TrackColor {
         public string Name { get; set; } = "";
+        public bool IsCustom { get; }
+        public string? StoragePath { get; }
         public SolidColorBrush AccentColor { get; set; }
         public SolidColorBrush AccentColorDark { get; set; } // Pressed
         public SolidColorBrush AccentColorLight { get; set; } // PointerOver
@@ -452,8 +468,10 @@ namespace OpenUtau.App {
         public SolidColorBrush NoteBorderColorPressed { get; set; }
         public SolidColorBrush NoteColorEmpty { get; set; }
 
-        public TrackColor(string name, string accentColor, string darkColor, string lightColor, string centerKey, string noteColor, string noteColorPressed, string noteBorderColor, string noteBorderColorPressed, string noteColorEmpty) {
+        public TrackColor(string name, string accentColor, string darkColor, string lightColor, string centerKey, string noteColor, string noteColorPressed, string noteBorderColor, string noteBorderColorPressed, string noteColorEmpty, bool isCustom = false, string? storagePath = null) {
             Name = name;
+            IsCustom = isCustom;
+            StoragePath = storagePath;
             AccentColor = SolidColorBrush.Parse(accentColor);
             AccentColorDark = SolidColorBrush.Parse(darkColor);
             AccentColorLight = SolidColorBrush.Parse(lightColor);
@@ -465,6 +483,25 @@ namespace OpenUtau.App {
             NoteBorderColor = SolidColorBrush.Parse(noteBorderColor);
             NoteBorderColorPressed = SolidColorBrush.Parse(noteBorderColorPressed);
             NoteColorEmpty = SolidColorBrush.Parse(noteColorEmpty);
+        }
+
+        public static TrackColor FromCustomYaml(TrackColorYaml yaml, string storagePath) {
+            var normal = Color.Parse(yaml.BaseColor);
+            var bright = Color.Parse(yaml.BrightColor);
+            var palette = TrackColorPalette.Generate(normal, bright);
+            return new TrackColor(
+                yaml.Name,
+                palette.AccentColor,
+                palette.DarkColor,
+                palette.LightColor,
+                palette.CenterKeyColor,
+                palette.NoteColor,
+                palette.NoteColorPressed,
+                palette.NoteBorderColor,
+                palette.NoteBorderColorPressed,
+                palette.NoteColorEmpty,
+                isCustom: true,
+                storagePath: storagePath);
         }
     }
 }

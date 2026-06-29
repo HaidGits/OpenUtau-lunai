@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -84,6 +84,7 @@ namespace OpenUtau.Core {
         public string LogFilePath => Path.Combine(DataPath, "Logs", "log.txt");
         public string PrefsFilePath => Path.Combine(DataPath, "prefs.json");
         public string ThemesPath => Path.Combine(DataPath, "Themes");
+        public string TrackColorsPath => Path.Combine(DataPath, "TrackColors");
         public string NotePresetsFilePath => Path.Combine(DataPath, "notepresets.json");
         public string BackupsPath => Path.Combine(DataPath, "Backups");
 
