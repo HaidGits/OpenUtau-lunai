@@ -10,7 +10,8 @@ using Avalonia.Media;
 public static class BuiltInThemeLoader {
     public const string LightThemeName = "Light";
     public const string DarkThemeName = "Dark";
-    public const string GrayThemeName = "Gray";
+    public const string OriginalLightThemeName = "OriginalLight";
+    public const string OriginalDarkThemeName = "OriginalDark";
     public const string ColdThemeName = "Cold";
     public const string WarmThemeName = "Warm";
 
@@ -20,7 +21,8 @@ public static class BuiltInThemeLoader {
     ];
 
     public static readonly string[] BuiltInCustomThemeNames = [
-        GrayThemeName,
+        OriginalLightThemeName,
+        OriginalDarkThemeName,
         ColdThemeName,
         WarmThemeName,
     ];
@@ -45,8 +47,11 @@ public static class BuiltInThemeLoader {
             case DarkThemeName:
                 yaml = CreateDark();
                 return true;
-            case GrayThemeName:
-                yaml = CreateGray();
+            case OriginalLightThemeName:
+                yaml = CreateOriginalLight();
+                return true;
+            case OriginalDarkThemeName:
+                yaml = CreateOriginalDark();
                 return true;
             case ColdThemeName:
                 yaml = CreateCold();
@@ -174,29 +179,122 @@ public static class BuiltInThemeLoader {
         };
     }
 
-    public static ThemeYaml CreateGray() {
-        var yaml = CreateDark();
-        yaml.WorkspaceCanvasColor = "#1A1A1A";
-        yaml.WorkspaceCardColor = "#323232";
-        yaml.WorkspaceElevatedSurfaceColor = "#3F3F3F";
-        yaml.BackgroundColor = "#303030";
-        yaml.BackgroundColorPointerOver = "#3F3F3F";
-        yaml.BackgroundColorPressed = "#464646";
-        yaml.BackgroundColorDisabled = "#303030";
-        yaml.TransportToolbarOffHoverColor = "#4A4A4A";
-        yaml.TrackBackgroundAltColor = "#454545";
-        yaml.TextControlBorderColorDisabled = "#626262";
-        yaml.PianoRollToolbarStripColor = "#121212";
-        yaml.PianoRollTimelineStripColor = "#323232";
-        yaml.AppTopBarTransportStripColor = "#414141";
-        yaml.AppTopBarTransportHoverColor = "#545454";
-        yaml.AppTopBarValueStripColor = "#242424";
-        yaml.AppTopBarValueDividerColor = "#4E4E4E";
-        yaml.PianoRollToolbarButtonHoverColor = "#3F3F3F";
-        yaml.TickLineColor = "#080808";
-        yaml.BarNumberColor = "#F0F0F0";
-        ApplyPresetTint(yaml, surfaceR: 0, surfaceG: 0, surfaceB: 0, accentR: 5, accentG: 5, accentB: 5);
-        return yaml;
+    /// <summary>Classic OpenUtau light palette (stakira/OpenUtau) with fork-only keys filled in.</summary>
+    public static ThemeYaml CreateOriginalLight() {
+        return new ThemeYaml {
+            Name = OriginalLightThemeName,
+            IsDarkMode = false,
+            BackgroundColor = "#FFFFFF",
+            BackgroundColorPointerOver = "#F0F0F0",
+            TransportToolbarOffHoverColor = "#F0F0F0",
+            BackgroundColorPressed = "#E0E0E0",
+            BackgroundColorDisabled = "#D0D0D0",
+            ForegroundColor = "#000000",
+            ForegroundColorPointerOver = "#000000",
+            ForegroundColorPressed = "#202020",
+            ForegroundColorDisabled = "#808080",
+            TextControlBorderColorDisabled = "#BDBDBD",
+            BorderColor = "#707070",
+            BorderColorPointerOver = "#B0B0B0",
+            SystemAccentColor = "#4EA6EA",
+            SystemAccentColorLight1 = "#90CAF9",
+            SystemAccentColorDark1 = "#1E88E5",
+            NeutralAccentColor = "#ADA1B3",
+            NeutralAccentColorPointerOver = "#948A99",
+            AccentColor1 = "#4EA6EA",
+            AccentColor1Note = "#4EA6EA",
+            AccentColor2 = "#FF679D",
+            AccentColor3 = "#E62E6E",
+            NoteBorderColor = "#4EA6EA",
+            NoteBorderColorPressed = "#1E88E5",
+            TickLineColor = "#AFA3B5",
+            BarNumberColor = "#AFA3B5",
+            FinalPitchColor = "#C0C0C0",
+            TrackBackgroundAltColor = "#F0F0F0",
+            WarningColor = "#FFF4CE",
+            ToolbarCheckedHoverColor = "#E0E0E0",
+            ToolTipForegroundColor = "#FFFFFF",
+            WorkspaceCanvasColor = "#E8E8E8",
+            WorkspaceCardColor = "#FFFFFF",
+            WorkspaceElevatedSurfaceColor = "#F0F0F0",
+            MutedIconColor = "#808080",
+            PianoRollWaveformPeakColor = "#59999999",
+            PianoRollToolbarStripColor = "#202020",
+            PianoRollToolbarButtonHoverColor = "#313131",
+            PianoRollTimelineStripColor = "#E8E8E8",
+            AppTopBarTransportStripColor = "#F0F0F0",
+            AppTopBarTransportHoverColor = "#E0E0E0",
+            AppTopBarValueStripColor = "#E8E8E8",
+            AppTopBarValueDividerColor = "#D0D0D0",
+            WhiteKeyColorLeft = "Transparent",
+            WhiteKeyColorRight = "Transparent",
+            WhiteKeyNameColor = "#FF347C",
+            CenterKeyColorLeft = "#FFDDE6",
+            CenterKeyColorRight = "#FFCEDC",
+            CenterKeyNameColor = "#FF347C",
+            BlackKeyColorLeft = "#FF71A3",
+            BlackKeyColorRight = "#FF347C",
+            BlackKeyNameColor = "#FFFFFF",
+        };
+    }
+
+    /// <summary>Classic OpenUtau dark palette (stakira/OpenUtau) with fork-only keys filled in.</summary>
+    public static ThemeYaml CreateOriginalDark() {
+        return new ThemeYaml {
+            Name = OriginalDarkThemeName,
+            IsDarkMode = true,
+            BackgroundColor = "#303030",
+            BackgroundColorPointerOver = "#505050",
+            TransportToolbarOffHoverColor = "#505050",
+            BackgroundColorPressed = "#707070",
+            BackgroundColorDisabled = "#404040",
+            ForegroundColor = "#E0E0E0",
+            ForegroundColorPointerOver = "#FCFCFC",
+            ForegroundColorPressed = "#FFFFFF",
+            ForegroundColorDisabled = "#A0A0A0",
+            TextControlBorderColorDisabled = "#505050",
+            BorderColor = "#707070",
+            BorderColorPointerOver = "#B0B0B0",
+            SystemAccentColor = "#4EA6EA",
+            SystemAccentColorLight1 = "#90CAF9",
+            SystemAccentColorDark1 = "#1E88E5",
+            NeutralAccentColor = "#808080",
+            NeutralAccentColorPointerOver = "#A0A0A0",
+            AccentColor1 = "#4EA6EA",
+            AccentColor1Note = "#4EA6EA",
+            AccentColor2 = "#FF679D",
+            AccentColor3 = "#E62E6E",
+            NoteBorderColor = "#4EA6EA",
+            NoteBorderColorPressed = "#1E88E5",
+            TickLineColor = "#707070",
+            BarNumberColor = "#D0D0D0",
+            FinalPitchColor = "#D0D0D0",
+            TrackBackgroundAltColor = "#404040",
+            WarningColor = "#433519",
+            ToolbarCheckedHoverColor = "#A0A0A0",
+            ToolTipForegroundColor = "#FFFFFF",
+            WorkspaceCanvasColor = "#242424",
+            WorkspaceCardColor = "#303030",
+            WorkspaceElevatedSurfaceColor = "#404040",
+            MutedIconColor = "#808080",
+            PianoRollWaveformPeakColor = "#3BFFFFFF",
+            PianoRollToolbarStripColor = "#252525",
+            PianoRollToolbarButtonHoverColor = "#505050",
+            PianoRollTimelineStripColor = "#303030",
+            AppTopBarTransportStripColor = "#353535",
+            AppTopBarTransportHoverColor = "#505050",
+            AppTopBarValueStripColor = "#282828",
+            AppTopBarValueDividerColor = "#505050",
+            WhiteKeyColorLeft = "#CC2A63",
+            WhiteKeyColorRight = "#FF347C",
+            WhiteKeyNameColor = "#FFFFFF",
+            CenterKeyColorLeft = "#CCA5B0",
+            CenterKeyColorRight = "#FFCEDC",
+            CenterKeyNameColor = "#FF347C",
+            BlackKeyColorLeft = "Transparent",
+            BlackKeyColorRight = "Transparent",
+            BlackKeyNameColor = "#FFFFFF",
+        };
     }
 
     public static ThemeYaml CreateCold() {

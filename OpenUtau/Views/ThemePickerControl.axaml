@@ -175,7 +175,8 @@
                       IsVisible="{Binding IsCreateTile}"
                       Background="Transparent"
                       ToolTip.Tip="{DynamicResource prefs.appearance.customtheme.create.title}">
-                <Path Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <Path Width="20" Height="20" Margin="1,0,0,0"
+                      HorizontalAlignment="Center" VerticalAlignment="Center"
                       Fill="{DynamicResource MutedIconBrush}"
                       Data="M8.43 3.33 a0.38 0.38 0 0 0 -0.38 0.38 v4.35 H3.7 a0.38 0.38 0 0 0 -0.38 0.38 v1.13 c0 0.23 0.19 0.38 0.38 0.38 h4.35 v4.35 c0 0.23 0.19 0.38 0.38 0.38 h1.13 a0.38 0.38 0 0 0 0.38 -0.38 V9.97 h4.35 a0.38 0.38 0 0 0 0.38 -0.38 v-1.13 a0.38 0.38 0 0 0 -0.38 -0.38 H9.97 V3.7 a0.38 0.38 0 0 0 -0.38 -0.38 h-1.13 z"/>
               </Border>
