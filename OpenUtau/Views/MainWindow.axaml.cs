@@ -13,7 +13,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
-using OpenUtau.App;
+using OpenUtau.App.Helpers;
 using OpenUtau.App.Controls;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Classic;
@@ -204,6 +204,18 @@ namespace OpenUtau.App.Views {
             };
             dialog.ShowDialog(this);
             // Workaround for https://github.com/AvaloniaUI/Avalonia/issues/3986
+            args.Pointer.Capture(null);
+        }
+
+        void OnEditKey(object sender, PointerPressedEventArgs args) {
+            if (sender is not Control control) {
+                return;
+            }
+            KeySignatureMenuHelper.OpenPicker(
+                control,
+                () => DocManager.Inst.Project.parts.OfType<UVoicePart>().SelectMany(part => part.notes),
+                key => viewModel.PlaybackViewModel.SetKeySignature(key.Tonic, key.IsMajor),
+                MusicalKey.FromProject(DocManager.Inst.Project));
             args.Pointer.Capture(null);
         }
 
@@ -1593,6 +1605,22 @@ namespace OpenUtau.App.Views {
         public void PartsContextMenuClosing(object sender, CancelEventArgs args) {
             if (PartsContextMenu != null) {
                 PartsContextMenu.DataContext = null;
+            }
+        }
+
+        void OnPartGenerateHarmonies(object? sender, RoutedEventArgs e) {
+            if (PartsContextMenu?.DataContext is PartsContextMenuArgs args && args.Part is UVoicePart voicePart) {
+                ShowGenerateHarmonyDialog(voicePart, this);
+            }
+        }
+
+        internal static void ShowGenerateHarmonyDialog(UVoicePart voicePart, Window? owner = null) {
+            var dialog = new GenerateHarmonyDialog(voicePart);
+            var host = owner ?? (Avalonia.Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+            if (host != null) {
+                dialog.ShowDialog(host);
+            } else {
+                dialog.Show();
             }
         }
 

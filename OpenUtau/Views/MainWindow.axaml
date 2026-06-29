@@ -150,8 +150,8 @@
                 </Viewbox>
               </ToggleButton>
             </StackPanel>
-            <Border Classes="appTopBarValueStrip" MinWidth="120">
-              <Grid ColumnDefinitions="*,Auto,*">
+            <Border Classes="appTopBarValueStrip" MinWidth="200">
+              <Grid ColumnDefinitions="*,Auto,*,Auto,*">
                 <Border Grid.Column="0" Classes="transportStripCell appTopBarBpmCell" Cursor="Hand"
                         PointerPressed="OnEditBpm">
                   <TextBlock Classes="appTopBarLabel">
@@ -173,6 +173,11 @@
                       </MultiBinding>
                     </TextBlock.Text>
                   </TextBlock>
+                </Border>
+                <Border Grid.Column="3" Classes="transportValueDivider"/>
+                <Border Grid.Column="4" Classes="transportStripCell appTopBarKeyCell" Cursor="Hand"
+                        PointerPressed="OnEditKey">
+                  <TextBlock Classes="appTopBarLabel" Text="{Binding PlaybackViewModel.KeyName}"/>
                 </Border>
               </Grid>
             </Border>
@@ -503,6 +508,9 @@
                           IsVisible="{Binding IsVoicePart}"
                           Command="{Binding PartRenameCommand}"
                           CommandParameter="{Binding Part}"/>
+                <MenuItem Header="{DynamicResource context.part.generateharmonies}"
+                          IsVisible="{Binding IsVoicePart}"
+                          Click="OnPartGenerateHarmonies"/>
                 <MenuItem Header="{DynamicResource context.part.merge}"
                           IsVisible="{Binding IsVoicePart}"
                           Command="{Binding PartMergeCommand}"

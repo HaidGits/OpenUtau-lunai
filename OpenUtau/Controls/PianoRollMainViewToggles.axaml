@@ -135,6 +135,21 @@
         </Grid>
       </Grid>
     </ToggleButton>
+    <ToggleButton Classes="sideToolbarToggle keyScaleToggle" Margin="0" Padding="0"
+                  IsChecked="{Binding NotesViewModel.ShowKeyScale, Mode=TwoWay}">
+      <ToolTip.Tip>
+        <TextBlock Text="{DynamicResource pianoroll.toggle.keyscale}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
+      </ToolTip.Tip>
+      <Grid Classes="toolbarIconHostSide">
+        <Grid Classes="toolbarIconHostSideLayout">
+          <Path Classes="stroked" Data="M 6.5 3 L 6.5 13 M 10.5 3 L 10.5 13 M 3.5 6.5 L 13.5 5.5 M 3.5 10.5 L 13.5 9.5">
+            <Path.RenderTransform>
+              <TranslateTransform X="1" Y="1"/>
+            </Path.RenderTransform>
+          </Path>
+        </Grid>
+      </Grid>
+    </ToggleButton>
     <ToggleButton Classes="sideToolbarToggle pitchFollowToggle" Margin="0" Padding="0"
                   IsChecked="{Binding AppearancePreferences.PlaybackPitchFollowEnabled, Mode=TwoWay}">
       <ToolTip.Tip>

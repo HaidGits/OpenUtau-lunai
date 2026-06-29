@@ -13,7 +13,8 @@ namespace OpenUtau.App.ViewModels {
         public int BeatUnit => Project.timeSignatures[0].beatUnit;
         public double Bpm => Project.tempos[0].bpm;
         public int Key => Project.key;
-        public string KeyName => MusicMath.KeysInOctave[Key].Item1;
+        public bool KeyIsMajor => Project.keyIsMajor;
+        public string KeyName => KeySignatureHelper.FormatProjectKey(Project);
         public int Resolution => Project.resolution;
         public int PlayPosTick => DocManager.Inst.playPosTick;
         public TimeSpan PlayPosTime => TimeSpan.FromMilliseconds((int)Project.timeAxis.TickPosToMsPos(DocManager.Inst.playPosTick));
@@ -110,12 +111,14 @@ namespace OpenUtau.App.ViewModels {
             DocManager.Inst.EndUndoGroup();
         }
 
-        public void SetKey(int key) {
-            if (key == DocManager.Inst.Project.key) {
+        public void SetKey(int key) => SetKeySignature(key, Project.keyIsMajor);
+
+        public void SetKeySignature(int key, bool isMajor) {
+            if (key == DocManager.Inst.Project.key && isMajor == DocManager.Inst.Project.keyIsMajor) {
                 return;
             }
             DocManager.Inst.StartUndoGroup("command.project.key");
-            DocManager.Inst.ExecuteCmd(new KeyCommand(Project, key));
+            DocManager.Inst.ExecuteCmd(new KeyCommand(Project, key, isMajor));
             DocManager.Inst.EndUndoGroup();
         }
 
@@ -131,7 +134,9 @@ namespace OpenUtau.App.ViewModels {
                 this.RaisePropertyChanged(nameof(BeatPerBar));
                 this.RaisePropertyChanged(nameof(BeatUnit));
                 this.RaisePropertyChanged(nameof(Bpm));
+                this.RaisePropertyChanged(nameof(Key));
                 this.RaisePropertyChanged(nameof(KeyName));
+                this.RaisePropertyChanged(nameof(KeyIsMajor));
                 MessageBus.Current.SendMessage(new TimeAxisChangedEvent());
                 if (cmd is LoadProjectNotification) {
                     DocManager.Inst.ExecuteCmd(new SetPlayPosTickNotification(0));

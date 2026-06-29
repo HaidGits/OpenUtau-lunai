@@ -58,6 +58,7 @@
   <system:String x:Key="context.note.delete">Удалить ноту</system:String>
   <system:String x:Key="context.note.pasteparameters">Выделение и вставка параметров</system:String>
   <system:String x:Key="context.part.delete">Удалить партию</system:String>
+  <system:String x:Key="context.part.generateharmonies">Создать гармонии...</system:String>
   <system:String x:Key="context.part.gotofile">Просмотр расположения файла</system:String>
   <system:String x:Key="context.part.merge">Объединить партии</system:String>
   <system:String x:Key="context.part.rename">Переименовать партию</system:String>
@@ -138,6 +139,20 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="dialogs.recovery.caption">Восстановить проект</system:String>
   <system:String x:Key="dialogs.remaptimeaxis.message">Этот инструмент позволяет изменять темп проекта без изменения фактических позиций и длительностей (в секундах) нот.
   Новый BPM:</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Создание гармоний</system:String>
+  <system:String x:Key="dialogs.harmony.description">Создать новые треки с гармониями на основе выбранной партии. Ноты транспонируются диатонически в выбранной тональности.</system:String>
+  <system:String x:Key="dialogs.harmony.key">Тональность</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Голоса гармонии</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Для каждого выбранного голоса создаётся новый трек под исходным с транспонированными нотами. Вокалист и настройки копируются с исходного трека.</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="key.picker.analyzing">Анализ...</system:String>
+  <system:String x:Key="key.picker.suggested">Предлагаемые тональности</system:String>
+  <system:String x:Key="key.picker.all">Все тональности</system:String>
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Создать гармонии...</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Показать гамму тональности</system:String>
   <system:String x:Key="dialogs.timesig.caption">Такт</system:String>
   <system:String x:Key="dialogs.tracksettings.caption">Параметры трека</system:String>
   <system:String x:Key="dialogs.tracksettings.location">Расположение</system:String>

@@ -15,6 +15,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using OpenUtau.App.Helpers;
 using OpenUtau.App.ViewModels;
 using OpenUtau.App.Views;
 using OpenUtau.Core;
@@ -1824,8 +1825,25 @@ namespace OpenUtau.App.Controls {
         }
 
         public void OnKeyMenuButton(object sender, RoutedEventArgs args) {
-            KeyMenu.PlacementTarget = sender as Button;
-            KeyMenu.Open();
+            if (sender is not Control control || ViewModel?.NotesViewModel == null) {
+                return;
+            }
+            var notesVm = ViewModel.NotesViewModel;
+            var playbackVm = ViewModel.PlaybackViewModel;
+            if (playbackVm == null) {
+                return;
+            }
+            KeySignatureMenuHelper.OpenPicker(
+                control,
+                () => notesVm.Project.parts.OfType<UVoicePart>().SelectMany(part => part.notes),
+                key => playbackVm.SetKeySignature(key.Tonic, key.IsMajor),
+                MusicalKey.FromProject(notesVm.Project));
+        }
+
+        void OnMenuGenerateHarmonies(object? sender, RoutedEventArgs e) {
+            if (ViewModel?.NotesViewModel?.Part is UVoicePart voicePart) {
+                MainWindow.ShowGenerateHarmonyDialog(voicePart, TopLevel.GetTopLevel(this) as Window);
+            }
         }
 
         bool MoveToNextPart(bool next) {

@@ -9,6 +9,7 @@ using OpenUtau.App.ViewModels;
 using OpenUtau.Core;
 using OpenUtau.Core.Util;
 using ReactiveUI;
+using Avalonia.Threading;
 
 namespace OpenUtau.App.Controls {
     class TrackBackground : TemplatedControl {
@@ -37,6 +38,16 @@ namespace OpenUtau.App.Controls {
                 nameof(Key),
                 o => o.Key,
                 (o, v) => o.Key = v);
+        public static readonly DirectProperty<TrackBackground, bool> KeyIsMajorProperty =
+            AvaloniaProperty.RegisterDirect<TrackBackground, bool>(
+                nameof(KeyIsMajor),
+                o => o.KeyIsMajor,
+                (o, v) => o.KeyIsMajor = v);
+        public static readonly DirectProperty<TrackBackground, bool> ShowKeyScaleProperty =
+            AvaloniaProperty.RegisterDirect<TrackBackground, bool>(
+                nameof(ShowKeyScale),
+                o => o.ShowKeyScale,
+                (o, v) => o.ShowKeyScale = v);
         public static readonly DirectProperty<TrackBackground, int> PianoRollHighlightTrackNoProperty =
             AvaloniaProperty.RegisterDirect<TrackBackground, int>(
                 nameof(PianoRollHighlightTrackNo),
@@ -63,6 +74,14 @@ namespace OpenUtau.App.Controls {
             get => _key;
             set => SetAndRaise(KeyProperty, ref _key, value);
         }
+        public bool KeyIsMajor {
+            get => _keyIsMajor;
+            set => SetAndRaise(KeyIsMajorProperty, ref _keyIsMajor, value);
+        }
+        public bool ShowKeyScale {
+            get => _showKeyScale;
+            set => SetAndRaise(ShowKeyScaleProperty, ref _showKeyScale, value);
+        }
         public int PianoRollHighlightTrackNo {
             get => _pianoRollHighlightTrackNo;
             set => SetAndRaise(PianoRollHighlightTrackNoProperty, ref _pianoRollHighlightTrackNo, value);
@@ -73,13 +92,24 @@ namespace OpenUtau.App.Controls {
         private bool _isPianoRoll;
         private bool _isKeyboard;
         private int _key;
+        private bool _keyIsMajor = true;
+        private bool _showKeyScale;
         private int _pianoRollHighlightTrackNo = -1;
+        const double KeyScaleLineOpacity = 0.5;
 
         public TrackBackground() {
             MessageBus.Current.Listen<ThemeChangedEvent>()
-                .Subscribe(_ => InvalidateVisual());
+                .Subscribe(_ => RequestInvalidateVisual());
             MessageBus.Current.Listen<PianorollRefreshEvent>()
-                .Subscribe(_ => InvalidateVisual());
+                .Subscribe(_ => RequestInvalidateVisual());
+        }
+
+        void RequestInvalidateVisual() {
+            if (Dispatcher.UIThread.CheckAccess()) {
+                InvalidateVisual();
+            } else {
+                Dispatcher.UIThread.Post(InvalidateVisual);
+            }
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change) {
@@ -89,6 +119,8 @@ namespace OpenUtau.App.Controls {
                 change.Property == ForegroundProperty ||
                 change.Property == BackgroundProperty ||
                 change.Property == KeyProperty ||
+                change.Property == KeyIsMajorProperty ||
+                change.Property == ShowKeyScaleProperty ||
                 change.Property == PianoRollHighlightTrackNoProperty) {
                 InvalidateVisual();
             }
@@ -119,6 +151,10 @@ namespace OpenUtau.App.Controls {
             while (top < Bounds.Height) {
                 bool isAltTrack = IsAltTrack(track) ^ (ThemeManager.IsDarkMode && !IsKeyboard);
                 bool isCenterKey = IsKeyboard && IsCenterKey(track);
+                int tone = ViewConstants.MaxTone - 1 - track;
+                var musicalKey = new MusicalKey(Key, KeyIsMajor);
+                bool isScaleTone = IsPianoRoll && !IsKeyboard && ShowKeyScale && tone >= 0
+                    && KeySignatureHelper.IsInScale(tone, musicalKey);
                 var pianoRollBase = Background ?? ThemeManager.BackgroundBrush;
                 IBrush brush;
                 if (isCenterKey) {
@@ -140,11 +176,18 @@ namespace OpenUtau.App.Controls {
                     brush,
                     null,
                     rowRect);
+                if (isScaleTone) {
+                    double centerY = top + TrackHeight / 2;
+                    var lineStart = new Point(0, centerY);
+                    var lineEnd = new Point(Bounds.Width, centerY);
+                    using (context.PushOpacity(KeyScaleLineOpacity)) {
+                        context.DrawLine(ThemeManager.NoteBorderPenPressed, lineStart, lineEnd);
+                    }
+                }
                 if (IsKeyboard && TrackHeight >= 12) {
                     brush = isCenterKey ? ThemeManager.CenterKeyNameBrush
                         : isAltTrack ? ThemeManager.BlackKeyNameBrush
                             : ThemeManager.WhiteKeyNameBrush;
-                    int tone = ViewConstants.MaxTone - 1 - track;
                     string toneName = MusicMath.GetToneName(tone);
                     var toneTextLayout = TextLayoutCache.Get(toneName, brush, 12);
                     var toneTextPosition = new Point(Bounds.Width - 4 - (int)toneTextLayout.Width, (int)(top + (TrackHeight - toneTextLayout.Height) / 2));

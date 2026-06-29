@@ -48,6 +48,8 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public double TrackOffset { get; set; }
         [Reactive] public int SnapDiv { get; set; }
         [Reactive] public int Key { get; set; }
+        [Reactive] public bool KeyIsMajor { get; set; }
+        [Reactive] public bool ShowKeyScale { get; set; }
         public ObservableCollectionExtended<int> SnapTicks { get; } = new ObservableCollectionExtended<int>();
         [Reactive] public double PlayPosX { get; set; }
         [Reactive] public double PlayPosHighlightX { get; set; }
@@ -62,9 +64,6 @@ namespace OpenUtau.App.ViewModels {
             ShowPlaybackBarHighlight && (HasRangeSelection || !UseModernPlayhead);
         public bool ShowThinPlayPosLine {
             get {
-                if (PlayPosWaitingRendering) {
-                    return false;
-                }
                 if (UseModernPlayhead) {
                     return true;
                 }
@@ -212,9 +211,10 @@ namespace OpenUtau.App.ViewModels {
             });
 
             Keys = new List<MenuItemViewModel>();
-            SetKeyCommand = ReactiveCommand.Create<int>(key => {
+            SetKeyCommand = ReactiveCommand.Create<int>(encoded => {
+                var key = KeySignatureHelper.Decode(encoded);
                 DocManager.Inst.StartUndoGroup("command.project.key");
-                DocManager.Inst.ExecuteCmd(new KeyCommand(Project, key));
+                DocManager.Inst.ExecuteCmd(new KeyCommand(Project, key.Tonic, key.IsMajor));
                 DocManager.Inst.EndUndoGroup();
                 UpdateKey();
             });
@@ -297,15 +297,23 @@ namespace OpenUtau.App.ViewModels {
                             CommandParameter = div,
                         }));
                     Keys.Clear();
-                    Keys.AddRange(MusicMath.KeysInOctave
-                        .Select((key, index) => new MenuItemViewModel {
-                            Header = $"1={key.Item1}",
+                    Keys.AddRange(KeySignatureHelper.AllKeys()
+                        .Select(key => new MenuItemViewModel {
+                            Header = KeySignatureHelper.FormatKey(key),
                             Command = SetKeyCommand,
-                            CommandParameter = index,
+                            CommandParameter = KeySignatureHelper.Encode(key),
                         }));
                 });
 
             ShowTips = Preferences.Default.ShowTips;
+            ShowKeyScale = Preferences.Default.ShowKeyScaleOnPianoRoll;
+            this.WhenAnyValue(x => x.ShowKeyScale)
+                .Skip(1)
+                .Subscribe(showKeyScale => {
+                    Preferences.Default.ShowKeyScaleOnPianoRoll = showKeyScale;
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PianorollRefreshEvent("KeyScale"));
+                });
             IsSnapOn = true;
             SnapDivText = string.Empty;
             KeyText = string.Empty;
@@ -550,7 +558,8 @@ namespace OpenUtau.App.ViewModels {
 
         private void UpdateKey() {
             Key = userKey;
-            KeyText = "1=" + MusicMath.KeysInOctave[userKey].Item1;
+            KeyIsMajor = Project.keyIsMajor;
+            KeyText = KeySignatureHelper.FormatProjectKey(Project, shortName: true);
         }
 
         public void OnXZoomed(Point position, double delta) {
@@ -1268,10 +1277,6 @@ namespace OpenUtau.App.ViewModels {
 
         private void SetPlayPos(int tick, bool waitingRendering) {
             PlayPosWaitingRendering = waitingRendering;
-            if (waitingRendering) {
-                this.RaisePropertyChanged(nameof(ShowThinPlayPosLine));
-                return;
-            }
             tick -= Part?.position ?? 0;
             PlayPosX = TickToneToPoint(tick, 0).X;
             UpdateHighlight();
@@ -1456,6 +1461,8 @@ namespace OpenUtau.App.ViewModels {
                     }
                 }
                 PrimaryKeyNotSupported = !IsExpSupported(PrimaryKey);
+            } else if (cmd is KeyCommand) {
+                UpdateKey();
             }
         }
 

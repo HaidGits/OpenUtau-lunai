@@ -69,6 +69,7 @@
   <system:String x:Key="context.note.delete">Delete note</system:String>
   <system:String x:Key="context.note.pasteparameters">Select and paste parameters</system:String>
   <system:String x:Key="context.part.delete">Delete part</system:String>
+  <system:String x:Key="context.part.generateharmonies">Generate harmonies...</system:String>
   <system:String x:Key="context.part.gotofile">View file location</system:String>
   <system:String x:Key="context.part.merge">Merge parts</system:String>
   <system:String x:Key="context.part.rename">Rename part</system:String>
@@ -157,6 +158,20 @@ Do you want to continue by splitting at the nearest position after current playh
   <system:String x:Key="dialogs.recovery.caption">Recovery project</system:String>
   <system:String x:Key="dialogs.remaptimeaxis.message">This tool will change the tempo of the project without changing the actual positions and durations (in seconds) of notes.
   New BPM:</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Generate Harmonies</system:String>
+  <system:String x:Key="dialogs.harmony.description">Create new harmony tracks from the selected part. Notes are transposed diatonically in the chosen key.</system:String>
+  <system:String x:Key="dialogs.harmony.key">Key</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Harmony voices</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Each selected voice creates a new track below the source with transposed notes. Singer and settings are copied from the source track.</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="key.picker.analyzing">Analyzing...</system:String>
+  <system:String x:Key="key.picker.suggested">Suggested keys</system:String>
+  <system:String x:Key="key.picker.all">All keys</system:String>
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Generate harmonies...</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Show key scale</system:String>
   <system:String x:Key="dialogs.timesig.caption">Time Signature</system:String>
   <system:String x:Key="dialogs.tracksettings.caption">Track Settings</system:String>
   <system:String x:Key="dialogs.tracksettings.location">Location</system:String>

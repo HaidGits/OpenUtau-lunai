@@ -634,6 +634,11 @@
           ToggleButton.sideToolbarToggle.pitchFollowToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentPitchFollowCheckedBrush}" />
   </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle.keyScaleToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.keyScaleToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.keyScaleToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentKeyScaleCheckedBrush}" />
+  </Style>
   <Style Selector="ToggleButton.sideToolbarToggle.appearanceToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
           ToggleButton.sideToolbarToggle.appearanceToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
           ToggleButton.sideToolbarToggle.appearanceToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
@@ -722,6 +727,14 @@
     <Setter Property="StrokeThickness" Value="1" />
     <Setter Property="Stroke" Value="{DynamicResource PianoRollSideIconOffBrush}" />
     <Setter Property="Fill" Value="Transparent" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle Rectangle.stroked">
+    <Setter Property="StrokeThickness" Value="1" />
+    <Setter Property="Stroke" Value="{DynamicResource PianoRollSideIconOffBrush}" />
+    <Setter Property="Fill" Value="Transparent" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle Rectangle.filled">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollSideIconOffBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle TextBlock.sideToolbarGlyph">
     <Setter Property="Foreground" Value="{DynamicResource PianoRollSideIconOffBrush}" />
@@ -814,6 +827,22 @@
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.pitchFollowToggle Path.filled.pitchFollowStick">
     <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentPitchFollowBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.keyScaleToggle Path.stroked">
+    <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentKeyScaleBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.keyScaleToggle Path.filled">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentKeyScaleBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.keyScaleToggle Rectangle.filled">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentKeyScaleBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.keyScaleToggle Rectangle.stroked">
+    <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentKeyScaleBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.keyScaleToggle Path.stroked.keyScaleRowAccent">
+    <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentKeyScaleBrush}" />
+    <Setter Property="StrokeThickness" Value="1.75" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle.diffSingerPanelToggle TextBlock.sideToolbarGlyph">
     <Setter Property="FontSize" Value="9" />

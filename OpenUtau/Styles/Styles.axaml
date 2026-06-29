@@ -810,8 +810,12 @@
   <Style Selector="Border.appTopBarValueStrip > Border.appTopBarBpmCell:pointerover">
     <Setter Property="CornerRadius" Value="4,0,0,4" />
   </Style>
-  <!-- Time signature (right): sharp at divider (top-left, bottom-left); rounded outer right. -->
+  <!-- Time signature (middle): sharp at both dividers. -->
   <Style Selector="Border.appTopBarValueStrip > Border.appTopBarTimeSigCell:pointerover">
+    <Setter Property="CornerRadius" Value="0" />
+  </Style>
+  <!-- Key (right): sharp at divider; rounded outer right. -->
+  <Style Selector="Border.appTopBarValueStrip > Border.appTopBarKeyCell:pointerover">
     <Setter Property="CornerRadius" Value="0,4,4,0" />
   </Style>
   <Style Selector="Border.appTopBarValueStrip Border.transportValueDivider">

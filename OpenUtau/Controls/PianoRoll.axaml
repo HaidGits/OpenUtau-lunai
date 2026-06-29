@@ -183,6 +183,8 @@
                          TrackHeight="{Binding TrackHeight}"
                          TrackOffset="{Binding TrackOffset}"
                          Key="{Binding Key}"
+                         KeyIsMajor="{Binding KeyIsMajor}"
+                         ShowKeyScale="{Binding ShowKeyScale}"
                          PointerWheelChanged="KeyboardPointerWheelChanged"
                          PointerPressed="KeyboardPointerPressed"
                          PointerMoved="KeyboardPointerMoved"
@@ -200,7 +202,11 @@
                          DataContext="{Binding NotesViewModel}"
                          Bounds="{Binding Bounds, Mode=OneWayToSource}"
                          TrackHeight="{Binding TrackHeight}"
-                         TrackOffset="{Binding TrackOffset}" IsPianoRoll="True"/>
+                         TrackOffset="{Binding TrackOffset}"
+                         Key="{Binding Key}"
+                         KeyIsMajor="{Binding KeyIsMajor}"
+                         ShowKeyScale="{Binding ShowKeyScale}"
+                         IsPianoRoll="True"/>
       <c:TickBackground Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" IsHitTestVisible="False"
                         Foreground="{DynamicResource TickLineBrush}"
                         Background="{DynamicResource TickLineBrushLow}"
@@ -360,6 +366,7 @@
               <MenuItem Header="{DynamicResource menu.edit.selectall}" InputGesture="Ctrl+A" Command="{Binding SelectAll}"/>
               <MenuItem Header="-" Height="1"/>
               <MenuItem Header="{DynamicResource pianoroll.menu.part.singer}" Click="OnMenuSingers"/>
+              <MenuItem Header="{DynamicResource pianoroll.menu.part.generateharmonies}" Click="OnMenuGenerateHarmonies"/>
               <MenuItem Header="{DynamicResource menu.edit.lockunselectednotes}">
                 <MenuItem Header="{DynamicResource menu.edit.lockunselectednotes.pitchpoints}" Click="OnMenuLockPitchPoints">
                   <MenuItem.Icon>
