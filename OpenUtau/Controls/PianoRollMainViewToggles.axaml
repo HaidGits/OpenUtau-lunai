@@ -142,9 +142,9 @@
       </ToolTip.Tip>
       <Grid Classes="toolbarIconHostSide">
         <Grid Classes="toolbarIconHostSideLayout">
-          <Path Classes="stroked" Data="M 9 4.5 L 9 12.5"/>
+          <Path Classes="filled pitchFollowStick" Data="M 8.5 4.5 L 9.5 4.5 L 9.5 13.5 L 8.5 13.5 Z"/>
           <Path Classes="stroked" Data="M 6.5 7 L 9 4.5 L 11.5 7"/>
-          <Path Classes="stroked" Data="M 6.5 10 L 9 12.5 L 11.5 10"/>
+          <Path Classes="stroked" Data="M 6.5 11 L 9 13.5 L 11.5 11"/>
         </Grid>
       </Grid>
     </ToggleButton>

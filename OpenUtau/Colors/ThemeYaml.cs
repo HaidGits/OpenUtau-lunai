@@ -133,6 +133,11 @@ public class ThemeYaml {
         foreach (var key in ThemeColorCatalog.AllResourceKeys) {
             SetResourceColor(key, GetColor(key) ?? string.Empty);
         }
+        SetResourceColor(
+            "PianoRollTopBarToolIconOffColor",
+            IsDarkMode
+                ? (GetColor(nameof(ToolTipForegroundColor)) ?? "#FFFFFF")
+                : (GetColor(nameof(MutedIconColor)) ?? "#808080"));
     }
 
     public static ThemeYaml LoadFromFile(string path) {

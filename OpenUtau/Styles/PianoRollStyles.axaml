@@ -236,14 +236,21 @@
           ListBox.topBarToolStrip ListBoxItem.toolbar:selected:pointerover /template/ Border#PART_LayoutRoot">
     <Setter Property="Background" Value="{DynamicResource SelectedTrackAccentBrushSemi}" />
   </Style>
-  <Style Selector="ListBox.topBarToolStrip ListBoxItem.toolbar /template/ Path#PART_ToolIcon,
-          ListBox.topBarToolStrip ListBoxItem.toolbar:selected /template/ Path#PART_ToolIcon,
-          ListBox.topBarToolStrip ListBoxItem.toolbar:pointerover /template/ Path#PART_ToolIcon">
+  <Style Selector="ListBox.topBarToolStrip ListBoxItem.toolbar:not(:selected) /template/ Path#PART_ToolIcon,
+          ListBox.topBarToolStrip ListBoxItem.toolbar:not(:selected):pointerover /template/ Path#PART_ToolIcon">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollTopBarToolIconOffBrush}" />
+  </Style>
+  <Style Selector="ListBox.topBarToolStrip ListBoxItem.toolbar:selected /template/ Path#PART_ToolIcon,
+          ListBox.topBarToolStrip ListBoxItem.toolbar:selected:pointerover /template/ Path#PART_ToolIcon">
     <Setter Property="Fill" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />
   </Style>
-  <Style Selector="ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool /template/ Path#PART_SubToolArrow,
-          ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool:pointerover /template/ Path#PART_SubToolArrow,
-          ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool:selected /template/ Path#PART_SubToolArrow">
+  <Style Selector="ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool:not(:selected) /template/ Path#PART_SubToolArrow,
+          ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool:not(:selected):pointerover /template/ Path#PART_SubToolArrow">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollTopBarToolIconOffBrush}" />
+    <Setter Property="Opacity" Value="0.7" />
+  </Style>
+  <Style Selector="ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool:selected /template/ Path#PART_SubToolArrow,
+          ListBox.topBarToolStrip ListBoxItem.toolbar.hasSubTool:selected:pointerover /template/ Path#PART_SubToolArrow">
     <Setter Property="Fill" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />
     <Setter Property="Opacity" Value="0.7" />
   </Style>
@@ -804,6 +811,9 @@
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.pitchFollowToggle Path.stroked">
     <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentPitchFollowBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.pitchFollowToggle Path.filled.pitchFollowStick">
+    <Setter Property="Fill" Value="{DynamicResource PianoRollSideAccentPitchFollowBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle.diffSingerPanelToggle TextBlock.sideToolbarGlyph">
     <Setter Property="FontSize" Value="9" />

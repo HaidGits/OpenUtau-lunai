@@ -47,6 +47,7 @@
   <Color x:Key="WorkspaceCardColor">#212121</Color>
   <Color x:Key="WorkspaceElevatedSurfaceColor">#2B2B2B</Color>
   <Color x:Key="MutedIconColor">#808080</Color>
+  <Color x:Key="PianoRollTopBarToolIconOffColor">#FFFFFF</Color>
   <Color x:Key="PianoRollWaveformPeakColor">#3BFFFFFF</Color>
   <Color x:Key="PianoRollToolbarStripColor">#1F1F1F</Color>
   <Color x:Key="PianoRollToolbarButtonHoverColor">#313131</Color>
