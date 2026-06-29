@@ -767,7 +767,8 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.appearance.theme.custom">Custom</system:String>
   <system:String x:Key="prefs.appearance.theme.name.light">Light</system:String>
   <system:String x:Key="prefs.appearance.theme.name.dark">Dark</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.gray">Gray</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Original Light</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Original Dark</system:String>
   <system:String x:Key="prefs.appearance.theme.name.cold">Cold</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Warm</system:String>
   <system:String x:Key="prefs.appearance.section.pianoroll">Piano roll</system:String>
@@ -808,6 +809,17 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.appearance.trackcolor">Use track color in UI</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Tint piano roll background with track color</system:String>
   <system:String x:Key="prefs.appearance.defaulttrackcolor">Default track color for new tracks</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Create Custom Track Color</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Edit</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Edit Custom Track Color</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">New</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Enter a name and pick the base and bright colors.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Base color</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Bright color</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Track color name cannot be empty.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">A track color with this name already exists.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Delete Custom Track Color</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Are you sure you want to delete this track color?</system:String>
   <system:String x:Key="prefs.cache">Cache</system:String>
   <system:String x:Key="prefs.cache.clearonquit">Clear cache on quit</system:String>
   <system:String x:Key="prefs.cache.diffsingertensorcache">DiffSinger Tensor Cache</system:String>

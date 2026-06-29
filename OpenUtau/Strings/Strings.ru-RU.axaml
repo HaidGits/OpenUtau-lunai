@@ -657,7 +657,8 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="prefs.appearance.theme.custom">Пользовательские</system:String>
   <system:String x:Key="prefs.appearance.theme.name.light">Светлая</system:String>
   <system:String x:Key="prefs.appearance.theme.name.dark">Темная</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.gray">Серая</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Оригинальная светлая</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Оригинальная тёмная</system:String>
   <system:String x:Key="prefs.appearance.theme.name.cold">Холодная</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Теплая</system:String>
   <system:String x:Key="prefs.appearance.section.pianoroll">Пианоролл</system:String>
@@ -698,6 +699,17 @@ OpenUtau стремится стать средой редактирования
   <system:String x:Key="prefs.appearance.trackcolor">Использовать цвет трека в интерфейсе</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Подкрашивать фон пианоролла цветом трека</system:String>
   <system:String x:Key="prefs.appearance.defaulttrackcolor">Цвет трека по умолчанию для новых треков</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Создать свой цвет трека</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Изменить</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Изменить свой цвет трека</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Новый</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Введите название и выберите обычный и яркий цвета.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Обычный цвет</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Яркий цвет</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Название цвета трека не может быть пустым.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Цвет трека с таким именем уже существует.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Удалить свой цвет трека</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Удалить этот цвет трека?</system:String>
   <system:String x:Key="prefs.cache">Кэш</system:String>
   <system:String x:Key="prefs.cache.clearonquit">Очищать кэш при выходе</system:String>
   <system:String x:Key="prefs.cache.diffsingertensorcache">Тензорный кэш DiffSinger</system:String>
