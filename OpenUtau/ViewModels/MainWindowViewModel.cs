@@ -87,10 +87,8 @@ namespace OpenUtau.App.ViewModels {
         public bool ShowTracksArea => !PianoRollFullscreen;
         public double TracksRowMinHeight => PianoRollFullscreen ? 0 : ViewConstants.TracksPanelMinHeight;
         public bool ShowPianoRollSplitter => ShowPianoRoll && !PianoRollFullscreen;
-        [Reactive] public GridLength TracksRowHeight { get; set; } = new GridLength(1, GridUnitType.Star);
-        [Reactive] public GridLength PianoRollRowHeight { get; set; } = new GridLength(3, GridUnitType.Star);
-        GridLength savedTracksRowHeight = new GridLength(1, GridUnitType.Star);
-        GridLength savedPianoRollRowHeight = new GridLength(3, GridUnitType.Star);
+        [Reactive] public double TracksPanelHeightPx { get; set; }
+        double savedTracksPanelHeightPx;
         public GridLength PianoRollSplitterRowHeight =>
             ShowPianoRoll && !PianoRollFullscreen ? new GridLength(8) : new GridLength(0);
         public ReactiveCommand<UPart, Unit> PartDeleteCommand { get; set; }
@@ -159,19 +157,34 @@ namespace OpenUtau.App.ViewModels {
             this.WhenAnyValue(vm => vm.PianoRollFullscreen)
                 .Subscribe(fullscreen => {
                     if (fullscreen) {
-                        savedTracksRowHeight = TracksRowHeight;
-                        savedPianoRollRowHeight = PianoRollRowHeight;
-                        TracksRowHeight = new GridLength(0);
-                        PianoRollRowHeight = new GridLength(1, GridUnitType.Star);
+                        savedTracksPanelHeightPx = TracksPanelHeightPx;
+                        TracksPanelHeightPx = 0;
                     } else {
-                        TracksRowHeight = savedTracksRowHeight;
-                        PianoRollRowHeight = savedPianoRollRowHeight;
+                        TracksPanelHeightPx = savedTracksPanelHeightPx;
                     }
                     this.RaisePropertyChanged(nameof(ShowTracksArea));
                     this.RaisePropertyChanged(nameof(ShowPianoRollSplitter));
                     this.RaisePropertyChanged(nameof(PianoRollSplitterRowHeight));
                     this.RaisePropertyChanged(nameof(TracksRowMinHeight));
                 });
+        }
+
+        public void ClampWorkspaceRowHeights(double workspaceHeight) {
+            if (PianoRollFullscreen || !ShowPianoRoll) {
+                return;
+            }
+            const double fixedRows = 8 + 20 + 4;
+            double available = workspaceHeight - fixedRows;
+            if (available <= 0) {
+                return;
+            }
+            double tracksMin = TracksRowMinHeight;
+            double pianoMin = PianoRollMinHeight;
+            double maxTracks = Math.Max(tracksMin, available - pianoMin);
+            double clamped = Math.Clamp(TracksPanelHeightPx, tracksMin, maxTracks);
+            if (Math.Abs(clamped - TracksPanelHeightPx) > 0.5) {
+                TracksPanelHeightPx = clamped;
+            }
         }
 
         public void Undo() {

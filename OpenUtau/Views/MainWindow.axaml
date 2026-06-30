@@ -277,17 +277,16 @@
         </Grid>
       
         <!--Main page-->
-        <Grid Classes="workspaceLayout" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid x:Name="WorkspaceTracksGrid" Classes="workspaceLayout" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding TracksViewModel.TrackHeaderColumnWidth}"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="16"/>
           </Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="{Binding TracksRowHeight}" MinHeight="{Binding TracksRowMinHeight}"/>
+            <RowDefinition MinHeight="{Binding TracksRowMinHeight}"/>
             <RowDefinition Height="{Binding PianoRollSplitterRowHeight}" MinHeight="0"/>
-            <RowDefinition Height="{Binding PianoRollRowHeight}"
-                           MinHeight="{Binding PianoRollMinHeight}"
+            <RowDefinition Height="*" MinHeight="{Binding PianoRollMinHeight}"
                            MaxHeight="{Binding PianoRollMaxHeight}"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="4"/>
@@ -539,7 +538,7 @@
           </Border>
             </Grid>
           </Border>
-          <GridSplitter Grid.Row="1" Grid.ColumnSpan="3"
+          <GridSplitter x:Name="PianoRollHeightSplitter" Grid.Row="1" Grid.ColumnSpan="3"
                         ResizeDirection="Rows"
                         Height="8" MinHeight="8" MaxHeight="8"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

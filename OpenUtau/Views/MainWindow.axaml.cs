@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
@@ -36,6 +37,8 @@ namespace OpenUtau.App.Views {
         private readonly MainWindowViewModel viewModel;
 
         private PianoRollDetachedWindow? pianoRollWindow;
+        private bool workspaceSplitterDragging;
+        private bool workspaceTracksHeightInitialized;
         private PianoRoll? pianoRoll;
 
         private bool tikTokSavedDetach;
@@ -117,6 +120,8 @@ namespace OpenUtau.App.Views {
             PartSplitCommand = ReactiveCommand.Create<UPart>(async part =>  await SplitPart(part));
 
             AddHandler(DragDrop.DropEvent, OnDrop);
+
+            SetupWorkspaceRowHeights();
 
             if (Preferences.Default.MainWindowSize.TryGetPosition(out int x, out int y)) {
                 Position = new PixelPoint(x, y);
@@ -1349,6 +1354,103 @@ namespace OpenUtau.App.Views {
             SetPianoRollFullscreen(!viewModel.PianoRollFullscreen);
         }
 
+        void SetupWorkspaceRowHeights() {
+            void BeginSplitterDrag() {
+                workspaceSplitterDragging = true;
+            }
+
+            void FinishSplitterDrag() {
+                Dispatcher.UIThread.Post(() => {
+                    SaveTracksPanelHeightFromGrid();
+                    workspaceSplitterDragging = false;
+                    ApplyTracksPanelHeight();
+                    NotifyWorkspaceLayoutChanged();
+                }, DispatcherPriority.Loaded);
+            }
+
+            PianoRollHeightSplitter.AddHandler(
+                PointerPressedEvent,
+                (_, _) => BeginSplitterDrag(),
+                RoutingStrategies.Tunnel | RoutingStrategies.Bubble,
+                true);
+            PianoRollHeightSplitter.DragStarted += (_, _) => BeginSplitterDrag();
+            PianoRollHeightSplitter.DragCompleted += (_, _) => FinishSplitterDrag();
+            PianoRollHeightSplitter.PointerCaptureLost += (_, _) => {
+                if (workspaceSplitterDragging) {
+                    FinishSplitterDrag();
+                }
+            };
+
+            Opened += (_, _) => TryInitializeTracksPanelHeight();
+
+            SizeChanged += (_, _) => {
+                if (workspaceSplitterDragging) {
+                    return;
+                }
+                TryInitializeTracksPanelHeight();
+                viewModel.ClampWorkspaceRowHeights(WorkspaceTracksGrid.Bounds.Height);
+                ApplyTracksPanelHeight();
+                NotifyWorkspaceLayoutChanged();
+            };
+
+            viewModel.WhenAnyValue(vm => vm.PianoRollFullscreen, vm => vm.ShowPianoRoll)
+                .Subscribe(_ => {
+                    TryInitializeTracksPanelHeight();
+                    ApplyTracksPanelHeight();
+                });
+        }
+
+        void TryInitializeTracksPanelHeight() {
+            if (workspaceTracksHeightInitialized || viewModel.PianoRollFullscreen || !viewModel.ShowPianoRoll) {
+                return;
+            }
+            double workspaceHeight = WorkspaceTracksGrid.Bounds.Height;
+            if (workspaceHeight <= 0) {
+                return;
+            }
+            const double fixedRows = 8 + 20 + 4;
+            double available = workspaceHeight - fixedRows;
+            if (available <= 0) {
+                return;
+            }
+            viewModel.TracksPanelHeightPx = available * 0.25;
+            workspaceTracksHeightInitialized = true;
+        }
+
+        void SaveTracksPanelHeightFromGrid() {
+            if (viewModel.PianoRollFullscreen || WorkspaceTracksGrid.RowDefinitions.Count < 3) {
+                return;
+            }
+            var tracksLength = WorkspaceTracksGrid.RowDefinitions[0].Height;
+            if (tracksLength.IsAbsolute) {
+                viewModel.TracksPanelHeightPx = Math.Max(viewModel.TracksRowMinHeight, tracksLength.Value);
+            }
+        }
+
+        void ApplyTracksPanelHeight() {
+            if (WorkspaceTracksGrid.RowDefinitions.Count < 3) {
+                return;
+            }
+            if (workspaceSplitterDragging) {
+                return;
+            }
+            if (viewModel.PianoRollFullscreen) {
+                WorkspaceTracksGrid.RowDefinitions[0].Height = new GridLength(0);
+                WorkspaceTracksGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+                return;
+            }
+            if (!viewModel.ShowPianoRoll || !workspaceTracksHeightInitialized) {
+                return;
+            }
+            WorkspaceTracksGrid.RowDefinitions[0].Height =
+                new GridLength(viewModel.TracksPanelHeightPx, GridUnitType.Pixel);
+            WorkspaceTracksGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+        }
+
+        static void NotifyWorkspaceLayoutChanged() {
+            MessageBus.Current.SendMessage(new PianorollRefreshEvent("Layout"));
+        }
+
         public void SetPianoRollFullscreen(bool fullscreen) {
             if (Preferences.Default.DetachPianoRoll) {
                 return;
@@ -1365,6 +1467,8 @@ namespace OpenUtau.App.Views {
                 pianoRoll.PianoRollFullscreenToggle.IsChecked = fullscreen;
                 pianoRoll.NotifyDetachedLayoutChanged();
             }
+            ApplyTracksPanelHeight();
+            NotifyWorkspaceLayoutChanged();
         }
 
         public void SetPianoRollAttachment() {
