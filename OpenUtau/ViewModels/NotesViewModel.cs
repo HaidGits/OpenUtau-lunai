@@ -10,6 +10,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using DynamicData;
 using DynamicData.Binding;
 using OpenUtau.App;
@@ -201,6 +202,8 @@ namespace OpenUtau.App.ViewModels {
         private int _lastNoteLength = 480;
         private string? portraitSource;
         private readonly object portraitLock = new object();
+        private Bitmap? portraitFull;
+        private int portraitRasterHeight;
         private int userSnapDiv = -2;
         private int userKey => Project.key;
 
@@ -696,32 +699,62 @@ namespace OpenUtau.App.ViewModels {
             pitchFollowUserOverride = false;
         }
 
-        //If PortraitHeight is 0, the default behaviour is resizing any image taller than 800px to 800px,
-        //and keeping the sizes of images shorter than 800px unchanged.
-        //If PortraitHeight isn't 0, then the image will be resized to the specified height.
-        private Bitmap ResizePortrait(Bitmap Portrait, int PortraitHeight) {
-            int targetHeight;
-            if (PortraitHeight == 0) {
-                if (Portrait.Size.Height > 800) {
-                    targetHeight = 800;
-                } else {
-                    return Portrait;
+        //If PortraitHeight is 0, keep the source image at full resolution.
+        //If PortraitHeight isn't 0, downscale to the specified height when the source is taller.
+        private static Bitmap ScalePortraitToHeight(Bitmap source, int portraitHeight) {
+            if (portraitHeight <= 0 || source.PixelSize.Height <= portraitHeight) {
+                return source;
+            }
+            int targetWidth = Math.Max(1, (int)Math.Round(
+                portraitHeight * source.PixelSize.Width / (double)source.PixelSize.Height));
+            return source.CreateScaledBitmap(
+                new PixelSize(targetWidth, portraitHeight),
+                BitmapInterpolationMode.HighQuality);
+        }
+
+        void DisposePortraitBitmaps() {
+            if (!ReferenceEquals(Portrait, portraitFull)) {
+                Portrait?.Dispose();
+            }
+            Portrait = null;
+            portraitFull?.Dispose();
+            portraitFull = null;
+            portraitRasterHeight = 0;
+        }
+
+        public void EnsurePortraitForDisplayHeight(double displayHeight, double renderScale = 1.0) {
+            lock (portraitLock) {
+                if (portraitFull == null) {
+                    return;
                 }
-            } else {
-                targetHeight = PortraitHeight;
+                int targetH = (int)Math.Ceiling(displayHeight * renderScale);
+                targetH = Math.Clamp(targetH, 1, portraitFull.PixelSize.Height);
+                if (Portrait != null && portraitRasterHeight == targetH) {
+                    return;
+                }
+                Bitmap next;
+                if (targetH >= portraitFull.PixelSize.Height) {
+                    next = portraitFull;
+                } else {
+                    int targetW = Math.Max(1, (int)Math.Round(
+                        targetH * portraitFull.PixelSize.Width / (double)portraitFull.PixelSize.Height));
+                    next = portraitFull.CreateScaledBitmap(
+                        new PixelSize(targetW, targetH),
+                        BitmapInterpolationMode.HighQuality);
+                }
+                if (!ReferenceEquals(Portrait, portraitFull) && Portrait != null) {
+                    Portrait.Dispose();
+                }
+                Portrait = next;
+                portraitRasterHeight = targetH;
             }
-            int targetWidth = (int)Math.Round(targetHeight * Portrait.Size.Width / Portrait.Size.Height);
-            if (targetWidth == 0) {
-                targetWidth = 1;
-            }
-            return Portrait.CreateScaledBitmap(new PixelSize(targetWidth, targetHeight));
+            this.RaisePropertyChanged(nameof(Portrait));
         }
 
         private void LoadPortrait(UPart? part, UProject? project) {
             if (part == null || project == null) {
                 lock (portraitLock) {
-                    Avatar = null;
-                    Portrait = null;
+                    DisposePortraitBitmaps();
                     portraitSource = null;
                 }
                 return;
@@ -744,40 +777,51 @@ namespace OpenUtau.App.ViewModels {
             }
             if (singer == null || string.IsNullOrEmpty(singer.Portrait) || !Preferences.Default.ShowPortrait) {
                 lock (portraitLock) {
-                    Portrait = null;
+                    DisposePortraitBitmaps();
                     portraitSource = null;
                 }
                 return;
             }
-            if (portraitSource != singer.Portrait) {
-                lock (portraitLock) {
-                    Portrait?.Dispose();
-                    Portrait = null;
-                    portraitSource = null;
-                }
-                PortraitMask = new SolidColorBrush(Avalonia.Media.Colors.White, singer.PortraitOpacity);
-                Task.Run(() => {
-                    lock (portraitLock) {
-                        try {
-                            var data = singer.LoadPortrait();
-                            if (data == null) {
-                                Portrait = null;
-                                portraitSource = null;
-                            } else {
-                                using (var stream = new MemoryStream(data)) {
-                                    Portrait = ResizePortrait(new Bitmap(stream), singer.PortraitHeight);
-                                    portraitSource = singer.Portrait;
-                                }
+            if (portraitSource == singer.Portrait && portraitFull != null) {
+                return;
+            }
+            var portraitKey = singer.Portrait;
+            var portraitOpacity = singer.PortraitOpacity;
+            var portraitHeight = singer.PortraitHeight;
+            PortraitMask = new SolidColorBrush(Avalonia.Media.Colors.White, portraitOpacity);
+            Task.Run(() => {
+                Bitmap? loaded = null;
+                try {
+                    var data = singer.LoadPortrait();
+                    if (data != null) {
+                        using var stream = new MemoryStream(data);
+                        loaded = new Bitmap(stream);
+                        if (portraitHeight > 0) {
+                            var scaled = ScalePortraitToHeight(loaded, portraitHeight);
+                            if (!ReferenceEquals(scaled, loaded)) {
+                                loaded.Dispose();
+                                loaded = scaled;
                             }
-                        } catch (Exception e) {
-                            Portrait?.Dispose();
-                            Portrait = null;
-                            portraitSource = null;
-                            Log.Error(e, $"Failed to load Portrait {singer.Portrait}");
                         }
                     }
+                } catch (Exception e) {
+                    loaded?.Dispose();
+                    loaded = null;
+                    Log.Error(e, $"Failed to load Portrait {portraitKey}");
+                }
+                var bitmap = loaded;
+                Dispatcher.UIThread.Post(() => {
+                    lock (portraitLock) {
+                        DisposePortraitBitmaps();
+                        portraitFull = bitmap;
+                        Portrait = bitmap;
+                        portraitRasterHeight = bitmap?.PixelSize.Height ?? 0;
+                        portraitSource = bitmap == null ? null : portraitKey;
+                    }
+                    this.RaisePropertyChanged(nameof(Portrait));
+                    MessageBus.Current.SendMessage(new PianorollRefreshEvent("Portrait"));
                 });
-            }
+            });
         }
         private void LoadWindowTitle(UPart? part, UProject? project) {
             if (part == null || project == null) {
