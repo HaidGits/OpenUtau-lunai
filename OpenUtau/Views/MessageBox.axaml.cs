@@ -252,12 +252,17 @@ namespace OpenUtau.App.Views {
             return ThemeManager.AccentBrush1;
         }
 
+        private static string TrimTrailingUrlPunctuation(string url) {
+            return url.TrimEnd('.', ',', ';', '!', '?', ')', ']', '>', '"', '\'');
+        }
+
         private void SetTextWithLink(string text, StackPanel textPanel, IBrush? linkBrush) {
-            var regex = new Regex(@"http(s)?://[^(\r\n|\n| )]+", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            var regex = new Regex(@"https?://[^\s]+", RegexOptions.IgnoreCase | RegexOptions.Singleline);
             var match = regex.Match(text);
             if (match.Success) {
                 textPanel.Children.Add(new TextBlock { Text = text.Substring(0, match.Index), TextAlignment = Avalonia.Media.TextAlignment.Center });
-                var url = match.Value.Trim();
+                var rawUrl = match.Value;
+                var url = TrimTrailingUrlPunctuation(rawUrl);
                 var hyperlink = new Button {
                     HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
                     Background = Brushes.Transparent,
@@ -274,7 +279,8 @@ namespace OpenUtau.App.Views {
                 hyperlink.Click += OnUrlClick;
                 textPanel.Children.Add(hyperlink);
 
-                SetTextWithLink(text.Substring(match.Index + match.Length), textPanel, linkBrush);
+                var trailing = rawUrl.Substring(url.Length) + text.Substring(match.Index + match.Length);
+                SetTextWithLink(trailing, textPanel, linkBrush);
             } else {
                 if (!string.IsNullOrEmpty(text)) {
                     textPanel.Children.Add(new TextBlock { Text = text, TextAlignment = Avalonia.Media.TextAlignment.Center });
