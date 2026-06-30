@@ -14,6 +14,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 using OpenUtau.App.Helpers;
 using OpenUtau.App.ViewModels;
@@ -59,6 +60,9 @@ namespace OpenUtau.App.Controls {
         private double dockPanelResizeStartWidth;
         private bool compositionRenderingHooked;
         private DateTime pitchFollowRenderLastUtc;
+        private bool portraitUpdateQueued;
+        private bool updatingPortrait;
+        private double lastPortraitSpanHeight = -1;
 
         private bool isSelectingRange;
         private Point rangeSelectStartPoint = default;
@@ -108,6 +112,7 @@ namespace OpenUtau.App.Controls {
                 ScheduleApplyPianoRollScrollStyle();
                 ScheduleUpdateDetachedLayout();
                 SchedulePreloadAppearancePane();
+                QueueUpdatePortraitPosition();
                 if (!compositionRenderingHooked) {
                     compositionRenderingHooked = true;
                     ViewModel.NotesViewModel.NotifyPitchFollowRendering(true);
@@ -123,13 +128,63 @@ namespace OpenUtau.App.Controls {
             };
             MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
                 .Subscribe(_ => ScheduleApplyPianoRollScrollStyle());
+            MessageBus.Current.Listen<PianorollRefreshEvent>()
+                .Subscribe(e => {
+                    if (e.refreshItem is "Portrait" or "Layout") {
+                        QueueUpdatePortraitPosition();
+                    }
+                });
+            ViewModel.NotesViewModel.WhenAnyValue(x => x.Portrait)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => QueueUpdatePortraitPosition());
+            ViewModel.NotesViewModel.WhenAnyValue(
+                    x => x.ShowExpressions,
+                    x => x.PhonemePanelDetached,
+                    x => x.PhonemePanelHeight)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => QueueUpdatePortraitPosition());
 
             ScheduleUpdateDetachedLayout();
-            this.LayoutUpdated += PianoRollLayoutUpdated;
+            SizeChanged += OnPortraitLayoutChanged;
+            WorkspaceDockGrid.SizeChanged += OnPortraitLayoutChanged;
+            WorkspaceDockGrid.LayoutUpdated += OnWorkspaceDockLayoutUpdated;
+            PianoRollMainBorder.SizeChanged += OnPortraitLayoutChanged;
+            PhonemePanelBorder.SizeChanged += OnPortraitLayoutChanged;
+            ExpPanelBorder.SizeChanged += OnPortraitLayoutChanged;
+            NotesCanvas.SizeChanged += OnPortraitLayoutChanged;
         }
 
-        private void PianoRollLayoutUpdated(object? sender, EventArgs e) {
-            UpdatePortraitPosition();
+        void OnPortraitLayoutChanged(object? sender, SizeChangedEventArgs e) => QueueUpdatePortraitPosition();
+
+        void OnWorkspaceDockLayoutUpdated(object? sender, EventArgs e) {
+            if (updatingPortrait || !TryMeasurePortraitSpan(out double spanHeight)) {
+                return;
+            }
+            if (Math.Abs(spanHeight - lastPortraitSpanHeight) < 0.5) {
+                return;
+            }
+            QueueUpdatePortraitPosition();
+        }
+
+        void QueueUpdatePortraitPosition() {
+            if (portraitUpdateQueued) {
+                return;
+            }
+            portraitUpdateQueued = true;
+            Dispatcher.UIThread.Post(() => {
+                portraitUpdateQueued = false;
+                if (updatingPortrait) {
+                    portraitUpdateQueued = true;
+                    Dispatcher.UIThread.Post(() => QueueUpdatePortraitPosition(), DispatcherPriority.Render);
+                    return;
+                }
+                updatingPortrait = true;
+                try {
+                    UpdatePortraitPosition();
+                } finally {
+                    updatingPortrait = false;
+                }
+            }, DispatcherPriority.Render);
         }
 
         void SchedulePitchFollowAnimationFrame() {
@@ -160,10 +215,147 @@ namespace OpenUtau.App.Controls {
             SchedulePitchFollowAnimationFrame();
         }
 
+        protected override Size MeasureOverride(Size availableSize) {
+            var measured = base.MeasureOverride(availableSize);
+            if (double.IsPositiveInfinity(availableSize.Height)) {
+                return measured;
+            }
+            return new Size(
+                double.IsPositiveInfinity(availableSize.Width) ? measured.Width : availableSize.Width,
+                availableSize.Height);
+        }
+
+        bool TryMeasurePortraitSpan(out double spanHeight) {
+            spanHeight = 0;
+            if (!Preferences.Default.ShowPortrait || ViewModel?.NotesViewModel?.Portrait == null) {
+                return false;
+            }
+            if (!TryGetBoundsIn(WorkspaceDockGrid, NotesCanvas, out var notesRect)) {
+                return false;
+            }
+            if (!TryGetBoundsIn(WorkspaceDockGrid, GetPortraitBottomVisual(), out var bottomRect)) {
+                return false;
+            }
+            spanHeight = bottomRect.Bottom - notesRect.Top;
+            return spanHeight > 1;
+        }
+
         private void UpdatePortraitPosition() {
-            if (PortraitImage.DesiredSize.Width == 0 || PortraitCanvas.Bounds.Width == 0) return;
-            Canvas.SetTop(PortraitImage, 0);
-            Canvas.SetLeft(PortraitImage, PortraitCanvas.Bounds.Width - PortraitImage.DesiredSize.Width - 100);
+            const double rightPad = 100;
+            var portrait = ViewModel?.NotesViewModel?.Portrait;
+            bool show = Preferences.Default.ShowPortrait && portrait != null;
+            if (!show || WorkspaceDockGrid.Bounds.Width <= 0) {
+                lastPortraitSpanHeight = -1;
+                SetPortraitLayersVisible(false);
+                return;
+            }
+            if (!TryGetBoundsIn(WorkspaceDockGrid, NotesCanvas, out var notesRect)) {
+                SetPortraitLayersVisible(false);
+                return;
+            }
+            var bottomVisual = GetPortraitBottomVisual();
+            if (!TryGetBoundsIn(WorkspaceDockGrid, bottomVisual, out var bottomRect)) {
+                SetPortraitLayersVisible(false);
+                return;
+            }
+            double spanTop = notesRect.Top;
+            double spanHeight = bottomRect.Bottom - spanTop;
+            if (spanHeight <= 1) {
+                SetPortraitLayersVisible(false);
+                return;
+            }
+            double renderScale = TopLevel.GetTopLevel(this)?.RenderScaling ?? 1.0;
+            ViewModel!.NotesViewModel.EnsurePortraitForDisplayHeight(spanHeight, renderScale);
+            portrait = ViewModel.NotesViewModel.Portrait;
+            if (portrait == null) {
+                SetPortraitLayersVisible(false);
+                return;
+            }
+            lastPortraitSpanHeight = spanHeight;
+            var size = portrait.PixelSize;
+            if (size.Height <= 0) {
+                SetPortraitLayersVisible(false);
+                return;
+            }
+            double aspect = size.Width / (double)size.Height;
+            double imgHeight = spanHeight;
+            double imgWidth = imgHeight * aspect;
+            double imgLeft = notesRect.Right - imgWidth - rightPad;
+            var portraitRect = new Rect(imgLeft, spanTop, imgWidth, imgHeight);
+
+            var notesVm = ViewModel!.NotesViewModel;
+            UpdatePortraitLayer(PortraitLayerNotes, PortraitImageNotes, portraitRect, NotesCanvas, true);
+            UpdatePortraitLayer(
+                PortraitLayerPhoneme,
+                PortraitImagePhoneme,
+                portraitRect,
+                PhonemeNotesArea,
+                notesVm.PhonemePanelDetached);
+            UpdatePortraitLayer(
+                PortraitLayerExp,
+                PortraitImageExp,
+                portraitRect,
+                ExpNotesArea,
+                notesVm.ShowExpressions);
+        }
+
+        void SetPortraitLayersVisible(bool visible) {
+            PortraitLayerNotes.IsVisible = visible;
+            PortraitImageNotes.IsVisible = visible;
+            PortraitLayerPhoneme.IsVisible = visible;
+            PortraitImagePhoneme.IsVisible = visible;
+            PortraitLayerExp.IsVisible = visible;
+            PortraitImageExp.IsVisible = visible;
+        }
+
+        void UpdatePortraitLayer(
+                Canvas layer,
+                Image image,
+                Rect portraitRect,
+                Visual anchor,
+                bool active) {
+            layer.IsVisible = active;
+            image.IsVisible = active;
+            if (!active) {
+                return;
+            }
+            if (!TryGetBoundsIn(WorkspaceDockGrid, layer, out var layerRect)
+                    && !TryGetBoundsIn(WorkspaceDockGrid, anchor, out layerRect)) {
+                layer.IsVisible = false;
+                image.IsVisible = false;
+                return;
+            }
+            double left = portraitRect.Left - layerRect.Left;
+            double top = portraitRect.Top - layerRect.Top;
+            image.Width = portraitRect.Width;
+            image.Height = portraitRect.Height;
+            Canvas.SetLeft(image, left);
+            Canvas.SetTop(image, top);
+        }
+
+        Visual GetPortraitBottomVisual() {
+            if (ViewModel.NotesViewModel.ShowExpressions) {
+                return ExpPanelBorder;
+            }
+            if (ViewModel.NotesViewModel.PhonemePanelDetached) {
+                return PhonemePanelBorder;
+            }
+            return PianoRollMainBorder;
+        }
+
+        static bool TryGetBoundsIn(Visual root, Visual? target, out Rect bounds) {
+            bounds = default;
+            if (target == null) {
+                return false;
+            }
+            var transform = target.TransformToVisual(root);
+            if (transform == null) {
+                return false;
+            }
+            var topLeft = transform.Value.Transform(new Point(0, 0));
+            var bottomRight = transform.Value.Transform(new Point(target.Bounds.Width, target.Bounds.Height));
+            bounds = new Rect(topLeft, bottomRight);
+            return bounds.Height > 0.5 && bounds.Width > 0.5;
         }
 
         void SchedulePreloadAppearancePane() {

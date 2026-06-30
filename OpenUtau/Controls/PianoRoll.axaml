@@ -55,7 +55,7 @@
             PointerPressed="AppearancePanelResizePointerPressed"
             PointerMoved="AppearancePanelResizePointerMoved"
             PointerReleased="AppearancePanelResizePointerReleased"/>
-    <Grid Grid.Column="6">
+    <Grid x:Name="WorkspaceDockGrid" Grid.Column="6">
       <Grid.RowDefinitions>
         <RowDefinition Height="*"/>
         <RowDefinition Height="{Binding NotesViewModel.ExpGapGridLength}"/>
@@ -70,7 +70,7 @@
           <RowDefinition Height="{Binding NotesViewModel.PhonemePanelOuterGridLength}"
                          MinHeight="{Binding NotesViewModel.PhonemePanelOuterMinHeight}"/>
         </Grid.RowDefinitions>
-    <Border Grid.Row="0" Classes="workspaceCard workspaceDockPianoRoll workspaceDockPianoRollMain"
+    <Border x:Name="PianoRollMainBorder" Grid.Row="0" Classes="workspaceCard workspaceDockPianoRoll workspaceDockPianoRollMain"
             Classes.FlushRight="{Binding NotesViewModel.NotePropsHidden}">
     <Grid>
       <Grid.RowDefinitions>
@@ -207,6 +207,13 @@
                          KeyIsMajor="{Binding KeyIsMajor}"
                          ShowKeyScale="{Binding ShowKeyScale}"
                          IsPianoRoll="True"/>
+      <Canvas x:Name="PortraitLayerNotes" Grid.Row="2" Grid.Column="1" ZIndex="0"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              IsHitTestVisible="False" ClipToBounds="True">
+        <Image x:Name="PortraitImageNotes" Source="{Binding NotesViewModel.Portrait}"
+               OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"
+               RenderOptions.BitmapInterpolationMode="HighQuality"/>
+      </Canvas>
       <c:TickBackground Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" IsHitTestVisible="False"
                         Foreground="{DynamicResource TickLineBrush}"
                         Background="{DynamicResource TickLineBrushLow}"
@@ -237,9 +244,6 @@
                    IsHitTestVisible="False"
                    IsVisible="{Binding NotesViewModel.ShowThinPlayPosLine, Mode=OneWay}"
                    Fill="{DynamicResource PlaybackLineSolidBrush}"/>
-      </Canvas>
-      <Canvas Name="PortraitCanvas" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" IsHitTestVisible="False">
-        <Image Name="PortraitImage" Source="{Binding NotesViewModel.Portrait}" OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"/>
       </Canvas>
       <Border Grid.Row="2" Grid.Column="1" ZIndex="0"
               HorizontalAlignment="Stretch" VerticalAlignment="Bottom" ClipToBounds="True"
@@ -707,7 +711,7 @@
                 PointerPressed="PhonemePanelResizePointerPressed"
                 PointerMoved="PhonemePanelResizePointerMoved"
                 PointerReleased="PhonemePanelResizePointerReleased"/>
-        <Border Grid.Row="2" Classes="workspaceCard workspaceDockPianoRollPhoneme"
+        <Border x:Name="PhonemePanelBorder" Grid.Row="2" Classes="workspaceCard workspaceDockPianoRollPhoneme"
                 Classes.FlushRight="{Binding NotesViewModel.NotePropsHidden}"
                 IsVisible="{Binding NotesViewModel.PhonemePanelDetached}">
       <Grid x:Name="PhonemePanelGrid">
@@ -717,7 +721,14 @@
           <ColumnDefinition Width="16"/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Background="{DynamicResource WorkspaceCardBrush}"/>
-        <Grid Grid.Column="1" Background="{DynamicResource WorkspaceCardBrush}" ClipToBounds="True">
+        <Grid x:Name="PhonemeNotesArea" Grid.Column="1" Background="{DynamicResource WorkspaceCardBrush}" ClipToBounds="True">
+          <Canvas x:Name="PortraitLayerPhoneme" ZIndex="0"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  IsHitTestVisible="False" ClipToBounds="True">
+            <Image x:Name="PortraitImagePhoneme" Source="{Binding NotesViewModel.Portrait}"
+                   OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+          </Canvas>
           <c:TickBackground IsHitTestVisible="False"
                             Foreground="{DynamicResource TickLineBrush}"
                             Background="{DynamicResource TickLineBrushLow}"
@@ -743,7 +754,7 @@
       <GridSplitter Grid.Row="1" ResizeDirection="Rows" Height="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Background="Transparent" IsVisible="{Binding NotesViewModel.ShowExpressions}"
                     Focusable="False" Cursor="SizeNorthSouth"/>
-    <Border Grid.Row="2" Classes="workspaceCard workspaceDockPianoRollExp"
+    <Border x:Name="ExpPanelBorder" Grid.Row="2" Classes="workspaceCard workspaceDockPianoRollExp"
             Classes.FlushRight="{Binding NotesViewModel.NotePropsHidden}"
             IsVisible="{Binding NotesViewModel.ShowExpressions}">
       <Grid x:Name="ExpPanelGrid">
@@ -816,7 +827,14 @@
             </StackPanel>
           </Grid>
         </Border>
-        <Grid Grid.Row="1" Grid.Column="1" Background="{DynamicResource BackgroundBrush}" ClipToBounds="True">
+        <Grid x:Name="ExpNotesArea" Grid.Row="1" Grid.Column="1" Background="{DynamicResource BackgroundBrush}" ClipToBounds="True">
+          <Canvas x:Name="PortraitLayerExp" ZIndex="0"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  IsHitTestVisible="False" ClipToBounds="True">
+            <Image x:Name="PortraitImageExp" Source="{Binding NotesViewModel.Portrait}"
+                   OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+          </Canvas>
           <c:TickBackground IsHitTestVisible="False"
                             Foreground="{DynamicResource TickLineBrush}"
                             Background="{DynamicResource TickLineBrushLow}"
