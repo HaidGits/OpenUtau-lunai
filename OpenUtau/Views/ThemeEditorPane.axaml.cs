@@ -103,7 +103,7 @@ namespace OpenUtau.App.Views {
 
             }
 
-            WorkspaceScrollbarHelper.ApplyScrollViewer(ContentScroll, !Preferences.Default.UseOverlayScrollbars);
+            WorkspaceScrollbarHelper.ApplyScrollViewer(ContentScroll, WorkspaceScrollbarHelper.UseClassicScrollbars);
 
         }
 

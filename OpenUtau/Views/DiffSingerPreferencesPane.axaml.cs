@@ -44,7 +44,7 @@ namespace OpenUtau.App.Views {
             if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
                 return;
             }
-            WorkspaceScrollbarHelper.ApplyScrollViewer(ContentScroll, !Preferences.Default.UseOverlayScrollbars);
+            WorkspaceScrollbarHelper.ApplyScrollViewer(ContentScroll, WorkspaceScrollbarHelper.UseClassicScrollbars);
         }
 
         bool IsHostedInPianoRollDock() {

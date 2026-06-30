@@ -142,7 +142,6 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool ShowNoteBorder { get; set; }
         [Reactive] public bool SolidTickGridLines { get; set; }
         [Reactive] public bool SolidExpPanelGridLines { get; set; }
-        [Reactive] public bool UseOverlayScrollbars { get; set; }
         [Reactive] public double NoteCornerRadius { get; set; }
         [Reactive] public bool ThemeEditable { get; set; }
         public List<string> ThemeItems => ThemeManager.GetAvailableThemes();
@@ -570,7 +569,6 @@ namespace OpenUtau.App.ViewModels {
             ShowNoteBorder = Preferences.Default.ShowNoteBorder;
             SolidTickGridLines = Preferences.Default.SolidTickGridLines;
             SolidExpPanelGridLines = Preferences.Default.SolidExpPanelGridLines;
-            UseOverlayScrollbars = Preferences.Default.UseOverlayScrollbars;
             NoteCornerRadius = Math.Clamp(Preferences.Default.NoteCornerRadius, 0, 12);
             Beta = Preferences.Default.Beta;
             LyricsHelper = LyricsHelpers.FirstOrDefault(option => option.klass.Equals(ActiveLyricsHelper.Inst.GetPreferred()));
@@ -781,14 +779,6 @@ namespace OpenUtau.App.ViewModels {
                     Preferences.Default.SolidExpPanelGridLines = solid;
                     Preferences.Save();
                     MessageBus.Current.SendMessage(new ExpressionCurveStyleChangedEvent());
-                });
-            this.WhenAnyValue(vm => vm.UseOverlayScrollbars)
-                .Skip(1)
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Subscribe(overlay => {
-                    Preferences.Default.UseOverlayScrollbars = overlay;
-                    Preferences.Save();
-                    MessageBus.Current.SendMessage(new ScrollbarsStyleChangedEvent());
                 });
             this.WhenAnyValue(vm => vm.NoteCornerRadius)
                 .ObserveOn(RxApp.MainThreadScheduler)

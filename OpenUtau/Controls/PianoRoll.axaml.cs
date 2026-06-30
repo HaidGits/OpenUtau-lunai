@@ -369,7 +369,7 @@ namespace OpenUtau.App.Controls {
             if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
                 return;
             }
-            bool classic = !Preferences.Default.UseOverlayScrollbars;
+            bool classic = WorkspaceScrollbarHelper.UseClassicScrollbars;
             if (VScrollBar.Parent is Grid pianoGrid && pianoGrid.ColumnDefinitions.Count > 2) {
                 pianoGrid.ColumnDefinitions[2].Width = classic ? new GridLength(16) : new GridLength(0);
             }

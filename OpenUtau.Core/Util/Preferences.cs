@@ -27,7 +27,14 @@ namespace OpenUtau.Core.Util {
             return string.IsNullOrWhiteSpace(name) ? "Blue" : name;
         }
 
+        static void EnsureOverlayScrollbars() {
+            if (Default != null) {
+                Default.UseOverlayScrollbars = true;
+            }
+        }
+
         public static void Save() {
+            EnsureOverlayScrollbars();
             try {
                 File.WriteAllText(PathManager.Inst.PrefsFilePath,
                     JsonConvert.SerializeObject(Default, Formatting.Indented),
@@ -53,6 +60,7 @@ namespace OpenUtau.Core.Util {
             } catch(Exception e){
                 Log.Error(e, "failed to load prefs-default.json");
             }
+            EnsureOverlayScrollbars();
             Save();
         }
 
@@ -169,6 +177,7 @@ namespace OpenUtau.Core.Util {
                 Log.Error(e, "Failed to load prefs.");
                 Default = new SerializablePreferences();
             }
+            EnsureOverlayScrollbars();
         }
 
         private static bool ValidString(Action action) {
@@ -195,7 +204,7 @@ namespace OpenUtau.Core.Util {
             public int MetronomeVolume = 60;
             public int MetronomeHighFrequency = 2200;
             public int MetronomeLowFrequency = 1320;
-            public string ThemeName = "Light";
+            public string ThemeName = "Dark";
             public bool PenPlusDefault = false;
             public int DegreeStyle;
             public bool ShowKeyScaleOnPianoRoll = false;
@@ -261,8 +270,8 @@ namespace OpenUtau.Core.Util {
             public bool SolidTickGridLines = true;
             /// <summary>When true, dashed default-value and preview curves in the expression panel are drawn solid.</summary>
             public bool SolidExpPanelGridLines = true;
-            /// <summary>When true, thin overlay scrollbars; when false, classic dedicated-track scrollbars (default).</summary>
-            public bool UseOverlayScrollbars = false;
+            /// <summary>Always true; classic scrollbars are not exposed in the UI yet.</summary>
+            public bool UseOverlayScrollbars = true;
             /// <summary>Corner radius in pixels for piano-roll notes and phonemizer badges (0 = square).</summary>
             public double NoteCornerRadius = 6;
             public EditTool EditTool = new EditTool();

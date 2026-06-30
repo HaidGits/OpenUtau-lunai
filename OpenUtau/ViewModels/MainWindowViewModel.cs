@@ -93,7 +93,6 @@ namespace OpenUtau.App.ViewModels {
         GridLength savedPianoRollRowHeight = new GridLength(3, GridUnitType.Star);
         public GridLength PianoRollSplitterRowHeight =>
             ShowPianoRoll && !PianoRollFullscreen ? new GridLength(8) : new GridLength(0);
-        [Reactive] public bool UseOverlayScrollbars { get; private set; }
         public ReactiveCommand<UPart, Unit> PartDeleteCommand { get; set; }
         public ReactiveCommand<int, Unit>? AddTempoChangeCmd { get; set; }
         public ReactiveCommand<int, Unit>? DelTempoChangeCmd { get; set; }
@@ -173,13 +172,6 @@ namespace OpenUtau.App.ViewModels {
                     this.RaisePropertyChanged(nameof(PianoRollSplitterRowHeight));
                     this.RaisePropertyChanged(nameof(TracksRowMinHeight));
                 });
-            RefreshScrollbarStylePreference();
-            MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
-                .Subscribe(_ => RefreshScrollbarStylePreference());
-        }
-
-        public void RefreshScrollbarStylePreference() {
-            UseOverlayScrollbars = Preferences.Default.UseOverlayScrollbars;
         }
 
         public void Undo() {

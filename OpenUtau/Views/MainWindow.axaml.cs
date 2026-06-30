@@ -156,8 +156,7 @@ namespace OpenUtau.App.Views {
             if (!WorkspaceScrollbarHelper.IsInVisualTree(VScrollBar)) {
                 return;
             }
-            bool classic = !Preferences.Default.UseOverlayScrollbars;
-            viewModel.RefreshScrollbarStylePreference();
+            bool classic = WorkspaceScrollbarHelper.UseClassicScrollbars;
             if (TracksHScrollBar.Parent is Grid tracksGrid) {
                 if (tracksGrid.RowDefinitions.Count > 2) {
                     tracksGrid.RowDefinitions[2].Height = classic ? new GridLength(24) : new GridLength(0);

@@ -14,6 +14,9 @@ namespace OpenUtau.App.Controls {
         public const double OverlayThumbThickness = 8;
         public const double OverlayBarThickness = 10;
 
+        /// <summary>Classic dedicated-track scrollbars are disabled; overlay mode is always used.</summary>
+        public static bool UseClassicScrollbars => false;
+
         sealed class DockPanelScrollTag {
             public bool Classic;
         }
