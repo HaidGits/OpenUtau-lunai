@@ -95,10 +95,10 @@
                 SelectedItem="{Binding ApplyPortamentoPreset}" HorizontalAlignment="Stretch"/>
             </Grid>
             <Grid ColumnDefinitions="132,*,20,*">
-              <Button Grid.Column="1" Classes="workspacePanelButton" Content="{DynamicResource notedefaults.preset.save}"
+              <Button Grid.Column="1" Classes="workspacePanelButton" Content="{DynamicResource button.save}"
                       HorizontalAlignment="Stretch" Click="OnSavePortamentoPreset"
                       ToolTip.Tip="{DynamicResource notedefaults.preset.save.tooltip}"/>
-              <Button Grid.Column="3" Classes="workspacePanelButton" Content="{DynamicResource notedefaults.preset.remove}"
+              <Button Grid.Column="3" Classes="workspacePanelButton" Content="{DynamicResource button.remove}"
                       HorizontalAlignment="Stretch" Command="{Binding RemoveAppliedPortamentoPreset}"
                       ToolTip.Tip="{DynamicResource notedefaults.preset.remove.tooltip}"/>
             </Grid>
@@ -144,10 +144,10 @@
                 SelectedItem="{Binding ApplyVibratoPreset}" HorizontalAlignment="Stretch" />
             </Grid>
             <Grid ColumnDefinitions="132,*,20,*">
-              <Button Grid.Column="1" Classes="workspacePanelButton" Content="{DynamicResource notedefaults.preset.save}"
+              <Button Grid.Column="1" Classes="workspacePanelButton" Content="{DynamicResource button.save}"
                       HorizontalAlignment="Stretch" Click="OnSaveVibratoPreset"
                       ToolTip.Tip="{DynamicResource notedefaults.preset.save.tooltip}"/>
-              <Button Grid.Column="3" Classes="workspacePanelButton" Content="{DynamicResource notedefaults.preset.remove}"
+              <Button Grid.Column="3" Classes="workspacePanelButton" Content="{DynamicResource button.remove}"
                 HorizontalAlignment="Stretch" Command="{Binding RemoveAppliedVibratoPreset}"
                 ToolTip.Tip="{DynamicResource notedefaults.preset.remove.tooltip}"/>
             </Grid>
