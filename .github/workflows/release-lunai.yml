@@ -165,14 +165,7 @@ jobs:
       # macOS specific
       - name: Create macOS DMG
         if: matrix.arch.os == 'osx'
-        run: |
-          cp OpenUtau/Assets/OpenUtau.icns bin/${{ matrix.arch.name }}/publish/OpenUtau.app/Contents/Resources/
-          rm -f OpenUtau-${{ matrix.arch.name }}.dmg *.dmg
-          hdiutil detach "/Volumes/OpenUtau" -force 2>/dev/null || true
-          npm install -g create-dmg
-          create-dmg "bin/${{ matrix.arch.name }}/publish/OpenUtau.app" || true
-          mv *.dmg "OpenUtau-${{ matrix.arch.name }}.dmg"
-          codesign -fvs - "OpenUtau-${{ matrix.arch.name }}.dmg"
+        run: bash scripts/create-macos-dmg.sh ${{ matrix.arch.name }}
 
       # Create Appimage
       - name: Install LinuxDeploy

@@ -150,12 +150,7 @@ jobs:
 
       # Create Dmg
       - name: Create Dmg
-        run: |
-          npm install -g create-dmg
-          cp OpenUtau/Assets/OpenUtau.icns bin/${{ matrix.arch.name }}/publish/OpenUtau.app/Contents/Resources/
-          create-dmg bin/${{ matrix.arch.name }}/publish/OpenUtau.app || true
-          mv *.dmg OpenUtau-${{ matrix.arch.name }}.dmg
-          codesign -fvs - OpenUtau-${{ matrix.arch.name }}.dmg
+        run: bash scripts/create-macos-dmg.sh ${{ matrix.arch.name }}
         if: ${{ matrix.arch.os == 'osx' }}
 
       # Create Appimage
