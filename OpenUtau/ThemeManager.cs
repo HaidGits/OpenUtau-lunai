@@ -80,6 +80,7 @@ namespace OpenUtau.App {
 
         /// <summary>Theme values for CenterKey/BlackKey colors, restored when UseTrackColor is off.</summary>
         private static Color? s_defaultCenterKeyColorLeft;
+        private static string lastPianorollTrackColor = "Blue";
         private static Color? s_defaultCenterKeyColorRight;
         private static Color? s_defaultCenterKeyNameColor;
         private static Color? s_defaultBlackKeyColorLeft;
@@ -238,10 +239,17 @@ namespace OpenUtau.App {
             if (resDict.TryGetResource("BlackKeyColorRight", themeVariant, out outVar) && outVar is Color bkr) { s_defaultBlackKeyColorRight = bkr; }
             SetKeyboardBrush();
             TextLayoutCache.Clear();
+            ApplyPianorollColorCore(lastPianorollTrackColor);
             MessageBus.Current.SendMessage(new ThemeChangedEvent());
         }
 
         public static void ChangePianorollColor(string color) {
+            lastPianorollTrackColor = color;
+            ApplyPianorollColorCore(color);
+            MessageBus.Current.SendMessage(new ThemeChangedEvent());
+        }
+
+        static void ApplyPianorollColorCore(string color) {
             if (Application.Current == null) {
                 return;
             }
@@ -293,7 +301,6 @@ namespace OpenUtau.App {
 
                 SetKeyboardBrush();
             } catch { }
-            MessageBus.Current.SendMessage(new ThemeChangedEvent());
         }
         private static void SetKeyboardBrush() {
             if (Application.Current == null) {

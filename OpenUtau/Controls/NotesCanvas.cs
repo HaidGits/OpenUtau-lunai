@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
+using OpenUtau.App;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Core;
 using OpenUtau.Core.DiffSinger;
@@ -231,6 +232,8 @@ namespace OpenUtau.App.Controls {
                 });
             MessageBus.Current.Listen<PartRefreshEvent>()
                 .Subscribe(_ => RefreshGhostNotes());
+            MessageBus.Current.Listen<ThemeChangedEvent>()
+                .Subscribe(_ => InvalidateVisual());
             this.WhenAnyValue(x => x.Part)
                 .Subscribe(_ => RefreshGhostNotes());
         }

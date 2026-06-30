@@ -12,6 +12,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using DynamicData;
 using DynamicData.Binding;
+using OpenUtau.App;
 using OpenUtau.App.Controls;
 using OpenUtau.App.Views;
 using OpenUtau.Core;
@@ -538,6 +539,8 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(e => {
                     DocManager.Inst.NotesClipboard?.Clear();
                 });
+            MessageBus.Current.Listen<ThemeChangedEvent>()
+                .Subscribe(_ => RefreshTrackColorBrushes(Part, Project));
         }
 
         private void UpdateSnapDiv() {
@@ -787,19 +790,24 @@ namespace OpenUtau.App.ViewModels {
         }
 
         private void LoadTrackColor(UPart? part, UProject? project) {
+            RefreshTrackColorBrushes(part, project);
+            string name = part == null || project == null
+                ? "Blue"
+                : Preferences.Default.UseTrackColor
+                    ? project.tracks[part.trackNo].TrackColor
+                    : "Blue";
+            ThemeManager.ChangePianorollColor(name);
+        }
+
+        private void RefreshTrackColorBrushes(UPart? part, UProject? project) {
             if (part == null || project == null) {
                 TrackAccentColor = ThemeManager.GetTrackColor("Blue").AccentColor;
                 TrackNoteColor = new SolidColorBrush(ThemeManager.GetTrackColor("Blue").NoteColor.Color) { Opacity = 0.5 };
-                ThemeManager.ChangePianorollColor("Blue");
                 return;
             }
             var trackColor = ThemeManager.GetTrackColor(project.tracks[part.trackNo].TrackColor);
             TrackAccentColor = trackColor.AccentColor;
             TrackNoteColor = new SolidColorBrush(trackColor.NoteColor.Color) { Opacity = 0.5 };
-            string name = Preferences.Default.UseTrackColor
-                ? project.tracks[part.trackNo].TrackColor
-                : "Blue";
-            ThemeManager.ChangePianorollColor(name);
         }
 
         private void UnloadPart() {
