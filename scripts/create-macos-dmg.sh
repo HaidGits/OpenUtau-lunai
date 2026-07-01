@@ -28,6 +28,7 @@ rm -f "${OUT}" *.dmg
 hdiutil detach "/Volumes/OpenUtau" -force 2>/dev/null || true
 
 npm install -g create-dmg
-create-dmg "${APP}"
+create-dmg --no-code-sign "${APP}"
 mv *.dmg "${OUT}"
-codesign -fvs - "${OUT}"
+# Ad-hoc sign when no Developer ID is available (e.g. GitHub Actions).
+codesign -fvs - "${OUT}" || true
