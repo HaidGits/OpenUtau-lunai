@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:OpenUtau.App.ViewModels"
+        xmlns:models="using:OpenUtau.App.Models"
+        mc:Ignorable="d"
+        x:Class="OpenUtau.App.Views.AboutDialog"
+        x:DataType="vm:AboutViewModel"
+        x:Name="AboutRoot"
+        Width="560" Height="680" MinWidth="480" MinHeight="520"
+        CanResize="True" WindowStartupLocation="CenterOwner"
+        Icon="/Assets/open-utau.ico"
+        Title="{DynamicResource dialogs.about.caption}"
+        Opened="OnOpened">
+  <Grid RowDefinitions="Auto,*,Auto,Auto" Margin="20">
+    <StackPanel Grid.Row="0" Spacing="8" HorizontalAlignment="Center" Margin="0,0,0,12">
+      <Image Width="72" Height="72" Source="/Assets/open-utau.ico"/>
+      <Image Height="44" Source="/Assets/logotype.png" IsVisible="{Binding !IsDarkMode}"/>
+      <Image Height="44" Source="/Assets/logotype-w.png" IsVisible="{Binding IsDarkMode}"/>
+      <TextBlock Text="{Binding AppVersion}" TextAlignment="Center"/>
+    </StackPanel>
+
+    <ScrollViewer x:Name="ContributorsScroll" Grid.Row="1"
+                  Classes="workspaceScroll"
+                  HorizontalScrollBarVisibility="Disabled">
+      <StackPanel Spacing="10">
+        <TextBlock Text="{DynamicResource dialogs.about.upstream.message}" TextWrapping="Wrap" Opacity="0.9"/>
+        <TextBlock Text="{DynamicResource dialogs.about.lunai.message}" TextWrapping="Wrap" Opacity="0.9"/>
+        <TextBlock Text="{DynamicResource dialogs.about.license}" TextWrapping="Wrap" Opacity="0.75" FontSize="11"/>
+
+        <TextBlock Classes="workspacePanelTitle" Text="{DynamicResource dialogs.about.contributors.title}"
+                   Margin="0,4,0,0"/>
+        <TextBlock Text="{DynamicResource dialogs.about.contributors.intro}" TextWrapping="Wrap" Opacity="0.85"/>
+        <TextBlock FontWeight="SemiBold" Text="{Binding SectionTitle}" TextWrapping="Wrap"/>
+        <ItemsControl ItemsSource="{Binding Contributors}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="models:ContributorEntry">
+              <TextBlock Classes="aboutContributorLink"
+                         Text="{Binding Login}"
+                         Tag="{Binding ProfileUrl}"
+                         PointerPressed="OnContributorPointerPressed"/>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </ScrollViewer>
+
+    <TextBlock Grid.Row="2" Margin="0,8,0,0" Opacity="0.75" Text="{Binding StatusText}" TextWrapping="Wrap"/>
+
+    <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,12,0,0">
+      <Button MinWidth="120" Margin="0,0,12,0" Content="{DynamicResource dialogs.about.github.upstream}"
+              Click="OnOpenRepository"/>
+      <Button MinWidth="120" Margin="0,0,12,0" Content="{DynamicResource dialogs.about.github.lunai}"
+              Click="OnOpenLunaiRepository"/>
+      <Button MinWidth="80" Content="{DynamicResource dialogs.about.close}" IsCancel="True" Click="OnClose"/>
+    </WrapPanel>
+  </Grid>
+</Window>

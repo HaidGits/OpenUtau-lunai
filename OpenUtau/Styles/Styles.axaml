@@ -1628,4 +1628,18 @@
     <Setter Property="Margin" Value="0"/>
   </Style>
 
+  <Style Selector="TextBlock.aboutContributorLink">
+    <Setter Property="Foreground" Value="{DynamicResource AccentBrush1}"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="Padding" Value="0,1"/>
+    <Setter Property="Margin" Value="0,0,0,2"/>
+  </Style>
+  <Style Selector="TextBlock.aboutContributorLink:pointerover">
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="TextDecorations" Value="Underline"/>
+  </Style>
+  <Style Selector="TextBlock.aboutContributorLink:pressed">
+    <Setter Property="Opacity" Value="0.75"/>
+  </Style>
+
 </Styles>

@@ -85,8 +85,20 @@
   <system:String x:Key="debug.reverselogorder">Обратный порядок лога</system:String>
 
   <system:String x:Key="dialogs.about.caption">Об OpenUtau</system:String>
-  <system:String x:Key="dialogs.about.message">
-OpenUtau стремится стать средой редактирования с открытым исходным кодом для сообщества UTAU, с современным пользовательским интерфейсом и интеллектуальной фонологической поддержкой. Посетите нас на GitHub.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau это редактор с открытым исходным кодом для сообщества UTAU, с современным интерфейсом и поддержкой фонетики. Посетите нас на Github.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">Редактор OpenUtau с открытым исходным кодом для сообщества UTAU, с современным интерфейсом и поддержкой фонетики.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Вы используете OpenUtau Lunai, форк для DiffSinger и голосов LUNAI. В нём есть Singer Hub и другие доработки под LUNAI, добавленные поверх оригинального OpenUtau.</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau и OpenUtau Lunai распространяются как свободное ПО с открытым исходным кодом по лицензии MIT.</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Контрибьюторы</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Ниже перечислены участники оригинального репозитория OpenUtau на GitHub. OpenUtau Lunai вырос из их работы. Спасибо всем из списка!</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Загрузка списка контрибьюторов с GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Список контрибьюторов обновлён с GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Показан встроенный список контрибьюторов.</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Не удалось загрузить список. Проверьте интернет и попробуйте снова.</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau на GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai на GitHub</system:String>
+  <system:String x:Key="dialogs.about.close">Закрыть</system:String>
   <system:String x:Key="dialogs.exitsave.caption">Выход из OpenUtau</system:String>
   <system:String x:Key="dialogs.exitsave.message">Текущий проект содержит несохраненные изменения. Хотите сохранить изменения?</system:String>
   <system:String x:Key="dialogs.export.caption">Экспорт</system:String>

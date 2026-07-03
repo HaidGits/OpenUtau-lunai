@@ -86,6 +86,7 @@
           </MenuItem>
           <MenuItem Header="{DynamicResource menu.help}">
             <MenuItem Header="{DynamicResource menu.help.wiki}" Click="OnMenuWiki"/>
+            <MenuItem Header="{DynamicResource menu.help.about}" Click="OnMenuAbout"/>
             <MenuItem Header="{DynamicResource menu.help.checkupdate}" Click="OnMenuCheckUpdate"/>
             <MenuItem Header="{DynamicResource menu.help.reportissue}" Click="OnMenuReportIssue"/>
             <MenuItem Header="{DynamicResource menu.help.logslocation}" Click="OnMenuLogsLocation"/>

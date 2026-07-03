@@ -825,6 +825,10 @@ namespace OpenUtau.App.Views {
             }
         }
 
+        void OnMenuAbout(object sender, RoutedEventArgs args) {
+            new AboutDialog().ShowDialog(this);
+        }
+
         void OnMenuLayoutReset(object sender, RoutedEventArgs args) {
             WindowState = WindowState.Normal;
             Position = new PixelPoint(0, 0);
