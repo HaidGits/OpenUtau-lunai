@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Core.Format;
+using OpenUtau.Core.Util;
 
 namespace OpenUtau.App.Views {
   public partial class ImportProjectDialog : Window {
@@ -11,6 +12,8 @@ namespace OpenUtau.App.Views {
 
     public ImportProjectDialog() {
       InitializeComponent();
+      ApplyButton.Content = ThemeManager.GetString("button.apply");
+      CancelButton.Content = ThemeManager.GetString("button.cancel");
     }
 
     public static async Task<ProjectImportOptions?> ShowAsync(Window owner, string fileName) {

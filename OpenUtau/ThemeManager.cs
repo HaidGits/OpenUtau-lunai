@@ -445,10 +445,24 @@ namespace OpenUtau.App {
                 value = key;
                 return false;
             }
-            IResourceDictionary resDict = Application.Current.Resources;
-            if (resDict.TryGetResource(key, ThemeVariant.Default, out var outVar) && outVar is string s) {
+            if (TryGetStringFromProvider(Application.Current.Resources, key, out value)) {
+                return true;
+            }
+            value = key;
+            return false;
+        }
+
+        static bool TryGetStringFromProvider(IResourceProvider provider, string key, out string value) {
+            if (provider.TryGetResource(key, ThemeVariant.Default, out var outVar) && outVar is string s) {
                 value = s;
                 return true;
+            }
+            if (provider is ResourceDictionary resourceDictionary) {
+                foreach (var merged in resourceDictionary.MergedDictionaries) {
+                    if (TryGetStringFromProvider(merged, key, out value)) {
+                        return true;
+                    }
+                }
             }
             value = key;
             return false;
