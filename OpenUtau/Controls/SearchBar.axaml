@@ -8,7 +8,7 @@
   <Grid ColumnDefinitions="Auto,Auto,100,40,28,28,28,28" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
     <RadioButton Grid.Column="0" Content="{DynamicResource pianoroll.menu.searchnote.note}" Margin="2,0,0,0" IsChecked="{Binding NoteMode}"/>
     
-    <RadioButton Grid.Column="1" Content="{DynamicResource pianoroll.menu.searchnote.alias}" Margin="2,0,4,0" IsChecked="{Binding !NoteMode, Mode=OneWay}"/>
+    <RadioButton Grid.Column="1" Content="{DynamicResource pianoroll.menu.searchnote.alias}" Margin="2,0,4,0" IsChecked="{Binding !NoteMode, Mode=TwoWay}"/>
     
     <c:WorkspacePanelTextBox Grid.Column="2" Name="box" Classes="workspacePanelTextBox" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
              Text="{Binding SearchWord}" Focusable="True" Watermark="{Binding Watermark}"
