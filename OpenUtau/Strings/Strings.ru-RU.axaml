@@ -4,6 +4,19 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <system:String x:Key="button.apply">Применить</system:String>
+  <system:String x:Key="button.cancel">Отмена</system:String>
+  <system:String x:Key="button.no">Нет</system:String>
+  <system:String x:Key="button.off">Выкл.</system:String>
+  <system:String x:Key="button.ok">ОК</system:String>
+  <system:String x:Key="button.on">Вкл.</system:String>
+  <system:String x:Key="button.open">Открыть</system:String>
+  <system:String x:Key="button.remove">Удалить</system:String>
+  <system:String x:Key="button.reset">Сброс</system:String>
+  <system:String x:Key="button.save">Сохранить</system:String>
+  <system:String x:Key="button.select">Выбрать</system:String>
+  <system:String x:Key="button.yes">Да</system:String>
+
   <system:String x:Key="command.batch.lyric">Пакетное редактирование текста</system:String>
   <system:String x:Key="command.batch.note">Пакетное редактирование нот</system:String>
   <system:String x:Key="command.batch.plugin">Изменение плагина</system:String>
@@ -142,6 +155,8 @@
   <system:String x:Key="dialogs.splitpart.intheway">Одна или несколько нот пересекаются с курсором воспроизведения. Продолжить разделение в ближайшей позиции после курсора, где нет нот?</system:String>
   <system:String x:Key="dialogs.messagebox.cancel">Отмена</system:String>
   <system:String x:Key="dialogs.messagebox.copy">Копировать ошибку в буфер обмена</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Менеджер пакетов</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Открыть страницу загрузки</system:String>
   <system:String x:Key="dialogs.messagebox.no">Нет</system:String>
   <system:String x:Key="dialogs.messagebox.ok">ОК</system:String>
   <system:String x:Key="dialogs.messagebox.yes">Да</system:String>
@@ -620,7 +635,7 @@
   <system:String x:Key="pianoroll.toggle.render">Настройки рендера DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger: качество (акустика 50, вэриэнс 50, питч 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger: баланс (акустика 20, вэриэнс 20, питч 20)</system:String>
-  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger: низкое качество (акустика 10, вэриэнс 10, питч 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger: низкое качество (акустика 1, вэриэнс 1, питч 20)</system:String>
   <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger: очень низкое качество (акустика 1, вэриэнс 1, питч 1)</system:String>
   <system:String x:Key="pianoroll.tool.drawlinepitch">Инструмент для рисования питча линией (Shift + 4)
     ЛКМ, чтобы рисовать (прямая линия)
