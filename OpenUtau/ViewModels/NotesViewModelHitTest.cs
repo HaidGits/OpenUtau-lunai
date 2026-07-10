@@ -392,7 +392,7 @@ namespace OpenUtau.App.ViewModels {
                     int p4Tick = timeAxis.MsPosToTickPos(phoneme.PositionMs + phoneme.envelope.data[4].X) - part.position;
                     double p4x = viewModel.TickToneToPoint(p4Tick, 0).X;
                     pt = new Point(p4x, barY + (1 - phoneme.envelope.data[4].Y / 100) * barHeight - 1);
-                    if (WithIn(pt, mousePos, 3)) {
+                    if (phoneme.Next != null && phoneme.Next.position == phoneme.End && WithIn(pt, mousePos, 3)) {
                         result.phoneme = phoneme;
                         result.hit = true;
                         result.hitOverlap = true;
