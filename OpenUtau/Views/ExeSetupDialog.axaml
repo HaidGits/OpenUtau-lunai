@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="using:OpenUtau.App.Controls"
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
         x:Class="OpenUtau.App.Views.ExeSetupDialog"
         Icon="/Assets/open-utau.ico"
@@ -13,7 +14,7 @@
       <RowDefinition Height="50"/>
     </Grid.RowDefinitions>
     <TextBlock Margin="20" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="Text" TextWrapping="Wrap" MaxWidth="560" Text="{Binding message}"/>
-    <TextBox Margin="30,0,30,20" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{OnPlatform False, macOS=True}" TextWrapping="Wrap" Height="36"
+    <c:WorkspacePanelTextBox Classes="workspacePanelTextBox" Margin="30,0,30,20" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{OnPlatform False, macOS=True}" TextWrapping="Wrap" Height="36" IsReadOnly="True"
              Text="% brew tap gcenx/wine&#x0a;% brew install --cask --no-quarantine wine-crossover" />
     <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Name="Buttons">
       <StackPanel.Styles>

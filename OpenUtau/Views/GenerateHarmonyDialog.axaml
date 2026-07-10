@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:OpenUtau.App.ViewModels"
+        xmlns:c="using:OpenUtau.App.Controls"
         x:Class="OpenUtau.App.Views.GenerateHarmonyDialog"
         Width="420" SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
@@ -12,14 +13,14 @@
     <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,4">
       <TextBlock Grid.Column="0" VerticalAlignment="Center" Classes="lbl" Margin="0,0,12,0"
                  Text="{DynamicResource dialogs.harmony.key}"/>
-      <ComboBox x:Name="KeyComboBox" Grid.Column="1"
+      <c:WorkspacePanelComboBox x:Name="KeyComboBox" Grid.Column="1" Classes="workspacePanelCombo"
                 SelectedItem="{Binding SelectedKeyOption}">
         <ComboBox.ItemTemplate>
           <DataTemplate x:DataType="vm:KeyOptionViewModel">
             <TextBlock Text="{Binding DisplayName}"/>
           </DataTemplate>
         </ComboBox.ItemTemplate>
-      </ComboBox>
+        </c:WorkspacePanelComboBox>
     </Grid>
     <StackPanel Spacing="6">
       <TextBlock Classes="lbl" Text="{DynamicResource dialogs.harmony.intervals}"/>

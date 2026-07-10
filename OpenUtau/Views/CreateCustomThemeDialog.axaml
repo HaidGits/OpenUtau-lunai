@@ -10,7 +10,7 @@
         Height="180" Width="360" WindowStartupLocation="CenterOwner">
   <StackPanel VerticalAlignment="Center" Margin="{Binding $parent.WindowDecorationMargin}" Spacing="8">
     <TextBlock Margin="12,12,12,0" Text="{DynamicResource prefs.appearance.customtheme.create.prompt}" TextWrapping="Wrap"/>
-    <TextBox Name="NameBox" Margin="12,0"/>
+    <c:WorkspacePanelTextBox Name="NameBox" Classes="workspacePanelTextBox" Margin="12,0"/>
     <Panel Margin="12,0">
       <TextBlock VerticalAlignment="Center" Text="{DynamicResource prefs.appearance.customtheme.create.base}"/>
       <c:WorkspacePanelComboBox Name="BaseThemeBox" Classes="workspacePanelCombo" HorizontalAlignment="Right" MinWidth="140" SelectedIndex="0">

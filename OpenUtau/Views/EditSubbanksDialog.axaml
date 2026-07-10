@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:OpenUtau.App.ViewModels"
+        xmlns:c="using:OpenUtau.App.Controls"
         mc:Ignorable="d"
         x:Class="OpenUtau.App.Views.EditSubbanksDialog"
         Icon="/Assets/open-utau.ico"
@@ -22,7 +23,7 @@
     <Grid Grid.Column="2">
       <Grid RowDefinitions="Auto,*,Auto,*,Auto">
         <StackPanel VerticalAlignment="Top" Grid.Row="0">
-          <ComboBox HorizontalAlignment="Stretch" Margin="0,0,0,4"
+          <c:WorkspacePanelComboBox Classes="workspacePanelCombo" HorizontalAlignment="Stretch" Margin="0,0,0,4"
                     ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor}"/>
           <Button Content="{DynamicResource singers.subbanks.color.add}" HorizontalAlignment="Stretch" Click="OnAdd"/>
           <Button Content="{DynamicResource singers.subbanks.color.remove}" HorizontalAlignment="Stretch" Click="OnRemove"
@@ -33,9 +34,9 @@
         <StackPanel VerticalAlignment="Top" Grid.Row="2">
           <Button Content="{DynamicResource singers.subbanks.selectall}" HorizontalAlignment="Stretch" Click="OnSelectAll"/>
           <TextBlock Text="{DynamicResource oto.prefix}"/>
-          <TextBox Margin="0,4" Text="{Binding Prefix}"/>
+          <c:WorkspacePanelTextBox Classes="workspacePanelTextBox" Margin="0,4" Text="{Binding Prefix}"/>
           <TextBlock Text="{DynamicResource oto.suffix}"/>
-          <TextBox Margin="0,4" Text="{Binding Suffix}"/>
+          <c:WorkspacePanelTextBox Classes="workspacePanelTextBox" Margin="0,4" Text="{Binding Suffix}"/>
           <Button Content="{DynamicResource singers.subbanks.set}" HorizontalAlignment="Stretch" Click="OnSet"/>
           <Button Content="{DynamicResource singers.subbanks.clear}" HorizontalAlignment="Stretch" Click="OnClear"/>
           <Button Content="{DynamicResource singers.subbanks.import}" HorizontalAlignment="Stretch" Click="OnImportMap"/>

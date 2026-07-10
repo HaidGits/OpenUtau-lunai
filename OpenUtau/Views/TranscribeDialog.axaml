@@ -2,6 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="using:OpenUtau.App.Controls"
+        xmlns:pe="using:OpenUtau.Controls"
         mc:Ignorable="d" d:DesignWidth="380" d:DesignHeight="320"
         x:Class="OpenUtau.App.Views.TranscribeDialog"
         Icon="/Assets/open-utau.ico"
@@ -16,15 +18,12 @@
     <Style Selector="CheckBox">
       <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
     </Style>
-    <Style Selector="ComboBox">
-      <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
-    </Style>
-    <Style Selector="ComboBoxItem">
-      <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
-    </Style>
     <Style Selector="Label">
       <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
       <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
     </Style>
   </Window.Styles>
   <Border Margin="{Binding $parent.WindowDecorationMargin}">
@@ -82,7 +81,7 @@
           <!-- Language (only if config has languages) -->
           <Grid ColumnDefinitions="160,*" IsVisible="{Binding GameHasLanguages}">
             <Label Content="{DynamicResource dialogs.transcribe.game.language}"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+            <c:WorkspacePanelComboBox Grid.Column="1" Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
                       ItemsSource="{Binding LanguageDisplayOptions}"
                       SelectedIndex="{Binding LanguageDisplayIndex}"/>
           </Grid>
@@ -90,7 +89,7 @@
           <!-- Sampling Steps -->
           <Grid ColumnDefinitions="160,*">
             <Label Content="{DynamicResource dialogs.transcribe.game.steps}"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"
+            <c:WorkspacePanelComboBox Grid.Column="1" Classes="workspacePanelCombo" HorizontalAlignment="Stretch"
                       ItemsSource="{Binding SamplingStepsOptions}"
                       SelectedIndex="{Binding SamplingStepsIndex}"/>
           </Grid>
@@ -98,9 +97,7 @@
           <!-- Boundary Threshold -->
           <Grid ColumnDefinitions="160,60,8,*">
             <Label Content="{DynamicResource dialogs.transcribe.game.segthreshold}"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding BoundaryThreshold, StringFormat=F2}"
-                     TextAlignment="Right"/>
+            <pe:FloatEditor Grid.Column="1" Value="{Binding BoundaryThreshold}" TextAlignment="Right"/>
             <Slider Grid.Column="3" Classes="fader"
                     Value="{Binding BoundaryThreshold}"
                     Minimum="0.0" Maximum="1.0"
@@ -111,9 +108,7 @@
           <!-- Boundary Radius -->
           <Grid ColumnDefinitions="160,60,8,*">
             <Label Content="{DynamicResource dialogs.transcribe.game.segradius}"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding BoundaryRadius}"
-                     TextAlignment="Right"/>
+            <pe:IntEditor Grid.Column="1" Value="{Binding BoundaryRadius}" TextAlignment="Right"/>
             <Slider Grid.Column="3" Classes="fader"
                     Value="{Binding BoundaryRadius}"
                     Minimum="0" Maximum="10"
@@ -124,9 +119,7 @@
           <!-- Score Threshold -->
           <Grid ColumnDefinitions="160,60,8,*">
             <Label Content="{DynamicResource dialogs.transcribe.game.estthreshold}"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding ScoreThreshold, StringFormat=F2}"
-                     TextAlignment="Right"/>
+            <pe:FloatEditor Grid.Column="1" Value="{Binding ScoreThreshold}" TextAlignment="Right"/>
             <Slider Grid.Column="3" Classes="fader"
                     Value="{Binding ScoreThreshold}"
                     Minimum="0.0" Maximum="1.0"
@@ -137,9 +130,7 @@
           <!-- Batch Size -->
           <Grid ColumnDefinitions="160,60,8,*">
             <Label Content="{DynamicResource dialogs.transcribe.game.batchsize}"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding BatchSize}"
-                     TextAlignment="Right"/>
+            <pe:IntEditor Grid.Column="1" Value="{Binding BatchSize}" TextAlignment="Right"/>
             <Slider Grid.Column="3" Classes="fader"
                     Value="{Binding BatchSize}"
                     Minimum="1" Maximum="32"
@@ -150,9 +141,7 @@
           <!-- Max Batch Duration -->
           <Grid ColumnDefinitions="160,60,8,*">
             <Label Content="{DynamicResource dialogs.transcribe.game.batchduration}"/>
-            <TextBox Grid.Column="1"
-                     Text="{Binding MaxBatchDuration, StringFormat=F0}"
-                     TextAlignment="Right"/>
+            <pe:FloatEditor Grid.Column="1" Value="{Binding MaxBatchDuration}" TextAlignment="Right"/>
             <Slider Grid.Column="3" Classes="fader"
                     Value="{Binding MaxBatchDuration}"
                     Minimum="10" Maximum="600"
@@ -165,12 +154,12 @@
 
       <!-- OK / Cancel -->
       <Grid ColumnDefinitions="*,8,*" Margin="0,4,0,0">
-        <Button Grid.Column="0" Content="{DynamicResource button.ok}"
+        <Button Grid.Column="0" Content="{DynamicResource button.apply}"
                 HorizontalAlignment="Stretch" Name="OkButton"
                 Click="OnOkClicked"
                 IsEnabled="{Binding CanRun}"/>
         <Button Grid.Column="2" Content="{DynamicResource button.cancel}"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Stretch" Name="CancelButton"
                 Click="OnCancelClicked"/>
       </Grid>
     </StackPanel>

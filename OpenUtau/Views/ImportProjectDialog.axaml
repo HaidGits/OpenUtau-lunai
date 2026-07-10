@@ -16,7 +16,9 @@
         Title="{DynamicResource dialogs.importproject.caption}"
 
         KeyDown="OnKeyDown">
-
+  <Window.Styles>
+    <StyleInclude Source="/Styles/PianoRollStyles.axaml"/>
+  </Window.Styles>
   <Border Padding="16">
 
     <Grid RowDefinitions="*,Auto">
@@ -141,18 +143,14 @@
 
           <TextBlock Text="{DynamicResource dialogs.importproject.lyricsmapping}" IsEnabled="{Binding ImportNotes}"/>
 
-          <TextBox Text="{Binding LyricsMappingText}" AcceptsReturn="True" TextWrapping="Wrap"
-
-                   Height="64" IsEnabled="{Binding ImportNotes}"
-
+          <c:WorkspacePanelTextBox Text="{Binding LyricsMappingText}" Classes="workspacePanelTextBox workspacePanelTextBoxMultiline"
+                   AcceptsReturn="True" TextWrapping="Wrap" Height="64" IsEnabled="{Binding ImportNotes}"
                    Watermark="{DynamicResource dialogs.importproject.lyricsmapping.hint}"/>
 
           <TextBlock Text="{DynamicResource dialogs.importproject.lyricsreplace}" IsEnabled="{Binding ImportNotes}"/>
 
-          <TextBox Text="{Binding LyricsReplacementText}" AcceptsReturn="True" TextWrapping="Wrap"
-
-                   Height="64" IsEnabled="{Binding ImportNotes}"
-
+          <c:WorkspacePanelTextBox Text="{Binding LyricsReplacementText}" Classes="workspacePanelTextBox workspacePanelTextBoxMultiline"
+                   AcceptsReturn="True" TextWrapping="Wrap" Height="64" IsEnabled="{Binding ImportNotes}"
                    Watermark="{DynamicResource dialogs.importproject.lyricsreplace.hint}"/>
 
           <Grid ColumnDefinitions="Auto,*">
@@ -161,7 +159,7 @@
 
                        Text="{DynamicResource dialogs.importproject.defaultlyric}"/>
 
-            <TextBox Grid.Column="1" Text="{Binding DefaultLyric}" Width="80" HorizontalAlignment="Left"/>
+            <c:WorkspacePanelTextBox Grid.Column="1" Classes="workspacePanelTextBox" Text="{Binding DefaultLyric}" Width="80" HorizontalAlignment="Left"/>
 
           </Grid>
 
@@ -170,11 +168,8 @@
       </ScrollViewer>
 
       <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" Margin="0,12,0,0">
-
-        <Button Content="{DynamicResource lyrics.cancel}" MinWidth="72" Click="OnCancel"/>
-
-        <Button Content="{DynamicResource lyrics.apply}" MinWidth="72" Click="OnApply"/>
-
+        <Button x:Name="CancelButton" Content="{DynamicResource button.cancel}" MinWidth="72" Click="OnCancel"/>
+        <Button x:Name="ApplyButton" Content="{DynamicResource button.apply}" MinWidth="72" IsDefault="True" Click="OnApply"/>
       </StackPanel>
 
     </Grid>
