@@ -16,15 +16,15 @@
     <Setter Property="FontFamily" Value="{DynamicResource ui.fontfamily}"/>
     <Setter Property="Icon" Value="/Assets/open-utau.ico"/>
   </Style>
-  <!-- String ToolTip.Tip can inherit placement-target foreground; force white on root and text content. -->
+  <!-- String ToolTip.Tip can inherit placement-target foreground; force tooltip text from theme. -->
   <Style Selector="ToolTip">
-    <Setter Property="Foreground" Value="{StaticResource ToolTipForegroundBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ToolTipForegroundBrush}"/>
   </Style>
   <Style Selector="ToolTip TextBlock">
-    <Setter Property="Foreground" Value="{StaticResource ToolTipForegroundBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ToolTipForegroundBrush}"/>
   </Style>
   <Style Selector="ToolTip AccessText">
-    <Setter Property="Foreground" Value="{StaticResource ToolTipForegroundBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ToolTipForegroundBrush}"/>
   </Style>
   <Style Selector="Menu">
     <Setter Property="Height" Value="24"/>

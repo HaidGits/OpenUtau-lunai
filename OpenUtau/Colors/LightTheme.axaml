@@ -42,7 +42,7 @@
   <Color x:Key="WarningColor">#FFF4CE</Color>
 
   <Color x:Key="ToolbarCheckedHoverColor">#E0E0E0</Color>
-  <Color x:Key="ToolTipForegroundColor">#FFFFFF</Color>
+  <Color x:Key="ToolTipForegroundColor">#111111</Color>
   <Color x:Key="WorkspaceCanvasColor">#E4E4E8</Color>
   <Color x:Key="WorkspaceCardColor">#FCFCFC</Color>
   <Color x:Key="WorkspaceElevatedSurfaceColor">#E8E8EC</Color>
