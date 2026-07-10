@@ -1595,11 +1595,13 @@ namespace OpenUtau.App.Views {
 
         async Task ApplyPitchFrom(UVoicePart target, UWavePart source) {
             if (!RmvpeTranscriber.IsInstalled()) {
-                await MessageBox.Show(
+                await MessageBox.ShowInstallPrompt(
                     this,
                     ThemeManager.GetString("dialogs.transcribe.rmvpe.notfound"),
-                    ThemeManager.GetString("errors.caption"),
-                    MessageBox.MessageBoxButtons.Ok);
+                    ThemeManager.GetString("dialogs.transcribe.caption"),
+                    new InstallPromptOptions {
+                        OfferPackageManager = true,
+                    });
                 return;
             }
             var project = DocManager.Inst.Project;
@@ -1781,11 +1783,14 @@ namespace OpenUtau.App.Views {
                 // Show algorithm selection dialog first
                 var transcribeVm = new TranscribeViewModel();
                 if (transcribeVm.NoneAvailable) {
-                    await MessageBox.Show(this,
+                    await MessageBox.ShowInstallPrompt(this,
                         String.Format(ThemeManager.GetString("dialogs.transcribe.allnotfound"),
                             Game.DownloadUrl),
                         ThemeManager.GetString("dialogs.transcribe.caption"),
-                        MessageBox.MessageBoxButtons.Ok);
+                        new InstallPromptOptions {
+                            OfferPackageManager = true,
+                            DownloadUrl = Game.DownloadUrl,
+                        });
                     return;
                 }
                 var transcribeDialog = new TranscribeDialog { DataContext = transcribeVm };

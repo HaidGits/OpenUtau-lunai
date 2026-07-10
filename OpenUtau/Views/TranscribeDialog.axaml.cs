@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Core;
 using OpenUtau.Core.Analysis;
+using OpenUtau.Core.Util;
 
 namespace OpenUtau.App.Views {
     public partial class TranscribeDialog : Window {
@@ -12,6 +13,8 @@ namespace OpenUtau.App.Views {
 
         public TranscribeDialog() {
             InitializeComponent();
+            OkButton.Content = ThemeManager.GetString("button.apply");
+            CancelButton.Content = ThemeManager.GetString("button.cancel");
         }
 
         void OnOkClicked(object? sender, RoutedEventArgs e) {
@@ -43,7 +46,8 @@ namespace OpenUtau.App.Views {
                     "<translate:errors.failed.transcribe.rmvpe>",
                     new FileNotFoundException(modelPath),
                     false,
-                    new[] { modelPath }));
+                    new[] { modelPath },
+                    suggestPackageManager: true));
                 return;
             }
             var current = vm.PredictPitd;

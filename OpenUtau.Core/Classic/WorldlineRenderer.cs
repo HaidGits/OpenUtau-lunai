@@ -149,7 +149,8 @@ namespace OpenUtau.Classic {
                                     $"<translate:packages.errors.missing>",
                                     new Exception($"Error loading package \"{vocoderPkg}\""),
                                 true,
-                                    new string[] { vocoderPkg });
+                                    new string[] { vocoderPkg },
+                                    suggestPackageManager: true);
                             }
                             var config = Yaml.DefaultDeserializer.Deserialize<Core.DiffSinger.DsVocoderConfig>(
                                 File.ReadAllText(configPath, System.Text.Encoding.UTF8));

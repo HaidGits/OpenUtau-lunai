@@ -218,7 +218,8 @@ public class RmvpeTranscriber : IDisposable {
                 "<translate:errors.failed.transcribe.rmvpe>",
                 new FileNotFoundException(modelPath),
                 false,
-                new[] { modelPath });
+                new[] { modelPath },
+                suggestPackageManager: true);
         }
         Log.Information("RMVPE loading model from {ModelPath}", modelPath);
         session = Onnx.getInferenceSession(modelPath, OnnxRunnerChoice.CPU);

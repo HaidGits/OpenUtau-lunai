@@ -31,21 +31,25 @@ namespace OpenUtau.Core.DiffSinger {
                 model = File.ReadAllBytes(Path.Combine(Location, config.model));
             }
             catch (Exception ex) {
+                const string downloadUrl = "https://github.com/xunmengshe/OpenUtau/wiki/Vocoders";
                 throw new MessageCustomizableException(
                     $"Error loading vocoder from \"{location}\"",
                     $"<translate:errors.diffsinger.downloadvocoder>",
                     ex,
                     true,
-                    new string[] { Path.GetFileName(location), "https://github.com/xunmengshe/OpenUtau/wiki/Vocoders" });
+                    new string[] { Path.GetFileName(location), downloadUrl },
+                    suggestDownloadUrl: downloadUrl);
             }
             if (config.num_mel_bins < 1 || config.num_mel_bins > DsVocoderConfig.MaxMelBins) {
+                const string downloadUrl = "https://github.com/xunmengshe/OpenUtau/wiki/Vocoders";
                 throw new MessageCustomizableException(
                     $"Invalid num_mel_bins in \"{Path.Combine(location, "vocoder.yaml")}\"",
                     $"<translate:errors.diffsinger.downloadvocoder>",
                     new Exception(
                         $"num_mel_bins must be between 1 and {DsVocoderConfig.MaxMelBins}, got {config.num_mel_bins}"),
                     true,
-                    new string[] { Path.GetFileName(location), "https://github.com/xunmengshe/OpenUtau/wiki/Vocoders" });
+                    new string[] { Path.GetFileName(location), downloadUrl },
+                    suggestDownloadUrl: downloadUrl);
             }
             hash = XXH64.DigestOf(model);
             session = Onnx.getInferenceSession(model);

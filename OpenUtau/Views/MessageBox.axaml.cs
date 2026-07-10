@@ -13,6 +13,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Threading;
 using OpenUtau.App;
+using OpenUtau.App.ViewModels;
 using OpenUtau.Core;
 using Serilog;
 using SharpCompress;
@@ -20,7 +21,7 @@ using SharpCompress;
 namespace OpenUtau.App.Views {
     public partial class MessageBox : Window {
         public enum MessageBoxButtons { Ok, OkCancel, YesNo, YesNoCancel, OkCopy, DropProjectOpenImportCancel }
-        public enum MessageBoxResult { Ok, Cancel, Yes, No }
+        public enum MessageBoxResult { Ok, Cancel, Yes, No, OpenPackageManager, OpenUrl }
 
         public MessageBox() {
             InitializeComponent();
@@ -53,6 +54,12 @@ namespace OpenUtau.App.Views {
 
                 if (e is MessageCustomizableException mce) {
                     text = Translate(mce);
+                    if (mce.SuggestPackageManager || !string.IsNullOrWhiteSpace(mce.SuggestDownloadUrl)) {
+                        return ShowInstallPrompt(parent, text, title, new InstallPromptOptions {
+                            OfferPackageManager = mce.SuggestPackageManager,
+                            DownloadUrl = mce.SuggestDownloadUrl,
+                        });
+                    }
                     builder.AppendLine(mce.SubstanceException.Message);
                     builder.AppendLine();
                     builder.Append(mce.SubstanceException.ToString());
@@ -178,6 +185,80 @@ namespace OpenUtau.App.Views {
                 msgbox.ShowDialog(parent);
             else msgbox.Show();
             return tcs.Task;
+        }
+
+        public static Task<MessageBoxResult> ShowInstallPrompt(
+                Window parent,
+                string text,
+                string title,
+                InstallPromptOptions options) {
+            var msgbox = new MessageBox() {
+                Title = title,
+            };
+            msgbox.Text.IsVisible = false;
+            SetPlainText(text, msgbox.TextPanel);
+
+            var res = MessageBoxResult.Cancel;
+            void AddActionButton(string caption, MessageBoxResult result, bool isDefault = false) {
+                var btn = new Button { Content = caption, IsDefault = isDefault };
+                btn.Click += (_, __) => {
+                    res = result;
+                    msgbox.Close();
+                };
+                msgbox.Buttons.Children.Add(btn);
+            }
+
+            if (options.OfferPackageManager) {
+                AddActionButton(
+                    ThemeManager.GetString("dialogs.messagebox.openpackages"),
+                    MessageBoxResult.OpenPackageManager,
+                    isDefault: true);
+            }
+            if (!string.IsNullOrWhiteSpace(options.DownloadUrl)) {
+                AddActionButton(
+                    ThemeManager.GetString("dialogs.messagebox.openlink"),
+                    MessageBoxResult.OpenUrl);
+            }
+            AddActionButton(ThemeManager.GetString("button.cancel"), MessageBoxResult.Cancel);
+            if (msgbox.Buttons.Children[msgbox.Buttons.Children.Count - 1] is Button cancelButton) {
+                cancelButton.IsCancel = true;
+            }
+
+            var tcs = new TaskCompletionSource<MessageBoxResult>();
+            msgbox.Closed += (_, __) => {
+                try {
+                    if (res == MessageBoxResult.OpenPackageManager) {
+                        OpenPackageManager();
+                    } else if (res == MessageBoxResult.OpenUrl && !string.IsNullOrWhiteSpace(options.DownloadUrl)) {
+                        OS.OpenWeb(options.DownloadUrl);
+                    }
+                } catch (Exception ex) {
+                    Log.Error(ex, "Failed to run install prompt action.");
+                }
+                tcs.TrySetResult(res);
+            };
+            if (parent != null) {
+                msgbox.ShowDialog(parent);
+            } else {
+                msgbox.Show();
+            }
+            return tcs.Task;
+        }
+
+        static void OpenPackageManager() {
+            var dialog = new PackageManagerDialog() { DataContext = new PackageManagerViewModel() };
+            dialog.Show();
+            if (dialog.Position.Y < 0) {
+                dialog.Position = dialog.Position.WithY(0);
+            }
+        }
+
+        static void SetPlainText(string text, StackPanel textPanel) {
+            textPanel.Children.Add(new TextBlock {
+                Text = text,
+                TextAlignment = Avalonia.Media.TextAlignment.Center,
+                TextWrapping = TextWrapping.Wrap,
+            });
         }
 
         public static MessageBox ShowModal(Window parent, string text, string title) {
