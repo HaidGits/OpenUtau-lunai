@@ -3,8 +3,11 @@
              xmlns:c="clr-namespace:OpenUtau.App.Controls"
              x:Class="OpenUtau.App.Controls.PianoRollDiffSingerQualityToggles">
   <StackPanel Spacing="0" Orientation="{Binding LayoutOrientation, RelativeSource={RelativeSource AncestorType=c:PianoRollDiffSingerQualityToggles}}">
-    <Button Classes="sideToolbarAction" Margin="0" Padding="0" Focusable="False"
-            Command="{Binding ApplyDiffSingerQualityPresetCommand}">
+    <ToggleButton x:Name="HqPresetToggle" Classes="sideToolbarToggle diffSingerHqPreset"
+                  Margin="0" Padding="0"
+                  IsChecked="{Binding DiffSingerHqPresetActive, Mode=OneWay}"
+                  IsCheckedChanged="OnPresetToggleCheckedChanged"
+                  Command="{Binding ApplyDiffSingerQualityPresetCommand}">
       <ToolTip.Tip>
         <TextBlock Text="{DynamicResource pianoroll.toggle.diffsinger.quality}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
       </ToolTip.Tip>
@@ -13,9 +16,12 @@
           <TextBlock Classes="sideToolbarGlyph sideToolbarGlyphWide" Text="HQ"/>
         </Grid>
       </Grid>
-    </Button>
-    <Button Classes="sideToolbarAction" Margin="0" Padding="0" Focusable="False"
-            Command="{Binding ApplyDiffSingerMediumPresetCommand}">
+    </ToggleButton>
+    <ToggleButton x:Name="MqPresetToggle" Classes="sideToolbarToggle diffSingerMqPreset"
+                  Margin="0" Padding="0"
+                  IsChecked="{Binding DiffSingerMqPresetActive, Mode=OneWay}"
+                  IsCheckedChanged="OnPresetToggleCheckedChanged"
+                  Command="{Binding ApplyDiffSingerMediumPresetCommand}">
       <ToolTip.Tip>
         <TextBlock Text="{DynamicResource pianoroll.toggle.diffsinger.medium}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
       </ToolTip.Tip>
@@ -24,9 +30,12 @@
           <TextBlock Classes="sideToolbarGlyph sideToolbarGlyphWide" Text="MQ"/>
         </Grid>
       </Grid>
-    </Button>
-    <Button Classes="sideToolbarAction" Margin="0" Padding="0" Focusable="False"
-            Command="{Binding ApplyDiffSingerLowPresetCommand}">
+    </ToggleButton>
+    <ToggleButton x:Name="LqPresetToggle" Classes="sideToolbarToggle diffSingerLqPreset"
+                  Margin="0" Padding="0"
+                  IsChecked="{Binding DiffSingerLqPresetActive, Mode=OneWay}"
+                  IsCheckedChanged="OnPresetToggleCheckedChanged"
+                  Command="{Binding ApplyDiffSingerLowPresetCommand}">
       <ToolTip.Tip>
         <TextBlock Text="{DynamicResource pianoroll.toggle.diffsinger.fast}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
       </ToolTip.Tip>
@@ -35,17 +44,6 @@
           <TextBlock Classes="sideToolbarGlyph sideToolbarGlyphWide" Text="LQ"/>
         </Grid>
       </Grid>
-    </Button>
-    <Button Classes="sideToolbarAction" Margin="0" Padding="0" Focusable="False"
-            Command="{Binding ApplyDiffSingerExtraLowPresetCommand}">
-      <ToolTip.Tip>
-        <TextBlock Text="{DynamicResource pianoroll.toggle.diffsinger.extralow}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
-      </ToolTip.Tip>
-      <Grid Classes="toolbarIconHostSide">
-        <Grid Classes="toolbarIconHostSideLayout">
-          <TextBlock Classes="sideToolbarGlyph sideToolbarGlyphCompact" Text="ELQ"/>
-        </Grid>
-      </Grid>
-    </Button>
+    </ToggleButton>
   </StackPanel>
 </UserControl>

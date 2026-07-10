@@ -92,6 +92,12 @@
   <SolidColorBrush x:Key="PianoRollSideAccentPhonemizerTagsCheckedBrush" Color="#9D8FDC" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentPitchFollowCheckedBrush" Color="#58B8C8" Opacity="0.10"/>
   <SolidColorBrush x:Key="PianoRollSideAccentKeyScaleCheckedBrush" Color="#D4B04A" Opacity="0.10"/>
+  <SolidColorBrush x:Key="PianoRollDiffSingerHqPresetBrush" Color="#E06666"/>
+  <SolidColorBrush x:Key="PianoRollDiffSingerMqPresetBrush" Color="#F0A050"/>
+  <SolidColorBrush x:Key="PianoRollDiffSingerLqPresetBrush" Color="#6CC87A"/>
+  <SolidColorBrush x:Key="PianoRollDiffSingerHqPresetCheckedBrush" Color="#E06666" Opacity="0.14"/>
+  <SolidColorBrush x:Key="PianoRollDiffSingerMqPresetCheckedBrush" Color="#F0A050" Opacity="0.14"/>
+  <SolidColorBrush x:Key="PianoRollDiffSingerLqPresetCheckedBrush" Color="#6CC87A" Opacity="0.14"/>
   <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush"
                    Color="{DynamicResource BackgroundColor}"/>
   <SolidColorBrush x:Key="BackgroundBrushSemi"

@@ -1,6 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
 using Avalonia.Layout;
+using OpenUtau.App.ViewModels;
 
 namespace OpenUtau.App.Controls {
     public partial class PianoRollDiffSingerQualityToggles : UserControl {
@@ -15,6 +18,21 @@ namespace OpenUtau.App.Controls {
 
         public PianoRollDiffSingerQualityToggles() {
             InitializeComponent();
+        }
+
+        void OnPresetToggleCheckedChanged(object? sender, RoutedEventArgs e) {
+            if (sender is not ToggleButton toggle || DataContext is not PianoRollViewModel vm) {
+                return;
+            }
+            bool shouldBeChecked = toggle switch {
+                var t when t == HqPresetToggle => vm.DiffSingerHqPresetActive,
+                var t when t == MqPresetToggle => vm.DiffSingerMqPresetActive,
+                var t when t == LqPresetToggle => vm.DiffSingerLqPresetActive,
+                _ => toggle.IsChecked ?? false,
+            };
+            if (toggle.IsChecked != shouldBeChecked) {
+                toggle.IsChecked = shouldBeChecked;
+            }
         }
     }
 }

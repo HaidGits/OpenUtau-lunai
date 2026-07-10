@@ -128,7 +128,9 @@ namespace OpenUtau.App.ViewModels {
         public ReactiveCommand<Unit, Unit> ApplyDiffSingerQualityPresetCommand { get; }
         public ReactiveCommand<Unit, Unit> ApplyDiffSingerMediumPresetCommand { get; }
         public ReactiveCommand<Unit, Unit> ApplyDiffSingerLowPresetCommand { get; }
-        public ReactiveCommand<Unit, Unit> ApplyDiffSingerExtraLowPresetCommand { get; }
+        [Reactive] public bool DiffSingerHqPresetActive { get; private set; }
+        [Reactive] public bool DiffSingerMqPresetActive { get; private set; }
+        [Reactive] public bool DiffSingerLqPresetActive { get; private set; }
         public bool ShowPhonemizerTags {
             get => Preferences.Default.ShowPhonemizerTags;
             set {
@@ -244,7 +246,15 @@ namespace OpenUtau.App.ViewModels {
             ApplyDiffSingerQualityPresetCommand = ReactiveCommand.Create(() => ApplyDiffSingerRenderPreset(0));
             ApplyDiffSingerMediumPresetCommand = ReactiveCommand.Create(() => ApplyDiffSingerRenderPreset(1));
             ApplyDiffSingerLowPresetCommand = ReactiveCommand.Create(() => ApplyDiffSingerRenderPreset(2));
-            ApplyDiffSingerExtraLowPresetCommand = ReactiveCommand.Create(() => ApplyDiffSingerRenderPreset(3));
+            WarmUpAppearancePreferences();
+            GetSharedPreferencesViewModel()
+                .WhenAnyValue(
+                    p => p.DiffSingerSteps,
+                    p => p.DiffSingerStepsVariance,
+                    p => p.DiffSingerStepsPitch)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => UpdateDiffSingerPresetHighlight());
+            UpdateDiffSingerPresetHighlight();
             this.WhenAnyValue(vm => vm.ShowAppearancePanel)
                 .Subscribe(show => {
                     Preferences.Default.ShowAppearancePanel = show;
@@ -477,43 +487,45 @@ namespace OpenUtau.App.ViewModels {
             MessageBus.Current.SendMessage(new NotesRefreshEvent());
         }
 
-        static readonly string[] DiffSingerPresetLabels = { "HQ", "MQ", "LQ", "ELQ" };
+        static readonly (string Label, int Acoustic, int Variance, int Pitch)[] DiffSingerRenderPresets = {
+            ("HQ", 50, 50, 20),
+            ("MQ", 20, 20, 20),
+            ("LQ", 1, 1, 20),
+        };
+
+        void UpdateDiffSingerPresetHighlight() {
+            int acoustic = Preferences.Default.DiffSingerSteps;
+            int variance = Preferences.Default.DiffSingerStepsVariance;
+            int pitch = Preferences.Default.DiffSingerStepsPitch;
+            DiffSingerHqPresetActive = MatchesDiffSingerRenderPreset(0, acoustic, variance, pitch);
+            DiffSingerMqPresetActive = MatchesDiffSingerRenderPreset(1, acoustic, variance, pitch);
+            DiffSingerLqPresetActive = MatchesDiffSingerRenderPreset(2, acoustic, variance, pitch);
+        }
+
+        static bool MatchesDiffSingerRenderPreset(int preset, int acoustic, int variance, int pitch) {
+            if (preset < 0 || preset >= DiffSingerRenderPresets.Length) {
+                return false;
+            }
+            var (_, presetAcoustic, presetVariance, presetPitch) = DiffSingerRenderPresets[preset];
+            return acoustic == presetAcoustic && variance == presetVariance && pitch == presetPitch;
+        }
 
         void ApplyDiffSingerRenderPreset(int preset) {
-            int acoustic;
-            int variance;
-            int pitch;
-            switch (preset) {
-                case 0:
-                    acoustic = Preferences.Default.DiffSingerSteps = 50;
-                    variance = Preferences.Default.DiffSingerStepsVariance = 50;
-                    pitch = Preferences.Default.DiffSingerStepsPitch = 20;
-                    break;
-                case 1:
-                    acoustic = Preferences.Default.DiffSingerSteps = 20;
-                    variance = Preferences.Default.DiffSingerStepsVariance = 20;
-                    pitch = Preferences.Default.DiffSingerStepsPitch = 20;
-                    break;
-                case 2:
-                    acoustic = Preferences.Default.DiffSingerSteps = 10;
-                    variance = Preferences.Default.DiffSingerStepsVariance = 10;
-                    pitch = Preferences.Default.DiffSingerStepsPitch = 20;
-                    break;
-                case 3:
-                    acoustic = Preferences.Default.DiffSingerSteps = 1;
-                    variance = Preferences.Default.DiffSingerStepsVariance = 1;
-                    pitch = Preferences.Default.DiffSingerStepsPitch = 1;
-                    break;
-                default:
-                    return;
+            if (preset < 0 || preset >= DiffSingerRenderPresets.Length) {
+                return;
             }
+            var (label, acoustic, variance, pitch) = DiffSingerRenderPresets[preset];
+            Preferences.Default.DiffSingerSteps = acoustic;
+            Preferences.Default.DiffSingerStepsVariance = variance;
+            Preferences.Default.DiffSingerStepsPitch = pitch;
             Preferences.Save();
-            if (appearancePreferences != null) {
-                appearancePreferences.DiffSingerSteps = acoustic;
-                appearancePreferences.DiffSingerStepsVariance = variance;
-                appearancePreferences.DiffSingerStepsPitch = pitch;
+            var prefs = appearancePreferences ?? sharedAppearancePreferences;
+            if (prefs != null) {
+                prefs.DiffSingerSteps = acoustic;
+                prefs.DiffSingerStepsVariance = variance;
+                prefs.DiffSingerStepsPitch = pitch;
             }
-            var label = DiffSingerPresetLabels[preset];
+            UpdateDiffSingerPresetHighlight();
             var message = string.Format(
                 ThemeManager.GetString("progress.diffsinger.preset"),
                 label, acoustic, variance, pitch);
