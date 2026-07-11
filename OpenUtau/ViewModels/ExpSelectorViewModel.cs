@@ -93,6 +93,14 @@ namespace OpenUtau.App.ViewModels {
             } else if (cmd is LoadPartNotification loadPart) {
                 currentTrackNo = loadPart.part.trackNo;
                 OnListChange();
+            } else if (cmd is TrackChangeSingerCommand changeSinger) {
+                if (changeSinger.track.TrackNo == currentTrackNo) {
+                    OnListChange();
+                }
+            } else if (cmd is TrackChangeRenderSettingCommand changeRenderer) {
+                if (changeRenderer.track.TrackNo == currentTrackNo) {
+                    OnListChange();
+                }
             } else if (cmd is ConfigureExpressionsCommand ||
                 cmd is ValidateProjectNotification ||
                 cmd is SingersRefreshedNotification) {
@@ -121,13 +129,19 @@ namespace OpenUtau.App.ViewModels {
             }
         }
 
+        static bool IsDiffSingerTrack(int trackNo) {
+            var project = DocManager.Inst.Project;
+            if (trackNo < 0 || trackNo >= project.tracks.Count) {
+                return false;
+            }
+            var singer = project.tracks[trackNo].Singer;
+            return singer is { Found: true, SingerType: USingerType.DiffSinger };
+        }
+
         static IEnumerable<UExpressionDescriptor> GetVisibleDescriptors(int trackNo) {
             var project = DocManager.Inst.Project;
-            if (trackNo >= 0 && trackNo < project.tracks.Count) {
-                var track = project.tracks[trackNo];
-                if (track.RendererSettings.Renderer?.SingerType == USingerType.DiffSinger) {
-                    return track.GetSupportedExps(project);
-                }
+            if (IsDiffSingerTrack(trackNo)) {
+                return project.tracks[trackNo].GetSupportedExps(project);
             }
             return project.expressions.Values;
         }
