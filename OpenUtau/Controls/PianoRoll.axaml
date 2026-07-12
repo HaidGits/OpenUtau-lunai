@@ -195,7 +195,7 @@
               PointerMoved="TimelinePointerMoved"
               PointerReleased="TimelinePointerReleased"
               DoubleTapped="TimelineDoubleTapped"/>
-      <c:TrackBackground Grid.Row="2" Grid.Column="1" IsHitTestVisible="False"
+      <c:TrackBackground Grid.Row="2" Grid.Column="1" IsHitTestVisible="False" ZIndex="0"
                          Background="{DynamicResource SystemRegionBrush}"
                          Foreground="{DynamicResource TrackBackgroundAltBrush}"
                          DataContext="{Binding NotesViewModel}"
@@ -206,14 +206,14 @@
                          KeyIsMajor="{Binding KeyIsMajor}"
                          ShowKeyScale="{Binding ShowKeyScale}"
                          IsPianoRoll="True"/>
-      <Canvas x:Name="PortraitLayerNotes" Grid.Row="2" Grid.Column="1" ZIndex="0"
+      <Canvas x:Name="PortraitLayerNotes" Grid.Row="2" Grid.Column="1" ZIndex="1"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               IsHitTestVisible="False" ClipToBounds="True">
         <Image x:Name="PortraitImageNotes" Source="{Binding NotesViewModel.Portrait}"
                OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"
                RenderOptions.BitmapInterpolationMode="HighQuality"/>
       </Canvas>
-      <c:TickBackground Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" IsHitTestVisible="False"
+      <c:TickBackground Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" IsHitTestVisible="False" ZIndex="0"
                         Foreground="{DynamicResource TickLineBrush}"
                         Background="{DynamicResource TickLineBrushLow}"
                         Resolution="{Binding PlaybackViewModel.Resolution}"
@@ -256,7 +256,7 @@
               Background="#4D000000"
               IsVisible="{Binding PitchFocusDim}"
               IsHitTestVisible="False"/>
-      <c:NotesCanvas x:Name="NotesCanvas" Grid.Row="2" Grid.Column="1" ZIndex="1"
+      <c:NotesCanvas x:Name="NotesCanvas" Grid.Row="2" Grid.Column="1" ZIndex="2"
                      TickWidth="{Binding NotesViewModel.TickWidth}"
                      TrackHeight="{Binding NotesViewModel.TrackHeight}"
                      TickOffset="{Binding NotesViewModel.TickOffset}"
@@ -721,14 +721,14 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Background="{DynamicResource WorkspaceCardBrush}"/>
         <Grid x:Name="PhonemeNotesArea" Grid.Column="1" Background="{DynamicResource WorkspaceCardBrush}" ClipToBounds="True">
-          <Canvas x:Name="PortraitLayerPhoneme" ZIndex="0"
+          <Canvas x:Name="PortraitLayerPhoneme" ZIndex="1"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   IsHitTestVisible="False" ClipToBounds="True">
             <Image x:Name="PortraitImagePhoneme" Source="{Binding NotesViewModel.Portrait}"
                    OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"
                    RenderOptions.BitmapInterpolationMode="HighQuality"/>
           </Canvas>
-          <c:TickBackground IsHitTestVisible="False"
+          <c:TickBackground IsHitTestVisible="False" ZIndex="0"
                             Foreground="{DynamicResource TickLineBrush}"
                             Background="{DynamicResource TickLineBrushLow}"
                             Resolution="{Binding PlaybackViewModel.Resolution}"
@@ -737,7 +737,7 @@
                             TickOffset="{Binding NotesViewModel.TickOffset}"
                             SnapDiv="{Binding NotesViewModel.SnapDiv, Mode=OneWay}"
                             ShowBar="False"/>
-          <c:PhonemeCanvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"
+          <c:PhonemeCanvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" ZIndex="2"
                          TickWidth="{Binding NotesViewModel.TickWidth}"
                          TickOffset="{Binding NotesViewModel.TickOffset}"
                          Part="{Binding NotesViewModel.Part}" IsVisible="True"
@@ -792,7 +792,7 @@
         </ScrollViewer>
         <Border Grid.Row="0" Grid.Column="1" Classes="expPanelTopBar" ClipToBounds="True">
           <Grid>
-            <c:TickBackground IsHitTestVisible="False"
+            <c:TickBackground IsHitTestVisible="False" ZIndex="0"
                               Foreground="{DynamicResource TickLineBrush}"
                               Background="{DynamicResource TickLineBrushLow}"
                               Resolution="{Binding PlaybackViewModel.Resolution}"
@@ -827,14 +827,14 @@
           </Grid>
         </Border>
         <Grid x:Name="ExpNotesArea" Grid.Row="1" Grid.Column="1" Background="{DynamicResource BackgroundBrush}" ClipToBounds="True">
-          <Canvas x:Name="PortraitLayerExp" ZIndex="0"
+          <Canvas x:Name="PortraitLayerExp" ZIndex="1"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   IsHitTestVisible="False" ClipToBounds="True">
             <Image x:Name="PortraitImageExp" Source="{Binding NotesViewModel.Portrait}"
                    OpacityMask="{Binding NotesViewModel.PortraitMask}" Stretch="None"
                    RenderOptions.BitmapInterpolationMode="HighQuality"/>
           </Canvas>
-          <c:TickBackground IsHitTestVisible="False"
+          <c:TickBackground IsHitTestVisible="False" ZIndex="0"
                             Foreground="{DynamicResource TickLineBrush}"
                             Background="{DynamicResource TickLineBrushLow}"
                             Resolution="{Binding PlaybackViewModel.Resolution}"
@@ -843,13 +843,13 @@
                             TickOffset="{Binding NotesViewModel.TickOffset}"
                             SnapDiv="{Binding NotesViewModel.SnapDiv, Mode=OneWay}"
                             ShowBar="False"/>
-          <c:ExpressionCanvas Opacity="{Binding NotesViewModel.ExpShadowOpacity}"
+          <c:ExpressionCanvas Opacity="{Binding NotesViewModel.ExpShadowOpacity}" ZIndex="2"
                               TickWidth="{Binding NotesViewModel.TickWidth}"
                               TickOffset="{Binding NotesViewModel.TickOffset}"
                               Part="{Binding NotesViewModel.Part}"
                               Key="{Binding NotesViewModel.SecondaryKey}"
                               ShowRealCurve="False"/>
-          <c:ExpressionCanvas Bounds="{Binding NotesViewModel.ExpBounds, Mode=OneWayToSource}"
+          <c:ExpressionCanvas Bounds="{Binding NotesViewModel.ExpBounds, Mode=OneWayToSource}" ZIndex="2"
                               TickWidth="{Binding NotesViewModel.TickWidth}"
                               TickOffset="{Binding NotesViewModel.TickOffset}"
                               Part="{Binding NotesViewModel.Part}"
