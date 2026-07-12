@@ -256,6 +256,8 @@ namespace OpenUtau.Core {
         CancellationTokenSource renderCancellation;
         CancellationTokenSource preRenderCancellation;
         bool pausedWithMix;
+        int playbackRenderGeneration;
+        bool playbackMixDirty;
 
         // Loop playback state
         private int loopStartTick = 0;
@@ -365,7 +367,8 @@ namespace OpenUtau.Core {
         }
 
         public void Play(UProject project, int tick, int endTick = -1, int trackNo = -1) {
-            if (pausedWithMix && masterMix != null) {
+            bool forceFreshRender = Preferences.Default.ExperimentalInvalidatePlaybackOnEdit && playbackMixDirty;
+            if (!forceFreshRender && pausedWithMix && masterMix != null) {
                 var timeAxis = project.timeAxis;
                 startMs = timeAxis.TickPosToMsPos(tick);
                 // playbackStartTick unchanged — resume from pause, not a new session
@@ -379,13 +382,18 @@ namespace OpenUtau.Core {
                 AudioOutput.Play();
                 return;
             }
-            if (AudioOutput.PlaybackState == PlaybackState.Paused) {
+            if (!forceFreshRender && AudioOutput.PlaybackState == PlaybackState.Paused) {
                 PlayingMaster = true;
                 metronomeEngine.StartPlayback(project.timeAxis, DocManager.Inst.playPosTick);
                 AudioOutput.Play();
                 return;
             }
+            if (forceFreshRender) {
+                pausedWithMix = false;
+                masterMix = null;
+            }
             AudioOutput.Stop();
+            playbackMixDirty = false;
             Render(project, tick, endTick, trackNo);
             StartingToPlay = true;
             PlayingMaster = true;
@@ -438,10 +446,14 @@ namespace OpenUtau.Core {
         }
 
         private void Render(UProject project, int tick, int endTick, int trackNo) {
+            int sessionGeneration = playbackRenderGeneration;
             Task.Run(() => {
                 try {
                     RenderEngine engine = new RenderEngine(project, startTick: tick, endTick: endTick, trackNo: trackNo);
                     var result = engine.RenderMixdown(DocManager.Inst.MainScheduler, ref renderCancellation, wait: false);
+                    if (sessionGeneration != playbackRenderGeneration) {
+                        return;
+                    }
                     var playbackAdapter = new MasterAdapter(new PlaybackMix(result.Item1, metronomeEngine));
                     playbackAdapter.SetPosition((int)(project.timeAxis.TickPosToMsPos(tick) * 44100 / 1000) * 2);
                     faders = result.Item2;
@@ -456,6 +468,25 @@ namespace OpenUtau.Core {
                     DocManager.Inst.ExecuteCmd(new ErrorMessageNotification(customEx));
                 }
             });
+        }
+
+        void InvalidatePlaybackForProjectChange() {
+            if (!Preferences.Default.ExperimentalInvalidatePlaybackOnEdit) {
+                return;
+            }
+            playbackMixDirty = true;
+            bool isActivelyPlaying = PlayingMaster
+                && AudioOutput.PlaybackState == PlaybackState.Playing;
+            if (isActivelyPlaying) {
+                return;
+            }
+            playbackRenderGeneration++;
+            if (masterMix != null || pausedWithMix
+                || AudioOutput.PlaybackState == PlaybackState.Paused
+                || StartingToPlay) {
+                StopPlayback();
+            }
+            renderCancellation?.Cancel();
         }
 
         public void UpdatePlayPos() {
@@ -609,7 +640,10 @@ namespace OpenUtau.Core {
             } else if (cmd is LoadProjectNotification) {
                 StopPlayback();
                 renderCancellation?.Cancel();
+                playbackRenderGeneration++;
                 DocManager.Inst.ExecuteCmd(new SetPlayPosTickNotification(0));
+            } else if (cmd is PreRenderNotification) {
+                InvalidatePlaybackForProjectChange();
             }
             if (cmd is PreRenderNotification || cmd is LoadProjectNotification) {
                 if (Util.Preferences.Default.PreRender) {

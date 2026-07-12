@@ -805,6 +805,7 @@
   <system:String x:Key="prefs.playback.pitchfollow.threshold">Порог в полутонах</system:String>
   <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Вертикальная позиция ноты</system:String>
   <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Плавность кадра</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Перерендер после правок при воспроизведении (экспериментально)</system:String>
   <system:String x:Key="prefs.rendering">Рендеринг</system:String>
   <system:String x:Key="prefs.rendering.defaultrenderer">Рендерер по-умолчанию (для классических войсбанков)</system:String>
   <system:String x:Key="prefs.rendering.diffsingerdepth">Глубина рендеринга DiffSinger</system:String>

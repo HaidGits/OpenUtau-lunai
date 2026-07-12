@@ -899,6 +899,7 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.playback.pitchfollow.threshold">Semitone threshold</system:String>
   <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Note vertical position</system:String>
   <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Frame smoothing</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Re-render after edits on play (experimental)</system:String>
   <system:String x:Key="prefs.rendering">Rendering</system:String>
   <system:String x:Key="prefs.rendering.defaultrenderer">Default renderer (for classic voicebanks)</system:String>
   <system:String x:Key="prefs.rendering.diffsingerdepth">DiffSinger Render Depth</system:String>

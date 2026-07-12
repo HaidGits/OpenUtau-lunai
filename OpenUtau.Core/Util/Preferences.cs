@@ -260,6 +260,8 @@ namespace OpenUtau.Core.Util {
             public double PlaybackPitchFollowFrameSmoothing = 0.1;
             /// <summary>When true, draw the planned pitch-follow camera center path on the piano roll.</summary>
             public bool PlaybackPitchFollowShowPath = false;
+            /// <summary>When true, edits invalidate the paused playback mix so the next Play re-renders.</summary>
+            public bool ExperimentalInvalidatePlaybackOnEdit = true;
             public bool ReverseLogOrder = true;
             public bool ShowPortrait = true;
             public bool ShowIcon = true;

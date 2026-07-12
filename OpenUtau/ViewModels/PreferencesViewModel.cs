@@ -96,6 +96,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public double PlaybackPitchFollowVerticalPosition { get; set; }
         [Reactive] public double PlaybackPitchFollowFrameSmoothing { get; set; }
         [Reactive] public bool PlaybackPitchFollowShowPath { get; set; }
+        [Reactive] public bool ExperimentalInvalidatePlaybackOnEdit { get; set; }
 
         // Paths
         public string SingerPath => PathManager.Inst.SingersPath;
@@ -515,6 +516,7 @@ namespace OpenUtau.App.ViewModels {
             PlaybackPitchFollowVerticalPosition = Preferences.Default.PlaybackPitchFollowVerticalPosition;
             PlaybackPitchFollowFrameSmoothing = Preferences.Default.PlaybackPitchFollowFrameSmoothing;
             PlaybackPitchFollowShowPath = Preferences.Default.PlaybackPitchFollowShowPath;
+            ExperimentalInvalidatePlaybackOnEdit = Preferences.Default.ExperimentalInvalidatePlaybackOnEdit;
             LockStartTime = Preferences.Default.LockStartTime;
             InstallToAdditionalSingersPath = Preferences.Default.InstallToAdditionalSingersPath;
             LoadDeepFolders = Preferences.Default.LoadDeepFolderSinger;
@@ -664,6 +666,11 @@ namespace OpenUtau.App.ViewModels {
                     Preferences.Default.UseModernPlayhead = useModernPlayhead;
                     Preferences.Save();
                     MessageBus.Current.SendMessage(new NotesViewModel.PlayheadModeChangedEvent(useModernPlayhead));
+                });
+            this.WhenAnyValue(vm => vm.ExperimentalInvalidatePlaybackOnEdit)
+                .Subscribe(experimentalInvalidatePlaybackOnEdit => {
+                    Preferences.Default.ExperimentalInvalidatePlaybackOnEdit = experimentalInvalidatePlaybackOnEdit;
+                    Preferences.Save();
                 });
             this.WhenAnyValue(vm => vm.LockStartTime)
                 .Subscribe(lockStartTime => {

@@ -223,6 +223,10 @@
             <TextBlock Text="{DynamicResource prefs.playback.modernplayhead}" HorizontalAlignment="Left"/>
             <ToggleSwitch IsChecked="{Binding UseModernPlayhead}"/>
           </Grid>
+          <Grid>
+            <TextBlock Text="{DynamicResource prefs.playback.experimentalinvalidaterender}" HorizontalAlignment="Left"/>
+            <ToggleSwitch IsChecked="{Binding ExperimentalInvalidatePlaybackOnEdit}"/>
+          </Grid>
         </StackPanel>
 
         <!-- Paths -->
