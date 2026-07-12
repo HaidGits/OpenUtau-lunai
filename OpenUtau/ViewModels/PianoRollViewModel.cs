@@ -48,6 +48,8 @@ namespace OpenUtau.App.ViewModels {
     }
 
     public class PianoRollViewModel : ViewModelBase, ICmdSubscriber {
+        DispatcherTimer? progressSmoothTimer;
+        double progressTarget;
 
         [Reactive] public NotesViewModel NotesViewModel { get; set; }
         [Reactive] public PlaybackViewModel? PlaybackViewModel { get; set; }
@@ -169,6 +171,7 @@ namespace OpenUtau.App.ViewModels {
             = new Dictionary<Key, MenuItemViewModel>();
 
         [Reactive] public double Progress { get; set; }
+        [Reactive] public string ProgressText { get; set; } = string.Empty;
         [Reactive] public bool CanUndo { get; set; } = false;
         [Reactive] public bool CanRedo { get; set; } = false;
         [Reactive] public string UndoText { get; set; } = ThemeManager.GetString("menu.edit.undo");
@@ -598,13 +601,51 @@ namespace OpenUtau.App.ViewModels {
                 }
             }
             if (cmd is ProgressBarNotification progressBarNotification) {
-                if (PianoRollDetached) {
+                if (UsesExpandedPianoRollLayout) {
                     Dispatcher.UIThread.InvokeAsync(() => {
-                        Progress = progressBarNotification.Progress;
+                        ApplyProgressNotification(progressBarNotification);
                     }, DispatcherPriority.Background);
                 }
             }
             SetUndoState();
+        }
+
+        void ApplyProgressNotification(ProgressBarNotification progressBarNotification) {
+            ProgressText = progressBarNotification.Info;
+            if (progressBarNotification.Progress <= 0 && string.IsNullOrEmpty(progressBarNotification.Info)) {
+                progressTarget = 0;
+                Progress = 0;
+                ProgressText = string.Empty;
+                progressSmoothTimer?.Stop();
+                return;
+            }
+            AnimateProgressTo(progressBarNotification.Progress);
+        }
+
+        void AnimateProgressTo(double target) {
+            progressTarget = Math.Clamp(target, 0, 100);
+            if (Progress <= 0.01 && progressTarget > 0) {
+                Progress = Math.Max(1.0, progressTarget * 0.04);
+            }
+            if (progressSmoothTimer == null) {
+                progressSmoothTimer = new DispatcherTimer {
+                    Interval = TimeSpan.FromMilliseconds(16),
+                };
+                progressSmoothTimer.Tick += (_, _) => {
+                    double delta = progressTarget - Progress;
+                    if (Math.Abs(delta) < 0.4) {
+                        Progress = progressTarget;
+                        if (progressTarget <= 0) {
+                            progressSmoothTimer?.Stop();
+                        }
+                        return;
+                    }
+                    Progress += delta * 0.22;
+                };
+            }
+            if (!progressSmoothTimer.IsEnabled) {
+                progressSmoothTimer.Start();
+            }
         }
 
         #endregion

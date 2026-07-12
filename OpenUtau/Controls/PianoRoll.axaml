@@ -77,7 +77,6 @@
         <RowDefinition Height="48"/>
         <RowDefinition Height="24"/>
         <RowDefinition Height="*"/>
-        <RowDefinition Height="Auto" MinHeight="0"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="60"/>
@@ -705,7 +704,6 @@
               PointerWheelChanged="ViewScalerPointerWheelChanged">
         <c:ViewScaler Name="VScaler" DataContext="{Binding NotesViewModel}" Value="{Binding TrackHeight}" Min="{Binding TrackHeightMin}" Max="{Binding TrackHeightMax}"/>
       </Border>
-      <ProgressBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Value="{Binding Progress}" IsVisible="{Binding UsesExpandedPianoRollLayout}"/>
     </Grid>
     </Border>
         <Border Grid.Row="1" Background="Transparent" Cursor="SizeNorthSouth"
@@ -894,5 +892,10 @@
             IsVisible="{Binding NotesViewModel.ShowNoteParams}">
       <c:NotePropertiesControl x:Name="NoteProperties"/>
     </Border>
+    <c:RenderProgressPanel Grid.ColumnSpan="9" ZIndex="1000"
+                           VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                           Height="24"
+                           Progress="{Binding Progress}"
+                           ProgressText="{Binding ProgressText}"/>
   </Grid>
 </UserControl>

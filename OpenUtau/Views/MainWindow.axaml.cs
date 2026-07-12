@@ -1419,7 +1419,7 @@ namespace OpenUtau.App.Views {
             if (workspaceHeight <= 0) {
                 return;
             }
-            const double fixedRows = 8 + 20 + 4;
+            const double fixedRows = 8 + 24;
             double available = workspaceHeight - fixedRows;
             if (available <= 0) {
                 return;

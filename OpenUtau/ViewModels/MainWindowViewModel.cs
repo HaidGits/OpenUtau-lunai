@@ -49,6 +49,8 @@ namespace OpenUtau.App.ViewModels {
 
     public class MainWindowViewModel : ViewModelBase, ICmdSubscriber {
         DispatcherTimer? progressTextClearTimer;
+        DispatcherTimer? progressSmoothTimer;
+        double progressTarget;
 
         public string Title => !ProjectSaved
             ? $"{AppVersion}"
@@ -173,7 +175,7 @@ namespace OpenUtau.App.ViewModels {
             if (PianoRollFullscreen || !ShowPianoRoll) {
                 return;
             }
-            const double fixedRows = 8 + 20 + 4;
+            const double fixedRows = 8 + 24;
             double available = workspaceHeight - fixedRows;
             if (available <= 0) {
                 return;
@@ -504,21 +506,7 @@ namespace OpenUtau.App.ViewModels {
         public void OnNext(UCommand cmd, bool isUndo) {
             if (cmd is ProgressBarNotification progressBarNotification) {
                 Dispatcher.UIThread.InvokeAsync(() => {
-                    Progress = progressBarNotification.Progress;
-                    ProgressText = progressBarNotification.Info;
-                    progressTextClearTimer?.Stop();
-                    progressTextClearTimer = null;
-                    if (progressBarNotification.AutoClearSeconds > 0) {
-                        progressTextClearTimer = new DispatcherTimer {
-                            Interval = TimeSpan.FromSeconds(progressBarNotification.AutoClearSeconds),
-                        };
-                        progressTextClearTimer.Tick += (_, _) => {
-                            ProgressText = string.Empty;
-                            progressTextClearTimer?.Stop();
-                            progressTextClearTimer = null;
-                        };
-                        progressTextClearTimer.Start();
-                    }
+                    ApplyProgressNotification(progressBarNotification);
                 }, DispatcherPriority.Background);
             } else if (cmd is LoadProjectNotification loadProject) {
                 Preferences.AddRecentFileIfEnabled(loadProject.project.FilePath);
@@ -530,5 +518,55 @@ namespace OpenUtau.App.ViewModels {
         }
 
         #endregion
+
+        void ApplyProgressNotification(ProgressBarNotification progressBarNotification) {
+            ProgressText = progressBarNotification.Info;
+            progressTextClearTimer?.Stop();
+            progressTextClearTimer = null;
+            if (progressBarNotification.AutoClearSeconds > 0) {
+                progressTextClearTimer = new DispatcherTimer {
+                    Interval = TimeSpan.FromSeconds(progressBarNotification.AutoClearSeconds),
+                };
+                progressTextClearTimer.Tick += (_, _) => {
+                    ProgressText = string.Empty;
+                    progressTextClearTimer?.Stop();
+                    progressTextClearTimer = null;
+                };
+                progressTextClearTimer.Start();
+            }
+            if (progressBarNotification.Progress <= 0 && string.IsNullOrEmpty(progressBarNotification.Info)) {
+                progressTarget = 0;
+                Progress = 0;
+                progressSmoothTimer?.Stop();
+                return;
+            }
+            AnimateProgressTo(progressBarNotification.Progress);
+        }
+
+        void AnimateProgressTo(double target) {
+            progressTarget = Math.Clamp(target, 0, 100);
+            if (Progress <= 0.01 && progressTarget > 0) {
+                Progress = Math.Max(1.0, progressTarget * 0.04);
+            }
+            if (progressSmoothTimer == null) {
+                progressSmoothTimer = new DispatcherTimer {
+                    Interval = TimeSpan.FromMilliseconds(16),
+                };
+                progressSmoothTimer.Tick += (_, _) => {
+                    double delta = progressTarget - Progress;
+                    if (Math.Abs(delta) < 0.4) {
+                        Progress = progressTarget;
+                        if (progressTarget <= 0) {
+                            progressSmoothTimer?.Stop();
+                        }
+                        return;
+                    }
+                    Progress += delta * 0.22;
+                };
+            }
+            if (!progressSmoothTimer.IsEnabled) {
+                progressSmoothTimer.Start();
+            }
+        }
     }
 }

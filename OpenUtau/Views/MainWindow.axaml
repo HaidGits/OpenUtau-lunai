@@ -289,8 +289,7 @@
             <RowDefinition Height="{Binding PianoRollSplitterRowHeight}" MinHeight="0"/>
             <RowDefinition Height="*" MinHeight="{Binding PianoRollMinHeight}"
                            MaxHeight="{Binding PianoRollMaxHeight}"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="4"/>
+            <RowDefinition Height="24"/>
           </Grid.RowDefinitions>
           <Border Grid.Row="0" Grid.ColumnSpan="3" Classes="workspaceCard workspaceDockTracks"
                   IsVisible="{Binding ShowTracksArea}">
@@ -545,13 +544,15 @@
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Background="Transparent" Focusable="False" Cursor="SizeNorthSouth"
                         IsVisible="{Binding ShowPianoRollSplitter}"/>
-          <Border Grid.Row="2" Grid.ColumnSpan="3" Classes="workspaceDockPianoHost"
+          <Border x:Name="PianoRollHost" Grid.Row="2" Grid.ColumnSpan="3" Classes="workspaceDockPianoHost"
                   ClipToBounds="True" IsVisible="{Binding ShowPianoRoll}">
             <ContentControl Name="PianoRollContainer"
                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
           </Border>
-          <TextBlock Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="20" Margin="4,4,4,0" Text="{Binding ProgressText}"/>
-          <ProgressBar Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Value="{Binding Progress}"/>
+          <c:RenderProgressPanel Grid.Row="3" Grid.ColumnSpan="3"
+                                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                 Progress="{Binding Progress}"
+                                 ProgressText="{Binding ProgressText}"/>
         </Grid>
       </Carousel>
     </Grid>

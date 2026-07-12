@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="24"
+             x:Class="OpenUtau.App.Controls.RenderProgressPanel"
+             x:Name="Root"
+             Height="24" MinHeight="24" MaxHeight="24"
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Stretch"
+             IsHitTestVisible="False">
+  <Grid x:Name="HostGrid" ClipToBounds="True">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="20"/>
+      <RowDefinition Height="4"/>
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0"
+               Text="{Binding ProgressText, ElementName=Root}"
+               Margin="4,0,4,0"
+               VerticalAlignment="Center"
+               FontSize="12"
+               TextTrimming="CharacterEllipsis"
+               Foreground="{DynamicResource ForegroundColor}"/>
+    <Panel x:Name="ProgressRow" Grid.Row="1" ClipToBounds="True">
+      <Border x:Name="FillClip"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Stretch"
+              Background="{DynamicResource ForegroundColor}"/>
+    </Panel>
+  </Grid>
+</UserControl>
