@@ -1,11 +1,16 @@
 using System;
+using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
+using OpenUtau.App;
 using OpenUtau.App.ViewModels;
 using OpenUtau.Core;
 using OpenUtau.Core.Ustx;
+using ReactiveUI;
 
 namespace OpenUtau.App.Controls {
     public partial class LyricBox : UserControl {
@@ -13,6 +18,7 @@ namespace OpenUtau.App.Controls {
         private TextBox box;
         private ListBox listBox;
         private DispatcherTimer? focusTimer;
+        private int scrollStyleApplyGeneration;
 
         public LyricBox() {
             InitializeComponent();
@@ -20,6 +26,37 @@ namespace OpenUtau.App.Controls {
             box = PART_Box;
             listBox = PART_Suggestions;
             IsVisible = false;
+            AttachedToVisualTree += (_, _) => ScheduleApplyScrollStyle();
+            Loaded += (_, _) => ScheduleApplyScrollStyle();
+            DetachedFromVisualTree += (_, _) => scrollStyleApplyGeneration++;
+            MessageBus.Current.Listen<ScrollbarsStyleChangedEvent>()
+                .Subscribe(_ => ScheduleApplyScrollStyle());
+        }
+
+        void ScheduleApplyScrollStyle() {
+            if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
+                return;
+            }
+            int generation = ++scrollStyleApplyGeneration;
+            Dispatcher.UIThread.Post(() => {
+                if (generation != scrollStyleApplyGeneration || !WorkspaceScrollbarHelper.IsInVisualTree(this)) {
+                    return;
+                }
+                ApplyScrollStyle();
+            }, DispatcherPriority.Loaded);
+        }
+
+        void ApplyScrollStyle() {
+            if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
+                return;
+            }
+            var scrollViewer = listBox.GetVisualDescendants().OfType<ScrollViewer>().FirstOrDefault();
+            if (scrollViewer == null) {
+                return;
+            }
+            scrollViewer.Classes.Add("workspaceScroll");
+            scrollViewer.AllowAutoHide = false;
+            WorkspaceScrollbarHelper.ApplyScrollViewer(scrollViewer, WorkspaceScrollbarHelper.UseClassicScrollbars);
         }
 
         private void Box_GotFocus(object? sender, GotFocusEventArgs e) {
@@ -144,8 +181,7 @@ namespace OpenUtau.App.Controls {
         }
 
         public void ListBox_PointerPressed(object sender, PointerPressedEventArgs args) {
-            if (sender is DockPanel panel &&
-                panel.DataContext is LyricBoxViewModel.SuggestionItem item) {
+            if (sender is Control { DataContext: LyricBoxViewModel.SuggestionItem item }) {
                 box.Text = item.Alias;
             }
             EndEdit(true);
@@ -167,6 +203,7 @@ namespace OpenUtau.App.Controls {
             viewModel.PhonemeOtherPart = otherPart ?? string.Empty;
             viewModel.IsVisible = true;
             box.SelectAll();
+            ScheduleApplyScrollStyle();
             focusTimer = new DispatcherTimer(
                 TimeSpan.FromMilliseconds(15),
                 DispatcherPriority.Normal,

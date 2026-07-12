@@ -6,34 +6,49 @@
              mc:Ignorable="d" d:DesignWidth="360" d:DesignHeight="300"
              x:Class="OpenUtau.App.Controls.LyricBox" Focusable="False"
              IsVisible="{Binding IsVisible}" IsEnabled="{Binding IsVisible}">
-  <Border CornerRadius="8" ClipToBounds="False"
-          Background="{DynamicResource WorkspaceCardBrush}"
-          BoxShadow="0 0 14 0 #66000000">
+  <UserControl.Styles>
+    <Style Selector="ListBox.lyricBoxSuggestions ListBoxItem">
+      <Setter Property="Padding" Value="4,0"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="ListBox.lyricBoxSuggestions ListBoxItem:pointerover:not(:disabled) /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="Transparent"/>
+    </Style>
+    <Style Selector="ListBox.lyricBoxSuggestions ListBoxItem:pointerover:not(:disabled) /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AppTopBarTransportStripBrush}"/>
+      <Setter Property="CornerRadius" Value="4"/>
+    </Style>
+  </UserControl.Styles>
+  <Border CornerRadius="8" ClipToBounds="True" Padding="4"
+          BorderThickness="1"
+          BorderBrush="{DynamicResource WorkspaceCanvasBrush}"
+          Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
     <Grid RowDefinitions="22,Auto,Auto" HorizontalAlignment="Stretch">
-      <TextBlock Classes="tips" Grid.Row="0" Margin="4" HorizontalAlignment="Left" Text="{DynamicResource tip.lyricbox.prev}" IsVisible="{Binding !IsAliasBox, Mode=OneWay}"/>
-      <TextBlock Classes="tips" Grid.Row="0" Margin="4" HorizontalAlignment="Right" Text="{DynamicResource tip.lyricbox.next}" IsVisible="{Binding !IsAliasBox, Mode=OneWay}"/>
-      <TextBlock Classes="tips" Grid.Row="0" Margin="4" HorizontalAlignment="Center" Text="{DynamicResource tip.aliasbox}" IsVisible="{Binding IsAliasBox, Mode=OneWay}"/>
+      <TextBlock Classes="tips" Grid.Row="0" HorizontalAlignment="Left" Text="{DynamicResource tip.lyricbox.prev}" IsVisible="{Binding !IsAliasBox, Mode=OneWay}"/>
+      <TextBlock Classes="tips" Grid.Row="0" HorizontalAlignment="Right" Text="{DynamicResource tip.lyricbox.next}" IsVisible="{Binding !IsAliasBox, Mode=OneWay}"/>
+      <TextBlock Classes="tips" Grid.Row="0" HorizontalAlignment="Center" Text="{DynamicResource tip.aliasbox}" IsVisible="{Binding IsAliasBox, Mode=OneWay}"/>
       <ac:WorkspacePanelTextBox Name="PART_Box" Grid.Row="1" Classes="workspacePanelTextBox" Margin="0"
                Text="{Binding Text}" Focusable="True"
                GotFocus="Box_GotFocus" LostFocus="Box_LostFocus" KeyDown="Box_KeyDown"/>
-      <Border Grid.Row="2">
-        <ListBox Name="PART_Suggestions" Grid.Row="2" MaxHeight="240"
+      <Border Grid.Row="2" Margin="0,4,0,0">
+        <ListBox Name="PART_Suggestions" Classes="lyricBoxSuggestions" Grid.Row="2" MaxHeight="240"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  BorderThickness="0" Background="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                  Margin="0"
                  ItemsSource="{Binding Suggestions}" SelectedItem="{Binding SelectedSuggestion}"
                  Focusable="True" KeyDown="ListBox_KeyDown">
-          <ListBox.Styles>
-            <Style Selector="ListBoxItem">
-              <Setter Property="Padding" Value="0"/>
-            </Style>
-          </ListBox.Styles>
           <ListBox.ItemTemplate>
             <DataTemplate>
-              <DockPanel Margin="0" HorizontalAlignment="Stretch" Background="Transparent" PointerPressed="ListBox_PointerPressed" ToolTip.Tip="{Binding Source}">
-                <TextBlock Margin="4" DockPanel.Dock="Left" IsHitTestVisible="False" Text="{Binding Alias}"/>
-                <TextBlock Margin="4" DockPanel.Dock="Right" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" IsHitTestVisible="False" FontSize="10" VerticalAlignment="Center" Text="{Binding Source}"/>
-              </DockPanel>
+              <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                    PointerPressed="ListBox_PointerPressed" ToolTip.Tip="{Binding Source}">
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" IsHitTestVisible="False" Text="{Binding Alias}"/>
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis"
+                           IsHitTestVisible="False" FontSize="10" Text="{Binding Source}"/>
+              </Grid>
             </DataTemplate>
           </ListBox.ItemTemplate>
         </ListBox>
