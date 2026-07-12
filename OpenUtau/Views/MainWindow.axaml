@@ -527,7 +527,7 @@
           </c:PartsCanvas>
           <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
                   ClipToBounds="True" IsHitTestVisible="False">
-            <Border HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,5"
+            <Border HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,5" CornerRadius="8" ClipToBounds="True"
                     IsVisible="{Binding TracksViewModel.PlayPosWaitingRendering}" Background="{DynamicResource BackgroundBrushSemi}">
               <TextBlock Text="{DynamicResource progress.waitingrendering}" FontSize="15"/>
             </Border>

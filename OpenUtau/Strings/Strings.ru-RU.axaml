@@ -965,7 +965,7 @@
     Alt + Перетаскивание конца ноты: Изменение размера соседних нот
     Пробел: Воспроизведение</system:String>
   <system:String x:Key="tip.notes.zoomx">◀ Прокрутите здесь для горизонтального масштабирования ▶</system:String>
-  <system:String x:Key="tip.notes.zoomy">Прокрутите здесь для вертикального масштабирования ▶</system:String>
+  <system:String x:Key="tip.notes.zoomy">Alt + колёсико для вертикального масштабирования</system:String>
 
   <system:String x:Key="tracks.duplicate">Дублировать трек</system:String>
   <system:String x:Key="tracks.duplicatesettings">Дублировать только параметры трека</system:String>

@@ -662,20 +662,19 @@
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               ClipToBounds="True" IsHitTestVisible="False">
         <Grid>
-          <Border Classes="tips" HorizontalAlignment="Center" VerticalAlignment="Center"
+          <Border Classes="tips" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8"
                 IsVisible="{Binding NotesViewModel.ShowTips}">
-            <TextBlock Classes="tips" Grid.Column="0" Margin="10,5"
-                       Text="{DynamicResource tip.notes.basics}"/>
+            <TextBlock Classes="tips" Text="{DynamicResource tip.notes.basics}"/>
           </Border>
-          <Border Classes="tips" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0" Padding="4,4,4,2"
+          <Border Classes="tips" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0" Padding="8"
                    IsVisible="{Binding NotesViewModel.ShowTips}">
             <TextBlock Classes="tips" Text="{DynamicResource tip.notes.zoomx}"/>
           </Border>
-          <Border Classes="tips" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="4,4,4,2"
+          <Border Classes="tips" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="8"
                    IsVisible="{Binding NotesViewModel.ShowTips}">
             <TextBlock Classes="tips" Text="{DynamicResource tip.notes.zoomy}"/>
           </Border>
-          <Border HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,5"
+          <Border HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,5" CornerRadius="8" ClipToBounds="True"
                 IsVisible="{Binding NotesViewModel.PlayPosWaitingRendering}" Background="{DynamicResource BackgroundBrushSemi}">
             <TextBlock Text="{DynamicResource progress.waitingrendering}" FontSize="15"/>
           </Border>
@@ -865,9 +864,9 @@
                      Text="{DynamicResource tip.exps.notsupported}"/>
           <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   ClipToBounds="True" IsHitTestVisible="False">
-            <Border Classes="tips" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Border Classes="tips" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="8"
                     IsVisible="{Binding NotesViewModel.ShowTips}">
-              <TextBlock Classes="tips" Margin="10,5" Text="{DynamicResource tip.exps}"/>
+              <TextBlock Classes="tips" Text="{DynamicResource tip.exps}"/>
             </Border>
           </Border>
         </Grid>
