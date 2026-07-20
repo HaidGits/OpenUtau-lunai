@@ -101,19 +101,19 @@ jobs:
         if: ${{ matrix.arch.os == 'win' }}
 
       - name: Set executable permission
-        run: chmod +x bin/${{ matrix.arch.name }}/OpenUtau
+        run: chmod +x bin/${{ matrix.arch.name }}/OpenUtau-Lunai
         if: ${{ matrix.arch.os == 'linux' }}
 
       - name: Zip
         run: |
           cd bin/${{ matrix.arch.name }}
-          7z a ../../OpenUtau-${{ matrix.arch.name }}.zip *
+          7z a ../../OpenUtau-Lunai-${{ matrix.arch.name }}.zip *
         if: ${{ matrix.arch.os == 'win' }}
 
       - name: Tar.gz
         run: |
           cd bin/${{ matrix.arch.name }}
-          tar -czf ../../OpenUtau-${{ matrix.arch.name }}.tar.gz *
+          tar -czf ../../OpenUtau-Lunai-${{ matrix.arch.name }}.tar.gz *
         if: ${{ matrix.arch.os == 'linux' }}
 
       # Create Installer
@@ -178,50 +178,50 @@ jobs:
       # Upload Artifacts
       - uses: actions/upload-artifact@v4
         with:
-          name: OpenUtau-${{ matrix.arch.name }}.tar.gz
-          path: OpenUtau-${{ matrix.arch.name }}.tar.gz
+          name: OpenUtau-Lunai-${{ matrix.arch.name }}.tar.gz
+          path: OpenUtau-Lunai-${{ matrix.arch.name }}.tar.gz
         if: ${{ !inputs.release && matrix.arch.os == 'linux' }}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: OpenUtau-${{ matrix.arch.name }}.zip
-          path: OpenUtau-${{ matrix.arch.name }}.zip
+          name: OpenUtau-Lunai-${{ matrix.arch.name }}.zip
+          path: OpenUtau-Lunai-${{ matrix.arch.name }}.zip
         if: ${{ !inputs.release && matrix.arch.os == 'win' }}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: OpenUtau-${{ matrix.arch.name }}.exe
-          path: OpenUtau-${{ matrix.arch.name }}.exe
+          name: OpenUtau-Lunai-${{ matrix.arch.name }}.exe
+          path: OpenUtau-Lunai-${{ matrix.arch.name }}.exe
         if: ${{ !inputs.release && matrix.arch.os == 'win' }}
       
       - uses: actions/upload-artifact@v4
         with:
-          name: OpenUtau-${{ matrix.arch.name }}.AppImage
+          name: OpenUtau-Lunai-${{ matrix.arch.name }}.AppImage
           path: OpenUtau-${{ matrix.arch.linuxarch }}.AppImage
         if: ${{ !inputs.release && matrix.arch.os == 'linux' }}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: OpenUtau-${{ matrix.arch.name }}.dmg
-          path: OpenUtau-${{ matrix.arch.name }}.dmg
+          name: OpenUtau-Lunai-${{ matrix.arch.name }}.dmg
+          path: OpenUtau-Lunai-${{ matrix.arch.name }}.dmg
         if: ${{ !inputs.release && matrix.arch.os == 'osx' }}
 
       # Appcast
       - name: Appcast Windows
         shell: cmd
         run: |
-          python appcast.py -v=${{ inputs.version }} -o=windows -r=${{ matrix.arch.name }} -f=OpenUtau-${{ matrix.arch.name }}.zip
-          python appcast.py -v=${{ inputs.version }} -o=windows -r=${{ matrix.arch.name }}-installer -f=OpenUtau-${{ matrix.arch.name }}.exe
+          python appcast.py -v=${{ inputs.version }} -o=windows -r=${{ matrix.arch.name }} -f=OpenUtau-Lunai-${{ matrix.arch.name }}.zip
+          python appcast.py -v=${{ inputs.version }} -o=windows -r=${{ matrix.arch.name }}-installer -f=OpenUtau-Lunai-${{ matrix.arch.name }}.exe
         if: ${{ inputs.release && matrix.arch.os == 'win' }}
 
       - name: Appcast MacOS
         run: |
-          python appcast.py -v=${{ inputs.version }} -o=macos -r=${{ matrix.arch.name }} -f=OpenUtau-${{ matrix.arch.name }}.dmg
+          python appcast.py -v=${{ inputs.version }} -o=macos -r=${{ matrix.arch.name }} -f=OpenUtau-Lunai-${{ matrix.arch.name }}.dmg
         if: ${{ inputs.release && matrix.arch.os == 'osx' }}
 
       - name: Appcast Linux
         run: |
-          python appcast.py -v=${{ inputs.version }} -o=linux -r=${{ matrix.arch.name }} -f=OpenUtau-${{ matrix.arch.name }}.tar.gz
+          python appcast.py -v=${{ inputs.version }} -o=linux -r=${{ matrix.arch.name }} -f=OpenUtau-Lunai-${{ matrix.arch.name }}.tar.gz
         if: ${{ inputs.release && matrix.arch.os == 'linux' }}
 
       # Release
@@ -234,12 +234,12 @@ jobs:
           draft: ${{ inputs.draft }}
           files: |
             appcast.${{ matrix.arch.name }}*.xml
-            OpenUtau-${{ matrix.arch.name }}.*
+            OpenUtau-Lunai-${{ matrix.arch.name }}.*
           body: |
             See [Getting Started](https://github.com/stakira/OpenUtau/wiki/Getting-Started) for how to use.
 
             If you encountered issues, see [FAQ](https://github.com/stakira/OpenUtau/wiki/FAQ)
 
             ## macOS says "This app is damaged"
-            Open a terminal and run `xattr -rc /Applications/OpenUtau.app`. Try opening OpenUtau again.
+            Open a terminal and run `xattr -rc "/Applications/OpenUtau Lunai.app"`. Try opening OpenUtau Lunai again.
         if: ${{ inputs.release }}

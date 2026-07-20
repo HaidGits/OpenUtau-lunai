@@ -3,9 +3,13 @@ set -euo pipefail
 
 ARCH_NAME="${1:?usage: create-macos-dmg.sh <arch-name> e.g. osx-x64}"
 
-APP="bin/${ARCH_NAME}/publish/OpenUtau.app"
+APP="bin/${ARCH_NAME}/publish/OpenUtau-Lunai.app"
+# Dotnet.Bundle may still emit OpenUtau.app from the project folder name.
+if [[ ! -d "${APP}" && -d "bin/${ARCH_NAME}/publish/OpenUtau.app" ]]; then
+  mv "bin/${ARCH_NAME}/publish/OpenUtau.app" "${APP}"
+fi
 PLIST="${APP}/Contents/Info.plist"
-OUT="OpenUtau-${ARCH_NAME}.dmg"
+OUT="OpenUtau-Lunai-${ARCH_NAME}.dmg"
 
 if [[ ! -d "${APP}" ]]; then
   echo "App bundle not found: ${APP}" >&2
@@ -25,6 +29,7 @@ if data.startswith(b'\\xef\\xbb\\xbf'):
 "
 
 rm -f "${OUT}" *.dmg
+hdiutil detach "/Volumes/OpenUtau Lunai" -force 2>/dev/null || true
 hdiutil detach "/Volumes/OpenUtau" -force 2>/dev/null || true
 
 npm install -g create-dmg

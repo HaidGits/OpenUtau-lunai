@@ -1,7 +1,8 @@
 [Desktop Entry]
 
 Type=Application
-Name=OpenUtau
+Name=OpenUtau Lunai
 Comment=Singing voice synthesizer
+Exec=OpenUtau-Lunai
 Icon=OpenUtau
 Categories=AudioVideo;Audio;Midi

@@ -3,9 +3,11 @@
 ManifestDPIAware true
 
 ; HM NIS Edit Wizard helper defines
-!define PRODUCT_NAME "OpenUtau"
-!define PRODUCT_PUBLISHER "stakira"
-!define PRODUCT_WEB_SITE "https://www.openutau.com"
+!define PRODUCT_NAME "OpenUtau Lunai"
+!define PRODUCT_PUBLISHER "keirokeer"
+!define PRODUCT_WEB_SITE "https://lunaiproject.github.io/editor"
+!define PRODUCT_EXE "OpenUtau-Lunai.exe"
+!define PRODUCT_PROGID "OpenUtauLunaiFile"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
@@ -29,7 +31,7 @@ ManifestDPIAware true
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
-!define MUI_FINISHPAGE_RUN "$INSTDIR\OpenUtau.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\${PRODUCT_EXE}"
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
@@ -47,8 +49,8 @@ ManifestDPIAware true
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "OpenUtau-win-${ARCH}.exe"
-InstallDir "$PROGRAMFILES64\OpenUtau"
+OutFile "OpenUtau-Lunai-win-${ARCH}.exe"
+InstallDir "$PROGRAMFILES64\OpenUtau-Lunai"
 ShowInstDetails show
 ShowUnInstDetails show
 
@@ -63,8 +65,8 @@ Section "MainSection" SEC01
 SectionEnd
 
 Section -AdditionalIcons
-  CreateShortCut "$SMPROGRAMS\OpenUtau.lnk" "$INSTDIR\OpenUtau.exe"
-  CreateShortCut "$DESKTOP\OpenUtau.lnk" "$INSTDIR\OpenUtau.exe"
+  CreateShortCut "$SMPROGRAMS\OpenUtau Lunai.lnk" "$INSTDIR\${PRODUCT_EXE}"
+  CreateShortCut "$DESKTOP\OpenUtau Lunai.lnk" "$INSTDIR\${PRODUCT_EXE}"
 SectionEnd
 
 Section -Post
@@ -76,15 +78,15 @@ Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\OpenUtau.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\${PRODUCT_EXE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 
-  WriteRegStr HKCR ".ustx" "" "OpenUtauFile"
-  WriteRegStr HKCR "OpenUtauFile" "" "OpenUtau Sequence File"
-  WriteRegStr HKCR "OpenUtauFile\DefaultIcon" "" "$INSTDIR\OpenUtau.exe"
-  WriteRegStr HKCR "OpenUtauFile\shell\open\command" "" '"$INSTDIR\OpenUtau.exe" "%1"'
+  WriteRegStr HKCR ".ustx" "" "${PRODUCT_PROGID}"
+  WriteRegStr HKCR "${PRODUCT_PROGID}" "" "OpenUtau Sequence File"
+  WriteRegStr HKCR "${PRODUCT_PROGID}\DefaultIcon" "" "$INSTDIR\${PRODUCT_EXE}"
+  WriteRegStr HKCR "${PRODUCT_PROGID}\shell\open\command" "" '"$INSTDIR\${PRODUCT_EXE}" "%1"'
 SectionEnd
 
 Section "VC Redist"
@@ -110,11 +112,15 @@ Section Uninstall
   Delete "$INSTDIR\*"
   RMDir "$INSTDIR"
 
-  Delete "$SMPROGRAMS\OpenUtau.lnk"
-  Delete "$DESKTOP\OpenUtau.lnk"
+  Delete "$SMPROGRAMS\OpenUtau Lunai.lnk"
+  Delete "$DESKTOP\OpenUtau Lunai.lnk"
 
+  ; Only clear .ustx association if it still points at Lunai.
+  ReadRegStr $0 HKCR ".ustx" ""
+  StrCmp $0 "${PRODUCT_PROGID}" 0 skip_ustx
   DeleteRegKey HKCR ".ustx"
-  DeleteRegKey HKCR "OpenUtauFile"
+skip_ustx:
+  DeleteRegKey HKCR "${PRODUCT_PROGID}"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   SetAutoClose true

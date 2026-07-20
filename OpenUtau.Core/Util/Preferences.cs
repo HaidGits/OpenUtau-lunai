@@ -142,6 +142,7 @@ namespace OpenUtau.Core.Util {
 
         private static void Load() {
             try {
+                PathManager.Inst.TryMigrateFromLegacyOpenUtau();
                 if (File.Exists(PathManager.Inst.PrefsFilePath)) {
                     var json = File.ReadAllText(PathManager.Inst.PrefsFilePath, Encoding.UTF8);
                     Default = JsonConvert.DeserializeObject<SerializablePreferences>(json);
@@ -153,6 +154,8 @@ namespace OpenUtau.Core.Util {
                     if (!ValidString(new Action(() => CultureInfo.GetCultureInfo(Default.Language)))) Default.Language = string.Empty;
                     if (!ValidString(new Action(() => CultureInfo.GetCultureInfo(Default.SortingOrder)))) Default.SortingOrder = string.Empty;
                     Default.NoteCornerRadius = Math.Clamp(Default.NoteCornerRadius, 0, 12);
+                    Default.NoteOpacity = Math.Clamp(Default.NoteOpacity, 0.05, 1);
+                    Default.NoteBorderThickness = Math.Clamp(Default.NoteBorderThickness, 0.5, 4);
                     Default.PlaybackPitchFollowSemitoneThreshold = Math.Clamp(Default.PlaybackPitchFollowSemitoneThreshold, 0, 24);
                     Default.PlaybackPitchFollowVerticalPosition = Math.Clamp(Default.PlaybackPitchFollowVerticalPosition, 0.15, 0.85);
                     Default.PlaybackPitchFollowFrameSmoothing = Math.Clamp(Default.PlaybackPitchFollowFrameSmoothing, 0.05, 1);
@@ -268,6 +271,8 @@ namespace OpenUtau.Core.Util {
             public bool ShowGhostNotes = true;
             /// <summary>When true, piano-roll notes (including rests/triggers) are drawn with a border stroke.</summary>
             public bool ShowNoteBorder = true;
+            /// <summary>Stroke thickness in pixels for piano-roll note borders.</summary>
+            public double NoteBorderThickness = 1;
             /// <summary>When true, tick/timeline grid lines between bar lines are solid; when false, dashed (piano roll, tracks, expression panel).</summary>
             public bool SolidTickGridLines = true;
             /// <summary>When true, dashed default-value and preview curves in the expression panel are drawn solid.</summary>
@@ -276,6 +281,8 @@ namespace OpenUtau.Core.Util {
             public bool UseOverlayScrollbars = true;
             /// <summary>Corner radius in pixels for piano-roll notes and phonemizer badges (0 = square).</summary>
             public double NoteCornerRadius = 6;
+            /// <summary>Piano-roll note fill opacity. Default 35%.</summary>
+            public double NoteOpacity = 0.35;
             public EditTool EditTool = new EditTool();
             public bool PlayTone = false;
             /// <summary>Legacy; migrated to <see cref="RealTimePitchMode"/> on load.</summary>

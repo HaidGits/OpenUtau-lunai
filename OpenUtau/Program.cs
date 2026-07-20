@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -34,9 +34,11 @@ namespace OpenUtau.App {
             Log.Information($"{RuntimeInformation.OSDescription} " +
                 $"{RuntimeInformation.OSArchitecture} " +
                 $"{RuntimeInformation.ProcessArchitecture}");
-            Log.Information($"OpenUtau v{Assembly.GetEntryAssembly()?.GetName().Version} " +
+            Log.Information($"OpenUtau Lunai v{Assembly.GetEntryAssembly()?.GetName().Version} " +
                 $"{RuntimeInformation.RuntimeIdentifier}");
             Log.Information($"Data path = {PathManager.Inst.DataPath}");
+            Log.Information($"Legacy data path = {PathManager.Inst.LegacyDataPath}");
+            Log.Information($"Singers path = {PathManager.Inst.SingersPath}");
             Log.Information($"Cache path = {PathManager.Inst.CachePath}");
             Log.Information($"System encoding = {Encoding.GetEncoding(0)?.WebName ?? "null"}");
             try {
