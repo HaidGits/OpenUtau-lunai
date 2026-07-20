@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -17,6 +17,7 @@ namespace OpenUtau {
                 Process.Start(new ProcessStartInfo {
                     FileName = GetOpener(),
                     Arguments = GetWrappedPath(path),
+                    UseShellExecute = IsWindows(),
                 });
             }
         }
@@ -28,6 +29,7 @@ namespace OpenUtau {
                     Process.Start(new ProcessStartInfo {
                         FileName = GetOpener(),
                         Arguments = $"/select, {wrappedPath}",
+                        UseShellExecute = true,
                     });
                 } else if (IsMacOS()) {
                     Process.Start(new ProcessStartInfo {
@@ -40,10 +42,27 @@ namespace OpenUtau {
             }
         }
 
+        /// <summary>
+        /// Open a URL in the default browser. Prefer shell-execute with the URL so
+        /// self-contained Linux builds work even when PATH does not include xdg-open.
+        /// </summary>
         public static void OpenWeb(string url) {
+            if (string.IsNullOrWhiteSpace(url)) {
+                return;
+            }
+            try {
+                Process.Start(new ProcessStartInfo {
+                    FileName = url,
+                    UseShellExecute = true,
+                });
+                return;
+            } catch {
+                // Fall back to platform openers below.
+            }
             Process.Start(new ProcessStartInfo {
                 FileName = GetOpener(),
                 Arguments = url,
+                UseShellExecute = IsWindows(),
             });
         }
 
@@ -82,17 +101,29 @@ namespace OpenUtau {
             if (File.Exists(filename)) {
                 return Path.GetFullPath(filename);
             }
-            var values = Environment.GetEnvironmentVariable("PATH");
+            var values = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
             foreach (var path in values.Split(Path.PathSeparator)) {
+                if (string.IsNullOrWhiteSpace(path)) {
+                    continue;
+                }
                 var fullPath = Path.Combine(path, filename);
                 if (File.Exists(fullPath)) {
                     return fullPath;
                 }
             }
+            // Self-contained apps often ship with a stripped PATH that omits /usr/bin.
+            if (IsLinux() || IsMacOS()) {
+                foreach (var dir in new[] { "/usr/bin", "/bin", "/usr/local/bin" }) {
+                    var fullPath = Path.Combine(dir, filename);
+                    if (File.Exists(fullPath)) {
+                        return fullPath;
+                    }
+                }
+            }
             return null;
         }
 
-        private static readonly string[] linuxOpeners = { "xdg-open", "mimeopen", "gnome-open", "open" };
+        private static readonly string[] linuxOpeners = { "xdg-open", "gio", "mimeopen", "gnome-open", "open" };
         private static string GetOpener() {
             if (IsWindows()) {
                 return "explorer.exe";
@@ -106,7 +137,7 @@ namespace OpenUtau {
                     return fullPath;
                 }
             }
-            throw new IOException($"None of {string.Join(", ", linuxOpeners)} found.");
+            throw new IOException($"None of {string.Join(", ", linuxOpeners)} found. Install xdg-utils (xdg-open) or open the link manually.");
         }
         private static string GetWrappedPath(string path) {
             if (IsWindows()) {

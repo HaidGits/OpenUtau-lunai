@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,6 +32,11 @@ namespace OpenUtau.App.ViewModels {
             public GithubReleaseAsset[] assets = new GithubReleaseAsset[0];
 #pragma warning restore 0649
         }
+        public const string LunaiRepository = "keirokeer/OpenUtau-lunai";
+        public const string LunaiReleasesApi = "https://api.github.com/repos/keirokeer/OpenUtau-lunai/releases";
+        public const string LunaiReleasesUrl = "https://github.com/keirokeer/OpenUtau-lunai/releases";
+        public const string LunaiRepoUrl = "https://github.com/keirokeer/OpenUtau-lunai";
+
         public string AppVersion => $"v{System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version}";
         public bool IsDarkMode => ThemeManager.IsDarkMode;
         [Reactive] public string UpdaterStatus { get; set; }
@@ -54,13 +59,13 @@ namespace OpenUtau.App.ViewModels {
             try {
                 var release = await SelectRelease();
                 if (release == null) {
-                    Log.Error("No updatable release found.");
+                    Log.Error("No updatable release found (empty list or beta/stable filter mismatch).");
                     return null;
                 }
                 Log.Information($"Checking update at: {release.html_url}");
                 var appcast = SelectAppcast(release);
                 if (appcast == null) {
-                    Log.Error("No updatable appcast found.");
+                    Log.Error($"No appcast.{OS.GetUpdaterRid()}{(PathManager.Inst.IsInstalled ? "-installer" : "")}.xml in release assets.");
                     return null;
                 }
                 Log.Information($"Checking appcast: {appcast.browser_download_url}");
@@ -81,10 +86,11 @@ namespace OpenUtau.App.ViewModels {
 
         static async Task<GithubRelease?> SelectRelease() {
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("User-Agent", "Other");
+            client.DefaultRequestHeaders.Add("Accept", "application/vnd.github+json");
+            client.DefaultRequestHeaders.Add("User-Agent", "OpenUtau-Lunai");
+            client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
             client.Timeout = TimeSpan.FromSeconds(30);
-            using var resposne = await client.GetAsync("https://api.github.com/repos/keirokeer/OpenUtau-DiffSinger-Lunai/releases");
+            using var resposne = await client.GetAsync(LunaiReleasesApi);
             resposne.EnsureSuccessStatusCode();
             string respBody = await resposne.Content.ReadAsStringAsync();
             List<GithubRelease>? releases = JsonConvert.DeserializeObject<List<GithubRelease>>(respBody);
@@ -134,7 +140,7 @@ namespace OpenUtau.App.ViewModels {
 
         public void OnGithub() {
             try {
-                OS.OpenWeb("https://github.com/stakira/OpenUtau/wiki");
+                OS.OpenWeb(LunaiReleasesUrl);
             } catch (Exception e) {
                 DocManager.Inst.ExecuteCmd(new ErrorMessageNotification(e));
             }

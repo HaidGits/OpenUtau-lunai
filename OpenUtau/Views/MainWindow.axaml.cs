@@ -811,7 +811,7 @@ namespace OpenUtau.App.Views {
 
         void OnMenuReportIssue(object sender, RoutedEventArgs args) {
             try {
-                OS.OpenWeb("https://github.com/stakira/OpenUtau/issues");
+                OS.OpenWeb(UpdaterViewModel.LunaiRepoUrl + "/issues");
             } catch (Exception e) {
                 DocManager.Inst.ExecuteCmd(new ErrorMessageNotification(e));
             }
