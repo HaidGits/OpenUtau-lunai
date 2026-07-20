@@ -1,0 +1,362 @@
+<!--Lunai overlay for cs-CZ. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Generovat harmonie...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Zavřít</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Zobrazuje se vložený seznam přispěvatelů.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Tito lidé přispěli do původního repozitáře OpenUtau na GitHubu. OpenUtau Lunai staví na jejich práci. Děkujeme všem uvedeným!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Načítání přispěvatelů z GitHubu...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Přispěvatelé</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Přispěvatele se nepodařilo načíst. Zkontrolujte připojení k internetu a zkuste to znovu.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Seznam přispěvatelů byl aktualizován z GitHubu.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai na GitHubu</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau na GitHubu</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau a OpenUtau Lunai jsou svobodný software s otevřeným zdrojovým kódem pod licencí MIT.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Používáte OpenUtau Lunai, fork zaměřený na jednodušší a příjemnější práci s DiffSinger. Klasické banky UTAU a všechny ostatní typy hlasových bank, které OpenUtau již podporuje, nadále fungují jako obvykle. Obsahuje také mnoho funkcí z upstream pull requestů, které zatím nebyly vydány ani sloučeny do původního OpenUtau.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau si klade za cíl být editačním prostředím s otevřeným zdrojovým kódem pro komunitu UTAU s moderním uživatelským prostředím a inteligentní fonologickou podporou. Navštivte nás na GitHubu.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau si klade za cíl být editačním prostředím s otevřeným zdrojovým kódem pro komunitu UTAU s moderním uživatelským prostředím a inteligentní fonologickou podporou.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Otevřít or import projekt</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Importovat stopy</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Chcete otevřít přetažený soubor projektu, nebo importovat jeho stopy do aktuálního projektu?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Otevřít projekt</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Exportovat DiffSinger skript</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Variabilita parametry</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Chcete-li exportovat křivky parametrů variability, povolte v Předvolbách tensorovou mezipaměť DiffSinger.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Generate Harmonie</system:String>
+  <system:String x:Key="dialogs.harmony.description">Vytvořte nové harmonické stopy z vybrané části. Noty jsou diatonicky transponovány do zvolené tóniny.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Každý vybraný hlas vytvoří pod zdrojovou stopou novou stopu s transponovanými notami. Zpěvák a nastavení se zkopírují ze zdrojové stopy.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Hlasy harmonie</system:String>
+  <system:String x:Key="dialogs.harmony.key">Tónina</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Importovat projekt options</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Čínské hanzi → Pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Výchozí text</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Vyplnit krátké mezery</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Maximální zpracovávaná délka (výhradně)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} noty</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Japonský text</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → Hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Bez převodu</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → Romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Mezera před první notou</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Odsazení, když první nota začíná na začátku klipu</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Mapování textu (přesné)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Jedna na řádek: z=na</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Nahrazení textu</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">z=&gt;na nebo /vzor/náhrada/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Zpracování textu</system:String>
+  <system:String x:Key="dialogs.importproject.message">Vyberte, co z tohoto souboru importovat:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Noty a text</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Křivka výšky (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Opravit překrývající se noty</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Značky tempa</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Taktová označení</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Otevřít stránku pro stažení</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Správce balíčků</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Připojte se k našemu serveru a popište chybu v #help. V případě potřeby přiložte protokol přes Nápověda → Otevřít umístění protokolů.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Otevřít Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Kopírovat adresu</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Napište nám a přiložte protokol, pokud se problém obtížně reprodukuje.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">E-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Napsat e-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Popište, co se pokazilo. Upřednostněte Discord #help, abychom mohli rychle odpovědět; pokud pomůže, přiložte soubor protokolu. Můžete nám také napsat e-mail.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Všechny tóniny</system:String>
+  <system:String x:Key="key.picker.analyzing">Analyzování...</system:String>
+  <system:String x:Key="key.picker.suggested">Navržené tóniny</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Akce</system:String>
+  <system:String x:Key="lunai.col.installed">Nainstalováno</system:String>
+  <system:String x:Key="lunai.col.name">Název</system:String>
+  <system:String x:Key="lunai.col.version">Verze</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Nainstalovat Singer</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Nainstalovat {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Tento zpěvák má podmínky použití. Kliknutím na Ano s těmito podmínkami souhlasíte.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Odinstalovat singer</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Odinstalovat {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Aktualizovat singer</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Aktualizovat {0} to version {1}?</system:String>
+  <system:String x:Key="lunai.install">Nainstalovat</system:String>
+  <system:String x:Key="lunai.installed">Nainstalováno</system:String>
+  <system:String x:Key="lunai.latest">Nejnovější</system:String>
+  <system:String x:Key="lunai.newversionavailable">K dispozici je nová verze</system:String>
+  <system:String x:Key="lunai.notinstalled">Nenainstalováno</system:String>
+  <system:String x:Key="lunai.outdated">Zastaralé</system:String>
+  <system:String x:Key="lunai.refresh">Obnovit</system:String>
+  <system:String x:Key="lunai.search">Hledat...</system:String>
+  <system:String x:Key="lunai.section.installed">Nainstalováno</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Nenainstalováno</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Dostupné aktualizace</system:String>
+  <system:String x:Key="lunai.status.error">Chyba</system:String>
+  <system:String x:Key="lunai.status.fetching">Načítání seznamu...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Instalace selhala</system:String>
+  <system:String x:Key="lunai.status.installfinished">Instalace dokončena</system:String>
+  <system:String x:Key="lunai.status.installing">Instalace {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">Prohledávání nainstalovaných...</system:String>
+  <system:String x:Key="lunai.status.offline">Připraveno (seznam z mezipaměti, síť není dostupná)</system:String>
+  <system:String x:Key="lunai.status.ready">Připraveno</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Odinstalovat failed</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Odinstalovat finished</system:String>
+  <system:String x:Key="lunai.status.uninstalling">Odinstalace {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Aktualizovat finished</system:String>
+  <system:String x:Key="lunai.status.updating">Aktualizace {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">Vše</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Odinstalovat</system:String>
+  <system:String x:Key="lunai.unknownversion">neznámá</system:String>
+  <system:String x:Key="lunai.update">Aktualizovat</system:String>
+  <system:String x:Key="lunai.uptodate">Aktuální</system:String>
+  <system:String x:Key="lunai.website">Web</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Exportovat DiffSinger Scripts do (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Exportovat DiffSinger Scripts do (v2, bez křivky výšky)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Nainstalovat Závislost (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + kliknutím zobrazíte úplnou chybu</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Generovat harmonie...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(starší)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Rozbalit klavírní roli v okně</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">TikTok režim nahrávání</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger velmi nízká kvalita (akustika 1, variabilita 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger nízká kvalita (akustika 1, variabilita 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger vyvážené (akustika 20, variabilita 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger kvalita (akustika 50, variabilita 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Zobrazit výslednou výšku pro renderování</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Rozbalit klavírní roli v okně</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Zobrazit stupnici tóniny</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Live Pitch (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Live Pitch Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Zobrazit parametry noty</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Zobrazit fonémy</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Zobrazit ohyb výšky</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Při přehrávání sledovat noty svisle</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Zobrazit skutečné křivky</system:String>
+  <system:String x:Key="pianoroll.toggle.render">DiffSinger nastavení renderování</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Přepnout přichytávání</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Zobrazení</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Nástroj pro kreslení výšky (4)
+    Kreslete levým tlačítkem
+    Resetujte pravým tlačítkem
+    Držte Ctrl pro výběr</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Nástroj nůž (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Nástroj sinusové vlny výšky (Shift + 3)
+    Tažením nakreslete sinusovku, uvolněním přejdete do režimu úprav
+    Pohybem myši upravte vlnovou délku a amplitudu, kliknutím použijte
+    Resetujte pravým tlačítkem
+    Držte Ctrl pro výběr</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Nástroj čáry výšky (Shift + 1)
+    Levým tlačítkem nakreslete přímku
+    Resetujte pravým tlačítkem
+    Držte Ctrl pro výběr</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Nástroj S-křivky výšky (Shift + 2)
+    Tažením nakreslete S-křivku, uvolněním přejdete do režimu úprav
+    Pohybem myši upravte sílu S-křivky, kliknutím použijte
+    Resetujte pravým tlačítkem
+    Držte Ctrl pro výběr</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Nástroj vyhlazení výšky (Shift + 4)
+    Levým tlačítkem vyhlaďte výšku
+    Resetujte pravým tlačítkem
+    Držte Ctrl pro výběr</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Klasické posuvníky (dedicated track area)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Základní motiv</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Tmavý</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Světlý</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Motiv s tímto názvem již existuje.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Nový</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Základní barva</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Jasná barva</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Název barvy stopy nesmí být prázdný.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Barva stopy s tímto názvem již existuje.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Zadejte název a vyberte základní a jasnou barvu.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Nový</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Vytvořit vlastní barvu stopy</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Opravdu chcete tuto barvu stopy odstranit?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Odstranit vlastní barvu stopy</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Upravit</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Upravit vlastní barvu stopy</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Výchozí barva nových stop</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Tloušťka okraje noty</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Poloměr rohů noty</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Krytí noty</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Překryvné posuvníky (thin, on top of content)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Řádky zobrazení</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Výrazy a fonémy</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Mřížka a posouvání</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Panel fonémů</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Klavírní role</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Přehrávání</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Motiv</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Barvy stop</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Zobrazit okraj noty</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Plné čáry výchozích hodnot v panelu výrazů</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Solid timeline grid lines (piano roll, stopy &amp; expression panel)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Vestavěné</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Vestavěné předvolby</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Vlastní</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Studený</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Tmavý</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Světlý</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Původní tmavý</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Původní světlý</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Teplý</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Zabarvit pozadí klavírní role barvou stopy</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">Panel fonémů přizpůsobený DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Zobrazit hranice renderovaných frází</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Mezipaměť</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Ladění</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">Obecné</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Výška a F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Kvalita</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Kvalita renderování</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Kroky renderování</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Při přehrávání po úpravách znovu renderovat (experimentální)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Metronom</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Moderní přehrávací hlava</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Pitch Follow Posunout</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Při přehrávání sledovat noty svisle</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Vyhlazování snímků</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Zobrazit náhled cesty kamery</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Prahová hodnota půltónu</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Svislá poloha noty</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSinger Pitch Local Retaking</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Show akustika F0 patch preview on piano roll</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">Interpolace F0 neznělých souhlásek DiffSinger (experimentální)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Hledat podle názvu nebo klávesy...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Levým tlačítkem změňte. Pravým tlačítkem resetujte.</system:String>
+  <system:String x:Key="prefs.shortcuts">Klávesové zkratky</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">Zkratka '{0}' je již přiřazena k '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Stiskněte klávesy...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">DiffSinger {0} preset applied (akustika {1}, variabilita {2}, pitch {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Clear Výběr</system:String>
+  <system:String x:Key="shortcut.Copy">Kopírovat</system:String>
+  <system:String x:Key="shortcut.Cut">Vyjmout</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Odstranit noty</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Zrušit výběr</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Upravit text</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Vybrat výraz 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Vybrat výraz 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Vybrat výraz 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Vybrat výraz 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Vybrat výraz 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Vybrat výraz 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Vybrat výraz 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Vybrat výraz 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Vybrat výraz 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Vybrat výraz 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Extend Výběr Left</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Extend Výběr Right</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Focus Výběr</system:String>
+  <system:String x:Key="shortcut.FullScreen">Přepnout Celá obrazovka</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Skrýt odpojené okno</system:String>
+  <system:String x:Key="shortcut.InsertNote">Vložit notu</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Sloučit vybrané noty</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Posunout kurzor Left</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Posunout kurzor Right</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Posunout noty Left</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Posunout noty Right</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Přejít na další část (dolů)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Přejít na další část (nahoru)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Ztlumit stopu</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Otevřít nabídku zásuvných modulů</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Otevřít nabídku přichytávání</system:String>
+  <system:String x:Key="shortcut.Paste">Vložit</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Vložit Parameters</system:String>
+  <system:String x:Key="shortcut.PastePlain">Vložit as Plain Notes</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Přehrát / pozastavit</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Přehrát výběr</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Move Přehrávací hlava to End</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Move Přehrávací hlava to Start</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Move Přehrávací hlava Left</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Move Přehrávací hlava Right</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Move Přehrávací hlava to Výběr End</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Move Přehrávací hlava to Výběr Start</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Move Přehrávací hlava to Zobrazení End</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Move Přehrávací hlava to Zobrazení Start</system:String>
+  <system:String x:Key="shortcut.Redo">Znovu</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Změnit velikost not Left</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Změnit velikost not Right</system:String>
+  <system:String x:Key="shortcut.SaveProject">Uložit projekt</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Posunout Down</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Posunout Left</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Posunout Right</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Posunout Up</system:String>
+  <system:String x:Key="shortcut.SearchNote">Hledat notu</system:String>
+  <system:String x:Key="shortcut.SelectAll">Vybrat vše</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Extend Výběr to End</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Extend Výběr to Start</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Sólo stopy</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">Přepnout Expressions Zobrazení</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">Přepnout Final Pitch Zobrazení</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">Přepnout Note Parameters Zobrazení</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">Přepnout Phoneme Zobrazení</system:String>
+  <system:String x:Key="shortcut.TogglePitch">Přepnout Pitch Zobrazení</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">Přepnout Play Tone</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Přepnout přichytávání</system:String>
+  <system:String x:Key="shortcut.ToggleTips">Přepnout Tips Zobrazení</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">Přepnout Vibrato Zobrazení</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">Přepnout Waveform Zobrazení</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Nástroj výběru</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Nástroj pero (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Nástroj pero</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Nástroj guma</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Draw Pitch Nástroj</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Draw Pitch Nástroj (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Nástroj nůž</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Pitch Line Nástroj</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Pitch Line Nástroj (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Pitch S-Curve Nástroj</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Pitch Sine Wave Nástroj</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Pitch Smoothen Nástroj</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Transponovat Down</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Transponovat Oktáva Down</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Transponovat Oktáva Up</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Transponovat Up</system:String>
+  <system:String x:Key="shortcut.Undo">Zpět</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Přiblížit</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Oddálit</system:String>
+
+  <system:String x:Key="themeditor.cancel">Zrušit</system:String>
+  <system:String x:Key="themeditor.save">Uložit</system:String>
+  <system:String x:Key="themeditor.title">Editor motivů</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Zrušit</system:String>
+  <system:String x:Key="themeeditor.save">Uložit</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + kolečko myši pro svislé přiblížení</system:String>
+
+  <system:String x:Key="tracks.mixfx">Úprava stopy</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Rotate singers across selected stopy</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Apply to all selected stopy</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Přidat zpěváka do oblíbených</system:String>
+  <system:String x:Key="tracks.standardizesettings">Standardizovat nastavení stop</system:String>
+
+  <system:String x:Key="updater.status.unknown">Aktualizaci nelze zkontrolovat. Pro ruční stažení otevřete GitHub Releases nebo si pro podrobnosti prohlédněte protokol.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Nainstalovat or update voice libraries from trusted sources</system:String>
+  <system:String x:Key="welcome.singerhub.open">Otevřít Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">Zavřít panel</system:String>
+  <system:String x:Key="workspace.panel.render">Renderovat</system:String>
+  <system:String x:Key="workspace.panel.view">Zobrazení</system:String>
+  <system:String x:Key="workspace.tracks">Stopy</system:String>
+</ResourceDictionary>

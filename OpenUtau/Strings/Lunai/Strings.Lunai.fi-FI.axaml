@@ -1,0 +1,362 @@
+<!--Lunai overlay for fi-FI. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Luo harmonioita...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Sulje</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Näytetään sisäänrakennettu tekijäluettelo.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Nämä henkilöt ovat osallistuneet alkuperäiseen OpenUtau-repositorioon GitHubissa. OpenUtau Lunai rakentuu heidän työnsä varaan. Kiitos kaikille listatuille!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Ladataan tekijöitä GitHubista...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Tekijät</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Tekijöitä ei voitu ladata. Tarkista internetyhteys ja yritä uudelleen.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Tekijäluettelo päivitetty GitHubista.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai GitHubissa</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau GitHubissa</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau ja OpenUtau Lunai ovat ilmaisia avoimen lähdekoodin ohjelmistoja MIT-lisenssillä.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Käytät OpenUtau Lunaita, haarautumaa, jonka tavoitteena on tehdä DiffSingeristä helpompi ja miellyttävämpi käyttää. Klassiset UTAU-pankit ja kaikki muut OpenUtaun jo tukemat äänipankkityypit toimivat edelleen normaalisti. Mukana on myös monia ominaisuuksia upstream-pull requesteista, joita ei ole vielä julkaistu tai yhdistetty alkuperäiseen OpenUtauhun.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau pyrkii olemaan avoimen lähdekoodin editointiympäristö UTAU-yhteisölle, modernilla käyttökokemuksella ja älykkäällä fonologisella tuella. Vieraile meillä Githubissa.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau pyrkii olemaan avoimen lähdekoodin editointiympäristö UTAU-yhteisölle, modernilla käyttökokemuksella ja älykkäällä fonologisella tuella.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Avaa tai tuo projekti</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Tuo raidat</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Haluatko avata pudotetun projektitiedoston vai tuoda sen raidat nykyiseen projektiin?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Avaa projekti</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Vie DiffSinger-skripti</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Varianssiparametrit</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Ota DiffSinger-tensorivälimuisti käyttöön Asetuksissa viedäksesi varianssiparametrikäyrät.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Luo harmoniat</system:String>
+  <system:String x:Key="dialogs.harmony.description">Luo uusia harmoniaraidat valitusta osasta. Nuotit transponoidaan diatonisesti valitussa sävellajissa.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Jokainen valittu ääni luo uuden raidan lähteen alle transponoiduilla nuoteilla. Laulaja ja asetukset kopioidaan lähderaidasta.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Harmoniaäänet</system:String>
+  <system:String x:Key="dialogs.harmony.key">Sävellaji</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Projektin tuontiasetukset</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Kiinalaiset hanzi → pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Oletussanoitus</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Täytä lyhyet aukot</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Käsiteltävä enimmäispituus (ei sisällä)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} nuotti</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Japanilaiset sanoitukset</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Ei muunnosta</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Tyhjä tila ennen ensimmäistä nuottia</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Täyte, kun ensimmäinen nuotti alkaa klipin alusta</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Sanoituskartoitus (tarkka)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Yksi per rivi: from=to</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Sanoituksen korvaus</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">from=&gt;to tai /pattern/replacement/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Sanoituksen käsittely</system:String>
+  <system:String x:Key="dialogs.importproject.message">Valitse, mitä tuodaan tästä tiedostosta:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Nuotit ja sanoitukset</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Pitch-käyrä (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Korjaa päällekkäiset nuotit</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Tempomerkinnät</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Tahtiosoitukset</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Avaa lataussivu</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Pakettienhallinta</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Liity palvelimellemme ja kuvaile virhe kanavalla #help. Liitä loki kohdasta Ohje → Avaa lokien sijainti tarvittaessa.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Avaa Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Kopioi osoite</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Kirjoita meille ja liitä loki, jos ongelmaa on vaikea toistaa.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">Sähköposti</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Kirjoita sähköposti</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Kerro, mikä meni pieleen. Suosi Discordia #help, jotta voimme vastata nopeasti; liitä lokitiedosto tarvittaessa. Voit myös lähettää sähköpostia.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Kaikki sävellajit</system:String>
+  <system:String x:Key="key.picker.analyzing">Analysoidaan...</system:String>
+  <system:String x:Key="key.picker.suggested">Ehdotetut sävellajit</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Toiminto</system:String>
+  <system:String x:Key="lunai.col.installed">Asennettu</system:String>
+  <system:String x:Key="lunai.col.name">Nimi</system:String>
+  <system:String x:Key="lunai.col.version">Versio</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Asenna laulaja</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Asennetaanko {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Tällä laulajalla on käyttöehdot. Napsauttamalla Kyllä hyväksyt nämä ehdot.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Poista laulaja</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Poistetaanko {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Päivitä laulaja</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Päivitetäänkö {0} versioon {1}?</system:String>
+  <system:String x:Key="lunai.install">Asenna</system:String>
+  <system:String x:Key="lunai.installed">Asennettu</system:String>
+  <system:String x:Key="lunai.latest">Uusin</system:String>
+  <system:String x:Key="lunai.newversionavailable">Uusi versio saatavilla</system:String>
+  <system:String x:Key="lunai.notinstalled">Ei asennettu</system:String>
+  <system:String x:Key="lunai.outdated">Vanhentunut</system:String>
+  <system:String x:Key="lunai.refresh">Päivitä</system:String>
+  <system:String x:Key="lunai.search">Haku...</system:String>
+  <system:String x:Key="lunai.section.installed">Asennettu</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Ei asennettu</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Päivityksiä saatavilla</system:String>
+  <system:String x:Key="lunai.status.error">Virhe</system:String>
+  <system:String x:Key="lunai.status.fetching">Haetaan luetteloa...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Asennus epäonnistui</system:String>
+  <system:String x:Key="lunai.status.installfinished">Asennus valmis</system:String>
+  <system:String x:Key="lunai.status.installing">Asennetaan {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">Skannataan asennettuja...</system:String>
+  <system:String x:Key="lunai.status.offline">Valmis (välimuistilista, verkko ei käytettävissä)</system:String>
+  <system:String x:Key="lunai.status.ready">Valmis</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Poisto epäonnistui</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Poisto valmis</system:String>
+  <system:String x:Key="lunai.status.uninstalling">Poistetaan {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Päivitys valmis</system:String>
+  <system:String x:Key="lunai.status.updating">Päivitetään {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">Kaikki</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Poista</system:String>
+  <system:String x:Key="lunai.unknownversion">tuntematon</system:String>
+  <system:String x:Key="lunai.update">Päivitä</system:String>
+  <system:String x:Key="lunai.uptodate">Ajantasalla</system:String>
+  <system:String x:Key="lunai.website">Verkkosivusto</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Vie DiffSinger-skriptit kohteeseen (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Vie DiffSinger-skriptit kohteeseen (v2, ilman pitch-käyrää)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Asenna riippuvuus (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + napsauta nähdäksesi koko virheen</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Luo harmonioita...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(vanha)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Laajenna pianorulla ikkunassa</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">TikTok-tallennustila</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger erittäin matala laatu (akustiikka 1, varianssi 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger matala laatu (akustiikka 1, varianssi 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger tasapainoinen (akustiikka 20, varianssi 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger laatu (akustiikka 50, varianssi 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Näytä lopullinen renderöitävä pitch</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Laajenna pianorulla ikkunassa</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Näytä sävellajiasteikko</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Live-pitch (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Live-pitch Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Näytä nuottiparametrit</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Näytä foneemit</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Näytä pitch-käyrä</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Seuraa nuotteja pystysuunnassa toiston aikana</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Näytä todelliset käyrät</system:String>
+  <system:String x:Key="pianoroll.toggle.render">DiffSinger-renderöintiasetukset</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Vaihda kohdistus</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Näytä</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Pitch-piirtotyökalu (4)
+    Vasen napsautus piirtää
+    Oikea napsautus nollaa
+    Pidä Ctrl valitaksesi</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Veitsityökalu (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Pitch-siniaaltotyökalu (Shift + 3)
+    Vedä piirtääksesi siniaallon, vapauta säätötilaan
+    Siirrä hiirtä säätääksesi aallonpituutta ja amplitudia, napsauta soveltaaksesi
+    Oikea napsautus nollaa
+    Pidä Ctrl valitaksesi</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Pitch-viivatyökalu (Shift + 1)
+    Vasen napsautus piirtää suoran viivan
+    Oikea napsautus nollaa
+    Pidä Ctrl valitaksesi</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Pitch-S-käyrätyökalu (Shift + 2)
+    Vedä piirtääksesi S-käyrän, vapauta säätötilaan
+    Siirrä hiirtä säätääksesi S-käyrän voimakkuutta, napsauta soveltaaksesi
+    Oikea napsautus nollaa
+    Pidä Ctrl valitaksesi</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Pitch-tasoitustyökalu (Shift + 4)
+    Vasen napsautus tasoittaa pitchin
+    Oikea napsautus nollaa
+    Pidä Ctrl valitaksesi</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Klassiset vierityspalkit (oma raida-alue)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Perusteema</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Tumma</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Vaalea</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Tämänniminen teema on jo olemassa.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Uusi</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Perusväri</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Kirkas väri</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Raidavärin nimi ei voi olla tyhjä.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Tämänniminen raidaväri on jo olemassa.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Anna nimi ja valitse perus- sekä kirkas väri.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Uusi</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Luo mukautettu raidaväri</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Haluatko varmasti poistaa tämän raidavärin?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Poista mukautettu raidaväri</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Muokkaa</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Muokkaa mukautettua raidaväriä</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Oletusraidaväri uusille raidoille</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Nuotin reunuksen paksuus</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Nuotin kulman pyöristys</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Nuotin peittävyys</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Päällekkäiset vierityspalkit (ohuet, sisällön päällä)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Näyttöviivat</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Ilmaisut &amp; foneemit</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Ruudukko &amp; vieritys</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Foneemipaneeli</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Pianorulla</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Toisto</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Teema</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Raidavärit</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Näytä nuotin reunus</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Kiinteät oletusarvoviivat ilmaisupaneelissa</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Kiinteät aikajanan ruudukkoviivat (pianorulla, raidat &amp; ilmaisupaneeli)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Sisäänrakennettu</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Sisäänrakennetut esiasetukset</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Mukautettu</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Kylmä</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Tumma</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Vaalea</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Alkuperäinen tumma</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Alkuperäinen vaalea</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Lämmin</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Sävytä pianorullan tausta raidavärillä</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger-ystävällinen foneemipaneeli</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Näytä renderöintilauseiden rajat</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Välimuisti</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Virheenkorjaus</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">Yleiset</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Pitch ja F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Laatu</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Renderöintilaatu</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Renderöintiaskeleet</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Renderöi uudelleen muokkausten jälkeen toiston aikana (kokeellinen)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Metronomi</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Moderni toistopää</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Pitch-seurantavieritys</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Seuraa nuotteja pystysuunnassa toiston aikana</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Kehystasoitus</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Näytä kamerapolun esikatselu</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Puolisävelaskelkynnys</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Nuotin pystysuuntainen sijainti</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSingerin paikallinen pitch-uudelleenotto</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Näytä akustisen F0-korjauksen esikatselu pianorullalla</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">DiffSinger soinnittomien konsonanttien F0-interpolointi (kokeellinen)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Hae nimellä tai näppäimellä...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Vasen napsautus muuttaa. Oikea napsautus nollaa.</system:String>
+  <system:String x:Key="prefs.shortcuts">Pikanäppäimet</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">Pikanäppäin '{0}' on jo määritetty kohteelle '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Paina näppäimiä...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">DiffSinger {0} -esiasetus käytössä (akustiikka {1}, varianssi {2}, pitch {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Tyhjennä valinta</system:String>
+  <system:String x:Key="shortcut.Copy">Kopioi</system:String>
+  <system:String x:Key="shortcut.Cut">Leikkaa</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Poista nuotit</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Poista kaikki valinnat</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Muokkaa sanoituksia</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Valitse ilmaisu 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Valitse ilmaisu 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Valitse ilmaisu 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Valitse ilmaisu 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Valitse ilmaisu 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Valitse ilmaisu 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Valitse ilmaisu 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Valitse ilmaisu 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Valitse ilmaisu 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Valitse ilmaisu 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Laajenna valintaa vasemmalle</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Laajenna valintaa oikealle</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Kohdista valintaan</system:String>
+  <system:String x:Key="shortcut.FullScreen">Vaihda koko näyttö</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Piilota irrotettu ikkuna</system:String>
+  <system:String x:Key="shortcut.InsertNote">Lisää nuotti</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Yhdistä valitut nuotit</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Siirrä kohdistinta vasemmalle</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Siirrä kohdistinta oikealle</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Siirrä nuotteja vasemmalle</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Siirrä nuotteja oikealle</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Siirry seuraavaan osaan (alas)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Siirry seuraavaan osaan (ylös)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Mykistä raida</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Avaa laajennusvalikko</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Avaa kohdistusvalikko</system:String>
+  <system:String x:Key="shortcut.Paste">Liitä</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Liitä parametrit</system:String>
+  <system:String x:Key="shortcut.PastePlain">Liitä tavallisina nuotteina</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Toista / tauko</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Toista valinta</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Siirrä toistopää loppuun</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Siirrä toistopää alkuun</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Siirrä toistopäätä vasemmalle</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Siirrä toistopäätä oikealle</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Siirrä toistopää valinnan loppuun</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Siirrä toistopää valinnan alkuun</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Siirrä toistopää näkymän loppuun</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Siirrä toistopää näkymän alkuun</system:String>
+  <system:String x:Key="shortcut.Redo">Tee uudelleen</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Muuta nuottien kokoa vasemmalle</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Muuta nuottien kokoa oikealle</system:String>
+  <system:String x:Key="shortcut.SaveProject">Tallenna projekti</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Vieritä alas</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Vieritä vasemmalle</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Vieritä oikealle</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Vieritä ylös</system:String>
+  <system:String x:Key="shortcut.SearchNote">Etsi nuotti</system:String>
+  <system:String x:Key="shortcut.SelectAll">Valitse kaikki</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Laajenna valinta loppuun</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Laajenna valinta alkuun</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Solo-raida</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">Vaihda ilmaisunäkymä</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">Vaihda lopullisen pitchin näkymä</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">Vaihda nuottiparametrien näkymä</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">Vaihda foneeminäkymä</system:String>
+  <system:String x:Key="shortcut.TogglePitch">Vaihda pitch-näkymä</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">Vaihda opasääni</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Vaihda kohdistus</system:String>
+  <system:String x:Key="shortcut.ToggleTips">Vaihda vihjenäkymä</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">Vaihda vibratonäkymä</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">Vaihda aaltomuodonäkymä</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Valintatyökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Kynätyökalu (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Kynätyökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Pyyhekumi</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Pitch-piirtotyökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Pitch-piirtotyökalu (korvaa)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Veitsityökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Pitch-viivatyökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Pitch-viivatyökalu (korvaa)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Pitch-S-käyrätyökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Pitch-siniaaltotyökalu</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Pitch-tasoitustyökalu</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Transponoi alas</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Transponoi oktaavi alas</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Transponoi oktaavi ylös</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Transponoi ylös</system:String>
+  <system:String x:Key="shortcut.Undo">Kumoa</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Lähennä</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Loitonna</system:String>
+
+  <system:String x:Key="themeditor.cancel">Peruuta</system:String>
+  <system:String x:Key="themeditor.save">Tallenna</system:String>
+  <system:String x:Key="themeditor.title">Teemaeditori</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Peruuta</system:String>
+  <system:String x:Key="themeeditor.save">Tallenna</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + vierityspyörä zoomaukseen pystysuunnassa</system:String>
+
+  <system:String x:Key="tracks.mixfx">Track Polish</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Kierrätä laulajia valituilla raidoilla</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Käytä kaikkiin valittuihin raitoihin</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Lisää laulaja suosikkeihin</system:String>
+  <system:String x:Key="tracks.standardizesettings">Yhtenäistä raida-asetukset</system:String>
+
+  <system:String x:Key="updater.status.unknown">Päivitystä ei voitu tarkistaa. Avaa GitHub Releases ladataksesi manuaalisesti, tai katso lokista lisätietoja.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Asenna tai päivitä äänikirjastoja luotetuista lähteistä</system:String>
+  <system:String x:Key="welcome.singerhub.open">Avaa Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">Sulje paneeli</system:String>
+  <system:String x:Key="workspace.panel.render">Renderöi</system:String>
+  <system:String x:Key="workspace.panel.view">Näytä</system:String>
+  <system:String x:Key="workspace.tracks">Raidat</system:String>
+</ResourceDictionary>

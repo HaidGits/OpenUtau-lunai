@@ -1,0 +1,362 @@
+<!--Lunai overlay for pt-BR. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Gerar harmonias...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Fechar</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Exibindo a lista incorporada de colaboradores.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Estas pessoas contribuíram para o repositório original do OpenUtau no GitHub. O OpenUtau Lunai se baseia no trabalho delas. Agradecemos a todas as pessoas listadas!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Carregando colaboradores do GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Colaboradores</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Não foi possível carregar os colaboradores. Verifique sua conexão com a Internet e tente novamente.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Lista de colaboradores atualizada do GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai no GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau no GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau e OpenUtau Lunai são softwares livres e de código aberto sob a licença MIT.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Você está executando o OpenUtau Lunai, um fork voltado a tornar o DiffSinger mais fácil e agradável de usar. Bancos de voz UTAU clássicos e todos os outros tipos de voicebank já compatíveis com o OpenUtau continuam funcionando normalmente. Ele também inclui muitos recursos de pull requests upstream que ainda não foram lançados ou integrados ao OpenUtau original.</system:String>
+  <system:String x:Key="dialogs.about.message">O OpenUtau busca ser um ambiente de edição de código aberto para a comunidade UTAU, com experiência de usuário moderna e suporte fonológico inteligente. Visite-nos no GitHub.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">O OpenUtau busca ser um ambiente de edição de código aberto para a comunidade UTAU, com experiência de usuário moderna e suporte fonológico inteligente.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Abrir ou importar projeto</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Importar faixas</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Deseja abrir o arquivo de projeto solto ou importar suas faixas para o projeto atual?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Abrir projeto</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Exportar script do DiffSinger</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Parâmetros de variância</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Ative o cache de tensores do DiffSinger nas Preferências para exportar curvas de parâmetros de variância.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Gerar harmonias</system:String>
+  <system:String x:Key="dialogs.harmony.description">Crie novas faixas de harmonia a partir da parte selecionada. As notas são transpostas diatonicamente na tonalidade escolhida.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Cada voz selecionada cria uma nova faixa abaixo da fonte com notas transpostas. O cantor e as configurações são copiados da faixa de origem.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Vozes de harmonia</system:String>
+  <system:String x:Key="dialogs.harmony.key">Tonalidade</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Opções de importação de projeto</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Hanzi chinês → Pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Letra padrão</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Preencher lacunas curtas</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Comprimento máximo a processar (exclusivo)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} de nota</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Letras em japonês</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → Hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Sem conversão</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → Romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Espaço antes da primeira nota</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Preenchimento quando a primeira nota começa no início do clipe</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Mapeamento de letras (exato)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Uma por linha: de=para</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Substituição de letras</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">de=&gt;para ou /padrão/substituição/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Processamento de letras</system:String>
+  <system:String x:Key="dialogs.importproject.message">Escolha o que importar deste arquivo:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Notas e letras</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Curva de pitch (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Corrigir notas sobrepostas</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Marcadores de andamento</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Fórmulas de compasso</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Abrir página de download</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Gerenciador de pacotes</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Entre no nosso servidor e descreva o erro em #help. Anexe um log em Ajuda → Abrir local dos logs, se necessário.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Abrir Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Copiar endereço</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Escreva para nós e anexe um log se o problema for difícil de reproduzir.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">E-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Escrever e-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Conte-nos o que deu errado. Prefira o Discord #help para podermos responder rapidamente; inclua um arquivo de log quando ajudar. Você também pode enviar um e-mail.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Todas as tonalidades</system:String>
+  <system:String x:Key="key.picker.analyzing">Analisando...</system:String>
+  <system:String x:Key="key.picker.suggested">Tonalidades sugeridas</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Ação</system:String>
+  <system:String x:Key="lunai.col.installed">Instalado</system:String>
+  <system:String x:Key="lunai.col.name">Nome</system:String>
+  <system:String x:Key="lunai.col.version">Versão</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Instalar cantor</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Instalar {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Este cantor possui termos de uso. Ao clicar em Sim, você concorda com eles.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Desinstalar cantor</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Desinstalar {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Atualizar cantor</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Atualizar {0} para a versão {1}?</system:String>
+  <system:String x:Key="lunai.install">Instalar</system:String>
+  <system:String x:Key="lunai.installed">Instalado</system:String>
+  <system:String x:Key="lunai.latest">Mais recente</system:String>
+  <system:String x:Key="lunai.newversionavailable">Nova versão disponível</system:String>
+  <system:String x:Key="lunai.notinstalled">Não instalado</system:String>
+  <system:String x:Key="lunai.outdated">Desatualizado</system:String>
+  <system:String x:Key="lunai.refresh">Atualizar</system:String>
+  <system:String x:Key="lunai.search">Pesquisar...</system:String>
+  <system:String x:Key="lunai.section.installed">Instalado</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Não instalado</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Atualizações disponíveis</system:String>
+  <system:String x:Key="lunai.status.error">Erro</system:String>
+  <system:String x:Key="lunai.status.fetching">Obtendo lista...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Falha na instalação</system:String>
+  <system:String x:Key="lunai.status.installfinished">Instalação concluída</system:String>
+  <system:String x:Key="lunai.status.installing">Instalando {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">Verificando instalados...</system:String>
+  <system:String x:Key="lunai.status.offline">Pronto (lista em cache, rede indisponível)</system:String>
+  <system:String x:Key="lunai.status.ready">Pronto</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Falha ao desinstalar</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Desinstalação concluída</system:String>
+  <system:String x:Key="lunai.status.uninstalling">Desinstalando {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Atualização concluída</system:String>
+  <system:String x:Key="lunai.status.updating">Atualizando {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">Todas</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Desinstalar</system:String>
+  <system:String x:Key="lunai.unknownversion">desconhecida</system:String>
+  <system:String x:Key="lunai.update">Atualizar</system:String>
+  <system:String x:Key="lunai.uptodate">Atualizado</system:String>
+  <system:String x:Key="lunai.website">Site</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Exportar scripts DiffSinger para (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Exportar scripts DiffSinger para (v2, sem curva de pitch)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Instalar dependência (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + clique para ver o erro completo</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Gerar harmonias...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(legado)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Expandir piano roll na janela</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">Modo de gravação TikTok</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger qualidade extrabaixa (acústica 1, variância 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger qualidade baixa (acústica 1, variância 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger equilibrado (acústica 20, variância 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger qualidade alta (acústica 50, variância 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Exibir pitch final para renderizar</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Expandir piano roll na janela</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Mostrar escala da tonalidade</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Live Pitch (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Live Pitch Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Exibir parâmetros da nota</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Exibir fonemas</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Exibir desvio de pitch</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Seguir notas verticalmente durante a reprodução</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Exibir curvas reais</system:String>
+  <system:String x:Key="pianoroll.toggle.render">Configurações de renderização do DiffSinger</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Alternar encaixe</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Exibir</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Ferramenta Desenhar pitch (4)
+    Clique esquerdo para desenhar
+    Clique direito para redefinir
+    Segure Ctrl para selecionar</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Ferramenta Faca (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Ferramenta Onda senoidal de pitch (Shift + 3)
+    Arraste para desenhar a onda senoidal; solte para entrar no modo de ajuste
+    Mova o mouse para ajustar o comprimento de onda e a amplitude; clique para aplicar
+    Clique direito para redefinir
+    Segure Ctrl para selecionar</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Ferramenta Linha de pitch (Shift + 1)
+    Clique esquerdo para desenhar uma linha reta
+    Clique direito para redefinir
+    Segure Ctrl para selecionar</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Ferramenta Curva em S de pitch (Shift + 2)
+    Arraste para desenhar uma curva em S; solte para entrar no modo de ajuste
+    Mova o mouse para ajustar a intensidade da curva em S; clique para aplicar
+    Clique direito para redefinir
+    Segure Ctrl para selecionar</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Ferramenta Suavizar pitch (Shift + 4)
+    Clique esquerdo para suavizar o pitch
+    Clique direito para redefinir
+    Segure Ctrl para selecionar</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Barras de rolagem clássicas (área de faixa dedicada)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Tema base</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Escuro</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Claro</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Já existe um tema com este nome.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Novo</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Cor base</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Cor brilhante</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">O nome da cor da faixa não pode ficar vazio.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Já existe uma cor de faixa com este nome.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Insira um nome e escolha as cores base e brilhante.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Novo</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Criar cor de faixa personalizada</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Tem certeza de que deseja excluir esta cor de faixa?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Excluir cor de faixa personalizada</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Editar</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Editar cor de faixa personalizada</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Cor padrão para novas faixas</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Espessura da borda da nota</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Raio do canto da nota</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Opacidade da nota</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Barras de rolagem sobrepostas (finas, sobre o conteúdo)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Linhas de exibição</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Expressões e fonemas</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Grade e rolagem</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Painel de fonemas</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Piano roll</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Reprodução</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Tema</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Cores de faixa</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Mostrar borda da nota</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Linhas sólidas de valores padrão no painel de expressões</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Linhas sólidas da grade temporal (piano roll, faixas e painel de expressões)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Integrado</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Predefinições integradas</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Personalizado</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Frio</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Escuro</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Claro</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Escuro original</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Claro original</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Quente</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Tingir o fundo do piano roll com a cor da faixa</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">Painel de fonemas adequado ao DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Mostrar limites das frases renderizadas</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Depuração</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">Geral</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Pitch e F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Qualidade</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Qualidade de renderização</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Etapas de renderização</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Renderizar novamente após edições ao reproduzir (experimental)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Metrônomo</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Cursor de reprodução moderno</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Rolagem seguindo o pitch</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Seguir notas verticalmente durante a reprodução</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Suavização de quadros</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Mostrar prévia do caminho da câmera</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Limite de semitons</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Posição vertical da nota</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">Retomada local de pitch do DiffSinger</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Mostrar prévia de patch acústico de F0 no piano roll</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">Interpolar F0 acústico de consoantes surdas do DiffSinger (experimental)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Pesquisar por nome ou tecla...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Clique esquerdo para alterar. Clique direito para redefinir.</system:String>
+  <system:String x:Key="prefs.shortcuts">Atalhos de teclado</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">O atalho '{0}' já está atribuído a '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Pressione as teclas...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">Predefinição DiffSinger {0} aplicada (acústica {1}, variância {2}, pitch {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Limpar seleção</system:String>
+  <system:String x:Key="shortcut.Copy">Copiar</system:String>
+  <system:String x:Key="shortcut.Cut">Recortar</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Excluir notas</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Desmarcar tudo</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Editar letra</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Selecionar expressão 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Selecionar expressão 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Selecionar expressão 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Selecionar expressão 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Selecionar expressão 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Selecionar expressão 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Selecionar expressão 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Selecionar expressão 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Selecionar expressão 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Selecionar expressão 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Estender seleção à esquerda</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Estender seleção à direita</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Focar seleção</system:String>
+  <system:String x:Key="shortcut.FullScreen">Alternar tela cheia</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Ocultar janela destacada</system:String>
+  <system:String x:Key="shortcut.InsertNote">Inserir nota</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Unir notas selecionadas</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Mover cursor para a esquerda</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Mover cursor para a direita</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Mover notas para a esquerda</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Mover notas para a direita</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Mover para a próxima parte (abaixo)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Mover para a próxima parte (acima)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Silenciar faixa</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Abrir menu de plugins</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Abrir menu de encaixe</system:String>
+  <system:String x:Key="shortcut.Paste">Colar</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Colar parâmetros</system:String>
+  <system:String x:Key="shortcut.PastePlain">Colar como notas simples</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Reproduzir / Pausar</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Reproduzir seleção</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Mover cursor de reprodução para o fim</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Mover cursor de reprodução para o início</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Mover cursor de reprodução à esquerda</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Mover cursor de reprodução à direita</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Mover cursor de reprodução para o fim da seleção</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Mover cursor de reprodução para o início da seleção</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Mover cursor de reprodução para o fim da visualização</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Mover cursor de reprodução para o início da visualização</system:String>
+  <system:String x:Key="shortcut.Redo">Refazer</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Redimensionar notas à esquerda</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Redimensionar notas à direita</system:String>
+  <system:String x:Key="shortcut.SaveProject">Salvar projeto</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Rolar para baixo</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Rolar para a esquerda</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Rolar para a direita</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Rolar para cima</system:String>
+  <system:String x:Key="shortcut.SearchNote">Pesquisar nota</system:String>
+  <system:String x:Key="shortcut.SelectAll">Selecionar tudo</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Estender seleção até o fim</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Estender seleção até o início</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Faixa solo</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">Alternar visualização de expressões</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">Alternar visualização do pitch final</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">Alternar visualização dos parâmetros da nota</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">Alternar visualização de fonemas</system:String>
+  <system:String x:Key="shortcut.TogglePitch">Alternar visualização de pitch</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">Alternar tom de reprodução</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Alternar encaixe</system:String>
+  <system:String x:Key="shortcut.ToggleTips">Alternar visualização de dicas</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">Alternar visualização de vibrato</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">Alternar visualização de forma de onda</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Ferramenta Seleção</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Ferramenta Caneta (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Ferramenta Caneta</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Ferramenta Borracha</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Ferramenta Desenhar pitch</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Ferramenta Desenhar pitch (sobrescrever)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Ferramenta Faca</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Ferramenta Linha de pitch</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Ferramenta Linha de pitch (sobrescrever)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Ferramenta Curva em S de pitch</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Ferramenta Onda senoidal de pitch</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Ferramenta Suavizar pitch</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Transpor para baixo</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Transpor uma oitava abaixo</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Transpor uma oitava acima</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Transpor para cima</system:String>
+  <system:String x:Key="shortcut.Undo">Desfazer</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Aumentar zoom</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Diminuir zoom</system:String>
+
+  <system:String x:Key="themeditor.cancel">Cancelar</system:String>
+  <system:String x:Key="themeditor.save">Salvar</system:String>
+  <system:String x:Key="themeditor.title">Editor de temas</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Cancelar</system:String>
+  <system:String x:Key="themeeditor.save">Salvar</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + roda do mouse para aplicar zoom vertical</system:String>
+
+  <system:String x:Key="tracks.mixfx">Polimento da faixa</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Alternar cantores entre as faixas selecionadas</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Aplicar a todas as faixas selecionadas</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Adicionar cantor aos favoritos</system:String>
+  <system:String x:Key="tracks.standardizesettings">Padronizar configurações da faixa</system:String>
+
+  <system:String x:Key="updater.status.unknown">Não foi possível verificar a atualização. Abra GitHub Releases para baixar manualmente ou consulte o log para obter detalhes.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Instale ou atualize bibliotecas de voz de fontes confiáveis</system:String>
+  <system:String x:Key="welcome.singerhub.open">Abrir Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">Fechar painel</system:String>
+  <system:String x:Key="workspace.panel.render">Renderizar</system:String>
+  <system:String x:Key="workspace.panel.view">Exibir</system:String>
+  <system:String x:Key="workspace.tracks">Faixas</system:String>
+</ResourceDictionary>

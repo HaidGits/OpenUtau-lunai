@@ -1,0 +1,362 @@
+<!--Lunai overlay for nl-NL. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Harmonieën genereren...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Sluiten</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">De ingebouwde lijst met bijdragers wordt weergegeven.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Deze mensen hebben bijgedragen aan de oorspronkelijke OpenUtau-repository op GitHub. OpenUtau Lunai bouwt voort op hun werk. Dank aan iedereen die hier wordt vermeld!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Bijdragers worden geladen van GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Bijdragers</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">De bijdragers konden niet worden geladen. Controleer uw internetverbinding en probeer het opnieuw.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Lijst met bijdragers bijgewerkt vanaf GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai op GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau op GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau en OpenUtau Lunai zijn vrije opensourcesoftware onder de MIT-licentie.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">U gebruikt OpenUtau Lunai, een fork die DiffSinger eenvoudiger en prettiger in gebruik maakt. Klassieke UTAU-banken en alle andere voicebanktypen die OpenUtau al ondersteunt, werken gewoon zoals altijd. Ook bevat het veel functies uit upstream-pullrequests die nog niet zijn uitgebracht of samengevoegd met het oorspronkelijke OpenUtau.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau wil een opensourcebewerkingsomgeving zijn voor de UTAU-gemeenschap, met een moderne gebruikerservaring en intelligente fonologische ondersteuning. Bezoek ons op GitHub.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau wil een opensourcebewerkingsomgeving zijn voor de UTAU-gemeenschap, met een moderne gebruikerservaring en intelligente fonologische ondersteuning.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Openen or import project</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Importeren sporen</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Wilt u het neergezette projectbestand openen of de sporen ervan in het huidige project importeren?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Openen project</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Exporteren DiffSinger script</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Variantie parameters</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Schakel de DiffSinger-tensorcache in Voorkeuren in om curven voor variantieparameters te exporteren.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Generate Harmonieën</system:String>
+  <system:String x:Key="dialogs.harmony.description">Maak nieuwe harmoniesporen vanuit het geselecteerde deel. Noten worden diatonisch getransponeerd in de gekozen toonsoort.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Elke geselecteerde stem maakt onder het bronspeur een nieuw spoor met getransponeerde noten. Zanger en instellingen worden gekopieerd van het bronspoor.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Harmoniestemmen</system:String>
+  <system:String x:Key="dialogs.harmony.key">Toonsoort</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Importeren project options</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Chinese hanzi → Pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Standaardtekst</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Korte gaten opvullen</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Maximale te verwerken lengte (exclusief)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} noot</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Japanse songtekst</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → Hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Geen conversie</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → Romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Ruimte vóór de eerste noot</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Opvulling wanneer de eerste noot aan het begin van de clip start</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Tekstkoppeling (exact)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Eén per regel: van=naar</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Tekstvervanging</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">van=&gt;naar of /patroon/vervanging/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Tekstverwerking</system:String>
+  <system:String x:Key="dialogs.importproject.message">Kies wat uit dit bestand moet worden geïmporteerd:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Noten en songtekst</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Toonhoogtecurve (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Overlappende noten herstellen</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Tempomarkeringen</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Maatsoorten</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Downloadpagina openen</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Pakketbeheer</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Word lid van onze server en beschrijf de fout in #help. Voeg indien nodig een logbestand toe via Help → Loglocatie openen.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Openen Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Adres kopiëren</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Schrijf ons en voeg een logbestand toe als het probleem moeilijk te reproduceren is.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">E-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">E-mail schrijven</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Vertel ons wat er misging. Gebruik bij voorkeur Discord #help zodat we snel kunnen reageren; voeg een logbestand toe als dat helpt. U kunt ons ook e-mailen.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Alle toonsoorten</system:String>
+  <system:String x:Key="key.picker.analyzing">Analyseren...</system:String>
+  <system:String x:Key="key.picker.suggested">Voorgestelde toonsoorten</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Actie</system:String>
+  <system:String x:Key="lunai.col.installed">Geïnstalleerd</system:String>
+  <system:String x:Key="lunai.col.name">Naam</system:String>
+  <system:String x:Key="lunai.col.version">Versie</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Installeren Singer</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Installeren {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Deze zanger heeft gebruiksvoorwaarden. Door op Ja te klikken, gaat u akkoord met deze voorwaarden.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Verwijderen singer</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Verwijderen {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Bijwerken singer</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Bijwerken {0} to version {1}?</system:String>
+  <system:String x:Key="lunai.install">Installeren</system:String>
+  <system:String x:Key="lunai.installed">Geïnstalleerd</system:String>
+  <system:String x:Key="lunai.latest">Nieuwste</system:String>
+  <system:String x:Key="lunai.newversionavailable">Nieuwe versie beschikbaar</system:String>
+  <system:String x:Key="lunai.notinstalled">Niet geïnstalleerd</system:String>
+  <system:String x:Key="lunai.outdated">Verouderd</system:String>
+  <system:String x:Key="lunai.refresh">Vernieuwen</system:String>
+  <system:String x:Key="lunai.search">Zoeken...</system:String>
+  <system:String x:Key="lunai.section.installed">Geïnstalleerd</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Niet geïnstalleerd</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Updates beschikbaar</system:String>
+  <system:String x:Key="lunai.status.error">Fout</system:String>
+  <system:String x:Key="lunai.status.fetching">Lijst ophalen...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Installatie mislukt</system:String>
+  <system:String x:Key="lunai.status.installfinished">Installatie voltooid</system:String>
+  <system:String x:Key="lunai.status.installing">{0} installeren...</system:String>
+  <system:String x:Key="lunai.status.listing">Geïnstalleerde items scannen...</system:String>
+  <system:String x:Key="lunai.status.offline">Gereed (lijst uit cache, netwerk niet beschikbaar)</system:String>
+  <system:String x:Key="lunai.status.ready">Gereed</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Verwijderen failed</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Verwijderen finished</system:String>
+  <system:String x:Key="lunai.status.uninstalling">{0} verwijderen...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Bijwerken finished</system:String>
+  <system:String x:Key="lunai.status.updating">{0} bijwerken...</system:String>
+  <system:String x:Key="lunai.tab.all">Alles</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Verwijderen</system:String>
+  <system:String x:Key="lunai.unknownversion">onbekend</system:String>
+  <system:String x:Key="lunai.update">Bijwerken</system:String>
+  <system:String x:Key="lunai.uptodate">Actueel</system:String>
+  <system:String x:Key="lunai.website">Website</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Exporteren DiffSinger Scripts naar (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Exporteren DiffSinger Scripts naar (v2, zonder toonhoogtecurve)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Installeren Afhankelijkheid (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + klik om de volledige fout te bekijken</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Harmonieën genereren...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(verouderd)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Pianorol in venster uitbreiden</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">TikTok opnamemodus</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger zeer lage kwaliteit (akoestiek 1, variantie 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger lage kwaliteit (akoestiek 1, variantie 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger gebalanceerd (akoestiek 20, variantie 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger kwaliteit (akoestiek 50, variantie 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Eindtoonhoogte voor renderen weergeven</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Pianorol in venster uitbreiden</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Toonschaal weergeven</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Live Pitch (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Live Pitch Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Nootparameters weergeven</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Fonemen weergeven</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Pitchbend weergeven</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Noten tijdens afspelen verticaal volgen</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Werkelijke curven weergeven</system:String>
+  <system:String x:Key="pianoroll.toggle.render">DiffSinger renderinstellingen</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Rastermagnetisme in-/uitschakelen</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Weergave</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Hulpmiddel Toonhoogte tekenen (4)
+    Klik met links om te tekenen
+    Klik met rechts om te resetten
+    Ctrl vasthouden om te selecteren</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Mesgereedschap (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Hulpmiddel Toonhoogte-sinusgolf (Shift + 3)
+    Sleep om een sinusgolf te tekenen; laat los voor de aanpassingsmodus
+    Beweeg de muis om golflengte en amplitude aan te passen; klik om toe te passen
+    Klik met rechts om te resetten
+    Ctrl vasthouden om te selecteren</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Hulpmiddel Toonhoogtelijn (Shift + 1)
+    Klik met links om een rechte lijn te tekenen
+    Klik met rechts om te resetten
+    Ctrl vasthouden om te selecteren</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Hulpmiddel Toonhoogte-S-curve (Shift + 2)
+    Sleep om een S-curve te tekenen; laat los voor de aanpassingsmodus
+    Beweeg de muis om de sterkte van de S-curve aan te passen; klik om toe te passen
+    Klik met rechts om te resetten
+    Ctrl vasthouden om te selecteren</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Hulpmiddel Toonhoogte gladstrijken (Shift + 4)
+    Klik met links om de toonhoogte glad te strijken
+    Klik met rechts om te resetten
+    Ctrl vasthouden om te selecteren</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Klassieke schuifbalken (dedicated track area)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Basisthema</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Donker</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Licht</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Er bestaat al een thema met deze naam.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Nieuw</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Basiskleur</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Heldere kleur</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">De naam van de spoorkleur mag niet leeg zijn.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Er bestaat al een spoorkleur met deze naam.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Voer een naam in en kies de basis- en heldere kleuren.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Nieuw</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Aangepaste spoorkleur maken</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Weet u zeker dat u deze spoorkleur wilt verwijderen?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Aangepaste spoorkleur verwijderen</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Bewerken</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Aangepaste spoorkleur bewerken</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Standaardspoorkleur voor nieuwe sporen</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Dikte van nootrand</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Hoekradius van noot</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Dekking van noot</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Overlay-schuifbalken (thin, on top of content)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Weergavelijnen</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Expressies en fonemen</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Raster en scrollen</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Foneempaneel</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Pianorol</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Afspelen</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Thema</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Spoorkleuren</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Nootrand weergeven</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Doorgetrokken standaardwaardelijnen in het expressiepaneel</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Solid timeline grid lines (piano roll, sporen &amp; expression panel)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Ingebouwd</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Ingebouwde voorinstellingen</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Aangepast</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Koud</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Donker</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Licht</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Oorspronkelijk donker</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Oorspronkelijk licht</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Warm</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Achtergrond van pianorol kleuren met spoorkleur</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger-vriendelijk foneempaneel</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Renderfrasegrenzen weergeven</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Foutopsporing</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">Algemeen</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Toonhoogte en F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Kwaliteit</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Renderkwaliteit</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Renderstappen</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Opnieuw renderen na bewerkingen bij afspelen (experimenteel)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Metronoom</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Moderne afspeelkop</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Pitch Follow Scrollen</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Noten tijdens afspelen verticaal volgen</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Framevervloeiing</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Voorbeeld van camerabeweging weergeven</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Drempelwaarde in halve tonen</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Verticale positie van noot</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSinger Pitch Local Retaking</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Show akoestiek F0 patch preview on piano roll</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">F0-interpolatie voor stemloze medeklinkers in DiffSinger (experimenteel)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Zoeken op naam of toets...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Klik met links om te wijzigen. Klik met rechts om te resetten.</system:String>
+  <system:String x:Key="prefs.shortcuts">Sneltoetsen</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">De sneltoets '{0}' is al toegewezen aan '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Druk op toetsen...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">DiffSinger {0} preset applied (akoestiek {1}, variantie {2}, pitch {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Clear Selectie</system:String>
+  <system:String x:Key="shortcut.Copy">Kopiëren</system:String>
+  <system:String x:Key="shortcut.Cut">Knippen</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Noten verwijderen</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Alles deselecteren</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Songtekst bewerken</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Expressie selecteren 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Expressie selecteren 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Expressie selecteren 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Expressie selecteren 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Expressie selecteren 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Expressie selecteren 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Expressie selecteren 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Expressie selecteren 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Expressie selecteren 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Expressie selecteren 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Extend Selectie Left</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Extend Selectie Right</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Focus Selectie</system:String>
+  <system:String x:Key="shortcut.FullScreen">In-/uitschakelen Volledig scherm</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Losgekoppeld venster verbergen</system:String>
+  <system:String x:Key="shortcut.InsertNote">Noot invoegen</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Geselecteerde noten samenvoegen</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Cursor verplaatsen Left</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Cursor verplaatsen Right</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Noten verplaatsen Left</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Noten verplaatsen Right</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Naar volgend deel (omlaag)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Naar volgend deel (omhoog)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Spoor dempen</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Plug-inmenu openen</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Rastermenu openen</system:String>
+  <system:String x:Key="shortcut.Paste">Plakken</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Plakken Parameters</system:String>
+  <system:String x:Key="shortcut.PastePlain">Plakken as Plain Notes</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Afspelen / pauzeren</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Selectie afspelen</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Move Afspeelkop to End</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Move Afspeelkop to Start</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Move Afspeelkop Left</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Move Afspeelkop Right</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Move Afspeelkop to Selectie End</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Move Afspeelkop to Selectie Start</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Move Afspeelkop to Weergave End</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Move Afspeelkop to Weergave Start</system:String>
+  <system:String x:Key="shortcut.Redo">Opnieuw</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Noten schalen Left</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Noten schalen Right</system:String>
+  <system:String x:Key="shortcut.SaveProject">Project opslaan</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Scrollen Down</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Scrollen Left</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Scrollen Right</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Scrollen Up</system:String>
+  <system:String x:Key="shortcut.SearchNote">Noot zoeken</system:String>
+  <system:String x:Key="shortcut.SelectAll">Alles selecteren</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Extend Selectie to End</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Extend Selectie to Start</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Spoor solo</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">In-/uitschakelen Expressions Weergave</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">In-/uitschakelen Final Pitch Weergave</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">In-/uitschakelen Note Parameters Weergave</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">In-/uitschakelen Phoneme Weergave</system:String>
+  <system:String x:Key="shortcut.TogglePitch">In-/uitschakelen Pitch Weergave</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">In-/uitschakelen Play Tone</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Rastermagnetisme in-/uitschakelen</system:String>
+  <system:String x:Key="shortcut.ToggleTips">In-/uitschakelen Tips Weergave</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">In-/uitschakelen Vibrato Weergave</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">In-/uitschakelen Waveform Weergave</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Selectiegereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Pengereedschap (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Pengereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Gumgereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Draw Pitch Gereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Draw Pitch Gereedschap (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Mesgereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Pitch Line Gereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Pitch Line Gereedschap (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Pitch S-Curve Gereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Pitch Sine Wave Gereedschap</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Pitch Smoothen Gereedschap</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Transponeren Down</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Transponeren Octaaf Down</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Transponeren Octaaf Up</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Transponeren Up</system:String>
+  <system:String x:Key="shortcut.Undo">Ongedaan maken</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Inzoomen</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Uitzoomen</system:String>
+
+  <system:String x:Key="themeditor.cancel">Annuleren</system:String>
+  <system:String x:Key="themeditor.save">Opslaan</system:String>
+  <system:String x:Key="themeditor.title">Thema-editor</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Annuleren</system:String>
+  <system:String x:Key="themeeditor.save">Opslaan</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + muiswiel om verticaal te zoomen</system:String>
+
+  <system:String x:Key="tracks.mixfx">Spoorafwerking</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Rotate singers across selected sporen</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Apply to all selected sporen</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Zanger aan favorieten toevoegen</system:String>
+  <system:String x:Key="tracks.standardizesettings">Spoorinstellingen standaardiseren</system:String>
+
+  <system:String x:Key="updater.status.unknown">Kan niet op updates controleren. Openen GitHub Releases om handmatig te downloaden of bekijk het logbestand voor details.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Installeren or update voice libraries from trusted sources</system:String>
+  <system:String x:Key="welcome.singerhub.open">Singer Hub openen</system:String>
+
+  <system:String x:Key="workspace.panel.close">Sluiten panel</system:String>
+  <system:String x:Key="workspace.panel.render">Renderen</system:String>
+  <system:String x:Key="workspace.panel.view">Weergave</system:String>
+  <system:String x:Key="workspace.tracks">Sporen</system:String>
+</ResourceDictionary>

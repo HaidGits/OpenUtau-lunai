@@ -1,0 +1,362 @@
+<!--Lunai overlay for zh-CN. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">生成和声...</system:String>
+
+  <system:String x:Key="dialogs.about.close">关闭</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">正在显示内嵌的贡献者列表。</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">以下人员为 GitHub 上原始 OpenUtau 仓库做出了贡献。OpenUtau Lunai 建立在他们的工作之上。感谢所有列出的贡献者！</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">正在从 GitHub 加载贡献者...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">贡献者</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">无法加载贡献者。请检查网络连接后重试。</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">已从 GitHub 更新贡献者列表。</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">GitHub 上的 OpenUtau Lunai</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">GitHub 上的 OpenUtau</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau 与 OpenUtau Lunai 均为采用 MIT 许可证的免费开源软件。</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">您正在运行 OpenUtau Lunai，这是一个旨在让 DiffSinger 更易用、更愉快的分支。经典 UTAU 音源以及 OpenUtau 已支持的其他类型音源均可照常使用。此外还包含许多尚未发布或合并到原始 OpenUtau 的上游拉取请求中的功能。</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau 致力于成为面向 UTAU 社区的开源编辑环境，提供现代化的使用体验与智能音韵支持。欢迎访问我们的 GitHub。</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau 致力于成为面向 UTAU 社区的开源编辑环境，提供现代化的使用体验与智能音韵支持。</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">打开或导入工程</system:String>
+  <system:String x:Key="dialogs.dropproject.import">导入音轨</system:String>
+  <system:String x:Key="dialogs.dropproject.message">要打开拖入的工程文件，还是将其音轨导入到当前工程？</system:String>
+  <system:String x:Key="dialogs.dropproject.open">打开工程</system:String>
+  <system:String x:Key="dialogs.exportds.caption">导出 DiffSinger 脚本</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Variance 参数</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">请在偏好设置中启用 DiffSinger 张量缓存，以导出 variance 参数曲线。</system:String>
+  <system:String x:Key="dialogs.harmony.caption">生成和声</system:String>
+  <system:String x:Key="dialogs.harmony.description">根据所选片段创建新的和声音轨。音符将按所选调性做自然音阶移调。</system:String>
+  <system:String x:Key="dialogs.harmony.hint">每个选中的声部都会在源音轨下方创建一条带有移调音符的新音轨。歌手与设置将从源音轨复制。</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">和声声部</system:String>
+  <system:String x:Key="dialogs.harmony.key">调性</system:String>
+  <system:String x:Key="dialogs.importproject.caption">导入工程选项</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">汉字 → 拼音</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">默认歌词</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">填充短空隙</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">最大处理长度（不含）</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} 音符</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">日语歌词</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">罗马音 → 平假名</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">不转换</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">平假名 → 罗马音</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">首个音符前的前导空白</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">首个音符从片段开头起时的填充量</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">歌词映射（精确匹配）</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">每行一组：from=to</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">歌词替换</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">from=&gt;to 或 /pattern/replacement/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">歌词处理</system:String>
+  <system:String x:Key="dialogs.importproject.message">选择要从该文件导入的内容：</system:String>
+  <system:String x:Key="dialogs.importproject.notes">音符与歌词</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">音高曲线 (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">修复重叠音符</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">速度标记</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">拍号</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">打开下载页面</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">扩展包管理器</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">加入我们的服务器，在 #help 中描述问题。如有需要，请从“帮助 → 打开日志位置”附加日志。</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">打开 Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">复制地址</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">如问题难以复现，请写信给我们并附上日志。</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">电子邮件</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">撰写邮件</system:String>
+  <system:String x:Key="dialogs.reportissue.message">请告诉我们出了什么问题。建议优先使用 Discord #help，以便我们尽快回复；有帮助时请附上日志文件。也可以通过电子邮件联系我们。</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">全部调性</system:String>
+  <system:String x:Key="key.picker.analyzing">正在分析...</system:String>
+  <system:String x:Key="key.picker.suggested">建议调性</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">操作</system:String>
+  <system:String x:Key="lunai.col.installed">已安装</system:String>
+  <system:String x:Key="lunai.col.name">名称</system:String>
+  <system:String x:Key="lunai.col.version">版本</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">安装歌手</system:String>
+  <system:String x:Key="lunai.confirm.install.message">安装 {0}？</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">该歌手有使用条款。点击“是”即表示您同意这些条款。</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">卸载歌手</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">卸载 {0}？</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">更新歌手</system:String>
+  <system:String x:Key="lunai.confirm.update.message">将 {0} 更新到版本 {1}？</system:String>
+  <system:String x:Key="lunai.install">安装</system:String>
+  <system:String x:Key="lunai.installed">已安装</system:String>
+  <system:String x:Key="lunai.latest">最新</system:String>
+  <system:String x:Key="lunai.newversionavailable">有新版本可用</system:String>
+  <system:String x:Key="lunai.notinstalled">未安装</system:String>
+  <system:String x:Key="lunai.outdated">已过时</system:String>
+  <system:String x:Key="lunai.refresh">刷新</system:String>
+  <system:String x:Key="lunai.search">搜索...</system:String>
+  <system:String x:Key="lunai.section.installed">已安装</system:String>
+  <system:String x:Key="lunai.section.notinstalled">未安装</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">有可用更新</system:String>
+  <system:String x:Key="lunai.status.error">错误</system:String>
+  <system:String x:Key="lunai.status.fetching">正在获取列表...</system:String>
+  <system:String x:Key="lunai.status.installfailed">安装失败</system:String>
+  <system:String x:Key="lunai.status.installfinished">安装完成</system:String>
+  <system:String x:Key="lunai.status.installing">正在安装 {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">正在扫描已安装项...</system:String>
+  <system:String x:Key="lunai.status.offline">就绪（缓存列表，网络不可用）</system:String>
+  <system:String x:Key="lunai.status.ready">就绪</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">卸载失败</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">卸载完成</system:String>
+  <system:String x:Key="lunai.status.uninstalling">正在卸载 {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">更新完成</system:String>
+  <system:String x:Key="lunai.status.updating">正在更新 {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">全部</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">卸载</system:String>
+  <system:String x:Key="lunai.unknownversion">未知</system:String>
+  <system:String x:Key="lunai.update">更新</system:String>
+  <system:String x:Key="lunai.uptodate">已是最新</system:String>
+  <system:String x:Key="lunai.website">网站</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">导出 DiffSinger 脚本至 (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">导出 DiffSinger 脚本至 (v2，不含音高曲线)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">安装依赖项（.oudep）...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + 单击查看完整错误</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">生成和声...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">（传统）</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">在窗口中展开钢琴卷轴</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">TikTok 录制模式</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger 超低质量（声学 1，variance 1，音高 1）</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger 低质量（声学 1，variance 1，音高 20）</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger 均衡（声学 20，variance 20，音高 20）</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger 高质量（声学 50，variance 50，音高 20）</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">显示最终渲染音高</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">在窗口中展开钢琴卷轴</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">显示调性音阶</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">实时音高（DiffSinger）</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">实时音高加速（DiffSinger）</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">显示音符参数</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">显示音素</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">显示弯音</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">播放时垂直跟随音符</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">显示真实曲线</system:String>
+  <system:String x:Key="pianoroll.toggle.render">DiffSinger 渲染设置</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">开关吸附</system:String>
+  <system:String x:Key="pianoroll.toggle.view">视图</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">绘制音高工具 (4)
+    左键绘制
+    右键重置
+    按住 Ctrl 进行选择</system:String>
+  <system:String x:Key="pianoroll.tool.knife">分割工具 (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">音高正弦波工具 (Shift + 3)
+    拖动绘制正弦波，松开进入调整模式
+    移动鼠标调整波长与振幅，单击应用
+    右键重置
+    按住 Ctrl 进行选择</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">音高直线工具 (Shift + 1)
+    左键绘制直线
+    右键重置
+    按住 Ctrl 进行选择</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">音高 S 曲线工具 (Shift + 2)
+    拖动绘制 S 曲线，松开进入调整模式
+    移动鼠标调整 S 曲线强度，单击应用
+    右键重置
+    按住 Ctrl 进行选择</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">音高平滑工具 (Shift + 4)
+    左键平滑音高
+    右键重置
+    按住 Ctrl 进行选择</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">经典滚动条（独立轨道区域）</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">基础主题</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">深色</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">浅色</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">已存在同名主题。</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">新建</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">基础色</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">亮色</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">音轨颜色名称不能为空。</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">已存在同名音轨颜色。</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">输入名称，并选择基础色与亮色。</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">新建</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">创建自定义音轨颜色</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">确定要删除此音轨颜色吗？</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">删除自定义音轨颜色</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">编辑</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">编辑自定义音轨颜色</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">新建音轨的默认颜色</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">音符边框粗细</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">音符圆角半径</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">音符不透明度</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">叠加滚动条（细条，覆盖在内容上）</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">显示线条</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">表情与音素</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">网格与滚动</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">音素面板</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">钢琴卷轴</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">播放</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">主题</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">音轨颜色</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">显示音符边框</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">表情面板中的实线默认值线</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">实线时间轴网格线（钢琴卷轴、音轨与表情面板）</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">内置</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">内置预设</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">自定义</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">冷色</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">深色</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">浅色</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">原始深色</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">原始浅色</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">暖色</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">用音轨颜色为钢琴卷轴背景着色</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger 友好音素面板</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">显示渲染短语边界</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">缓存</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">调试</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">常规</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">音高与 F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">质量</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">渲染质量</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">渲染步数</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">播放时在编辑后重新渲染（实验性）</system:String>
+  <system:String x:Key="prefs.playback.metronome">节拍器</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">现代播放头</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">音高跟随滚动</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">播放时垂直跟随音符</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">帧平滑</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">显示镜头路径预览</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">半音阈值</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">音符垂直位置</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSinger 音高局部重录</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">在钢琴卷轴上显示声学 F0 补丁预览</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">DiffSinger 清辅音 F0 插值（实验性）</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">按名称或按键搜索...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">左键单击更改。右键单击重置。</system:String>
+  <system:String x:Key="prefs.shortcuts">键盘快捷键</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">快捷键“{0}”已分配给“{1}”。</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">请按下按键...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">已应用 DiffSinger {0} 预设（声学 {1}，方差 {2}，音高 {3}）</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">清除选择</system:String>
+  <system:String x:Key="shortcut.Copy">复制</system:String>
+  <system:String x:Key="shortcut.Cut">剪切</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">删除音符</system:String>
+  <system:String x:Key="shortcut.DeselectAll">取消全选</system:String>
+  <system:String x:Key="shortcut.EditLyrics">编辑歌词</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">选择表情 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">选择表情 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">选择表情 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">选择表情 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">选择表情 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">选择表情 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">选择表情 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">选择表情 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">选择表情 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">选择表情 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">向左扩展选择</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">向右扩展选择</system:String>
+  <system:String x:Key="shortcut.FocusSelection">聚焦选择</system:String>
+  <system:String x:Key="shortcut.FullScreen">切换全屏</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">隐藏分离窗口</system:String>
+  <system:String x:Key="shortcut.InsertNote">插入音符</system:String>
+  <system:String x:Key="shortcut.MergeNotes">合并所选音符</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">光标左移</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">光标右移</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">音符左移</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">音符右移</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">移至下一片段（向下）</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">移至下一片段（向上）</system:String>
+  <system:String x:Key="shortcut.MuteTrack">静音音轨</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">打开插件菜单</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">打开吸附菜单</system:String>
+  <system:String x:Key="shortcut.Paste">粘贴</system:String>
+  <system:String x:Key="shortcut.PasteParameters">粘贴参数</system:String>
+  <system:String x:Key="shortcut.PastePlain">粘贴为普通音符</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">播放 / 暂停</system:String>
+  <system:String x:Key="shortcut.PlaySelection">播放选区</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">播放头移至结尾</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">播放头移至开头</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">播放头左移</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">播放头右移</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">播放头移至选区末尾</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">播放头移至选区开头</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">播放头移至视图末尾</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">播放头移至视图开头</system:String>
+  <system:String x:Key="shortcut.Redo">重做</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">向左调整音符长度</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">向右调整音符长度</system:String>
+  <system:String x:Key="shortcut.SaveProject">保存工程</system:String>
+  <system:String x:Key="shortcut.ScrollDown">向下滚动</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">向左滚动</system:String>
+  <system:String x:Key="shortcut.ScrollRight">向右滚动</system:String>
+  <system:String x:Key="shortcut.ScrollUp">向上滚动</system:String>
+  <system:String x:Key="shortcut.SearchNote">搜索音符</system:String>
+  <system:String x:Key="shortcut.SelectAll">全选</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">扩展选择至结尾</system:String>
+  <system:String x:Key="shortcut.SelectToStart">扩展选择至开头</system:String>
+  <system:String x:Key="shortcut.SoloTrack">独奏音轨</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">切换表情视图</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">切换最终音高视图</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">切换音符参数视图</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">切换音素视图</system:String>
+  <system:String x:Key="shortcut.TogglePitch">切换音高视图</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">切换试听音</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">切换吸附</system:String>
+  <system:String x:Key="shortcut.ToggleTips">切换提示视图</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">切换颤音视图</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">切换波形视图</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">选择工具</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">画笔工具（Alt）</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">画笔工具</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">橡皮工具</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">绘制音高工具</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">绘制音高工具（覆盖）</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">分割工具</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">音高直线工具</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">音高直线工具（覆盖）</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">音高 S 曲线工具</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">音高正弦波工具</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">音高平滑工具</system:String>
+  <system:String x:Key="shortcut.TransposeDown">向下移调</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">下移八度</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">上移八度</system:String>
+  <system:String x:Key="shortcut.TransposeUp">向上移调</system:String>
+  <system:String x:Key="shortcut.Undo">撤销</system:String>
+  <system:String x:Key="shortcut.ZoomIn">放大</system:String>
+  <system:String x:Key="shortcut.ZoomOut">缩小</system:String>
+
+  <system:String x:Key="themeditor.cancel">取消</system:String>
+  <system:String x:Key="themeditor.save">保存</system:String>
+  <system:String x:Key="themeditor.title">主题编辑器</system:String>
+
+  <system:String x:Key="themeeditor.cancel">取消</system:String>
+  <system:String x:Key="themeeditor.save">保存</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + 滚轮可垂直缩放</system:String>
+
+  <system:String x:Key="tracks.mixfx">Track Polish</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">在所选音轨间轮换歌手</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">应用到所有所选音轨</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">将歌手加入收藏</system:String>
+  <system:String x:Key="tracks.standardizesettings">标准化音轨设置</system:String>
+
+  <system:String x:Key="updater.status.unknown">无法检查更新。请打开 GitHub Releases 手动下载，或查看日志了解详情。</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">从可信来源安装或更新音源库</system:String>
+  <system:String x:Key="welcome.singerhub.open">打开 Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">关闭面板</system:String>
+  <system:String x:Key="workspace.panel.render">渲染</system:String>
+  <system:String x:Key="workspace.panel.view">视图</system:String>
+  <system:String x:Key="workspace.tracks">音轨</system:String>
+</ResourceDictionary>

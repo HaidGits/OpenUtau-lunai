@@ -59,9 +59,25 @@ namespace OpenUtau.App {
             var result = new Dictionary<string, IResourceProvider>();
             foreach (string key in Current.Resources.Keys.OfType<string>()) {
                 if (key.StartsWith("strings-") &&
+                    !key.StartsWith("lunai-strings-") &&
                     Current.Resources.TryGetResource(key, ThemeVariant.Default, out var res) &&
                     res is IResourceProvider rp) {
                     result.Add(key.Replace("strings-", ""), rp);
+                }
+            }
+            return result;
+        }
+
+        static Dictionary<string, IResourceProvider> GetLunaiLanguages() {
+            if (Current == null) {
+                return new();
+            }
+            var result = new Dictionary<string, IResourceProvider>();
+            foreach (string key in Current.Resources.Keys.OfType<string>()) {
+                if (key.StartsWith("lunai-strings-") &&
+                    Current.Resources.TryGetResource(key, ThemeVariant.Default, out var res) &&
+                    res is IResourceProvider rp) {
+                    result.Add(key.Replace("lunai-strings-", ""), rp);
                 }
             }
             return result;
@@ -72,14 +88,23 @@ namespace OpenUtau.App {
                 return;
             }
             var languages = GetLanguages();
-            foreach (var res in languages.Values) {
+            var lunaiLanguages = GetLunaiLanguages();
+            foreach (var res in languages.Values.Concat(lunaiLanguages.Values)) {
                 Current.Resources.MergedDictionaries.Remove(res);
             }
+            // Upstream: en-US fallback, then selected locale.
             if (language != "en-US") {
                 Current.Resources.MergedDictionaries.Add(languages["en-US"]);
             }
             if (languages.TryGetValue(language, out var res1)) {
                 Current.Resources.MergedDictionaries.Add(res1);
+            }
+            // Lunai overlay: English Lunai keys, then locale Lunai overrides.
+            if (lunaiLanguages.TryGetValue("en-US", out var lunaiEn)) {
+                Current.Resources.MergedDictionaries.Add(lunaiEn);
+            }
+            if (language != "en-US" && lunaiLanguages.TryGetValue(language, out var lunaiLocale)) {
+                Current.Resources.MergedDictionaries.Add(lunaiLocale);
             }
         }
 

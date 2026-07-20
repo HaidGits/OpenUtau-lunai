@@ -1,0 +1,362 @@
+<!--Lunai overlay for th-TH. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">สร้างเสียงประสาน...</system:String>
+
+  <system:String x:Key="dialogs.about.close">ปิด</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">กำลังแสดงรายชื่อผู้ร่วมพัฒนาแบบฝังตัว</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">บุคคลเหล่านี้มีส่วนร่วมในที่เก็บ OpenUtau ต้นทางบน GitHub. OpenUtau Lunai สร้างต่อจากผลงานของพวกเขา ขอขอบคุณทุกคนในรายชื่อ!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">กำลังโหลดผู้ร่วมพัฒนาจาก GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">ผู้ร่วมพัฒนา</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">โหลดรายชื่อผู้ร่วมพัฒนาไม่สำเร็จ โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">อัปเดตรายชื่อผู้ร่วมพัฒนาจาก GitHub แล้ว</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai บน GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau บน GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau และ OpenUtau Lunai เป็นซอฟต์แวร์โอเพนซอร์สฟรีภายใต้สัญญาอนุญาต MIT</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">คุณกำลังใช้ OpenUtau Lunai ซึ่งเป็นฟอร์กที่มุ่งให้ DiffSinger ใช้งานง่ายและสนุกยิ่งขึ้น แบงก์ UTAU คลาสสิกและประเภทไลบรารีเสียงอื่นทั้งหมดที่ OpenUtau รองรับอยู่แล้วยังใช้งานได้ตามปกติ นอกจากนี้ยังรวมฟีเจอร์จำนวนมากจากพูลรีเควสต์ต้นทางที่ยังไม่ได้เผยแพร่หรือรวมเข้า OpenUtau ต้นฉบับ</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau มุ่งเป็นสภาพแวดล้อมแก้ไขโอเพนซอร์สสำหรับชุมชน UTAU พร้อมประสบการณ์ใช้งานที่ทันสมัยและการรองรับสัทศาสตร์อย่างชาญฉลาด เยี่ยมชมเราได้บน Github</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau มุ่งเป็นสภาพแวดล้อมแก้ไขโอเพนซอร์สสำหรับชุมชน UTAU พร้อมประสบการณ์ใช้งานที่ทันสมัยและการรองรับสัทศาสตร์อย่างชาญฉลาด</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">เปิดหรือนำเข้าโปรเจกต์</system:String>
+  <system:String x:Key="dialogs.dropproject.import">นำเข้าแทร็ก</system:String>
+  <system:String x:Key="dialogs.dropproject.message">ต้องการเปิดไฟล์โปรเจกต์ที่วางไว้ หรือนำเข้าแทร็กเข้าโปรเจกต์ปัจจุบัน?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">เปิดโปรเจกต์</system:String>
+  <system:String x:Key="dialogs.exportds.caption">ส่งออกสคริปต์ DiffSinger</system:String>
+  <system:String x:Key="dialogs.exportds.variance">พารามิเตอร์ความแปรปรวน</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">เปิดใช้งานแคชเทนเซอร์ DiffSinger ในการตั้งค่าเพื่อส่งออกเส้นโค้งพารามิเตอร์ความแปรปรวน</system:String>
+  <system:String x:Key="dialogs.harmony.caption">สร้างเสียงประสาน</system:String>
+  <system:String x:Key="dialogs.harmony.description">สร้างแทร็กเสียงประสานใหม่จากพาร์ทที่เลือก โน้ตจะถูกทรานสโพสแบบไดอะโทนิกในคีย์ที่เลือก</system:String>
+  <system:String x:Key="dialogs.harmony.hint">แต่ละเสียงที่เลือกจะสร้างแทร็กใหม่ใต้ต้นทางพร้อมโน้ตที่ทรานสโพสแล้ว นักร้องและการตั้งค่าจะถูกคัดลอกจากแทร็กต้นทาง</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">เสียงประสาน</system:String>
+  <system:String x:Key="dialogs.harmony.key">คีย์</system:String>
+  <system:String x:Key="dialogs.importproject.caption">ตัวเลือกการนำเข้าโปรเจกต์</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">อักษรจีน → พินอิน</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">เนื้อร้องเริ่มต้น</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">เติมช่องว่างสั้น</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">ความยาวสูงสุดที่จะประมวลผล (ไม่รวมค่านี้)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} โน้ต</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">เนื้อร้องภาษาญี่ปุ่น</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">โรมะจิ → ฮิรางานะ</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">ไม่แปลง</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">ฮิรางานะ → โรมะจิ</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">ช่องว่างนำหน้าก่อนโน้ตแรก</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">ระยะเสริมเมื่อโน้ตแรกเริ่มที่ต้นคลิป</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">การจับคู่เนื้อร้อง (ตรงทั้งหมด)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">บรรทัดละหนึ่งรายการ: จาก=ถึง</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">การแทนที่เนื้อร้อง</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">จาก=&gt;ถึง หรือ /รูปแบบ/แทนที่/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">การประมวลผลเนื้อร้อง</system:String>
+  <system:String x:Key="dialogs.importproject.message">เลือกสิ่งที่จะนำเข้าจากไฟล์นี้:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">โน้ตและเนื้อร้อง</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">เส้นโค้งระดับเสียง (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">แก้โน้ตที่ทับซ้อน</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">เครื่องหมายเท็มโป</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">อัตราจังหวะ</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">เปิดหน้าดาวน์โหลด</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">ตัวจัดการแพ็กเกจ</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">เข้าร่วมเซิร์ฟเวอร์ของเราแล้วอธิบายบั๊กใน #help หากจำเป็น ให้แนบไฟล์บันทึกจาก ความช่วยเหลือ → เปิดตำแหน่งไฟล์บันทึก</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">เปิด Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">คัดลอกที่อยู่</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">เขียนถึงเราและแนบไฟล์บันทึกหากปัญหาจำลองได้ยาก</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">อีเมล</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">เขียนอีเมล</system:String>
+  <system:String x:Key="dialogs.reportissue.message">บอกเราว่าเกิดอะไรขึ้น แนะนำให้ใช้ Discord #help เพื่อให้เราตอบได้เร็ว รวมไฟล์บันทึกเมื่อช่วยได้ คุณยังสามารถส่งอีเมลถึงเราได้</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">ทุกคีย์</system:String>
+  <system:String x:Key="key.picker.analyzing">กำลังวิเคราะห์...</system:String>
+  <system:String x:Key="key.picker.suggested">คีย์ที่แนะนำ</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">การดำเนินการ</system:String>
+  <system:String x:Key="lunai.col.installed">ติดตั้งแล้ว</system:String>
+  <system:String x:Key="lunai.col.name">ชื่อ</system:String>
+  <system:String x:Key="lunai.col.version">เวอร์ชัน</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">ติดตั้งนักร้อง</system:String>
+  <system:String x:Key="lunai.confirm.install.message">ติดตั้ง {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">นักร้องนี้มีข้อกำหนดการใช้งาน การคลิก ใช่ หมายความว่าคุณยอมรับข้อกำหนดเหล่านี้</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">ถอนการติดตั้งนักร้อง</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">ถอนการติดตั้ง {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">อัปเดตนักร้อง</system:String>
+  <system:String x:Key="lunai.confirm.update.message">อัปเดต {0} เป็นเวอร์ชัน {1}?</system:String>
+  <system:String x:Key="lunai.install">ติดตั้ง</system:String>
+  <system:String x:Key="lunai.installed">ติดตั้งแล้ว</system:String>
+  <system:String x:Key="lunai.latest">ล่าสุด</system:String>
+  <system:String x:Key="lunai.newversionavailable">มีเวอร์ชันใหม่</system:String>
+  <system:String x:Key="lunai.notinstalled">ยังไม่ได้ติดตั้ง</system:String>
+  <system:String x:Key="lunai.outdated">ล้าสมัย</system:String>
+  <system:String x:Key="lunai.refresh">รีเฟรช</system:String>
+  <system:String x:Key="lunai.search">ค้นหา...</system:String>
+  <system:String x:Key="lunai.section.installed">ติดตั้งแล้ว</system:String>
+  <system:String x:Key="lunai.section.notinstalled">ยังไม่ได้ติดตั้ง</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">มีอัปเดต</system:String>
+  <system:String x:Key="lunai.status.error">ข้อผิดพลาด</system:String>
+  <system:String x:Key="lunai.status.fetching">กำลังดึงรายการ...</system:String>
+  <system:String x:Key="lunai.status.installfailed">ติดตั้งไม่สำเร็จ</system:String>
+  <system:String x:Key="lunai.status.installfinished">ติดตั้งเสร็จสิ้น</system:String>
+  <system:String x:Key="lunai.status.installing">กำลังติดตั้ง {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">กำลังสแกนรายการที่ติดตั้ง...</system:String>
+  <system:String x:Key="lunai.status.offline">พร้อม (รายการแคช เครือข่ายไม่พร้อมใช้)</system:String>
+  <system:String x:Key="lunai.status.ready">พร้อม</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">ถอนการติดตั้งไม่สำเร็จ</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">ถอนการติดตั้งเสร็จสิ้น</system:String>
+  <system:String x:Key="lunai.status.uninstalling">กำลังถอนการติดตั้ง {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">อัปเดตเสร็จสิ้น</system:String>
+  <system:String x:Key="lunai.status.updating">กำลังอัปเดต {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">ทั้งหมด</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">ถอนการติดตั้ง</system:String>
+  <system:String x:Key="lunai.unknownversion">ไม่ทราบ</system:String>
+  <system:String x:Key="lunai.update">อัปเดต</system:String>
+  <system:String x:Key="lunai.uptodate">เป็นเวอร์ชันล่าสุด</system:String>
+  <system:String x:Key="lunai.website">เว็บไซต์</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">ส่งออกสคริปต์ DiffSinger ไปยัง (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">ส่งออกสคริปต์ DiffSinger ไปยัง (v2 ไม่มีเส้นโค้งระดับเสียง)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">ติดตั้ง Dependency (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + คลิกเพื่อดูข้อผิดพลาดทั้งหมด</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">สร้างเสียงประสาน...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(รุ่นเก่า)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">ขยายเปียโนโรลในหน้าต่าง</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">โหมดบันทึก TikTok</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger คุณภาพต่ำพิเศษ (acoustic 1, variance 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger คุณภาพต่ำ (acoustic 1, variance 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger สมดุล (acoustic 20, variance 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger คุณภาพ (acoustic 50, variance 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">ดูระดับเสียงสุดท้ายที่จะเรนเดอร์</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">ขยายเปียโนโรลในหน้าต่าง</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">แสดงสเกลคีย์</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">ไลฟ์พิช (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">ไลฟ์พิช Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">ดูพารามิเตอร์โน้ต</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">ดูโฟนีม</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">ดู Pitch Bend</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">ติดตามโน้ตในแนวตั้งระหว่างเล่น</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">ดูเส้นโค้งจริง</system:String>
+  <system:String x:Key="pianoroll.toggle.render">การตั้งค่าเรนเดอร์ DiffSinger</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">สลับการสแนป</system:String>
+  <system:String x:Key="pianoroll.toggle.view">มุมมอง</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">เครื่องมือวาดระดับเสียง (4)
+    คลิกซ้ายเพื่อวาด
+    คลิกขวาเพื่อรีเซ็ต
+    กด Ctrl ค้างเพื่อเลือก</system:String>
+  <system:String x:Key="pianoroll.tool.knife">เครื่องมือมีด (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">เครื่องมือคลื่นไซน์ระดับเสียง (Shift + 3)
+    ลากเพื่อวาดคลื่นไซน์ ปล่อยเพื่อเข้าโหมดปรับแต่ง
+    เลื่อนเมาส์เพื่อปรับความยาวคลื่นและแอมพลิจูด คลิกเพื่อใช้
+    คลิกขวาเพื่อรีเซ็ต
+    กด Ctrl ค้างเพื่อเลือก</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">เครื่องมือเส้นระดับเสียง (Shift + 1)
+    คลิกซ้ายเพื่อวาดเส้นตรง
+    คลิกขวาเพื่อรีเซ็ต
+    กด Ctrl ค้างเพื่อเลือก</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">เครื่องมือ S-Curve ระดับเสียง (Shift + 2)
+    ลากเพื่อวาด S-curve ปล่อยเพื่อเข้าโหมดปรับแต่ง
+    เลื่อนเมาส์เพื่อปรับความแรงของ S-curve คลิกเพื่อใช้
+    คลิกขวาเพื่อรีเซ็ต
+    กด Ctrl ค้างเพื่อเลือก</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">เครื่องมือทำให้ระดับเสียงนุ่ม (Shift + 4)
+    คลิกซ้ายเพื่อทำให้ระดับเสียงนุ่ม
+    คลิกขวาเพื่อรีเซ็ต
+    กด Ctrl ค้างเพื่อเลือก</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">แถบเลื่อนแบบคลาสสิก (พื้นที่แทร็กแยก)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">ธีมฐาน</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">มืด</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">สว่าง</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">มีธีมชื่อนี้อยู่แล้ว</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">ใหม่</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">สีฐาน</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">สีสว่าง</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">ชื่อสีแทร็กว่างไม่ได้</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">มีสีแทร็กชื่อนี้อยู่แล้ว</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">ป้อนชื่อแล้วเลือกสีฐานและสีสว่าง</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">ใหม่</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">สร้างสีแทร็กแบบกำหนดเอง</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">ต้องการลบสีแทร็กนี้หรือไม่?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">ลบสีแทร็กแบบกำหนดเอง</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">แก้ไข</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">แก้ไขสีแทร็กแบบกำหนดเอง</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">สีแทร็กเริ่มต้นสำหรับแทร็กใหม่</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">ความหนาขอบโน้ต</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">รัศมีมุมโน้ต</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">ความทึบของโน้ต</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">แถบเลื่อนซ้อนทับ (บาง อยู่บนเนื้อหา)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">เส้นแสดงผล</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">เอ็กซ์เพรสชันและโฟนีม</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">ตารางและการเลื่อน</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">แผงโฟนีม</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">เปียโนโรล</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">การเล่น</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">ธีม</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">สีแทร็ก</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">แสดงขอบโน้ต</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">เส้นค่าเริ่มต้นแบบทึบในแผงเอ็กซ์เพรสชัน</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">เส้นตารางไทม์ไลน์แบบทึบ (เปียโนโรล แทร็ก และแผงเอ็กซ์เพรสชัน)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">ในตัว</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">พรีเซ็ตในตัว</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">กำหนดเอง</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">เย็น</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">มืด</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">สว่าง</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">มืดต้นฉบับ</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">สว่างต้นฉบับ</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">อุ่น</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">ย้อมพื้นหลังเปียโนโรลด้วยสีแทร็ก</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">แผงโฟนีมที่เหมาะกับ DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">แสดงขอบเขตวลีเรนเดอร์</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">แคช</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">ดีบัก</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">ทั่วไป</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">ระดับเสียงและ F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">คุณภาพ</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">คุณภาพเรนเดอร์</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">ขั้นตอนเรนเดอร์</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">เรนเดอร์ใหม่หลังแก้ไขเมื่อเล่น (ทดลอง)</system:String>
+  <system:String x:Key="prefs.playback.metronome">เมโทรนอม</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">หัวเล่นแบบใหม่</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">เลื่อนตามระดับเสียง</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">ติดตามโน้ตในแนวตั้งระหว่างเล่น</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">การทำให้เฟรมนุ่มนวล</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">แสดงตัวอย่างเส้นทางกล้อง</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">เกณฑ์เซมิโทน</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">ตำแหน่งแนวตั้งของโน้ต</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSinger พิชแบบรีเทคเฉพาะจุด</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">แสดงตัวอย่างแพตช์ F0 อะคูสติกบนเปียโนโรล</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">อินเทอร์โพเลต F0 พยัญชนะไร้เสียง DiffSinger (ทดลอง)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">ค้นหาตามชื่อหรือปุ่ม...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">คลิกซ้ายเพื่อเปลี่ยน คลิกขวาเพื่อรีเซ็ต</system:String>
+  <system:String x:Key="prefs.shortcuts">ทางลัดแป้นพิมพ์</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">ทางลัด '{0}' ถูกกำหนดให้กับ '{1}' แล้ว</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">กดปุ่ม...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">ใช้พรีเซ็ต DiffSinger {0} แล้ว (อะคูสติก {1}, แวเรียนซ์ {2}, พิช {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">ล้างการเลือก</system:String>
+  <system:String x:Key="shortcut.Copy">คัดลอก</system:String>
+  <system:String x:Key="shortcut.Cut">ตัด</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">ลบโน้ต</system:String>
+  <system:String x:Key="shortcut.DeselectAll">ยกเลิกการเลือกทั้งหมด</system:String>
+  <system:String x:Key="shortcut.EditLyrics">แก้ไขเนื้อร้อง</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">เลือกเอ็กซ์เพรสชัน 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">เลือกเอ็กซ์เพรสชัน 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">เลือกเอ็กซ์เพรสชัน 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">เลือกเอ็กซ์เพรสชัน 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">เลือกเอ็กซ์เพรสชัน 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">เลือกเอ็กซ์เพรสชัน 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">เลือกเอ็กซ์เพรสชัน 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">เลือกเอ็กซ์เพรสชัน 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">เลือกเอ็กซ์เพรสชัน 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">เลือกเอ็กซ์เพรสชัน 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">ขยายการเลือกไปทางซ้าย</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">ขยายการเลือกไปทางขวา</system:String>
+  <system:String x:Key="shortcut.FocusSelection">โฟกัสการเลือก</system:String>
+  <system:String x:Key="shortcut.FullScreen">สลับเต็มหน้าจอ</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">ซ่อนหน้าต่างแยก</system:String>
+  <system:String x:Key="shortcut.InsertNote">แทรกโน้ต</system:String>
+  <system:String x:Key="shortcut.MergeNotes">รวมโน้ตที่เลือก</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">เลื่อนเคอร์เซอร์ไปทางซ้าย</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">เลื่อนเคอร์เซอร์ไปทางขวา</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">ย้ายโน้ตไปทางซ้าย</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">ย้ายโน้ตไปทางขวา</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">ไปยังพาร์ทถัดไป (ลง)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">ไปยังพาร์ทถัดไป (ขึ้น)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">ปิดเสียงแทร็ก</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">เปิดเมนูปลั๊กอิน</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">เปิดเมนูสแนป</system:String>
+  <system:String x:Key="shortcut.Paste">วาง</system:String>
+  <system:String x:Key="shortcut.PasteParameters">วางพารามิเตอร์</system:String>
+  <system:String x:Key="shortcut.PastePlain">วางเป็นโน้ตธรรมดา</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">เล่น / หยุดชั่วคราว</system:String>
+  <system:String x:Key="shortcut.PlaySelection">เล่นส่วนที่เลือก</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">ย้ายหัวเล่นไปท้าย</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">ย้ายหัวเล่นไปต้น</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">ย้ายหัวเล่นไปทางซ้าย</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">ย้ายหัวเล่นไปทางขวา</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">ย้ายหัวเล่นไปท้ายส่วนที่เลือก</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">ย้ายหัวเล่นไปต้นส่วนที่เลือก</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">ย้ายหัวเล่นไปท้ายมุมมอง</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">ย้ายหัวเล่นไปต้นมุมมอง</system:String>
+  <system:String x:Key="shortcut.Redo">ทำซ้ำ</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">ปรับขนาดโน้ตทางซ้าย</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">ปรับขนาดโน้ตทางขวา</system:String>
+  <system:String x:Key="shortcut.SaveProject">บันทึกโปรเจกต์</system:String>
+  <system:String x:Key="shortcut.ScrollDown">เลื่อนลง</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">เลื่อนซ้าย</system:String>
+  <system:String x:Key="shortcut.ScrollRight">เลื่อนขวา</system:String>
+  <system:String x:Key="shortcut.ScrollUp">เลื่อนขึ้น</system:String>
+  <system:String x:Key="shortcut.SearchNote">ค้นหาโน้ต</system:String>
+  <system:String x:Key="shortcut.SelectAll">เลือกทั้งหมด</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">ขยายการเลือกไปท้าย</system:String>
+  <system:String x:Key="shortcut.SelectToStart">ขยายการเลือกไปต้น</system:String>
+  <system:String x:Key="shortcut.SoloTrack">โซโลแทร็ก</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">สลับมุมมองเอ็กซ์เพรสชัน</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">สลับมุมมองระดับเสียงสุดท้าย</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">สลับมุมมองพารามิเตอร์โน้ต</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">สลับมุมมองโฟนีม</system:String>
+  <system:String x:Key="shortcut.TogglePitch">สลับมุมมองระดับเสียง</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">สลับเล่นโทน</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">สลับการสแนป</system:String>
+  <system:String x:Key="shortcut.ToggleTips">สลับมุมมองเคล็ดลับ</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">สลับมุมมองไวเบรโต</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">สลับมุมมองเวฟฟอร์ม</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">เครื่องมือเลือก</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">เครื่องมือปากกา (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">เครื่องมือปากกา</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">เครื่องมือยางลบ</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">เครื่องมือวาดระดับเสียง</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">เครื่องมือวาดระดับเสียง (เขียนทับ)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">เครื่องมือมีด</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">เครื่องมือเส้นระดับเสียง</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">เครื่องมือเส้นระดับเสียง (เขียนทับ)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">เครื่องมือ S-Curve ระดับเสียง</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">เครื่องมือคลื่นไซน์ระดับเสียง</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">เครื่องมือทำให้ระดับเสียงนุ่ม</system:String>
+  <system:String x:Key="shortcut.TransposeDown">ทรานสโพสลง</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">ทรานสโพสลงหนึ่งอ็อกเทฟ</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">ทรานสโพสขึ้นหนึ่งอ็อกเทฟ</system:String>
+  <system:String x:Key="shortcut.TransposeUp">ทรานสโพสขึ้น</system:String>
+  <system:String x:Key="shortcut.Undo">เลิกทำ</system:String>
+  <system:String x:Key="shortcut.ZoomIn">ซูมเข้า</system:String>
+  <system:String x:Key="shortcut.ZoomOut">ซูมออก</system:String>
+
+  <system:String x:Key="themeditor.cancel">ยกเลิก</system:String>
+  <system:String x:Key="themeditor.save">บันทึก</system:String>
+  <system:String x:Key="themeditor.title">ตัวแก้ไขธีม</system:String>
+
+  <system:String x:Key="themeeditor.cancel">ยกเลิก</system:String>
+  <system:String x:Key="themeeditor.save">บันทึก</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + ล้อเลื่อนเมาส์เพื่อซูมแนวตั้ง</system:String>
+
+  <system:String x:Key="tracks.mixfx">Track Polish</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">หมุนนักร้องระหว่างแทร็กที่เลือก</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">ใช้กับแทร็กที่เลือกทั้งหมด</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">เพิ่มนักร้องในรายการโปรด</system:String>
+  <system:String x:Key="tracks.standardizesettings">ปรับมาตรฐานการตั้งค่าแทร็ก</system:String>
+
+  <system:String x:Key="updater.status.unknown">ตรวจสอบอัปเดตไม่สำเร็จ เปิด GitHub Releases เพื่อดาวน์โหลดด้วยตนเอง หรือดูรายละเอียดในไฟล์บันทึก</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">ติดตั้งหรืออัปเดตไลบรารีเสียงจากแหล่งที่เชื่อถือได้</system:String>
+  <system:String x:Key="welcome.singerhub.open">เปิด Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">ปิดแผง</system:String>
+  <system:String x:Key="workspace.panel.render">เรนเดอร์</system:String>
+  <system:String x:Key="workspace.panel.view">มุมมอง</system:String>
+  <system:String x:Key="workspace.tracks">แทร็ก</system:String>
+</ResourceDictionary>

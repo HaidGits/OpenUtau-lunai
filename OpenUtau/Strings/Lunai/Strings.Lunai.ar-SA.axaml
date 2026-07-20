@@ -1,0 +1,362 @@
+<!--Lunai overlay for ar-SA. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">إنشاء توافقيات...</system:String>
+
+  <system:String x:Key="dialogs.about.close">إغلاق</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">يتم عرض قائمة المساهمين المضمّنة.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">ساهم هؤلاء الأشخاص في مستودع OpenUtau الأصلي على GitHub. يعتمد OpenUtau Lunai على عملهم. شكرًا لكل من ورد اسمه في القائمة!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">جارٍ تحميل المساهمين من GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">المساهمون</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">تعذّر تحميل المساهمين. تحقق من اتصال الإنترنت ثم حاول مجددًا.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">تم تحديث قائمة المساهمين من GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai على GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau على GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau وOpenUtau Lunai برمجيات حرة مفتوحة المصدر بموجب رخصة MIT.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">أنت تستخدم OpenUtau Lunai، وهو فرع يهدف إلى جعل DiffSinger أسهل وأكثر متعة في الاستخدام. بنوك UTAU الكلاسيكية وجميع أنواع مكتبات الصوت الأخرى التي يدعمها OpenUtau بالفعل ما زالت تعمل كالمعتاد. ويتضمن أيضًا العديد من الميزات من طلبات السحب في المشروع الأصلي التي لم تُصدَر أو تُدمَج بعد في OpenUtau الأصلي.</system:String>
+  <system:String x:Key="dialogs.about.message">يهدف OpenUtau إلى أن يكون بيئة تحرير مفتوحة المصدر لمجتمع UTAU، بتجربة مستخدم حديثة ودعم صوتي ذكي. زرنا على Github.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">يهدف OpenUtau إلى أن يكون بيئة تحرير مفتوحة المصدر لمجتمع UTAU، بتجربة مستخدم حديثة ودعم صوتي ذكي.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">فتح المشروع أو استيراده</system:String>
+  <system:String x:Key="dialogs.dropproject.import">استيراد المسارات</system:String>
+  <system:String x:Key="dialogs.dropproject.message">هل تريد فتح ملف المشروع المُسقَط، أم استيراد مساراته إلى المشروع الحالي؟</system:String>
+  <system:String x:Key="dialogs.dropproject.open">فتح المشروع</system:String>
+  <system:String x:Key="dialogs.exportds.caption">تصدير سكربت DiffSinger</system:String>
+  <system:String x:Key="dialogs.exportds.variance">معلمات التباين (Variance)</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">فعّل ذاكرة التخزين المؤقت لمصفوفات DiffSinger في التفضيلات لتصدير منحنيات معلمات التباين.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">إنشاء التوافقيات</system:String>
+  <system:String x:Key="dialogs.harmony.description">إنشاء مسارات توافقية جديدة من الجزء المحدد. تُنقَل النغمات دياتونيًا ضمن المفتاح المختار.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">كل صوت محدد ينشئ مسارًا جديدًا أسفل المصدر المصدر بنغمات منقولة. يُنسَخ المغني والإعدادات من مسار المصدر.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">أصوات التوافق</system:String>
+  <system:String x:Key="dialogs.harmony.key">المفتاح</system:String>
+  <system:String x:Key="dialogs.importproject.caption">خيارات استيراد المشروع</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">الحروف الصينية → بينيين</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">كلمات افتراضية</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">ملء الفجوات القصيرة</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">أقصى طول للمعالجة (غير شامل)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} نغمة</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">كلمات يابانية</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">روماجي → هيراغانا</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">بدون تحويل</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">هيراغانا → روماجي</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">مسافة بادئة قبل أول نغمة</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">المسافة عندما تبدأ أول نغمة عند بداية المقطع</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">تعيين الكلمات (مطابقة تامة)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">سطر لكل تحويل: من=إلى</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">استبدال الكلمات</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">من=&gt;إلى أو /نمط/بديل/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">معالجة الكلمات</system:String>
+  <system:String x:Key="dialogs.importproject.message">اختر ما تريد استيراده من هذا الملف:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">النغمات والكلمات</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">منحنى الطبقة الصوتية (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">إصلاح النغمات المتداخلة</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">علامات الإيقاع</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">الموازين الزمنية</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">فتح صفحة التنزيل</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">مدير الحزم</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">انضم إلى خادمنا ووصف الخطأ في #help. أرفق سجلًا من تعليمات → فتح موقع السجلات عند الحاجة.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">فتح Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">نسخ العنوان</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">راسلنا وأرفق سجلًا إذا كان تكرار المشكلة صعبًا.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">البريد الإلكتروني</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">كتابة بريد</system:String>
+  <system:String x:Key="dialogs.reportissue.message">أخبرنا بما حدث خطأ. يُفضَّل Discord في #help لسرعة الرد؛ أرفق ملف سجل عند الحاجة. يمكنك أيضًا مراسلتنا بالبريد.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">كل المفاتيح</system:String>
+  <system:String x:Key="key.picker.analyzing">جارٍ التحليل...</system:String>
+  <system:String x:Key="key.picker.suggested">المفاتيح المقترحة</system:String>
+
+  <system:String x:Key="lunai.caption">مركز المغنين</system:String>
+  <system:String x:Key="lunai.col.action">إجراء</system:String>
+  <system:String x:Key="lunai.col.installed">مثبَّت</system:String>
+  <system:String x:Key="lunai.col.name">الاسم</system:String>
+  <system:String x:Key="lunai.col.version">الإصدار</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">تثبيت مغنٍ</system:String>
+  <system:String x:Key="lunai.confirm.install.message">تثبيت {0}؟</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">لهذا المغني شروط استخدام. بالنقر على نعم فإنك توافق على هذه الشروط.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">إلغاء تثبيت المغني</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">إلغاء تثبيت {0}؟</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">تحديث المغني</system:String>
+  <system:String x:Key="lunai.confirm.update.message">تحديث {0} إلى الإصدار {1}؟</system:String>
+  <system:String x:Key="lunai.install">تثبيت</system:String>
+  <system:String x:Key="lunai.installed">مثبَّت</system:String>
+  <system:String x:Key="lunai.latest">الأحدث</system:String>
+  <system:String x:Key="lunai.newversionavailable">يتوفر إصدار جديد</system:String>
+  <system:String x:Key="lunai.notinstalled">غير مثبَّت</system:String>
+  <system:String x:Key="lunai.outdated">قديم</system:String>
+  <system:String x:Key="lunai.refresh">تحديث</system:String>
+  <system:String x:Key="lunai.search">بحث...</system:String>
+  <system:String x:Key="lunai.section.installed">مثبَّتة</system:String>
+  <system:String x:Key="lunai.section.notinstalled">غير مثبَّتة</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">تحديثات متاحة</system:String>
+  <system:String x:Key="lunai.status.error">خطأ</system:String>
+  <system:String x:Key="lunai.status.fetching">جارٍ جلب القائمة...</system:String>
+  <system:String x:Key="lunai.status.installfailed">فشل التثبيت</system:String>
+  <system:String x:Key="lunai.status.installfinished">اكتمل التثبيت</system:String>
+  <system:String x:Key="lunai.status.installing">جارٍ تثبيت {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">جارٍ فحص المثبَّت...</system:String>
+  <system:String x:Key="lunai.status.offline">جاهز (قائمة مخزَّنة، الشبكة غير متاحة)</system:String>
+  <system:String x:Key="lunai.status.ready">جاهز</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">فشل إلغاء التثبيت</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">اكتمل إلغاء التثبيت</system:String>
+  <system:String x:Key="lunai.status.uninstalling">جارٍ إلغاء تثبيت {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">اكتمل التحديث</system:String>
+  <system:String x:Key="lunai.status.updating">جارٍ تحديث {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">الكل</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">إلغاء التثبيت</system:String>
+  <system:String x:Key="lunai.unknownversion">غير معروف</system:String>
+  <system:String x:Key="lunai.update">تحديث</system:String>
+  <system:String x:Key="lunai.uptodate">محدَّث</system:String>
+  <system:String x:Key="lunai.website">الموقع</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">تصدير سكربتات DiffSinger إلى (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">تصدير سكربتات DiffSinger إلى (v2، بدون منحنى الطبقة)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">تثبيت تبعية (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">مركز المغنين...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + نقرة لعرض الخطأ بالكامل</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">إنشاء توافقيات...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(قديم)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">توسيع لفة البيانو في النافذة</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">وضع التسجيل لـ TikTok</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">جودة DiffSinger منخفضة جدًا (صوتي 1، تباين 1، طبقة 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">جودة DiffSinger منخفضة (صوتي 1، تباين 1، طبقة 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger متوازن (صوتي 20، تباين 20، طبقة 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">جودة DiffSinger (صوتي 50، تباين 50، طبقة 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">عرض الطبقة النهائية للتصيير</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">توسيع لفة البيانو في النافذة</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">إظهار سلم المفتاح</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">طبقة مباشرة (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">طبقة مباشرة Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">عرض معلمات النغمة</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">عرض الصوتيات</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">عرض انحناء الطبقة</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">متابعة النغمات رأسيًا أثناء التشغيل</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">عرض المنحنيات الحقيقية</system:String>
+  <system:String x:Key="pianoroll.toggle.render">إعدادات تصيير DiffSinger</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">تبديل الالتقاط</system:String>
+  <system:String x:Key="pianoroll.toggle.view">عرض</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">أداة رسم الطبقة (4)
+    نقرة يسار للرسم
+    نقرة يمين لإعادة التعيين
+    اضغط Ctrl للتحديد</system:String>
+  <system:String x:Key="pianoroll.tool.knife">أداة السكين (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">أداة موجة جيب الطبقة (Shift + 3)
+    اسحب لرسم موجة جيبية، أفلت للدخول في وضع الضبط
+    حرّك الماوس لضبط طول الموجة والسعة، انقر للتطبيق
+    نقرة يمين لإعادة التعيين
+    اضغط Ctrl للتحديد</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">أداة خط الطبقة (Shift + 1)
+    نقرة يسار لرسم خط مستقيم
+    نقرة يمين لإعادة التعيين
+    اضغط Ctrl للتحديد</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">أداة منحنى S للطبقة (Shift + 2)
+    اسحب لرسم منحنى S، أفلت للدخول في وضع الضبط
+    حرّك الماوس لضبط قوة منحنى S، انقر للتطبيق
+    نقرة يمين لإعادة التعيين
+    اضغط Ctrl للتحديد</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">أداة تنعيم الطبقة (Shift + 4)
+    نقرة يسار لتنعيم الطبقة
+    نقرة يمين لإعادة التعيين
+    اضغط Ctrl للتحديد</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">أشرطة تمرير كلاسيكية (منطقة مسار مخصصة)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">السمة الأساسية</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">داكنة</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">فاتحة</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">توجد سمة بهذا الاسم بالفعل.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">جديد</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">اللون الأساسي</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">اللون الساطع</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">لا يمكن أن يكون اسم لون المسار فارغًا.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">يوجد لون مسار بهذا الاسم بالفعل.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">أدخل اسمًا واختر اللونين الأساسي والساطع.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">جديد</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">إنشاء لون مسار مخصص</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">هل أنت متأكد أنك تريد حذف لون المسار هذا؟</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">حذف لون مسار مخصص</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">تحرير</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">تحرير لون مسار مخصص</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">لون المسار الافتراضي للمسارات الجديدة</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">سُمك حدود النغمة</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">نصف قطر زوايا النغمة</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">شفافية النغمة</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">أشرطة تمرير متراكبة (رفيعة فوق المحتوى)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">خطوط العرض</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">التعبيرات والصوتيات</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">الشبكة والتمرير</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">لوحة الصوتيات</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">لفة البيانو</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">التشغيل</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">السمة</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">ألوان المسارات</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">إظهار حدود النغمة</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">خطوط صلبة للقيمة الافتراضية في لوحة التعبير</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">خطوط شبكة زمنية صلبة (لفة البيانو والمسارات ولوحة التعبير)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">مدمجة</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">إعدادات مسبقة مدمجة</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">مخصصة</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">باردة</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">داكنة</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">فاتحة</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">داكنة أصلية</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">فاتحة أصلية</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">دافئة</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">تلوين خلفية لفة البيانو بلون المسار</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">لوحة صوتيات ملائمة لـ DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">إظهار حدود عبارات التصيير</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">التخزين المؤقت</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">تصحيح الأخطاء</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">عام</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">الطبقة وF0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">الجودة</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">جودة التصيير</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">خطوات التصيير</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">إعادة التصيير بعد التعديلات أثناء التشغيل (تجريبي)</system:String>
+  <system:String x:Key="prefs.playback.metronome">المترونوم</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">رأس تشغيل حديث</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">تمرير متابعة الطبقة</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">متابعة النغمات رأسيًا أثناء التشغيل</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">تنعيم الإطارات</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">إظهار معاينة مسار الكاميرا</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">عتبة نصف النغمة</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">الموضع الرأسي للنغمة</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">إعادة أخذ محلية لطبقة DiffSinger</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">إظهار معاينة رقعة F0 الصوتية على لفة البيانو</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">استيفاء F0 للصوامت غير المجهورة في DiffSinger (تجريبي)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">بحث بالاسم أو المفتاح...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">نقرة يسار للتغيير. نقرة يمين لإعادة التعيين.</system:String>
+  <system:String x:Key="prefs.shortcuts">اختصارات لوحة المفاتيح</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">الاختصار «{0}» معيَّن بالفعل إلى «{1}».</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">اضغط المفاتيح...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">تم تطبيق إعداد DiffSinger المسبق {0} (صوتي {1}، تباين {2}، طبقة {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">مسح التحديد</system:String>
+  <system:String x:Key="shortcut.Copy">نسخ</system:String>
+  <system:String x:Key="shortcut.Cut">قص</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">حذف النغمات</system:String>
+  <system:String x:Key="shortcut.DeselectAll">إلغاء تحديد الكل</system:String>
+  <system:String x:Key="shortcut.EditLyrics">تحرير الكلمات</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">تحديد التعبير 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">تحديد التعبير 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">تحديد التعبير 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">تحديد التعبير 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">تحديد التعبير 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">تحديد التعبير 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">تحديد التعبير 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">تحديد التعبير 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">تحديد التعبير 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">تحديد التعبير 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">توسيع التحديد يسارًا</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">توسيع التحديد يمينًا</system:String>
+  <system:String x:Key="shortcut.FocusSelection">التركيز على التحديد</system:String>
+  <system:String x:Key="shortcut.FullScreen">تبديل ملء الشاشة</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">إخفاء النافذة المنفصلة</system:String>
+  <system:String x:Key="shortcut.InsertNote">إدراج نغمة</system:String>
+  <system:String x:Key="shortcut.MergeNotes">دمج النغمات المحددة</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">تحريك المؤشر يسارًا</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">تحريك المؤشر يمينًا</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">تحريك النغمات يسارًا</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">تحريك النغمات يمينًا</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">الانتقال إلى الجزء التالي (أسفل)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">الانتقال إلى الجزء التالي (أعلى)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">كتم المسار</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">فتح قائمة الإضافات</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">فتح قائمة الالتقاط</system:String>
+  <system:String x:Key="shortcut.Paste">لصق</system:String>
+  <system:String x:Key="shortcut.PasteParameters">لصق المعلمات</system:String>
+  <system:String x:Key="shortcut.PastePlain">لصق كنغمات عادية</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">تشغيل / إيقاف مؤقت</system:String>
+  <system:String x:Key="shortcut.PlaySelection">تشغيل التحديد</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">نقل رأس التشغيل إلى النهاية</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">نقل رأس التشغيل إلى البداية</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">نقل رأس التشغيل يسارًا</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">نقل رأس التشغيل يمينًا</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">نقل رأس التشغيل إلى نهاية التحديد</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">نقل رأس التشغيل إلى بداية التحديد</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">نقل رأس التشغيل إلى نهاية العرض</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">نقل رأس التشغيل إلى بداية العرض</system:String>
+  <system:String x:Key="shortcut.Redo">إعادة</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">تغيير حجم النغمات من اليسار</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">تغيير حجم النغمات من اليمين</system:String>
+  <system:String x:Key="shortcut.SaveProject">حفظ المشروع</system:String>
+  <system:String x:Key="shortcut.ScrollDown">تمرير لأسفل</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">تمرير لليسار</system:String>
+  <system:String x:Key="shortcut.ScrollRight">تمرير لليمين</system:String>
+  <system:String x:Key="shortcut.ScrollUp">تمرير لأعلى</system:String>
+  <system:String x:Key="shortcut.SearchNote">البحث عن نغمة</system:String>
+  <system:String x:Key="shortcut.SelectAll">تحديد الكل</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">توسيع التحديد إلى النهاية</system:String>
+  <system:String x:Key="shortcut.SelectToStart">توسيع التحديد إلى البداية</system:String>
+  <system:String x:Key="shortcut.SoloTrack">عزل المسار</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">تبديل عرض التعبيرات</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">تبديل عرض الطبقة النهائية</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">تبديل عرض معلمات النغمة</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">تبديل عرض الصوتيات</system:String>
+  <system:String x:Key="shortcut.TogglePitch">تبديل عرض الطبقة</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">تبديل تشغيل النغمة</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">تبديل الالتقاط</system:String>
+  <system:String x:Key="shortcut.ToggleTips">تبديل عرض التلميحات</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">تبديل عرض الاهتزاز</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">تبديل عرض الموجة</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">أداة التحديد</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">أداة القلم (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">أداة القلم</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">أداة الممحاة</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">أداة رسم الطبقة</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">أداة رسم الطبقة (استبدال)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">أداة السكين</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">أداة خط الطبقة</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">أداة خط الطبقة (استبدال)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">أداة منحنى S للطبقة</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">أداة موجة جيب الطبقة</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">أداة تنعيم الطبقة</system:String>
+  <system:String x:Key="shortcut.TransposeDown">نقل لحن لأسفل</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">نقل أوكتاف لأسفل</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">نقل أوكتاف لأعلى</system:String>
+  <system:String x:Key="shortcut.TransposeUp">نقل لحن لأعلى</system:String>
+  <system:String x:Key="shortcut.Undo">تراجع</system:String>
+  <system:String x:Key="shortcut.ZoomIn">تكبير</system:String>
+  <system:String x:Key="shortcut.ZoomOut">تصغير</system:String>
+
+  <system:String x:Key="themeditor.cancel">إلغاء</system:String>
+  <system:String x:Key="themeditor.save">حفظ</system:String>
+  <system:String x:Key="themeditor.title">محرر السمة</system:String>
+
+  <system:String x:Key="themeeditor.cancel">إلغاء</system:String>
+  <system:String x:Key="themeeditor.save">حفظ</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + عجلة التمرير للتكبير الرأسي</system:String>
+
+  <system:String x:Key="tracks.mixfx">تحسين المسار</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">تدوير المغنين عبر المسارات المحددة</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">تطبيق على كل المسارات المحددة</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">إضافة المغني إلى المفضلة</system:String>
+  <system:String x:Key="tracks.standardizesettings">توحيد إعدادات المسار</system:String>
+
+  <system:String x:Key="updater.status.unknown">تعذّر التحقق من التحديث. افتح إصدارات GitHub للتنزيل يدويًا، أو راجع السجل للتفاصيل.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">ثبّت أو حدّث مكتبات الصوت من مصادر موثوقة</system:String>
+  <system:String x:Key="welcome.singerhub.open">فتح مركز المغنين</system:String>
+
+  <system:String x:Key="workspace.panel.close">إغلاق اللوحة</system:String>
+  <system:String x:Key="workspace.panel.render">تصيير</system:String>
+  <system:String x:Key="workspace.panel.view">عرض</system:String>
+  <system:String x:Key="workspace.tracks">المسارات</system:String>
+</ResourceDictionary>

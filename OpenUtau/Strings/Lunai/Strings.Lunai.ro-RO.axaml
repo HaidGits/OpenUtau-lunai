@@ -1,0 +1,362 @@
+<!--Lunai overlay for ro-RO. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Generează armonii...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Închide</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Se afișează lista încorporată a contribuitorilor.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Aceste persoane au contribuit la depozitul original OpenUtau de pe GitHub. OpenUtau Lunai se bazează pe munca lor. Mulțumim tuturor celor enumerați!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Se încarcă contribuitorii de pe GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Contribuitori</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Contribuitorii nu au putut fi încărcați. Verifică conexiunea la internet și încearcă din nou.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Lista contribuitorilor a fost actualizată de pe GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai pe GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau pe GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau și OpenUtau Lunai sunt programe gratuite cu sursă deschisă, sub licența MIT.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Rulați OpenUtau Lunai, un fork creat pentru a face DiffSinger mai simplu și mai plăcut de utilizat. Băncile UTAU clasice și toate celelalte tipuri de bănci vocale deja acceptate de OpenUtau funcționează în continuare ca de obicei. Include și multe funcții din pull request-uri upstream care încă nu sunt lansate sau integrate în OpenUtau original.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau își propune să fie un mediu de editare cu sursă deschisă pentru comunitatea UTAU, cu o experiență modernă și suport fonologic inteligent. Vizitează-ne pe GitHub.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau își propune să fie un mediu de editare cu sursă deschisă pentru comunitatea UTAU, cu o experiență modernă și suport fonologic inteligent.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Deschide or import proiect</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Importă piste</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Doriți să deschideți fișierul de proiect plasat sau să importați pistele sale în proiectul curent?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Deschide proiect</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Exportă DiffSinger script</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Variație parametri</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Activați memoria cache de tensori DiffSinger în Preferințe pentru a exporta curbele parametrilor de variație.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Generate Armonii</system:String>
+  <system:String x:Key="dialogs.harmony.description">Creați piste noi de armonie din partea selectată. Notele sunt transpuse diatonic în tonalitatea aleasă.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Fiecare voce selectată creează o pistă nouă sub cea sursă, cu note transpuse. Interpretul și setările sunt copiate de pe pista sursă.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Voci de armonie</system:String>
+  <system:String x:Key="dialogs.harmony.key">Tonalitate</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Importă proiect options</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Hanzi chinezesc → Pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Vers implicit</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Umple pauzele scurte</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Lungime maximă de procesat (exclusiv)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} notă</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Versuri japoneze</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → Hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Fără conversie</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → Romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Spațiu înaintea primei note</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Spațiere când prima notă începe la începutul clipului</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Mapare versuri (exactă)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Câte una pe linie: din=în</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Înlocuire versuri</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">din=&gt;în sau /model/înlocuire/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Procesare versuri</system:String>
+  <system:String x:Key="dialogs.importproject.message">Alegeți ce să importați din acest fișier:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Note și versuri</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Curbă de înălțime (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Repară notele suprapuse</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Marcaje de tempo</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Măsuri</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Deschide pagina de descărcare</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Manager de pachete</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Alăturați-vă serverului nostru și descrieți eroarea în #help. Atașați un jurnal din Ajutor → Deschide locația jurnalelor dacă este necesar.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Deschide Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Copiază adresa</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Scrieți-ne și atașați un jurnal dacă problema este greu de reprodus.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">E-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Scrie e-mail</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Spuneți-ne ce nu a funcționat. Preferați Discord #help pentru a vă putea răspunde rapid; includeți un fișier jurnal când ajută. Ne puteți scrie și prin e-mail.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Toate tonalitățile</system:String>
+  <system:String x:Key="key.picker.analyzing">Se analizează...</system:String>
+  <system:String x:Key="key.picker.suggested">Tonalități sugerate</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Acțiune</system:String>
+  <system:String x:Key="lunai.col.installed">Instalat</system:String>
+  <system:String x:Key="lunai.col.name">Nume</system:String>
+  <system:String x:Key="lunai.col.version">Versiune</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Instalează Singer</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Instalează {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Acest interpret are termeni de utilizare. Făcând clic pe Da, acceptați acești termeni.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Dezinstalează singer</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Dezinstalează {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Actualizează singer</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Actualizează {0} to version {1}?</system:String>
+  <system:String x:Key="lunai.install">Instalează</system:String>
+  <system:String x:Key="lunai.installed">Instalat</system:String>
+  <system:String x:Key="lunai.latest">Cea mai recentă</system:String>
+  <system:String x:Key="lunai.newversionavailable">Este disponibilă o versiune nouă</system:String>
+  <system:String x:Key="lunai.notinstalled">Neinstalat</system:String>
+  <system:String x:Key="lunai.outdated">Învechit</system:String>
+  <system:String x:Key="lunai.refresh">Reîmprospătează</system:String>
+  <system:String x:Key="lunai.search">Caută...</system:String>
+  <system:String x:Key="lunai.section.installed">Instalat</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Neinstalat</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Actualizări disponibile</system:String>
+  <system:String x:Key="lunai.status.error">Eroare</system:String>
+  <system:String x:Key="lunai.status.fetching">Se preia lista...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Instalarea a eșuat</system:String>
+  <system:String x:Key="lunai.status.installfinished">Instalare finalizată</system:String>
+  <system:String x:Key="lunai.status.installing">Se instalează {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">Se scanează instalările...</system:String>
+  <system:String x:Key="lunai.status.offline">Gata (listă din cache, rețea indisponibilă)</system:String>
+  <system:String x:Key="lunai.status.ready">Gata</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Dezinstalează failed</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Dezinstalează finished</system:String>
+  <system:String x:Key="lunai.status.uninstalling">Se dezinstalează {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Actualizează finished</system:String>
+  <system:String x:Key="lunai.status.updating">Se actualizează {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">Toate</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Dezinstalează</system:String>
+  <system:String x:Key="lunai.unknownversion">necunoscută</system:String>
+  <system:String x:Key="lunai.update">Actualizează</system:String>
+  <system:String x:Key="lunai.uptodate">La zi</system:String>
+  <system:String x:Key="lunai.website">Site web</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Exportă DiffSinger Scripts în (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Exportă DiffSinger Scripts în (v2, fără curbă de înălțime)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Instalează Dependență (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + clic pentru a vedea eroarea completă</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Generează armonii...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(moștenit)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Extinde rola de pian în fereastră</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">TikTok mod de înregistrare</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger calitate extrem de scăzută (acustic 1, variație 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger calitate scăzută (acustic 1, variație 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger echilibrat (acustic 20, variație 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger calitate (acustic 50, variație 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Afișează înălțimea finală pentru randare</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Extinde rola de pian în fereastră</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Arată scara tonalității</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Live Pitch (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Live Pitch Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Arată parametrii notei</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Arată fonemele</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Arată variația înălțimii</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Urmărește notele vertical în timpul redării</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Arată curbele reale</system:String>
+  <system:String x:Key="pianoroll.toggle.render">DiffSinger setări de randare</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Comută alinierea</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Vizualizare</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Instrument de desenare a înălțimii (4)
+    Faceți clic stânga pentru a desena
+    Faceți clic dreapta pentru a reseta
+    Ține Ctrl pentru a selecta</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Instrument cuțit (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Instrument de undă sinusoidală a înălțimii (Shift + 3)
+    Trageți pentru a desena unda; eliberați pentru modul de ajustare
+    Mișcați mouse-ul pentru a ajusta lungimea de undă și amplitudinea; faceți clic pentru aplicare
+    Faceți clic dreapta pentru a reseta
+    Ține Ctrl pentru a selecta</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Instrument de linie a înălțimii (Shift + 1)
+    Faceți clic stânga pentru a desena o linie dreaptă
+    Faceți clic dreapta pentru a reseta
+    Ține Ctrl pentru a selecta</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Instrument de curbă S a înălțimii (Shift + 2)
+    Trageți pentru a desena curba S; eliberați pentru modul de ajustare
+    Mișcați mouse-ul pentru a regla intensitatea curbei S; faceți clic pentru aplicare
+    Faceți clic dreapta pentru a reseta
+    Ține Ctrl pentru a selecta</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Instrument de netezire a înălțimii (Shift + 4)
+    Faceți clic stânga pentru a netezi înălțimea
+    Faceți clic dreapta pentru a reseta
+    Ține Ctrl pentru a selecta</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Bare de derulare clasice (dedicated track area)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Temă de bază</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Întunecat</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Deschis</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Există deja o temă cu acest nume.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Nou</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Culoare de bază</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Culoare luminoasă</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Numele culorii pistei nu poate fi gol.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Există deja o culoare de pistă cu acest nume.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Introduceți un nume și alegeți culorile de bază și luminoasă.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Nou</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Creează culoare personalizată a pistei</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Sigur doriți să ștergeți această culoare de pistă?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Șterge culoarea personalizată a pistei</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Editează</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Editează culoarea personalizată a pistei</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Culoare implicită pentru piste noi</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Grosimea conturului notei</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Raza colțului notei</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Opacitatea notei</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Bare de derulare suprapuse (thin, on top of content)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Linii de afișare</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Expresii și foneme</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Grilă și derulare</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Panou de foneme</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Rolă de pian</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Redare</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Temă</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Culori de piste</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Arată conturul notei</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Linii continue ale valorii implicite în panoul de expresii</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Solid timeline grid lines (piano roll, piste &amp; expression panel)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Integrat</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Presetări integrate</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Personalizat</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Rece</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Întunecat</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Deschis</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Întunecat original</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Deschis original</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Cald</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Nuanțează fundalul rolei de pian cu culoarea pistei</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">Panou de foneme compatibil cu DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Arată limitele frazelor de randare</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Depanare</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">General</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Înălțime și F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Calitate</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Calitatea randării</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Pași de randare</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Randează din nou după editări la redare (experimental)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Metronom</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Cap de redare modern</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Pitch Follow Derulează</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Urmărește notele vertical în timpul redării</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Netezirea cadrelor</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Arată previzualizarea traseului camerei</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Prag de semiton</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Poziția verticală a notei</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSinger Pitch Local Retaking</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Show acustic F0 patch preview on piano roll</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">Interpolare F0 pentru consoane nevoce DiffSinger (experimental)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Caută după nume sau tastă...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Faceți clic stânga pentru modificare. Faceți clic dreapta pentru resetare.</system:String>
+  <system:String x:Key="prefs.shortcuts">Comenzi rapide de la tastatură</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">Comanda rapidă '{0}' este deja atribuită la '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Apăsați tastele...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">DiffSinger {0} preset applied (acustic {1}, variație {2}, pitch {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Clear Selecție</system:String>
+  <system:String x:Key="shortcut.Copy">Copiază</system:String>
+  <system:String x:Key="shortcut.Cut">Taie</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Șterge notele</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Deselectează tot</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Editează versurile</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Selectează expresia 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Selectează expresia 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Selectează expresia 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Selectează expresia 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Selectează expresia 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Selectează expresia 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Selectează expresia 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Selectează expresia 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Selectează expresia 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Selectează expresia 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Extend Selecție Left</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Extend Selecție Right</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Focus Selecție</system:String>
+  <system:String x:Key="shortcut.FullScreen">Comută Ecran complet</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Ascunde fereastra detașată</system:String>
+  <system:String x:Key="shortcut.InsertNote">Inserează notă</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Îmbină notele selectate</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Mută cursorul Left</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Mută cursorul Right</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Mută notele Left</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Mută notele Right</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Treci la partea următoare (jos)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Treci la partea următoare (sus)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Dezactivează pista</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Deschide meniul modulelor</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Deschide meniul de aliniere</system:String>
+  <system:String x:Key="shortcut.Paste">Lipește</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Lipește Parameters</system:String>
+  <system:String x:Key="shortcut.PastePlain">Lipește as Plain Notes</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Redare / pauză</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Redă selecția</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Move Cap de redare to End</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Move Cap de redare to Start</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Move Cap de redare Left</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Move Cap de redare Right</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Move Cap de redare to Selecție End</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Move Cap de redare to Selecție Start</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Move Cap de redare to Vizualizare End</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Move Cap de redare to Vizualizare Start</system:String>
+  <system:String x:Key="shortcut.Redo">Refă</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Redimensionează notele Left</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Redimensionează notele Right</system:String>
+  <system:String x:Key="shortcut.SaveProject">Salvează proiectul</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Derulează Down</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Derulează Left</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Derulează Right</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Derulează Up</system:String>
+  <system:String x:Key="shortcut.SearchNote">Caută notă</system:String>
+  <system:String x:Key="shortcut.SelectAll">Selectează tot</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Extend Selecție to End</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Extend Selecție to Start</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Pistă solo</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">Comută Expressions Vizualizare</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">Comută Final Pitch Vizualizare</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">Comută Note Parameters Vizualizare</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">Comută Phoneme Vizualizare</system:String>
+  <system:String x:Key="shortcut.TogglePitch">Comută Pitch Vizualizare</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">Comută Play Tone</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Comută alinierea</system:String>
+  <system:String x:Key="shortcut.ToggleTips">Comută Tips Vizualizare</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">Comută Vibrato Vizualizare</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">Comută Waveform Vizualizare</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Instrument de selecție</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Instrument creion (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Instrument creion</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Instrument radieră</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Draw Pitch Instrument</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Draw Pitch Instrument (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Instrument cuțit</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Pitch Line Instrument</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Pitch Line Instrument (Overwrite)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Pitch S-Curve Instrument</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Pitch Sine Wave Instrument</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Pitch Smoothen Instrument</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Transpune Down</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Transpune Octavă Down</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Transpune Octavă Up</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Transpune Up</system:String>
+  <system:String x:Key="shortcut.Undo">Anulează</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Mărește</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Micșorează</system:String>
+
+  <system:String x:Key="themeditor.cancel">Anulează</system:String>
+  <system:String x:Key="themeditor.save">Salvează</system:String>
+  <system:String x:Key="themeditor.title">Editor de teme</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Anulează</system:String>
+  <system:String x:Key="themeeditor.save">Salvează</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + rotița mouse-ului pentru zoom vertical</system:String>
+
+  <system:String x:Key="tracks.mixfx">Finisare pistă</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Rotate singers across selected piste</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Apply to all selected piste</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Adaugă interpretul la favorite</system:String>
+  <system:String x:Key="tracks.standardizesettings">Standardizează setările pistelor</system:String>
+
+  <system:String x:Key="updater.status.unknown">Actualizarea nu a putut fi verificată. Deschideți GitHub Releases pentru descărcare manuală sau consultați jurnalul pentru detalii.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Instalează or update voice libraries from trusted sources</system:String>
+  <system:String x:Key="welcome.singerhub.open">Deschide Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">Închide panel</system:String>
+  <system:String x:Key="workspace.panel.render">Randare</system:String>
+  <system:String x:Key="workspace.panel.view">Vizualizare</system:String>
+  <system:String x:Key="workspace.tracks">Piste</system:String>
+</ResourceDictionary>

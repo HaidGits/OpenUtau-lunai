@@ -1,7 +1,12 @@
+"""
+Normalize Crowdin/upstream string files under OpenUtau/Strings/.
+
+Does NOT touch OpenUtau/Strings/Lunai/ — those overlays are maintained in-repo
+and merged at runtime after upstream locales (see App.SetLanguage).
+"""
 import os
 import re
 import xml.etree.ElementTree as ET
-import xml.dom.minidom as MD
 import json
 
 def register_all_namespaces(filename):
@@ -58,17 +63,17 @@ def dict_to_file(filename, dict, en_dict):
 if __name__ == "__main__":
     dir = os.path.dirname(os.path.abspath(__file__))
     dir = os.path.join(dir, "../OpenUtau/Strings/")
-    lang_files = os.listdir(dir)
-    src_file = next(filter(lambda f: f.endswith("Strings.axaml"), lang_files))
+    # Only top-level Crowdin files — skip Strings/Lunai/
+    lang_files = [f for f in os.listdir(dir) if f.endswith(".axaml")]
+    src_file = next(filter(lambda f: f == "Strings.axaml", lang_files))
     src_file = os.path.join(dir, src_file)
-    dst_files = filter(lambda f: f.endswith("axaml") and not f.endswith("Strings.axaml"), lang_files)
+    dst_files = filter(lambda f: f.endswith(".axaml") and f != "Strings.axaml", lang_files)
     dst_files = map(lambda f: os.path.join(dir, f), dst_files)
 
     register_all_namespaces(src_file)
     en_dict = file_to_dict(src_file)
     dict_to_file(src_file, en_dict, None)
-    
-    #strings unhandled by crowdin
+
     unhandled_strings = json.load(open(os.path.join(dir, "unhandled_strings.json"), "r", encoding='utf8'))
 
     for dst_file in dst_files:

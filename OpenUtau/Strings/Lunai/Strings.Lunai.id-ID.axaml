@@ -1,0 +1,362 @@
+<!--Lunai overlay for id-ID. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Buat harmoni...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Tutup</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Menampilkan daftar kontributor bawaan.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Orang-orang ini berkontribusi pada repositori OpenUtau asli di GitHub. OpenUtau Lunai dibangun di atas karya mereka. Terima kasih kepada semua yang tercantum!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Memuat kontributor dari GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Kontributor</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Tidak dapat memuat kontributor. Periksa koneksi internet Anda dan coba lagi.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Daftar kontributor diperbarui dari GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai di GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau di GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau dan OpenUtau Lunai adalah perangkat lunak sumber terbuka gratis di bawah lisensi MIT.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Anda menjalankan OpenUtau Lunai, fork yang bertujuan membuat DiffSinger lebih mudah dan lebih menyenangkan digunakan. Bank UTAU klasik dan semua jenis voicebank lain yang sudah didukung OpenUtau tetap berfungsi seperti biasa. Juga menyertakan banyak fitur dari pull request upstream yang belum dirilis atau digabungkan ke OpenUtau asli.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau bertujuan menjadi lingkungan penyuntingan sumber terbuka untuk komunitas UTAU, dengan pengalaman pengguna modern dan dukungan fonologi yang cerdas. Kunjungi kami di Github.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau bertujuan menjadi lingkungan penyuntingan sumber terbuka untuk komunitas UTAU, dengan pengalaman pengguna modern dan dukungan fonologi yang cerdas.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Buka atau impor proyek</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Impor trek</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Apakah Anda ingin membuka berkas proyek yang dijatuhkan, atau mengimpor treknya ke proyek saat ini?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Buka proyek</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Ekspor skrip DiffSinger</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Parameter variasi</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Aktifkan cache tensor DiffSinger di Preferensi untuk mengekspor kurva parameter variasi.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Buat Harmoni</system:String>
+  <system:String x:Key="dialogs.harmony.description">Buat trek harmoni baru dari bagian yang dipilih. Not ditransposisi secara diatonik dalam kunci yang dipilih.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Setiap suara yang dipilih membuat trek baru di bawah sumber dengan not yang ditransposisi. Penyanyi dan pengaturan disalin dari trek sumber.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Suara harmoni</system:String>
+  <system:String x:Key="dialogs.harmony.key">Kunci</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Opsi impor proyek</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Hanzi Tionghoa → Pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Lirik bawaan</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Isi celah pendek</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Panjang maksimum yang diproses (eksklusif)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} not</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Lirik Jepang</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → Hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Tanpa konversi</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → Romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Ruang awal sebelum not pertama</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Padding saat not pertama dimulai di awal klip</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Pemetaan lirik (persis)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Satu per baris: from=to</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Penggantian lirik</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">from=&gt;to atau /pattern/replacement/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Pemrosesan lirik</system:String>
+  <system:String x:Key="dialogs.importproject.message">Pilih apa yang akan diimpor dari berkas ini:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Not dan lirik</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Kurva nada (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Perbaiki not yang tumpang tindih</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Penanda tempo</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Tanda birama</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Buka halaman unduhan</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Pengelola Paket</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Gabung server kami dan jelaskan bug di #help. Lampirkan log dari Bantuan → Buka Lokasi Log jika diperlukan.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Buka Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Salin alamat</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Tulis kepada kami dan lampirkan log jika masalahnya sulit direproduksi.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">Email</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Tulis email</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Beritahu kami apa yang salah. Lebih baik Discord #help agar kami bisa membalas cepat; sertakan berkas log jika membantu. Anda juga bisa mengirim email.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Semua kunci</system:String>
+  <system:String x:Key="key.picker.analyzing">Menganalisis...</system:String>
+  <system:String x:Key="key.picker.suggested">Kunci yang disarankan</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Aksi</system:String>
+  <system:String x:Key="lunai.col.installed">Terpasang</system:String>
+  <system:String x:Key="lunai.col.name">Nama</system:String>
+  <system:String x:Key="lunai.col.version">Versi</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Pasang Penyanyi</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Pasang {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Penyanyi ini memiliki syarat penggunaan. Dengan mengeklik Ya, Anda menyetujui syarat tersebut.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Hapus instalasi penyanyi</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Hapus instalasi {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Perbarui penyanyi</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Perbarui {0} ke versi {1}?</system:String>
+  <system:String x:Key="lunai.install">Pasang</system:String>
+  <system:String x:Key="lunai.installed">Terpasang</system:String>
+  <system:String x:Key="lunai.latest">Terbaru</system:String>
+  <system:String x:Key="lunai.newversionavailable">Versi baru tersedia</system:String>
+  <system:String x:Key="lunai.notinstalled">Belum terpasang</system:String>
+  <system:String x:Key="lunai.outdated">Usang</system:String>
+  <system:String x:Key="lunai.refresh">Segarkan</system:String>
+  <system:String x:Key="lunai.search">Cari...</system:String>
+  <system:String x:Key="lunai.section.installed">Terpasang</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Belum terpasang</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Pembaruan tersedia</system:String>
+  <system:String x:Key="lunai.status.error">Kesalahan</system:String>
+  <system:String x:Key="lunai.status.fetching">Mengambil daftar...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Pemasangan gagal</system:String>
+  <system:String x:Key="lunai.status.installfinished">Pemasangan selesai</system:String>
+  <system:String x:Key="lunai.status.installing">Memasang {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">Memindai yang terpasang...</system:String>
+  <system:String x:Key="lunai.status.offline">Siap (daftar cache, jaringan tidak tersedia)</system:String>
+  <system:String x:Key="lunai.status.ready">Siap</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Gagal menghapus instalasi</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Penghapusan instalasi selesai</system:String>
+  <system:String x:Key="lunai.status.uninstalling">Menghapus instalasi {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Pembaruan selesai</system:String>
+  <system:String x:Key="lunai.status.updating">Memperbarui {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">Semua</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Hapus instalasi</system:String>
+  <system:String x:Key="lunai.unknownversion">tidak diketahui</system:String>
+  <system:String x:Key="lunai.update">Perbarui</system:String>
+  <system:String x:Key="lunai.uptodate">Sudah terbaru</system:String>
+  <system:String x:Key="lunai.website">Situs web</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Ekspor Skrip DiffSinger Ke (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Ekspor Skrip DiffSinger Ke (v2, tanpa kurva nada)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Pasang Dependensi (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + Klik untuk melihat kesalahan lengkap</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Buat harmoni...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(warisan)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Perluas piano roll di jendela</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">Mode rekaman TikTok</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger kualitas ekstra rendah (akustik 1, variasi 1, nada 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger kualitas rendah (akustik 1, variasi 1, nada 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger seimbang (akustik 20, variasi 20, nada 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger kualitas (akustik 50, variasi 50, nada 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Lihat Nada Akhir untuk Render</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Perluas piano roll di jendela</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Tampilkan skala kunci</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Nada Langsung (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Nada Langsung Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Lihat Parameter Not</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Lihat Fonem</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Lihat Lekukan Nada</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Ikuti not secara vertikal saat pemutaran</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Lihat Kurva Nyata</system:String>
+  <system:String x:Key="pianoroll.toggle.render">Pengaturan render DiffSinger</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Alihkan Jepret</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Tampilan</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Alat Gambar Nada (4)
+    Klik kiri untuk menggambar
+    Klik kanan untuk mengatur ulang
+    Tahan Ctrl untuk memilih</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Alat Pisau (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Alat Gelombang Sinus Nada (Shift + 3)
+    Seret untuk menggambar gelombang sinus, lepaskan untuk masuk mode penyesuaian
+    Gerakkan mouse untuk menyesuaikan panjang gelombang dan amplitudo, klik untuk menerapkan
+    Klik kanan untuk mengatur ulang
+    Tahan Ctrl untuk memilih</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Alat Garis Nada (Shift + 1)
+    Klik kiri untuk menggambar garis lurus
+    Klik kanan untuk mengatur ulang
+    Tahan Ctrl untuk memilih</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Alat Kurva-S Nada (Shift + 2)
+    Seret untuk menggambar kurva-S, lepaskan untuk masuk mode penyesuaian
+    Gerakkan mouse untuk menyesuaikan kekuatan kurva-S, klik untuk menerapkan
+    Klik kanan untuk mengatur ulang
+    Tahan Ctrl untuk memilih</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Alat Haluskan Nada (Shift + 4)
+    Klik kiri untuk menghaluskan nada
+    Klik kanan untuk mengatur ulang
+    Tahan Ctrl untuk memilih</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Bilah gulir klasik (area trek khusus)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Tema dasar</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Gelap</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Terang</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Tema dengan nama ini sudah ada.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Baru</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Warna dasar</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Warna cerah</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Nama warna trek tidak boleh kosong.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Warna trek dengan nama ini sudah ada.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Masukkan nama dan pilih warna dasar serta warna cerah.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Baru</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Buat Warna Trek Kustom</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Yakin ingin menghapus warna trek ini?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Hapus Warna Trek Kustom</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Sunting</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Edit Warna Trek Kustom</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Warna trek bawaan untuk trek baru</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Ketebalan batas not</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Radius sudut not</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Opasitas not</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Bilah gulir overlay (tipis, di atas konten)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Garis tampilan</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Ekspresi &amp; fonem</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Kisi &amp; gulir</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Panel fonem</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Piano roll</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Pemutaran</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Tema</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Warna trek</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Tampilkan batas not</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Garis nilai bawaan solid di panel ekspresi</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Garis kisi garis waktu solid (piano roll, trek &amp; panel ekspresi)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Bawaan</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Prasetel bawaan</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Kustom</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Dingin</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Gelap</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Terang</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Gelap Asli</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Terang Asli</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Hangat</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Warnai latar piano roll dengan warna trek</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">Panel fonem ramah DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Tampilkan batas frasa render</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Debug</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">Umum</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Nada &amp; F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Kualitas</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Kualitas render</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Langkah render</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Render ulang setelah suntingan saat putar (eksperimental)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Metronom</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Playhead modern</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Gulir Ikuti Nada</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Ikuti not secara vertikal saat pemutaran</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Penghalusan bingkai</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Tampilkan pratinjau jalur kamera</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Ambang semiton</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Posisi vertikal not</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">Pengambilan Ulang Nada Lokal DiffSinger</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Tampilkan pratinjau patch F0 akustik di piano roll</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">Interpolasi F0 konsonan tak bersuara DiffSinger (eksperimental)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Cari berdasarkan nama atau tombol...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Klik kiri untuk mengubah. Klik kanan untuk mengatur ulang.</system:String>
+  <system:String x:Key="prefs.shortcuts">Pintasan Keyboard</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">Pintasan '{0}' sudah ditetapkan ke '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Tekan tombol...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">Prasetel DiffSinger {0} diterapkan (akustik {1}, variasi {2}, nada {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Hapus Seleksi</system:String>
+  <system:String x:Key="shortcut.Copy">Salin</system:String>
+  <system:String x:Key="shortcut.Cut">Potong</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Hapus Not</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Batalkan Semua Seleksi</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Edit Lirik</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Pilih Ekspresi 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Pilih Ekspresi 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Pilih Ekspresi 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Pilih Ekspresi 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Pilih Ekspresi 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Pilih Ekspresi 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Pilih Ekspresi 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Pilih Ekspresi 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Pilih Ekspresi 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Pilih Ekspresi 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Perluas Seleksi ke Kiri</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Perluas Seleksi ke Kanan</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Fokus ke Seleksi</system:String>
+  <system:String x:Key="shortcut.FullScreen">Alihkan Layar Penuh</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Sembunyikan Jendela Terpisah</system:String>
+  <system:String x:Key="shortcut.InsertNote">Sisipkan Not</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Gabungkan Not Terpilih</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Pindahkan Kursor ke Kiri</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Pindahkan Kursor ke Kanan</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Pindahkan Not ke Kiri</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Pindahkan Not ke Kanan</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Pindah ke Bagian Berikutnya (Bawah)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Pindah ke Bagian Berikutnya (Atas)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Bisukan Trek</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Buka Menu Plugin</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Buka Menu Jepret</system:String>
+  <system:String x:Key="shortcut.Paste">Tempel</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Tempel Parameter</system:String>
+  <system:String x:Key="shortcut.PastePlain">Tempel sebagai Not Biasa</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Putar / Jeda</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Putar Seleksi</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Pindahkan Playhead ke Akhir</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Pindahkan Playhead ke Awal</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Pindahkan Playhead ke Kiri</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Pindahkan Playhead ke Kanan</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Pindahkan Playhead ke Akhir Seleksi</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Pindahkan Playhead ke Awal Seleksi</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Pindahkan Playhead ke Akhir Tampilan</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Pindahkan Playhead ke Awal Tampilan</system:String>
+  <system:String x:Key="shortcut.Redo">Ulangi</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Ubah Ukuran Not ke Kiri</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Ubah Ukuran Not ke Kanan</system:String>
+  <system:String x:Key="shortcut.SaveProject">Simpan Proyek</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Gulir ke Bawah</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Gulir ke Kiri</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Gulir ke Kanan</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Gulir ke Atas</system:String>
+  <system:String x:Key="shortcut.SearchNote">Cari Not</system:String>
+  <system:String x:Key="shortcut.SelectAll">Pilih Semua</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Perluas Seleksi ke Akhir</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Perluas Seleksi ke Awal</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Solo Trek</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">Alihkan Tampilan Ekspresi</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">Alihkan Tampilan Nada Akhir</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">Alihkan Tampilan Parameter Not</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">Alihkan Tampilan Fonem</system:String>
+  <system:String x:Key="shortcut.TogglePitch">Alihkan Tampilan Nada</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">Alihkan Putar Nada</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Alihkan Jepret</system:String>
+  <system:String x:Key="shortcut.ToggleTips">Alihkan Tampilan Tips</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">Alihkan Tampilan Vibrato</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">Alihkan Tampilan Waveform</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Alat Seleksi</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Alat Pena (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Alat Pena</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Alat Penghapus</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Alat Gambar Nada</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Alat Gambar Nada (Timpa)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Alat Pisau</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Alat Garis Nada</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Alat Garis Nada (Timpa)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Alat Kurva-S Nada</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Alat Gelombang Sinus Nada</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Alat Haluskan Nada</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Transposisi ke Bawah</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Transposisi Oktaf ke Bawah</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Transposisi Oktaf ke Atas</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Transposisi ke Atas</system:String>
+  <system:String x:Key="shortcut.Undo">Urungkan</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Perbesar</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Perkecil</system:String>
+
+  <system:String x:Key="themeditor.cancel">Batal</system:String>
+  <system:String x:Key="themeditor.save">Simpan</system:String>
+  <system:String x:Key="themeditor.title">Editor Tema</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Batal</system:String>
+  <system:String x:Key="themeeditor.save">Simpan</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + roda gulir untuk zoom vertikal</system:String>
+
+  <system:String x:Key="tracks.mixfx">Track Polish</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Putar penyanyi di antara trek yang dipilih</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Terapkan ke semua trek yang dipilih</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Tambahkan penyanyi ke favorit</system:String>
+  <system:String x:Key="tracks.standardizesettings">Standarkan Pengaturan Trek</system:String>
+
+  <system:String x:Key="updater.status.unknown">Tidak dapat memeriksa pembaruan. Buka GitHub Releases untuk mengunduh secara manual, atau lihat log untuk detail.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Pasang atau perbarui pustaka suara dari sumber terpercaya</system:String>
+  <system:String x:Key="welcome.singerhub.open">Buka Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">Tutup panel</system:String>
+  <system:String x:Key="workspace.panel.render">Render</system:String>
+  <system:String x:Key="workspace.panel.view">Tampilan</system:String>
+  <system:String x:Key="workspace.tracks">Trek</system:String>
+</ResourceDictionary>

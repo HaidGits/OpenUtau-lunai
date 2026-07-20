@@ -1,4 +1,21 @@
-files:
-  - source: /OpenUtau/Strings/Strings.axaml
-    translation: /OpenUtau/Strings/Strings.%locale%.axaml
-    type: xaml
+#
+# Crowdin CLI config for upstream OpenUtau strings only.
+# Lunai overlays stay in OpenUtau/Strings/Lunai/ and are not synced.
+#
+# Credentials (do NOT commit tokens):
+#   set CROWDIN_PROJECT_ID=...
+#   set CROWDIN_PERSONAL_TOKEN=...
+# or put project_id / api_token in %USERPROFILE%\.crowdin.yml
+#
+"project_id_env": "CROWDIN_PROJECT_ID"
+"api_token_env": "CROWDIN_PERSONAL_TOKEN"
+"base_path": "."
+"base_url": "https://api.crowdin.com"
+
+"files": [
+  {
+    "source": "/OpenUtau/Strings/Strings.axaml",
+    "translation": "/OpenUtau/Strings/Strings.%locale%.axaml",
+    "type": "xaml"
+  }
+]

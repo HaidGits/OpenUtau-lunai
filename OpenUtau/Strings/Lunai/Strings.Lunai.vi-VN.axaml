@@ -1,0 +1,362 @@
+<!--Lunai overlay for vi-VN. Not managed by Crowdin.-->
+<!--Professional UI translation of Lunai-only strings.-->
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <system:String x:Key="context.part.generateharmonies">Tạo hòa âm...</system:String>
+
+  <system:String x:Key="dialogs.about.close">Đóng</system:String>
+  <system:String x:Key="dialogs.about.contributors.embedded">Đang hiển thị danh sách người đóng góp được nhúng.</system:String>
+  <system:String x:Key="dialogs.about.contributors.intro">Những người này đã đóng góp cho kho OpenUtau gốc trên GitHub. OpenUtau Lunai được xây dựng dựa trên công việc của họ. Cảm ơn tất cả mọi người trong danh sách!</system:String>
+  <system:String x:Key="dialogs.about.contributors.loading">Đang tải người đóng góp từ GitHub...</system:String>
+  <system:String x:Key="dialogs.about.contributors.title">Người đóng góp</system:String>
+  <system:String x:Key="dialogs.about.contributors.unavailable">Không thể tải danh sách người đóng góp. Kiểm tra kết nối internet và thử lại.</system:String>
+  <system:String x:Key="dialogs.about.contributors.updated">Danh sách người đóng góp đã được cập nhật từ GitHub.</system:String>
+  <system:String x:Key="dialogs.about.contributors.upstream">OpenUtau ({0})</system:String>
+  <system:String x:Key="dialogs.about.github.lunai">OpenUtau Lunai trên GitHub</system:String>
+  <system:String x:Key="dialogs.about.github.upstream">OpenUtau trên GitHub</system:String>
+  <system:String x:Key="dialogs.about.license">OpenUtau và OpenUtau Lunai là phần mềm mã nguồn mở miễn phí theo giấy phép MIT.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Bạn đang chạy OpenUtau Lunai, một bản fork nhằm giúp DiffSinger dễ dùng và thú vị hơn. Các bank UTAU cổ điển và mọi loại thư viện giọng mà OpenUtau đã hỗ trợ vẫn hoạt động bình thường. Đồng thời bao gồm nhiều tính năng từ các pull request gốc chưa được phát hành hoặc hợp nhất vào OpenUtau gốc.</system:String>
+  <system:String x:Key="dialogs.about.message">OpenUtau hướng tới trở thành môi trường chỉnh sửa mã nguồn mở cho cộng đồng UTAU, với trải nghiệm hiện đại và hỗ trợ ngữ âm thông minh. Hãy ghé thăm chúng tôi trên Github.</system:String>
+  <system:String x:Key="dialogs.about.upstream.message">OpenUtau hướng tới trở thành môi trường chỉnh sửa mã nguồn mở cho cộng đồng UTAU, với trải nghiệm hiện đại và hỗ trợ ngữ âm thông minh.</system:String>
+  <system:String x:Key="dialogs.dropproject.caption">Mở hoặc nhập dự án</system:String>
+  <system:String x:Key="dialogs.dropproject.import">Nhập track</system:String>
+  <system:String x:Key="dialogs.dropproject.message">Bạn muốn mở tệp dự án vừa thả vào, hay nhập các track của nó vào dự án hiện tại?</system:String>
+  <system:String x:Key="dialogs.dropproject.open">Mở dự án</system:String>
+  <system:String x:Key="dialogs.exportds.caption">Xuất script DiffSinger</system:String>
+  <system:String x:Key="dialogs.exportds.variance">Tham số variance</system:String>
+  <system:String x:Key="dialogs.exportds.variance.hint">Bật bộ nhớ đệm tensor DiffSinger trong Tùy chọn để xuất đường cong tham số variance.</system:String>
+  <system:String x:Key="dialogs.harmony.caption">Tạo hòa âm</system:String>
+  <system:String x:Key="dialogs.harmony.description">Tạo các track hòa âm mới từ phần đã chọn. Nốt được chuyển giọng theo điệu thức trong giọng đã chọn.</system:String>
+  <system:String x:Key="dialogs.harmony.hint">Mỗi giọng đã chọn tạo một track mới bên dưới nguồn với các nốt đã chuyển giọng. Ca sĩ và cài đặt được sao chép từ track nguồn.</system:String>
+  <system:String x:Key="dialogs.harmony.intervals">Giọng hòa âm</system:String>
+  <system:String x:Key="dialogs.harmony.key">Giọng</system:String>
+  <system:String x:Key="dialogs.importproject.caption">Tùy chọn nhập dự án</system:String>
+  <system:String x:Key="dialogs.importproject.chinesepinyin">Hán tự Trung Quốc → Pinyin</system:String>
+  <system:String x:Key="dialogs.importproject.defaultlyric">Lời mặc định</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps">Lấp khoảng trống ngắn</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.threshold">Độ dài tối đa để xử lý (không bao gồm)</system:String>
+  <system:String x:Key="dialogs.importproject.fillgaps.thresholditem">1/{0} nốt</system:String>
+  <system:String x:Key="dialogs.importproject.japanese">Lời tiếng Nhật</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.hiragana">Romaji → Hiragana</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.none">Không chuyển đổi</system:String>
+  <system:String x:Key="dialogs.importproject.japanese.romaji">Hiragana → Romaji</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding">Khoảng trống trước nốt đầu</system:String>
+  <system:String x:Key="dialogs.importproject.leadingpadding.size">Đệm khi nốt đầu bắt đầu ở đầu clip</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping">Ánh xạ lời (khớp chính xác)</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsmapping.hint">Mỗi dòng một mục: từ=đến</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace">Thay thế lời</system:String>
+  <system:String x:Key="dialogs.importproject.lyricsreplace.hint">từ=&gt;đến hoặc /mẫu/thay thế/</system:String>
+  <system:String x:Key="dialogs.importproject.lyricssection">Xử lý lời</system:String>
+  <system:String x:Key="dialogs.importproject.message">Chọn nội dung cần nhập từ tệp này:</system:String>
+  <system:String x:Key="dialogs.importproject.notes">Nốt và lời</system:String>
+  <system:String x:Key="dialogs.importproject.pitch">Đường cong cao độ (PITD)</system:String>
+  <system:String x:Key="dialogs.importproject.resolveoverlaps">Sửa nốt chồng chéo</system:String>
+  <system:String x:Key="dialogs.importproject.tempo">Dấu nhịp độ</system:String>
+  <system:String x:Key="dialogs.importproject.timesig">Nhịp điệu</system:String>
+  <system:String x:Key="dialogs.messagebox.openlink">Mở trang tải xuống</system:String>
+  <system:String x:Key="dialogs.messagebox.openpackages">Trình quản lý gói</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Tham gia máy chủ của chúng tôi và mô tả lỗi trong #help. Đính kèm nhật ký từ Trợ giúp → Mở vị trí nhật ký nếu cần.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Mở Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Sao chép địa chỉ</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Viết cho chúng tôi và đính kèm nhật ký nếu sự cố khó tái hiện.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">Email</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Viết email</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Hãy cho chúng tôi biết vấn đề. Nên dùng Discord #help để chúng tôi phản hồi nhanh; đính kèm tệp nhật ký khi hữu ích. Bạn cũng có thể gửi email.</system:String>
+
+  <system:String x:Key="harmony.interval.fifthabove">5+</system:String>
+  <system:String x:Key="harmony.interval.fifthbelow">5-</system:String>
+  <system:String x:Key="harmony.interval.thirdabove">3+</system:String>
+  <system:String x:Key="harmony.interval.thirdbelow">3-</system:String>
+
+  <system:String x:Key="key.picker.all">Tất cả giọng</system:String>
+  <system:String x:Key="key.picker.analyzing">Đang phân tích...</system:String>
+  <system:String x:Key="key.picker.suggested">Giọng gợi ý</system:String>
+
+  <system:String x:Key="lunai.caption">Singer Hub</system:String>
+  <system:String x:Key="lunai.col.action">Thao tác</system:String>
+  <system:String x:Key="lunai.col.installed">Đã cài</system:String>
+  <system:String x:Key="lunai.col.name">Tên</system:String>
+  <system:String x:Key="lunai.col.version">Phiên bản</system:String>
+  <system:String x:Key="lunai.company">LUNAI Project</system:String>
+  <system:String x:Key="lunai.confirm.install.caption">Cài đặt ca sĩ</system:String>
+  <system:String x:Key="lunai.confirm.install.message">Cài đặt {0}?</system:String>
+  <system:String x:Key="lunai.confirm.install.tos">Ca sĩ này có điều khoản sử dụng. Nhấn Có nghĩa là bạn đồng ý với các điều khoản này.</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.caption">Gỡ cài đặt ca sĩ</system:String>
+  <system:String x:Key="lunai.confirm.uninstall.message">Gỡ cài đặt {0}?</system:String>
+  <system:String x:Key="lunai.confirm.update.caption">Cập nhật ca sĩ</system:String>
+  <system:String x:Key="lunai.confirm.update.message">Cập nhật {0} lên phiên bản {1}?</system:String>
+  <system:String x:Key="lunai.install">Cài đặt</system:String>
+  <system:String x:Key="lunai.installed">Đã cài</system:String>
+  <system:String x:Key="lunai.latest">Mới nhất</system:String>
+  <system:String x:Key="lunai.newversionavailable">Có phiên bản mới</system:String>
+  <system:String x:Key="lunai.notinstalled">Chưa cài</system:String>
+  <system:String x:Key="lunai.outdated">Lỗi thời</system:String>
+  <system:String x:Key="lunai.refresh">Làm mới</system:String>
+  <system:String x:Key="lunai.search">Tìm kiếm...</system:String>
+  <system:String x:Key="lunai.section.installed">Đã cài</system:String>
+  <system:String x:Key="lunai.section.notinstalled">Chưa cài</system:String>
+  <system:String x:Key="lunai.section.updatesavailable">Có cập nhật</system:String>
+  <system:String x:Key="lunai.status.error">Lỗi</system:String>
+  <system:String x:Key="lunai.status.fetching">Đang lấy danh sách...</system:String>
+  <system:String x:Key="lunai.status.installfailed">Cài đặt thất bại</system:String>
+  <system:String x:Key="lunai.status.installfinished">Cài đặt hoàn tất</system:String>
+  <system:String x:Key="lunai.status.installing">Đang cài đặt {0}...</system:String>
+  <system:String x:Key="lunai.status.listing">Đang quét mục đã cài...</system:String>
+  <system:String x:Key="lunai.status.offline">Sẵn sàng (danh sách cache, mạng không khả dụng)</system:String>
+  <system:String x:Key="lunai.status.ready">Sẵn sàng</system:String>
+  <system:String x:Key="lunai.status.uninstallfailed">Gỡ cài đặt thất bại</system:String>
+  <system:String x:Key="lunai.status.uninstallfinished">Gỡ cài đặt hoàn tất</system:String>
+  <system:String x:Key="lunai.status.uninstalling">Đang gỡ cài đặt {0}...</system:String>
+  <system:String x:Key="lunai.status.updatefinished">Cập nhật hoàn tất</system:String>
+  <system:String x:Key="lunai.status.updating">Đang cập nhật {0}...</system:String>
+  <system:String x:Key="lunai.tab.all">Tất cả</system:String>
+  <system:String x:Key="lunai.tab.brapa">BRAPA</system:String>
+  <system:String x:Key="lunai.tab.lunai">LUNAI</system:String>
+  <system:String x:Key="lunai.tab.ufr">UFR</system:String>
+  <system:String x:Key="lunai.uninstall">Gỡ cài đặt</system:String>
+  <system:String x:Key="lunai.unknownversion">không rõ</system:String>
+  <system:String x:Key="lunai.update">Cập nhật</system:String>
+  <system:String x:Key="lunai.uptodate">Đã cập nhật</system:String>
+  <system:String x:Key="lunai.website">Trang web</system:String>
+
+  <system:String x:Key="menu.file.exportds.v2">Xuất script DiffSinger tới (v2)</system:String>
+  <system:String x:Key="menu.file.exportds.v2withoutpitch">Xuất script DiffSinger tới (v2, không có đường cong cao độ)</system:String>
+  <system:String x:Key="menu.tools.dependency.install">Cài đặt tệp phụ thuộc (.oudep)...</system:String>
+  <system:String x:Key="menu.tools.singerhub">Singer Hub...</system:String>
+
+  <system:String x:Key="phoneme.show.error">Alt + Nhấp để xem lỗi đầy đủ</system:String>
+
+  <system:String x:Key="pianoroll.menu.part.generateharmonies">Tạo hòa âm...</system:String>
+  <system:String x:Key="pianoroll.menu.part.legacypluginexp.shortcuts">(cũ)</system:String>
+  <system:String x:Key="pianoroll.menu.view.pianoroll.fullscreen">Mở rộng piano roll trong cửa sổ</system:String>
+  <system:String x:Key="pianoroll.menu.view.tiktokmode">Chế độ ghi TikTok</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.extralow">DiffSinger chất lượng cực thấp (acoustic 1, variance 1, pitch 1)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.fast">DiffSinger chất lượng thấp (acoustic 1, variance 1, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.medium">DiffSinger cân bằng (acoustic 20, variance 20, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.diffsinger.quality">DiffSinger chất lượng (acoustic 50, variance 50, pitch 20)</system:String>
+  <system:String x:Key="pianoroll.toggle.finalpitch">Xem cao độ cuối để render</system:String>
+  <system:String x:Key="pianoroll.toggle.fullscreen">Mở rộng piano roll trong cửa sổ</system:String>
+  <system:String x:Key="pianoroll.toggle.keyscale">Hiện thang âm</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch">Cao độ trực tiếp (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.livepitch.fast">Cao độ trực tiếp Turbo (DiffSinger)</system:String>
+  <system:String x:Key="pianoroll.toggle.noteparams">Xem tham số nốt</system:String>
+  <system:String x:Key="pianoroll.toggle.phoneme">Xem âm vị</system:String>
+  <system:String x:Key="pianoroll.toggle.pitch">Xem Pitch Bend</system:String>
+  <system:String x:Key="pianoroll.toggle.pitchfollow">Theo dõi nốt theo chiều dọc khi phát</system:String>
+  <system:String x:Key="pianoroll.toggle.realcurves">Xem đường cong thực</system:String>
+  <system:String x:Key="pianoroll.toggle.render">Cài đặt render DiffSinger</system:String>
+  <system:String x:Key="pianoroll.toggle.snap">Bật/tắt Snap</system:String>
+  <system:String x:Key="pianoroll.toggle.view">Xem</system:String>
+  <system:String x:Key="pianoroll.tool.drawpitch">Công cụ vẽ cao độ (4)
+    Nhấp trái để vẽ
+    Nhấp phải để đặt lại
+    Giữ Ctrl để chọn</system:String>
+  <system:String x:Key="pianoroll.tool.knife">Công cụ dao (5)</system:String>
+  <system:String x:Key="pianoroll.tool.pitchesinewave">Công cụ sóng sine cao độ (Shift + 3)
+    Kéo để vẽ sóng sine, thả để vào chế độ chỉnh
+    Di chuyển chuột để điều chỉnh bước sóng và biên độ, nhấp để áp dụng
+    Nhấp phải để đặt lại
+    Giữ Ctrl để chọn</system:String>
+  <system:String x:Key="pianoroll.tool.pitchline">Công cụ đường cao độ (Shift + 1)
+    Nhấp trái để vẽ đường thẳng
+    Nhấp phải để đặt lại
+    Giữ Ctrl để chọn</system:String>
+  <system:String x:Key="pianoroll.tool.pitchscurve">Công cụ S-Curve cao độ (Shift + 2)
+    Kéo để vẽ S-curve, thả để vào chế độ chỉnh
+    Di chuyển chuột để điều chỉnh độ mạnh S-curve, nhấp để áp dụng
+    Nhấp phải để đặt lại
+    Giữ Ctrl để chọn</system:String>
+  <system:String x:Key="pianoroll.tool.pitchsmoothen">Công cụ làm mượt cao độ (Shift + 4)
+    Nhấp trái để làm mượt cao độ
+    Nhấp phải để đặt lại
+    Giữ Ctrl để chọn</system:String>
+
+  <system:String x:Key="prefs.appearance.classicscrollbars">Thanh cuộn cổ điển (vùng track riêng)</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.base">Chủ đề gốc</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.basedark">Tối</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.baselight">Sáng</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.exists">Đã có chủ đề với tên này.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.create.short">Mới</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Màu gốc</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Màu sáng</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Tên màu track không được để trống.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.exists">Đã có màu track với tên này.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.prompt">Nhập tên và chọn màu gốc cùng màu sáng.</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.short">Mới</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.create.title">Tạo màu track tùy chỉnh</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.message">Bạn có chắc muốn xóa màu track này?</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.delete.title">Xóa màu track tùy chỉnh</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit">Sửa</system:String>
+  <system:String x:Key="prefs.appearance.customtrackcolor.edit.title">Sửa màu track tùy chỉnh</system:String>
+  <system:String x:Key="prefs.appearance.defaulttrackcolor">Màu track mặc định cho track mới</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Độ dày viền nốt</system:String>
+  <system:String x:Key="prefs.appearance.notecornerradius">Bo góc nốt</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Độ mờ nốt</system:String>
+  <system:String x:Key="prefs.appearance.overlayscrollbars">Thanh cuộn chồng (mỏng, trên nội dung)</system:String>
+  <system:String x:Key="prefs.appearance.section.displaylines">Đường hiển thị</system:String>
+  <system:String x:Key="prefs.appearance.section.expressions">Biểu cảm &amp; âm vị</system:String>
+  <system:String x:Key="prefs.appearance.section.grid">Lưới &amp; cuộn</system:String>
+  <system:String x:Key="prefs.appearance.section.phonemepanel">Bảng âm vị</system:String>
+  <system:String x:Key="prefs.appearance.section.pianoroll">Cuộn piano</system:String>
+  <system:String x:Key="prefs.appearance.section.playback">Phát lại</system:String>
+  <system:String x:Key="prefs.appearance.section.theme">Chủ đề</system:String>
+  <system:String x:Key="prefs.appearance.section.trackcolors">Màu track</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Hiện viền nốt</system:String>
+  <system:String x:Key="prefs.appearance.solidexppanelgridlines">Đường giá trị mặc định đặc trong bảng biểu cảm</system:String>
+  <system:String x:Key="prefs.appearance.solidtickgridlines">Đường lưới timeline đặc (piano roll, track &amp; bảng biểu cảm)</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin">Có sẵn</system:String>
+  <system:String x:Key="prefs.appearance.theme.builtin.custom">Preset có sẵn</system:String>
+  <system:String x:Key="prefs.appearance.theme.custom">Tùy chỉnh</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.cold">Lạnh</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.dark">Tối</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.light">Sáng</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originaldark">Tối gốc</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.originallight">Sáng gốc</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.warm">Ấm</system:String>
+  <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Tô nền piano roll bằng màu track</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel">Bảng âm vị thân thiện DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Hiện ranh giới cụm render</system:String>
+  <system:String x:Key="prefs.diffsinger.section.cache">Bộ nhớ đệm</system:String>
+  <system:String x:Key="prefs.diffsinger.section.debug">Gỡ lỗi</system:String>
+  <system:String x:Key="prefs.diffsinger.section.general">Chung</system:String>
+  <system:String x:Key="prefs.diffsinger.section.pitch">Cao độ &amp; F0</system:String>
+  <system:String x:Key="prefs.diffsinger.section.quality">Chất lượng</system:String>
+  <system:String x:Key="prefs.diffsinger.section.renderquality">Chất lượng render</system:String>
+  <system:String x:Key="prefs.diffsinger.section.steps">Bước render</system:String>
+  <system:String x:Key="prefs.playback.experimentalinvalidaterender">Render lại sau chỉnh sửa khi phát (thử nghiệm)</system:String>
+  <system:String x:Key="prefs.playback.metronome">Máy đếm nhịp</system:String>
+  <system:String x:Key="prefs.playback.modernplayhead">Đầu phát hiện đại</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow">Cuộn theo cao độ</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.enabled">Theo dõi nốt theo chiều dọc khi phát</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.framesmoothing">Làm mượt khung hình</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.showpath">Hiện xem trước đường camera</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.threshold">Ngưỡng nửa cung</system:String>
+  <system:String x:Key="prefs.playback.pitchfollow.verticalposition">Vị trí dọc của nốt</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerpitchlocalretaking">DiffSinger tái tạo cao độ cục bộ</system:String>
+  <system:String x:Key="prefs.rendering.diffsingershowacousticf0patchpreview">Hiện xem trước vá F0 acoustic trên piano roll</system:String>
+  <system:String x:Key="prefs.rendering.diffsingerunvoicedconsonantacousticf0interpolate">Nội suy F0 phụ âm vô thanh DiffSinger (thử nghiệm)</system:String>
+  <system:String x:Key="prefs.shortcut.search.watermark">Tìm theo tên hoặc phím...</system:String>
+  <system:String x:Key="prefs.shortcut.tooltip">Nhấp trái để đổi. Nhấp phải để đặt lại.</system:String>
+  <system:String x:Key="prefs.shortcuts">Phím tắt</system:String>
+  <system:String x:Key="prefs.shortcuts.duplicate">Phím tắt '{0}' đã được gán cho '{1}'.</system:String>
+  <system:String x:Key="prefs.shortcuts.listening">Nhấn phím...</system:String>
+
+  <system:String x:Key="progress.diffsinger.preset">Đã áp dụng preset DiffSinger {0} (acoustic {1}, variance {2}, pitch {3})</system:String>
+
+  <system:String x:Key="shortcut.ClearSelection">Xóa lựa chọn</system:String>
+  <system:String x:Key="shortcut.Copy">Sao chép</system:String>
+  <system:String x:Key="shortcut.Cut">Cắt</system:String>
+  <system:String x:Key="shortcut.DeleteNotes">Xóa nốt</system:String>
+  <system:String x:Key="shortcut.DeselectAll">Bỏ chọn tất cả</system:String>
+  <system:String x:Key="shortcut.EditLyrics">Sửa lời</system:String>
+  <system:String x:Key="shortcut.ExpSelect1">Chọn biểu cảm 1</system:String>
+  <system:String x:Key="shortcut.ExpSelect10">Chọn biểu cảm 10</system:String>
+  <system:String x:Key="shortcut.ExpSelect2">Chọn biểu cảm 2</system:String>
+  <system:String x:Key="shortcut.ExpSelect3">Chọn biểu cảm 3</system:String>
+  <system:String x:Key="shortcut.ExpSelect4">Chọn biểu cảm 4</system:String>
+  <system:String x:Key="shortcut.ExpSelect5">Chọn biểu cảm 5</system:String>
+  <system:String x:Key="shortcut.ExpSelect6">Chọn biểu cảm 6</system:String>
+  <system:String x:Key="shortcut.ExpSelect7">Chọn biểu cảm 7</system:String>
+  <system:String x:Key="shortcut.ExpSelect8">Chọn biểu cảm 8</system:String>
+  <system:String x:Key="shortcut.ExpSelect9">Chọn biểu cảm 9</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionLeft">Mở rộng lựa chọn sang trái</system:String>
+  <system:String x:Key="shortcut.ExtendSelectionRight">Mở rộng lựa chọn sang phải</system:String>
+  <system:String x:Key="shortcut.FocusSelection">Tập trung vào lựa chọn</system:String>
+  <system:String x:Key="shortcut.FullScreen">Bật/tắt toàn màn hình</system:String>
+  <system:String x:Key="shortcut.HideDetachedWindow">Ẩn cửa sổ tách</system:String>
+  <system:String x:Key="shortcut.InsertNote">Chèn nốt</system:String>
+  <system:String x:Key="shortcut.MergeNotes">Gộp nốt đã chọn</system:String>
+  <system:String x:Key="shortcut.MoveCursorLeft">Di chuyển con trỏ sang trái</system:String>
+  <system:String x:Key="shortcut.MoveCursorRight">Di chuyển con trỏ sang phải</system:String>
+  <system:String x:Key="shortcut.MoveNotesLeft">Di chuyển nốt sang trái</system:String>
+  <system:String x:Key="shortcut.MoveNotesRight">Di chuyển nốt sang phải</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartDown">Chuyển sang phần tiếp theo (Xuống)</system:String>
+  <system:String x:Key="shortcut.MoveToNextPartUp">Chuyển sang phần tiếp theo (Lên)</system:String>
+  <system:String x:Key="shortcut.MuteTrack">Tắt tiếng track</system:String>
+  <system:String x:Key="shortcut.OpenPluginMenu">Mở menu plugin</system:String>
+  <system:String x:Key="shortcut.OpenSnapMenu">Mở menu Snap</system:String>
+  <system:String x:Key="shortcut.Paste">Dán</system:String>
+  <system:String x:Key="shortcut.PasteParameters">Dán tham số</system:String>
+  <system:String x:Key="shortcut.PastePlain">Dán thành nốt thuần</system:String>
+  <system:String x:Key="shortcut.PlayOrPause">Phát / Tạm dừng</system:String>
+  <system:String x:Key="shortcut.PlaySelection">Phát phần đã chọn</system:String>
+  <system:String x:Key="shortcut.PlayheadEnd">Đưa đầu phát về cuối</system:String>
+  <system:String x:Key="shortcut.PlayheadHome">Đưa đầu phát về đầu</system:String>
+  <system:String x:Key="shortcut.PlayheadLeft">Di chuyển đầu phát sang trái</system:String>
+  <system:String x:Key="shortcut.PlayheadRight">Di chuyển đầu phát sang phải</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionEnd">Đưa đầu phát về cuối lựa chọn</system:String>
+  <system:String x:Key="shortcut.PlayheadToSelectionStart">Đưa đầu phát về đầu lựa chọn</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewEnd">Đưa đầu phát về cuối khung nhìn</system:String>
+  <system:String x:Key="shortcut.PlayheadToViewStart">Đưa đầu phát về đầu khung nhìn</system:String>
+  <system:String x:Key="shortcut.Redo">Làm lại</system:String>
+  <system:String x:Key="shortcut.ResizeNotesLeft">Đổi kích thước nốt bên trái</system:String>
+  <system:String x:Key="shortcut.ResizeNotesRight">Đổi kích thước nốt bên phải</system:String>
+  <system:String x:Key="shortcut.SaveProject">Lưu dự án</system:String>
+  <system:String x:Key="shortcut.ScrollDown">Cuộn xuống</system:String>
+  <system:String x:Key="shortcut.ScrollLeft">Cuộn trái</system:String>
+  <system:String x:Key="shortcut.ScrollRight">Cuộn phải</system:String>
+  <system:String x:Key="shortcut.ScrollUp">Cuộn lên</system:String>
+  <system:String x:Key="shortcut.SearchNote">Tìm nốt</system:String>
+  <system:String x:Key="shortcut.SelectAll">Chọn tất cả</system:String>
+  <system:String x:Key="shortcut.SelectToEnd">Mở rộng lựa chọn đến cuối</system:String>
+  <system:String x:Key="shortcut.SelectToStart">Mở rộng lựa chọn đến đầu</system:String>
+  <system:String x:Key="shortcut.SoloTrack">Solo track</system:String>
+  <system:String x:Key="shortcut.ToggleExpressions">Bật/tắt xem biểu cảm</system:String>
+  <system:String x:Key="shortcut.ToggleFinalPitch">Bật/tắt xem cao độ cuối</system:String>
+  <system:String x:Key="shortcut.ToggleNoteParams">Bật/tắt xem tham số nốt</system:String>
+  <system:String x:Key="shortcut.TogglePhoneme">Bật/tắt xem âm vị</system:String>
+  <system:String x:Key="shortcut.TogglePitch">Bật/tắt xem cao độ</system:String>
+  <system:String x:Key="shortcut.TogglePlayTone">Bật/tắt phát tone</system:String>
+  <system:String x:Key="shortcut.ToggleSnap">Bật/tắt Snap</system:String>
+  <system:String x:Key="shortcut.ToggleTips">Bật/tắt xem mẹo</system:String>
+  <system:String x:Key="shortcut.ToggleVibrato">Bật/tắt xem vibrato</system:String>
+  <system:String x:Key="shortcut.ToggleWaveform">Bật/tắt xem dạng sóng</system:String>
+  <system:String x:Key="shortcut.ToolSelect1">Công cụ chọn</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Alt">Công cụ bút (Alt)</system:String>
+  <system:String x:Key="shortcut.ToolSelect2Main">Công cụ bút</system:String>
+  <system:String x:Key="shortcut.ToolSelect3">Công cụ tẩy</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Main">Công cụ vẽ cao độ</system:String>
+  <system:String x:Key="shortcut.ToolSelect4Overwrite">Công cụ vẽ cao độ (Ghi đè)</system:String>
+  <system:String x:Key="shortcut.ToolSelect5">Công cụ dao</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLine">Công cụ đường cao độ</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchLineOverwrite">Công cụ đường cao độ (Ghi đè)</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSCurve">Công cụ S-Curve cao độ</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSine">Công cụ sóng sine cao độ</system:String>
+  <system:String x:Key="shortcut.ToolSelectPitchSmoothen">Công cụ làm mượt cao độ</system:String>
+  <system:String x:Key="shortcut.TransposeDown">Chuyển giọng xuống</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveDown">Chuyển xuống một quãng tám</system:String>
+  <system:String x:Key="shortcut.TransposeOctaveUp">Chuyển lên một quãng tám</system:String>
+  <system:String x:Key="shortcut.TransposeUp">Chuyển giọng lên</system:String>
+  <system:String x:Key="shortcut.Undo">Hoàn tác</system:String>
+  <system:String x:Key="shortcut.ZoomIn">Phóng to</system:String>
+  <system:String x:Key="shortcut.ZoomOut">Thu nhỏ</system:String>
+
+  <system:String x:Key="themeditor.cancel">Hủy</system:String>
+  <system:String x:Key="themeditor.save">Lưu</system:String>
+  <system:String x:Key="themeditor.title">Trình chỉnh sửa chủ đề</system:String>
+
+  <system:String x:Key="themeeditor.cancel">Hủy</system:String>
+  <system:String x:Key="themeeditor.save">Lưu</system:String>
+
+  <system:String x:Key="tip.notes.zoomy">Alt + con lăn chuột để phóng theo chiều dọc</system:String>
+
+  <system:String x:Key="tracks.mixfx">Track Polish</system:String>
+  <system:String x:Key="tracks.rotateselectedtracksingers">Xoay ca sĩ giữa các track đã chọn</system:String>
+  <system:String x:Key="tracks.singer.applytoalltracks.tooltip">Áp dụng cho tất cả track đã chọn</system:String>
+  <system:String x:Key="tracks.singer.favorite.tooltip">Thêm ca sĩ vào yêu thích</system:String>
+  <system:String x:Key="tracks.standardizesettings">Chuẩn hóa cài đặt track</system:String>
+
+  <system:String x:Key="updater.status.unknown">Không thể kiểm tra cập nhật. Mở GitHub Releases để tải thủ công, hoặc xem nhật ký để biết chi tiết.</system:String>
+
+  <system:String x:Key="welcome.singerhub.description">Cài đặt hoặc cập nhật thư viện giọng từ nguồn đáng tin cậy</system:String>
+  <system:String x:Key="welcome.singerhub.open">Mở Singer Hub</system:String>
+
+  <system:String x:Key="workspace.panel.close">Đóng bảng</system:String>
+  <system:String x:Key="workspace.panel.render">Kết xuất</system:String>
+  <system:String x:Key="workspace.panel.view">Xem</system:String>
+  <system:String x:Key="workspace.tracks">Track</system:String>
+</ResourceDictionary>
