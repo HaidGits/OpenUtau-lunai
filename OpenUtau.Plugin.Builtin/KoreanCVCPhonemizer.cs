@@ -6,7 +6,7 @@ using OpenUtau.Core;
 using OpenUtau.Core.Ustx;
 
 namespace OpenUtau.Plugin.Builtin {
-    [Phonemizer("KoreanCVCPhonemizer", "KO CVC", "NANA", language: "UTAU")]
+    [Phonemizer("KoreanCVCPhonemizer", "KO CVC", "NANA", language:"KO")]
 
     public class KoreanCVCPhonemizer : BaseKoreanPhonemizer {
 

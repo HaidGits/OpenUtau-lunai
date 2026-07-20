@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -124,7 +124,10 @@ namespace OpenUtau.App.ViewModels {
                                 CommandParameter = singerType,
                             }
                         ).ToList();
-                        setDefaultPhonemizerMenuItems = PhonemizerFactory.GetAll().Select(factory => 
+                        setDefaultPhonemizerMenuItems = PhonemizerFactory.EnumerateForSinger(singer)
+                            .OrderBy(factory => factory.tag)
+                            .ThenBy(factory => factory.name)
+                            .Select(factory =>
                             new MenuItemViewModel(singer.DefaultPhonemizer == factory.type.FullName) {
                                 Header = factory.ToString(),
                                 Command = setDefaultPhonemizerCommand,

@@ -7,7 +7,7 @@ using System.Linq;
 using Serilog;
 
 namespace OpenUtau.Plugin.Builtin {
-    [Phonemizer("Spanish Makkusan Phonemizer", "ES MAKKU", "Lotte V", language: "UTAU")]
+    [Phonemizer("Spanish Makkusan Phonemizer", "ES MAKKU", "Lotte V", language:"ES")]
     public class SpanishMakkusanPhonemizer : SyllableBasedPhonemizer {
         /// <summary>
         /// Spanish phonemizer, based on Makkusan's Italian reclist.

@@ -270,7 +270,7 @@ namespace OpenUtau.App.ViewModels {
             }
             var available = PhonemizerFactory.EnumerateForSinger(singer).ToArray();
             var availableTypes = available.Select(factory => factory.type).ToHashSet();
-            bool isDiffSinger = singer != null && singer.Found && singer.SingerType == USingerType.DiffSinger;
+            bool flatMenu = PhonemizerFactory.UsesFlatPhonemizerMenu(singer);
 
             string defaultHeader = "Default";
             if (Part != null) {
@@ -298,7 +298,7 @@ namespace OpenUtau.App.ViewModels {
                 .ToArray();
             items.AddRange(recentItems);
 
-            if (isDiffSinger) {
+            if (flatMenu) {
                 var listed = items
                     .Select(item => item.CommandParameter)
                     .OfType<string>()
@@ -324,19 +324,17 @@ namespace OpenUtau.App.ViewModels {
                 if (items.Count > 0) {
                     items.Add(new MenuItemViewModel() { Header = "-", Height = 1 });
                 }
-                items.Add(new MenuItemViewModel() {
-                    Header = $"{ThemeManager.GetString("tracks.more")} ...",
-                    Items = available.GroupBy(factory => factory.language)
+                items.AddRange(available.GroupBy(factory => factory.language)
                     .OrderBy(group => group.Key)
                     .Select(group => new MenuItemViewModel() {
                         Header = GetPhonemizerGroupHeader(group.Key),
-                        Items = group.Select(factory => new MenuItemViewModel() {
-                            Header = factory.ToString(),
-                            Command = SelectPhonemizerCommand,
-                            CommandParameter = factory.name,
-                        }).ToArray(),
-                    }).ToArray()
-                });
+                        Items = group.OrderBy(factory => factory.tag).ThenBy(factory => factory.name)
+                            .Select(factory => new MenuItemViewModel() {
+                                Header = factory.ToString(),
+                                Command = SelectPhonemizerCommand,
+                                CommandParameter = factory.name,
+                            }).ToArray(),
+                    }));
             }
 
             PhonemizerMenuItems = items;

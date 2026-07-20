@@ -38,31 +38,40 @@
       <Setter Property="MinHeight" Value="0"/>
     </Style>
     <Style Selector="controls|FavouriteToggleButton.singerMenuFavourite">
-      <Setter Property="Width" Value="14"/>
-      <Setter Property="Height" Value="14"/>
-      <Setter Property="Margin" Value="0,0,1,0"/>
+      <Setter Property="Width" Value="16"/>
+      <Setter Property="Height" Value="16"/>
+      <Setter Property="Margin" Value="0"/>
       <Setter Property="Padding" Value="0"/>
       <Setter Property="ClipToBounds" Value="False"/>
       <Setter Property="HorizontalAlignment" Value="Center"/>
       <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
     <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem">
-      <Setter Property="Padding" Value="8,2,8,2"/>
+      <Setter Property="Padding" Value="4,2,4,2"/>
       <Setter Property="ToolTip.Tip" Value="{x:Null}"/>
     </Style>
-    <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ ContentPresenter#PART_IconPresenter">
+    <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ ContentControl#PART_ToggleIconPresenter,
+                     ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ ContentControl#PART_IconPresenter">
       <Setter Property="IsVisible" Value="False"/>
       <Setter Property="Width" Value="0"/>
       <Setter Property="MinWidth" Value="0"/>
+      <Setter Property="Margin" Value="0"/>
+    </Style>
+    <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ TextBlock#PART_InputGestureText">
+      <Setter Property="IsVisible" Value="False"/>
+      <Setter Property="Width" Value="0"/>
+      <Setter Property="MinWidth" Value="0"/>
+      <Setter Property="Margin" Value="0"/>
     </Style>
     <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ Path#PART_ChevronPath">
       <Setter Property="IsVisible" Value="False"/>
       <Setter Property="Width" Value="0"/>
       <Setter Property="MinWidth" Value="0"/>
+      <Setter Property="Margin" Value="0"/>
     </Style>
-    <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ ContentPresenter#PART_ContentPresenter">
+    <Style Selector="ContextMenu#SingersMenu MenuItem.singerMenuItem /template/ ContentPresenter#PART_HeaderPresenter">
       <Setter Property="Grid.Column" Value="0"/>
-      <Setter Property="Grid.ColumnSpan" Value="4"/>
+      <Setter Property="Grid.ColumnSpan" Value="5"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
       <Setter Property="ClipToBounds" Value="False"/>
     </Style>
@@ -93,19 +102,6 @@
                      ContextMenu#SingersMenu MenuItem.singerMenuSpacer:pressed">
       <Setter Property="Background" Value="Transparent"/>
     </Style>
-    <Style Selector="ContextMenu#PhonemizersMenu MenuItem.phonemizerMenuSeparator">
-      <Setter Property="Padding" Value="0"/>
-      <Setter Property="Height" Value="1"/>
-      <Setter Property="MinHeight" Value="1"/>
-      <Setter Property="MaxHeight" Value="1"/>
-      <Setter Property="IsEnabled" Value="False"/>
-      <Setter Property="Background" Value="Transparent"/>
-    </Style>
-    <Style Selector="ContextMenu#PhonemizersMenu MenuItem.phonemizerMenuSeparator:pointerover,
-                     ContextMenu#PhonemizersMenu MenuItem.phonemizerMenuSeparator:selected,
-                     ContextMenu#PhonemizersMenu MenuItem.phonemizerMenuSeparator:pressed">
-      <Setter Property="Background" Value="Transparent"/>
-    </Style>
     <Style Selector="TextBlock.trackHeaderFaderLabel.muted">
       <Setter Property="Foreground" Value="{DynamicResource MutedIconBrush}"/>
     </Style>
@@ -113,23 +109,87 @@
   <UserControl.Resources>
     <ContextMenu x:Key="PhonemizersMenuRes" Classes="context" Name="PhonemizersMenu" Placement="BottomEdgeAlignedLeft"
                  HorizontalOffset="-3" ItemsSource="{Binding PhonemizerMenuItems}">
+      <ContextMenu.Resources>
+        <Thickness x:Key="MenuIconPresenterMargin">0</Thickness>
+        <Thickness x:Key="MenuInputGestureTextMargin">0</Thickness>
+        <Thickness x:Key="MenuFlyoutItemChevronMargin">0</Thickness>
+      </ContextMenu.Resources>
       <ContextMenu.Styles>
         <Style Selector="MenuItem">
-          <Setter Property="Header" Value="{Binding Header}"/>
+          <Setter Property="Header" Value="{Binding HeaderViewModel}"/>
           <Setter Property="Command" Value="{Binding Command}"/>
           <Setter Property="CommandParameter" Value="{Binding CommandParameter}"/>
           <Setter Property="ItemsSource" Value="{Binding Items}"/>
           <Setter Property="Height" Value="{Binding Height}"/>
+          <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+          <Setter Property="Padding" Value="8,2,4,2"/>
+        </Style>
+        <Style Selector="MenuItem.phonemizerMenuSeparator">
+          <Setter Property="Padding" Value="0"/>
+          <Setter Property="Height" Value="1"/>
+          <Setter Property="MinHeight" Value="1"/>
+          <Setter Property="MaxHeight" Value="1"/>
+          <Setter Property="IsEnabled" Value="False"/>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="MenuItem.phonemizerMenuSeparator:pointerover,
+                         MenuItem.phonemizerMenuSeparator:selected,
+                         MenuItem.phonemizerMenuSeparator:pressed">
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <!-- Collapse Fluent chrome slots so header (and apply button) can use full width -->
+        <Style Selector="MenuItem.phonemizerMenuItem /template/ ContentControl#PART_ToggleIconPresenter,
+                         MenuItem.phonemizerMenuItem /template/ ContentControl#PART_IconPresenter,
+                         MenuItem.phonemizerMenuSeparator /template/ ContentControl#PART_ToggleIconPresenter,
+                         MenuItem.phonemizerMenuSeparator /template/ ContentControl#PART_IconPresenter,
+                         MenuItem MenuItem /template/ ContentControl#PART_ToggleIconPresenter,
+                         MenuItem MenuItem /template/ ContentControl#PART_IconPresenter">
+          <Setter Property="IsVisible" Value="False"/>
+          <Setter Property="Width" Value="0"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="MenuItem.phonemizerMenuItem /template/ TextBlock#PART_InputGestureText,
+                         MenuItem.phonemizerMenuSeparator /template/ TextBlock#PART_InputGestureText,
+                         MenuItem MenuItem /template/ TextBlock#PART_InputGestureText">
+          <Setter Property="IsVisible" Value="False"/>
+          <Setter Property="Width" Value="0"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="MenuItem.phonemizerMenuItem /template/ Path#PART_ChevronPath,
+                         MenuItem.phonemizerMenuSeparator /template/ Path#PART_ChevronPath,
+                         MenuItem MenuItem /template/ Path#PART_ChevronPath">
+          <Setter Property="IsVisible" Value="False"/>
+          <Setter Property="Width" Value="0"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="MenuItem.phonemizerMenuItem /template/ ContentPresenter#PART_HeaderPresenter,
+                         MenuItem.phonemizerMenuSeparator /template/ ContentPresenter#PART_HeaderPresenter,
+                         MenuItem MenuItem /template/ ContentPresenter#PART_HeaderPresenter">
+          <Setter Property="Grid.Column" Value="0"/>
+          <Setter Property="Grid.ColumnSpan" Value="5"/>
+          <Setter Property="HorizontalAlignment" Value="Stretch"/>
+          <Setter Property="ClipToBounds" Value="False"/>
+        </Style>
+        <Style Selector="controls|ApplyToAllTracksButton.phonemizerMenuApplyAll">
+          <Setter Property="Width" Value="16"/>
+          <Setter Property="Height" Value="16"/>
+          <Setter Property="Margin" Value="4,0,0,0"/>
+          <Setter Property="Padding" Value="0"/>
+          <Setter Property="HorizontalAlignment" Value="Right"/>
+          <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
       </ContextMenu.Styles>
       <ContextMenu.DataTemplates>
         <DataTemplate DataType="vm:PhonemizerMenuItemViewModel">
-          <Grid ColumnDefinitions="*,24" MinHeight="24">
+          <Grid ColumnDefinitions="*,Auto" MinHeight="24" HorizontalAlignment="Stretch">
             <ContentPresenter Grid.Column="0"
                               Content="{Binding Header}"
                               VerticalAlignment="Center"/>
             <controls:ApplyToAllTracksButton Grid.Column="1"
-                  Margin="8,0,0,0"
+                  Classes="phonemizerMenuApplyAll"
                   VerticalAlignment="Center"
                   Command="{Binding SecondaryCommand}"
                   CommandParameter="{Binding CommandParameter}"/>
@@ -140,6 +200,11 @@
     <ContextMenu x:Key="SingersMenuRes" Classes="context" Name="SingersMenu" Placement="BottomEdgeAlignedLeft" 
                  MinWidth="220"
                  HorizontalOffset="-3" ItemsSource="{Binding SingerMenuItems}">
+      <ContextMenu.Resources>
+        <Thickness x:Key="MenuIconPresenterMargin">0</Thickness>
+        <Thickness x:Key="MenuInputGestureTextMargin">0</Thickness>
+        <Thickness x:Key="MenuFlyoutItemChevronMargin">0</Thickness>
+      </ContextMenu.Resources>
       <ContextMenu.Styles>
         <Style Selector="MenuItem">
           <Setter Property="Header" Value="{Binding HeaderViewModel}"/>
@@ -150,6 +215,35 @@
           <Setter Property="ToolTip.Tip" Value="{Binding Location}"/>
           <Setter Property="Height" Value="{Binding Height}"/>
           <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+        </Style>
+        <Style Selector="MenuItem.singerMenuItem">
+          <Setter Property="Padding" Value="4,2,4,2"/>
+          <Setter Property="ToolTip.Tip" Value="{x:Null}"/>
+        </Style>
+        <Style Selector="MenuItem.singerMenuItem /template/ TextBlock#PART_InputGestureText">
+          <Setter Property="IsVisible" Value="False"/>
+          <Setter Property="Width" Value="0"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="MenuItem.singerMenuItem /template/ ContentControl#PART_ToggleIconPresenter,
+                         MenuItem.singerMenuItem /template/ ContentControl#PART_IconPresenter">
+          <Setter Property="IsVisible" Value="False"/>
+          <Setter Property="Width" Value="0"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="MenuItem.singerMenuItem /template/ Path#PART_ChevronPath">
+          <Setter Property="IsVisible" Value="False"/>
+          <Setter Property="Width" Value="0"/>
+          <Setter Property="MinWidth" Value="0"/>
+          <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style Selector="MenuItem.singerMenuItem /template/ ContentPresenter#PART_HeaderPresenter">
+          <Setter Property="Grid.Column" Value="0"/>
+          <Setter Property="Grid.ColumnSpan" Value="5"/>
+          <Setter Property="HorizontalAlignment" Value="Stretch"/>
+          <Setter Property="ClipToBounds" Value="False"/>
         </Style>
       </ContextMenu.Styles>
       <ContextMenu.DataTemplates>

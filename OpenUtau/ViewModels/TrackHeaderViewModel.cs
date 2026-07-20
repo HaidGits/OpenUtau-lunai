@@ -357,33 +357,30 @@ namespace OpenUtau.App.ViewModels {
             return false;
         }
 
-        static bool IsDiffSingerTrack(UTrack targetTrack) {
-            return targetTrack.Singer != null
-                && targetTrack.Singer.Found
-                && targetTrack.Singer.SingerType == USingerType.DiffSinger;
-        }
-
         static bool IsPhonemizerAllowedForTrack(PhonemizerFactory? factory, UTrack targetTrack) {
             if (factory == null) {
                 return false;
             }
-            if (!IsDiffSingerTrack(targetTrack)) {
-                return !PhonemizerFactory.IsDiffSingerPhonemizer(factory);
-            }
-            return PhonemizerFactory.IsDiffSingerPhonemizer(factory);
+            return PhonemizerFactory.EnumerateForSinger(targetTrack.Singer).Any(f => f.type == factory.type);
         }
 
         static PhonemizerFactory? GetFallbackPhonemizerFactory(UTrack targetTrack) {
-            if (!IsDiffSingerTrack(targetTrack)) {
-                return null;
-            }
-            if (!string.IsNullOrEmpty(targetTrack.Singer.DefaultPhonemizer)) {
-                var singerDefault = PhonemizerFactory.Get(targetTrack.Singer.DefaultPhonemizer);
-                if (singerDefault != null && PhonemizerFactory.IsDiffSingerPhonemizer(singerDefault)) {
+            var singer = targetTrack.Singer;
+            if (singer != null && singer.Found && !string.IsNullOrEmpty(singer.DefaultPhonemizer)) {
+                var singerDefault = PhonemizerFactory.Get(singer.DefaultPhonemizer);
+                if (IsPhonemizerAllowedForTrack(singerDefault, targetTrack)) {
                     return singerDefault;
                 }
             }
-            return PhonemizerFactory.Get(typeof(DiffSingerPhonemizer));
+            var firstForSinger = PhonemizerFactory.EnumerateForSinger(singer).FirstOrDefault();
+            if (firstForSinger != null) {
+                return firstForSinger;
+            }
+            return singer?.SingerType switch {
+                USingerType.DiffSinger => PhonemizerFactory.Get(typeof(DiffSingerPhonemizer)),
+                USingerType.Voicevox => PhonemizerFactory.Get(typeof(Core.Voicevox.VoicevoxPhonemizer)),
+                _ => PhonemizerFactory.Get(typeof(DefaultPhonemizer)),
+            };
         }
 
         static MenuSeparatorViewModel SingerMenuSeparator() => new();
@@ -527,7 +524,7 @@ namespace OpenUtau.App.ViewModels {
             var items = new List<MenuItemViewModel>();
             var available = PhonemizerFactory.EnumerateForSinger(track.Singer).ToArray();
             var availableTypes = available.Select(factory => factory.type).ToHashSet();
-            bool isDiffSinger = IsDiffSingerTrack(track);
+            bool flatMenu = PhonemizerFactory.UsesFlatPhonemizerMenu(track.Singer);
             //Singer default
             if (track.Singer != null && track.Singer.Found) {
                 var factory = FindPhonemizerByName(track.Singer.DefaultPhonemizer);
@@ -547,7 +544,7 @@ namespace OpenUtau.App.ViewModels {
                 .Select(factory => new PhonemizerMenuItemViewModel(factory!, SelectPhonemizerCommand, null, AllSetPhonemizerCommand))
                 .ToArray();
             items.AddRange(recentItems);
-            if (isDiffSinger) {
+            if (flatMenu) {
                 var listed = items
                     .Select(item => item.CommandParameter)
                     .OfType<PhonemizerFactory>()
@@ -564,19 +561,18 @@ namespace OpenUtau.App.ViewModels {
                 }
                 items.AddRange(remaining);
             } else {
-                //more phonemizers grouped by singing language
+                // Classic UTAU: language groups directly under the menu
                 if (items.Count > 0) {
                     items.Add(MenuLineSeparator());
                 }
-                items.Add(new MenuItemViewModel() {
-                    Header = $"{ThemeManager.GetString("tracks.more")} ...",
-                    Items = available.GroupBy(factory => factory.language)
+                items.AddRange(available.GroupBy(factory => factory.language)
                     .OrderBy(group => group.Key)
                     .Select(group => new MenuItemViewModel() {
                         Header = GetPhonemizerGroupHeader(group.Key),
-                        Items = group.Select(factory => new PhonemizerMenuItemViewModel(factory, SelectPhonemizerCommand, null, AllSetPhonemizerCommand)).ToArray(),
-                    }).ToArray()
-                });
+                        Items = group.OrderBy(factory => factory.tag).ThenBy(factory => factory.name)
+                            .Select(factory => new PhonemizerMenuItemViewModel(factory, SelectPhonemizerCommand, null, AllSetPhonemizerCommand))
+                            .ToArray(),
+                    }));
             }
             PhonemizerMenuItems = items.ToArray();
             this.RaisePropertyChanged(nameof(PhonemizerMenuItems));

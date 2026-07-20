@@ -26,7 +26,7 @@ public class FavouriteToggleButton : ToggleButton {
         };
         _iconHost = new Viewbox {
             Stretch = Stretch.Uniform,
-            Margin = new Thickness(-1, 0, 2, 0),
+            ClipToBounds = false,
             Child = _iconPath,
         };
         Content = _iconHost;
@@ -57,13 +57,13 @@ public class FavouriteToggleButton : ToggleButton {
         if (useSingerMenuColors) {
             var brush = IsPointerOver ? MenuHoverBrush : ThemeManager.MutedIconBrush;
             _iconPath.StrokeThickness = 1.5;
-            _iconHost.Margin = new Thickness(-1, 0, 2, 0);
+            _iconHost.Margin = new Thickness(1.5);
             _iconPath.Stroke = brush;
             _iconPath.Fill = (IsChecked ?? false) ? brush : Brushes.Transparent;
             return;
         }
         _iconPath.StrokeThickness = 2;
-        _iconHost.Margin = new Thickness(0);
+        _iconHost.Margin = new Thickness(1);
         if (IsChecked ?? false) {
             _iconPath.Fill = ThemeManager.AccentBrush3;
             _iconPath.Stroke = ThemeManager.AccentBrush3;

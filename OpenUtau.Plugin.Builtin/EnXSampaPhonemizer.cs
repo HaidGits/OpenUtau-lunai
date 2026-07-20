@@ -26,7 +26,7 @@ namespace OpenUtau.Plugin.Builtin {
     /// <br></br>
     /// Read more about X-SAMPA <a href="https://www.wikipedia.org/wiki/X-SAMPA">here</a>.
     /// </summary>
-    [Phonemizer("English X-SAMPA phonemizer", "EN X-SAMPA", "Lotte V", language: "UTAU")]
+    [Phonemizer("English X-SAMPA phonemizer", "EN X-SAMPA", "Lotte V", language: "EN")]
     public class EnXSampaPhonemizer : SyllableBasedPhonemizer {
         protected override string YamlFileName => "en-xsampa.yaml";
         protected override byte[] YamlTemplate => Data.Resources.en_xsampa_template;

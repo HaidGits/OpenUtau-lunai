@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 using OpenUtau.Core;
 
 namespace OpenUtau.Plugin.Builtin {
-    [Phonemizer("Filipino Phonemizer", "FIL VCV & CVVC", "Cadlaxa", language: "UTAU")]
+    [Phonemizer("Filipino Phonemizer", "FIL VCV & CVVC", "Cadlaxa", language: "FIL")]
     public class FilipinoPhonemizer : SyllableBasedPhonemizer {
         protected override string YamlFileName => "filipino.yaml";
         protected override byte[] YamlTemplate => Data.Resources.filipino_template;

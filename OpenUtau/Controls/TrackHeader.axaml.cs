@@ -81,8 +81,8 @@ namespace OpenUtau.App.Controls {
                 return;
             }
             switch (menuItem.DataContext) {
-                case PhonemizerMenuItemViewModel phonemizer:
-                    menuItem.Header = phonemizer;
+                case PhonemizerMenuItemViewModel:
+                    menuItem.Classes.Set("phonemizerMenuItem", true);
                     break;
                 case PhonemizerMenuSeparatorViewModel:
                     menuItem.Classes.Set("phonemizerMenuSeparator", true);

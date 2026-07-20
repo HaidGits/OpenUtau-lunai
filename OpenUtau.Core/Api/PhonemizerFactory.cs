@@ -7,6 +7,10 @@ using OpenUtau.Core.Ustx;
 namespace OpenUtau.Api {
     public class PhonemizerFactory {
         public const string DiffSingerLanguage = "DiffSinger";
+        public const string VoicevoxLanguage = "VOICEVOX";
+        public const string EnunuLanguage = "ENUNU";
+        public const string VogenLanguage = "VOGEN";
+
         public Type type;
         public string name;
         public string tag;
@@ -60,16 +64,143 @@ namespace OpenUtau.Api {
 
         public static PhonemizerFactory[] GetAll() => orderedFactories;
 
+        static bool LanguageEquals(string? language, string expected) {
+            return string.Equals(language, expected, StringComparison.OrdinalIgnoreCase);
+        }
+
+        static bool ContainsIgnoreCase(string? text, string value) {
+            return !string.IsNullOrEmpty(text)
+                && text.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        static bool TagStartsWithDiffs(string? tag) {
+            if (string.IsNullOrWhiteSpace(tag)) {
+                return false;
+            }
+            tag = tag.Trim();
+            return tag.StartsWith("DIFFS", StringComparison.OrdinalIgnoreCase)
+                && (tag.Length == 5 || !char.IsLetterOrDigit(tag[5]));
+        }
+
+        static bool TypeDerivesFrom(Type type, params string[] baseTypeNames) {
+            for (var t = type; t != null && t != typeof(object); t = t.BaseType) {
+                foreach (var baseName in baseTypeNames) {
+                    if (string.Equals(t.Name, baseName, StringComparison.Ordinal)) {
+                        return true;
+                    }
+                    if (t.FullName != null
+                        && t.FullName.EndsWith("." + baseName, StringComparison.Ordinal)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public static bool IsDiffSingerPhonemizer(PhonemizerFactory factory) {
-            return string.Equals(factory.language, DiffSingerLanguage, StringComparison.OrdinalIgnoreCase);
+            if (factory == null) {
+                return false;
+            }
+            if (LanguageEquals(factory.language, DiffSingerLanguage)) {
+                return true;
+            }
+            if (TypeDerivesFrom(factory.type,
+                    "DiffSingerBasePhonemizer",
+                    "DiffSingerG2pPhonemizer",
+                    "DiffSingerRefinedPhonemizer")) {
+                return true;
+            }
+            if (ContainsIgnoreCase(factory.name, "DiffSinger")) {
+                return true;
+            }
+            return TagStartsWithDiffs(factory.tag);
+        }
+
+        public static bool IsVoicevoxPhonemizer(PhonemizerFactory factory) {
+            if (factory == null || IsDiffSingerPhonemizer(factory)) {
+                return false;
+            }
+            if (LanguageEquals(factory.language, VoicevoxLanguage)) {
+                return true;
+            }
+            if (TypeDerivesFrom(factory.type, "VoicevoxPhonemizer")) {
+                return true;
+            }
+            if (ContainsIgnoreCase(factory.name, "ENtoJA")
+                || TagStartsWithIgnoreCase(factory.tag, "S-VOICEVOX")) {
+                return false;
+            }
+            return ContainsIgnoreCase(factory.name, "Voicevox")
+                || ContainsIgnoreCase(factory.tag, "VOICEVOX");
+        }
+
+        public static bool IsEnunuPhonemizer(PhonemizerFactory factory) {
+            if (factory == null
+                || IsDiffSingerPhonemizer(factory)
+                || IsVoicevoxPhonemizer(factory)) {
+                return false;
+            }
+            if (LanguageEquals(factory.language, EnunuLanguage)) {
+                return true;
+            }
+            if (TypeDerivesFrom(factory.type, "EnunuPhonemizer")) {
+                return true;
+            }
+            return ContainsIgnoreCase(factory.name, "Enunu")
+                || ContainsIgnoreCase(factory.tag, "ENUNU");
+        }
+
+        public static bool IsVogenPhonemizer(PhonemizerFactory factory) {
+            if (factory == null
+                || IsDiffSingerPhonemizer(factory)
+                || IsVoicevoxPhonemizer(factory)
+                || IsEnunuPhonemizer(factory)) {
+                return false;
+            }
+            if (LanguageEquals(factory.language, VogenLanguage)) {
+                return true;
+            }
+            if (TypeDerivesFrom(factory.type, "VogenBasePhonemizer")) {
+                return true;
+            }
+            return ContainsIgnoreCase(factory.name, "Vogen")
+                || ContainsIgnoreCase(factory.tag, "VOGEN");
+        }
+
+        public static bool IsUtauPhonemizer(PhonemizerFactory factory) {
+            return !IsDiffSingerPhonemizer(factory)
+                && !IsVoicevoxPhonemizer(factory)
+                && !IsEnunuPhonemizer(factory)
+                && !IsVogenPhonemizer(factory);
+        }
+
+        static bool TagStartsWithIgnoreCase(string? tag, string prefix) {
+            return !string.IsNullOrEmpty(tag)
+                && tag.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static bool UsesFlatPhonemizerMenu(USinger? singer) {
+            if (singer == null || !singer.Found) {
+                return false;
+            }
+            return singer.SingerType is USingerType.DiffSinger
+                or USingerType.Voicevox
+                or USingerType.Enunu
+                or USingerType.Vogen;
         }
 
         public static IEnumerable<PhonemizerFactory> EnumerateForSinger(USinger? singer) {
             var all = GetAll();
-            if (singer != null && singer.Found && singer.SingerType == USingerType.DiffSinger) {
-                return all.Where(IsDiffSingerPhonemizer);
+            if (singer == null || !singer.Found) {
+                return all.Where(IsUtauPhonemizer);
             }
-            return all.Where(factory => !IsDiffSingerPhonemizer(factory));
+            return singer.SingerType switch {
+                USingerType.DiffSinger => all.Where(IsDiffSingerPhonemizer),
+                USingerType.Voicevox => all.Where(IsVoicevoxPhonemizer),
+                USingerType.Enunu => all.Where(IsEnunuPhonemizer),
+                USingerType.Vogen => all.Where(IsVogenPhonemizer),
+                _ => all.Where(IsUtauPhonemizer),
+            };
         }
     }
 }

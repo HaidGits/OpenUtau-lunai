@@ -8,7 +8,7 @@ using static OpenUtau.Core.KoreanPhonemizerUtil;
 
 namespace OpenUtau.Plugin.Builtin
 {
-	[Phonemizer("Korean VCV Phonemizer", "KO VCV", "ldc", language: "UTAU")]
+	[Phonemizer("Korean VCV Phonemizer", "KO VCV", "ldc", language: "KO")]
 
 	public class KoreanVCVPhonemizer : BaseKoreanPhonemizer
 	{

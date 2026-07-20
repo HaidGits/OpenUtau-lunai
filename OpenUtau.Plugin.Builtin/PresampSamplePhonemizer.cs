@@ -7,7 +7,7 @@ using OpenUtau.Core.Ustx;
 
 #if DEBUG
 namespace OpenUtau.Plugin.Builtin {
-    [Phonemizer("Presamp Sample Phonemizer", "ZH CVVC", language: "UTAU")]
+    [Phonemizer("Presamp Sample Phonemizer", "ZH CVVC", language: "ZH")]
     public class PresampSamplePhonemizer : Phonemizer {
         // Supporting: [VOWEL][CONSONANT][PRIORITY][REPLACE][ALIAS(VCPAD,VCVPAD)]
 
