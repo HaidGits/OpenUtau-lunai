@@ -369,6 +369,15 @@
   <system:String x:Key="menu.help.checkupdate">Проверить наличие обновлений</system:String>
   <system:String x:Key="menu.help.logslocation">Открыть расположение логов</system:String>
   <system:String x:Key="menu.help.reportissue">Сообщить об ошибке</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Опишите, что пошло не так. Удобнее всего через Discord в канале #help — так мы быстрее ответим; при необходимости приложите лог. Можно также написать нам на почту.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Зайдите на сервер и опишите баг в #help. Лог можно взять через Справка → Открыть расположение логов.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Открыть Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">Почта</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Напишите нам и при необходимости приложите лог, если ошибку сложно повторить.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Написать письмо</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Скопировать адрес</system:String>
   <system:String x:Key="menu.help.wiki">Вики OpenUtau</system:String>
   <system:String x:Key="menu.project">Проект</system:String>
   <system:String x:Key="menu.project.expressions">Выражения...</system:String>

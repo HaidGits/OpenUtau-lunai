@@ -810,11 +810,7 @@ namespace OpenUtau.App.Views {
         }
 
         void OnMenuReportIssue(object sender, RoutedEventArgs args) {
-            try {
-                OS.OpenWeb(UpdaterViewModel.LunaiRepoUrl + "/issues");
-            } catch (Exception e) {
-                DocManager.Inst.ExecuteCmd(new ErrorMessageNotification(e));
-            }
+            new ReportIssueDialog().ShowDialog(this);
         }
 
         void OnMenuWiki(object sender, RoutedEventArgs args) {

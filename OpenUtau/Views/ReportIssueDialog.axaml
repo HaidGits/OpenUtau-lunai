@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="OpenUtau.App.Views.ReportIssueDialog"
+        Width="460" SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Assets/open-utau.ico"
+        Title="{DynamicResource menu.help.reportissue}">
+  <StackPanel Margin="16" Spacing="12">
+    <TextBlock TextWrapping="Wrap"
+               Text="{DynamicResource dialogs.reportissue.message}"/>
+
+    <Border Classes="singerHubRow" Padding="12" CornerRadius="6" BorderThickness="0">
+      <StackPanel Spacing="8">
+        <TextBlock FontWeight="SemiBold"
+                   Text="{DynamicResource dialogs.reportissue.discord.title}"/>
+        <TextBlock TextWrapping="Wrap" Opacity="0.85"
+                   Text="{DynamicResource dialogs.reportissue.discord.description}"/>
+        <Button Classes="singerHubActionButton"
+                HorizontalAlignment="Left"
+                MinWidth="140" Height="28" MinHeight="28"
+                Content="{DynamicResource dialogs.reportissue.discord.open}"
+                Click="OnOpenDiscord"/>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="singerHubRow" Padding="12" CornerRadius="6" BorderThickness="0">
+      <StackPanel Spacing="8">
+        <TextBlock FontWeight="SemiBold"
+                   Text="{DynamicResource dialogs.reportissue.email.title}"/>
+        <TextBlock TextWrapping="Wrap" Opacity="0.85"
+                   Text="{DynamicResource dialogs.reportissue.email.description}"/>
+        <TextBlock FontFamily="Consolas,Courier New,monospace"
+                   Text="{DynamicResource dialogs.reportissue.email.address}"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Classes="singerHubActionButton"
+                  MinWidth="140" Height="28" MinHeight="28"
+                  Content="{DynamicResource dialogs.reportissue.email.write}"
+                  Click="OnWriteEmail"/>
+          <Button Classes="singerHubActionButton"
+                  MinWidth="140" Height="28" MinHeight="28"
+                  Content="{DynamicResource dialogs.reportissue.email.copy}"
+                  Click="OnCopyEmail"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+      <Button Grid.Column="0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              Content="{DynamicResource menu.help.logslocation}"
+              Click="OnOpenLogs"/>
+      <Button Grid.Column="1"
+              MinWidth="80"
+              VerticalAlignment="Center"
+              Content="{DynamicResource dialogs.about.close}"
+              IsCancel="True"
+              Click="OnClose"/>
+    </Grid>
+  </StackPanel>
+</Window>

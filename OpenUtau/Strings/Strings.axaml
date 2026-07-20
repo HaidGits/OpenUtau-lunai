@@ -371,6 +371,15 @@ Do you want to continue by splitting at the nearest position after current playh
   <system:String x:Key="menu.help.checkupdate">Check Update</system:String>
   <system:String x:Key="menu.help.logslocation">Open Logs Location</system:String>
   <system:String x:Key="menu.help.reportissue">Report Issue</system:String>
+  <system:String x:Key="dialogs.reportissue.message">Tell us what went wrong. Prefer Discord #help so we can reply quickly; include a log file when it helps. You can also email us.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.title">Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.description">Join our server and describe the bug in #help. Attach a log from Help → Open Logs Location if needed.</system:String>
+  <system:String x:Key="dialogs.reportissue.discord.open">Open Discord</system:String>
+  <system:String x:Key="dialogs.reportissue.email.title">Email</system:String>
+  <system:String x:Key="dialogs.reportissue.email.description">Write to us and attach a log if the problem is hard to reproduce.</system:String>
+  <system:String x:Key="dialogs.reportissue.email.address">lunaiproject@gmail.com</system:String>
+  <system:String x:Key="dialogs.reportissue.email.write">Write email</system:String>
+  <system:String x:Key="dialogs.reportissue.email.copy">Copy address</system:String>
   <system:String x:Key="menu.help.wiki">OpenUtau Documentation</system:String>
   <system:String x:Key="menu.project">Project</system:String>
   <system:String x:Key="menu.project.expressions">Expressions...</system:String>

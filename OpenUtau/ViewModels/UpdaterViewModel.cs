@@ -36,6 +36,8 @@ namespace OpenUtau.App.ViewModels {
         public const string LunaiReleasesApi = "https://api.github.com/repos/keirokeer/OpenUtau-lunai/releases";
         public const string LunaiReleasesUrl = "https://github.com/keirokeer/OpenUtau-lunai/releases";
         public const string LunaiRepoUrl = "https://github.com/keirokeer/OpenUtau-lunai";
+        public const string LunaiDiscordInviteUrl = "https://discord.gg/GKSxrSd7mB";
+        public const string LunaiSupportEmail = "lunaiproject@gmail.com";
 
         public string AppVersion => $"v{System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version}";
         public bool IsDarkMode => ThemeManager.IsDarkMode;
