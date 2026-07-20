@@ -1181,14 +1181,9 @@ namespace OpenUtau.App.Views {
                 } else if (hitControl is PartControl partControl) {
                     var localOnPart = args.GetCurrentPoint(partControl).Position;
                     var notesVm = pianoRoll?.ViewModel?.NotesViewModel;
-                    if (partControl.TryHitViewport(localOnPart)
-                        && notesVm != null && notesVm.Part == partControl.part) {
-                        partEditState = new PartViewportScrollState(control, viewModel, notesVm, partControl);
-                        Cursor = ViewConstants.cursorHandGrab;
-                    } else {
                     bool fadein = false;
                     bool fadeout = false;
-                    if (partControl.part is UWavePart wavePart && point.Position.Y < partControl.Bounds.Top + 6) {
+                    if (partControl.part is UWavePart && point.Position.Y < partControl.Bounds.Top + 6) {
                         var fadePos = partControl.Bounds.Left + partControl.FadeIn;
                         fadein = fadePos < point.Position.X && point.Position.X < fadePos + 6;
                         fadePos = partControl.Bounds.Left + partControl.FadeOut;
@@ -1208,10 +1203,13 @@ namespace OpenUtau.App.Views {
                     } else if (trim) {
                         partEditState = new PartResizeEditState(control, viewModel, partControl.part);
                         Cursor = ViewConstants.cursorSizeWE;
+                    } else if (partControl.TryHitViewport(localOnPart)
+                        && notesVm != null && notesVm.Part == partControl.part) {
+                        partEditState = new PartViewportScrollState(control, viewModel, notesVm, partControl);
+                        Cursor = ViewConstants.cursorHandGrab;
                     } else {
                         partEditState = new PartMoveEditState(control, viewModel, partControl.part);
                         Cursor = ViewConstants.cursorSizeAll;
-                    }
                     }
                 }
             } else if (point.Properties.IsRightButtonPressed) {
@@ -1275,13 +1273,9 @@ namespace OpenUtau.App.Views {
             var hitControl = control.InputHitTest(point.Position);
             if (hitControl is PartControl partControl) {
                 var localOnPart = args.GetCurrentPoint(partControl).Position;
-                if (partControl.TryHitViewport(localOnPart)) {
-                    Cursor = ViewConstants.cursorHand;
-                    return;
-                }
                 bool fadein = false;
                 bool fadeout = false;
-                if (partControl.part is UWavePart wavePart && point.Position.Y < partControl.Bounds.Top + 6) {
+                if (partControl.part is UWavePart && point.Position.Y < partControl.Bounds.Top + 6) {
                     var fadePos = partControl.Bounds.Left + partControl.FadeIn;
                     fadein = fadePos < point.Position.X && point.Position.X < fadePos + 6;
                     fadePos = partControl.Bounds.Left + partControl.FadeOut;
@@ -1293,6 +1287,8 @@ namespace OpenUtau.App.Views {
                     Cursor = ViewConstants.cursorHand;
                 } else if (skip || trim) {
                     Cursor = ViewConstants.cursorSizeWE;
+                } else if (partControl.TryHitViewport(localOnPart)) {
+                    Cursor = ViewConstants.cursorHand;
                 } else {
                     Cursor = null;
                 }
