@@ -27,6 +27,7 @@ using SharpCompress;
 
 namespace OpenUtau.App.ViewModels {
     public class NotesRefreshEvent { }
+    public class DiffSingerPhonemePanelAutoApplyEvent { }
     public class NotesSelectionEvent {
         public readonly UNote[] selectedNotes;
         public readonly UNote[] tempSelectedNotes;
@@ -879,18 +880,26 @@ namespace OpenUtau.App.ViewModels {
             Notify();
         }
 
+        bool? lastDiffSingerPhonemePanelMode;
+
         void UpdatePhonemePanelLayoutConstraints() {
-            if (Preferences.Default.DiffSingerPhonemePanelMode) {
+            bool mode = Preferences.Default.DiffSingerPhonemePanelMode;
+            if (mode) {
                 PhonemePanelHeightMin = ViewConstants.PhonemePanelHeightMin;
                 PhonemePanelHeightMax = ViewConstants.PhonemePanelHeightMax;
-                if (PhonemePanelHeight < PhonemePanelHeightMin) {
-                    PhonemePanelHeight = PhonemePanelHeightMin;
+                bool enteringDiffSingerMode = lastDiffSingerPhonemePanelMode != true;
+                bool classicHeightLeftover =
+                    Math.Abs(PhonemePanelHeight - ViewConstants.PhonemeEmbeddedHeight) < 0.01;
+                if (enteringDiffSingerMode || classicHeightLeftover
+                    || PhonemePanelHeight < PhonemePanelHeightMin) {
+                    PhonemePanelHeight = ViewConstants.PhonemePanelHeightMin;
                 }
             } else {
                 PhonemePanelHeightMin = ViewConstants.PhonemeEmbeddedHeight;
                 PhonemePanelHeightMax = ViewConstants.PhonemeEmbeddedHeight;
                 PhonemePanelHeight = ViewConstants.PhonemeEmbeddedHeight;
             }
+            lastDiffSingerPhonemePanelMode = mode;
             this.RaisePropertyChanged(nameof(PhonemePanelResizeEnabled));
             this.RaisePropertyChanged(nameof(PhonemePanelDetached));
             this.RaisePropertyChanged(nameof(ShowEmbeddedPhoneme));

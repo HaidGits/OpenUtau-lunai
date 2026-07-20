@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Hangat",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Warnai latar piano roll dengan warna trek",
   "prefs.diffsinger.phonemepanel": "Panel fonem ramah DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Otomatis beralih panel fonem ramah DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Tampilkan batas frasa render",
   "prefs.diffsinger.section.cache": "Cache",
   "prefs.diffsinger.section.debug": "Debug",

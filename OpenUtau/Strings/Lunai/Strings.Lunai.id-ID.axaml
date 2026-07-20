@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Hangat</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Warnai latar piano roll dengan warna trek</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Panel fonem ramah DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Otomatis beralih panel fonem ramah DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Tampilkan batas frasa render</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Debug</system:String>

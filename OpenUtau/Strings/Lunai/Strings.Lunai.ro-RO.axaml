@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Cald</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Nuanțează fundalul rolei de pian cu culoarea pistei</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Panou de foneme compatibil cu DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Comută automat panoul de foneme DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Arată limitele frazelor de randare</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Depanare</system:String>

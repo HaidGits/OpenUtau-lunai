@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">暖色</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">以音軌色彩為鋼琴捲軸背景著色</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger 友善音標面板</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">自動切換 DiffSinger 友善音標面板</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">顯示算繪短語邊界</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">快取</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">除錯</system:String>

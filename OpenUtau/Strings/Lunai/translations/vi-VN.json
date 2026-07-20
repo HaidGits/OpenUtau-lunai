@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Ấm",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Tô nền piano roll bằng màu track",
   "prefs.diffsinger.phonemepanel": "Bảng âm vị thân thiện DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Tự động chuyển bảng âm vị thân thiện DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Hiện ranh giới cụm render",
   "prefs.diffsinger.section.cache": "Bộ nhớ đệm",
   "prefs.diffsinger.section.debug": "Gỡ lỗi",

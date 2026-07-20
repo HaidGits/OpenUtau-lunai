@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Teplý",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Zabarvit pozadí klavírní role barvou stopy",
   "prefs.diffsinger.phonemepanel": "Panel fonémů přizpůsobený DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Automaticky přepínat panel fonémů DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Zobrazit hranice renderovaných frází",
   "prefs.diffsinger.section.cache": "Mezipaměť",
   "prefs.diffsinger.section.debug": "Ladění",

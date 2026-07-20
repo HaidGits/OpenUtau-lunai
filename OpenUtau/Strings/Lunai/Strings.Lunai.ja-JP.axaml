@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">ウォーム</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">ピアノロール背景をトラックカラーで着色</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger向け音素パネル</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">DiffSinger向け音素パネルを自動切替</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">レンダーフレーズ境界を表示</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">キャッシュ</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">デバッグ</system:String>

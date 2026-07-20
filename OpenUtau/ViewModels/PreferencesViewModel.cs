@@ -177,6 +177,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool DiffSingerShowAcousticF0PatchPreview { get; set; }
         [Reactive] public bool DiffSingerLangCodeHide { get; set; }
         [Reactive] public bool DiffSingerPhonemePanelMode { get; set; }
+        [Reactive] public bool DiffSingerPhonemePanelAuto { get; set; }
         [Reactive] public bool DiffSingerLocalRetaking { get; set; }
         [Reactive] public bool DiffSingerShowRenderPhraseBoundaries { get; set; }
 
@@ -556,6 +557,7 @@ namespace OpenUtau.App.ViewModels {
             DiffSingerShowAcousticF0PatchPreview = Preferences.Default.DiffSingerShowAcousticF0PatchPreview;
             DiffSingerLangCodeHide = Preferences.Default.DiffSingerLangCodeHide;
             DiffSingerPhonemePanelMode = Preferences.Default.DiffSingerPhonemePanelMode;
+            DiffSingerPhonemePanelAuto = Preferences.Default.DiffSingerPhonemePanelAuto;
             DiffSingerLocalRetaking = Preferences.Default.DiffSingerLocalRetaking;
             DiffSingerShowRenderPhraseBoundaries = Preferences.Default.DiffSingerShowRenderPhraseBoundaries;
             SkipRenderingMutedTracks = Preferences.Default.SkipRenderingMutedTracks;
@@ -592,6 +594,14 @@ namespace OpenUtau.App.ViewModels {
             MessageBus.Current.Listen<ThemeEditorSavedEvent>()
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => RefreshThemes());
+
+            MessageBus.Current.Listen<NotesRefreshEvent>()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => {
+                    if (DiffSingerPhonemePanelMode != Preferences.Default.DiffSingerPhonemePanelMode) {
+                        DiffSingerPhonemePanelMode = Preferences.Default.DiffSingerPhonemePanelMode;
+                    }
+                });
             
             this.WhenAnyValue(vm => vm.UseSystemDefaultDevice)
                 .Subscribe(useDefault => {
@@ -910,6 +920,15 @@ namespace OpenUtau.App.ViewModels {
                     Preferences.Default.DiffSingerPhonemePanelMode = mode;
                     Preferences.Save();
                     MessageBus.Current.SendMessage(new NotesRefreshEvent());
+                });
+            this.WhenAnyValue(vm => vm.DiffSingerPhonemePanelAuto)
+                .Subscribe(auto => {
+                    Preferences.Default.DiffSingerPhonemePanelAuto = auto;
+                    Preferences.Save();
+                    if (auto) {
+                        MessageBus.Current.SendMessage(new DiffSingerPhonemePanelAutoApplyEvent());
+                        DiffSingerPhonemePanelMode = Preferences.Default.DiffSingerPhonemePanelMode;
+                    }
                 });
             this.WhenAnyValue(vm => vm.DiffSingerVarianceLocalPitchPatch)
                 .Subscribe(useLocalPatch => {

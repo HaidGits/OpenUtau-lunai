@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Caldo</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Tingi lo sfondo del piano roll con il colore della traccia</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Pannello fonemi adatto a DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Attiva automaticamente il pannello fonemi DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Mostra confini delle frasi renderizzate</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Debug</system:String>

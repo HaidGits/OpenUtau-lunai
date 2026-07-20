@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Cald",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Nuanțează fundalul rolei de pian cu culoarea pistei",
   "prefs.diffsinger.phonemepanel": "Panou de foneme compatibil cu DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Comută automat panoul de foneme DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Arată limitele frazelor de randare",
   "prefs.diffsinger.section.cache": "Cache",
   "prefs.diffsinger.section.debug": "Depanare",

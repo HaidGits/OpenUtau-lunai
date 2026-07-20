@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Cálido",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Teñir el fondo del piano roll con el color de la pista",
   "prefs.diffsinger.phonemepanel": "Panel de fonemas optimizado para DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Cambiar automáticamente el panel de fonemas de DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Mostrar límites de frases de renderizado",
   "prefs.diffsinger.section.cache": "Caché",
   "prefs.diffsinger.section.debug": "Depuración",

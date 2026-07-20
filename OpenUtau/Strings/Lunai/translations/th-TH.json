@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "อุ่น",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "ย้อมพื้นหลังเปียโนโรลด้วยสีแทร็ก",
   "prefs.diffsinger.phonemepanel": "แผงโฟนีมที่เหมาะกับ DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "สลับแผงโฟนีม DiffSinger โดยอัตโนมัติ",
   "prefs.diffsinger.renderphraseboundaries": "แสดงขอบเขตวลีเรนเดอร์",
   "prefs.diffsinger.section.cache": "แคช",
   "prefs.diffsinger.section.debug": "ดีบัก",

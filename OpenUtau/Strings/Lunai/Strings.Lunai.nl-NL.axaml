@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Warm</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Achtergrond van pianorol kleuren met spoorkleur</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger-vriendelijk foneempaneel</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">DiffSinger-vriendelijk foneempaneel automatisch schakelen</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Renderfrasegrenzen weergeven</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Cache</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Foutopsporing</system:String>

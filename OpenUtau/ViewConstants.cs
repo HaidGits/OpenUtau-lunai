@@ -64,8 +64,8 @@ namespace OpenUtau.App {
         public const double ExpHeightMin = 132;
         public const double ExpHeightMax = 600;
 
-        public const double PhonemePanelHeightDefault = 58;
         public const double PhonemePanelHeightMin = 44;
+        public const double PhonemePanelHeightDefault = PhonemePanelHeightMin;
         public const double PhonemePanelHeightMax = 250;
         public const double PhonemePanelResizeHandleHeight = 8;
         public const double PhonemeTagStripHeight = 20;  // DiffSinger: space for tag above bars

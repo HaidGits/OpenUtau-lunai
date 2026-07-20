@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Ciepły",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Zabarw tło edytora pianinowego kolorem ścieżki",
   "prefs.diffsinger.phonemepanel": "Panel fonemów przyjazny dla DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Automatycznie przełączaj panel fonemów DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Pokaż granice fraz renderowania",
   "prefs.diffsinger.section.cache": "Pamięć podręczna",
   "prefs.diffsinger.section.debug": "Debugowanie",

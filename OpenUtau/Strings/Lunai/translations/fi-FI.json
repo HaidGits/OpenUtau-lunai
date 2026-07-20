@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Lämmin",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Sävytä pianorullan tausta raidavärillä",
   "prefs.diffsinger.phonemepanel": "DiffSinger-ystävällinen foneemipaneeli",
+  "prefs.diffsinger.phonemepanel.auto": "Vaihda DiffSinger-foneemipaneeli automaattisesti",
   "prefs.diffsinger.renderphraseboundaries": "Näytä renderöintilauseiden rajat",
   "prefs.diffsinger.section.cache": "Välimuisti",
   "prefs.diffsinger.section.debug": "Virheenkorjaus",

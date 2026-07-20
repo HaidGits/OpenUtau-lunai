@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">دافئة</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">تلوين خلفية لفة البيانو بلون المسار</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">لوحة صوتيات ملائمة لـ DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">التبديل التلقائي للوحة الصوتيات الملائمة لـ DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">إظهار حدود عبارات التصيير</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">التخزين المؤقت</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">تصحيح الأخطاء</system:String>

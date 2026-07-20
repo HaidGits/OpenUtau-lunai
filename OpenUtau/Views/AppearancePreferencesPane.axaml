@@ -305,6 +305,16 @@
 
             <Grid Classes="prefRow" ColumnDefinitions="*,Auto">
 
+              <TextBlock Text="{DynamicResource prefs.diffsinger.phonemepanel.auto}"/>
+
+              <ToggleSwitch IsChecked="{Binding DiffSingerPhonemePanelAuto}"/>
+
+            </Grid>
+
+            <Grid Classes="prefRow" ColumnDefinitions="*,Auto"
+
+                  IsEnabled="{Binding !DiffSingerPhonemePanelAuto}">
+
               <TextBlock Text="{DynamicResource prefs.diffsinger.phonemepanel}"/>
 
               <ToggleSwitch IsChecked="{Binding DiffSingerPhonemePanelMode}"/>

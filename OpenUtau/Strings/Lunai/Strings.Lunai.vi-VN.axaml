@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Ấm</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Tô nền piano roll bằng màu track</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Bảng âm vị thân thiện DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Tự động chuyển bảng âm vị thân thiện DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Hiện ranh giới cụm render</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Bộ nhớ đệm</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Gỡ lỗi</system:String>

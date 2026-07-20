@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Теплая</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Подкрашивать фон пианоролла цветом трека</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Удобный режим панели фонем для DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Автоматически переключать удобный режим панели фонем для DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Показывать границы фраз рендера</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Кэш</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Отладка</system:String>

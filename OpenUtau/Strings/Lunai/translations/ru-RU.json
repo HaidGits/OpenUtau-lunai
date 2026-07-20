@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Теплая",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Подкрашивать фон пианоролла цветом трека",
   "prefs.diffsinger.phonemepanel": "Удобный режим панели фонем для DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "Автоматически переключать удобный режим панели фонем для DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "Показывать границы фраз рендера",
   "prefs.diffsinger.section.cache": "Кэш",
   "prefs.diffsinger.section.debug": "Отладка",

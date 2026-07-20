@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Warm",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Achtergrond van pianorol kleuren met spoorkleur",
   "prefs.diffsinger.phonemepanel": "DiffSinger-vriendelijk foneempaneel",
+  "prefs.diffsinger.phonemepanel.auto": "DiffSinger-vriendelijk foneempaneel automatisch schakelen",
   "prefs.diffsinger.renderphraseboundaries": "Renderfrasegrenzen weergeven",
   "prefs.diffsinger.section.cache": "Cache",
   "prefs.diffsinger.section.debug": "Foutopsporing",

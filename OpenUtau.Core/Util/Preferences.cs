@@ -232,6 +232,7 @@ namespace OpenUtau.Core.Util {
             public bool DiffSingerShowAcousticF0PatchPreview = false;
             public bool DiffSingerLangCodeHide = false;
             public bool DiffSingerPhonemePanelMode = true;
+            public bool DiffSingerPhonemePanelAuto = true;
             public bool DiffSingerLocalRetaking = true;
             public bool DiffSingerShowRenderPhraseBoundaries = false;
             public bool SkipRenderingMutedTracks = false;

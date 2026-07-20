@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "웜",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "피아노 롤 배경을 트랙 색으로 칠하기",
   "prefs.diffsinger.phonemepanel": "DiffSinger에 맞는 음소 패널",
+  "prefs.diffsinger.phonemepanel.auto": "DiffSinger 음소 패널 자동 전환",
   "prefs.diffsinger.renderphraseboundaries": "렌더 프레이즈 경계 표시",
   "prefs.diffsinger.section.cache": "캐시",
   "prefs.diffsinger.section.debug": "디버그",

@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Teplý</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Zabarvit pozadí klavírní role barvou stopy</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Panel fonémů přizpůsobený DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Automaticky přepínat panel fonémů DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Zobrazit hranice renderovaných frází</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Mezipaměť</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Ladění</system:String>

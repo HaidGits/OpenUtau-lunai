@@ -394,6 +394,8 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(_ => ReloadShortcuts());
             NotesViewModel.WhenAnyValue(vm => vm.Part)
                 .Subscribe(_ => UpdateDiffSingerTrackVisibility());
+            MessageBus.Current.Listen<DiffSingerPhonemePanelAutoApplyEvent>()
+                .Subscribe(_ => UpdateDiffSingerTrackVisibility());
             UpdateDiffSingerTrackVisibility();
             DocManager.Inst.AddSubscriber(this);
         }
@@ -557,13 +559,25 @@ namespace OpenUtau.App.ViewModels {
         void UpdateDiffSingerTrackVisibility() {
             var singer = GetOpenTrackSinger();
             bool isDiffSinger = singer is { Found: true, SingerType: USingerType.DiffSinger };
-            if (IsDiffSingerTrack == isDiffSinger) {
+            if (IsDiffSingerTrack != isDiffSinger) {
+                IsDiffSingerTrack = isDiffSinger;
+                if (!isDiffSinger && ShowDiffSingerPanel) {
+                    ShowDiffSingerPanel = false;
+                }
+            }
+            ApplyDiffSingerPhonemePanelAuto(isDiffSinger);
+        }
+
+        static void ApplyDiffSingerPhonemePanelAuto(bool isDiffSinger) {
+            if (!Preferences.Default.DiffSingerPhonemePanelAuto) {
                 return;
             }
-            IsDiffSingerTrack = isDiffSinger;
-            if (!isDiffSinger && ShowDiffSingerPanel) {
-                ShowDiffSingerPanel = false;
+            if (Preferences.Default.DiffSingerPhonemePanelMode == isDiffSinger) {
+                return;
             }
+            Preferences.Default.DiffSingerPhonemePanelMode = isDiffSinger;
+            Preferences.Save();
+            MessageBus.Current.SendMessage(new NotesRefreshEvent());
         }
 
         USinger? GetOpenTrackSinger() {

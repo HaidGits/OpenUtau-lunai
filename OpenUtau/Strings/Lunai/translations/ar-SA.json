@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "دافئة",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "تلوين خلفية لفة البيانو بلون المسار",
   "prefs.diffsinger.phonemepanel": "لوحة صوتيات ملائمة لـ DiffSinger",
+  "prefs.diffsinger.phonemepanel.auto": "التبديل التلقائي للوحة الصوتيات الملائمة لـ DiffSinger",
   "prefs.diffsinger.renderphraseboundaries": "إظهار حدود عبارات التصيير",
   "prefs.diffsinger.section.cache": "التخزين المؤقت",
   "prefs.diffsinger.section.debug": "تصحيح الأخطاء",

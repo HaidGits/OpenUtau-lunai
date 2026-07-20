@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "Warm",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "Piano-Roll-Hintergrund mit Spurfarbe einfärben",
   "prefs.diffsinger.phonemepanel": "DiffSinger-freundliches Phonem-Panel",
+  "prefs.diffsinger.phonemepanel.auto": "DiffSinger-freundliches Phonem-Panel automatisch umschalten",
   "prefs.diffsinger.renderphraseboundaries": "Render-Phrasengrenzen anzeigen",
   "prefs.diffsinger.section.cache": "Cache",
   "prefs.diffsinger.section.debug": "Debug",

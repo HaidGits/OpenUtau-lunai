@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">웜</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">피아노 롤 배경을 트랙 색으로 칠하기</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger에 맞는 음소 패널</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">DiffSinger 음소 패널 자동 전환</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">렌더 프레이즈 경계 표시</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">캐시</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">디버그</system:String>

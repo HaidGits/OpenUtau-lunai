@@ -219,6 +219,7 @@
   <system:String x:Key="prefs.appearance.theme.name.warm">Ciepły</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Zabarw tło edytora pianinowego kolorem ścieżki</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Panel fonemów przyjazny dla DiffSinger</system:String>
+  <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Automatycznie przełączaj panel fonemów DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.renderphraseboundaries">Pokaż granice fraz renderowania</system:String>
   <system:String x:Key="prefs.diffsinger.section.cache">Pamięć podręczna</system:String>
   <system:String x:Key="prefs.diffsinger.section.debug">Debugowanie</system:String>

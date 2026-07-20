@@ -189,6 +189,7 @@
   "prefs.appearance.theme.name.warm": "暖色",
   "prefs.appearance.tintpianorollbackgroundwithtrackcolor": "用音轨颜色为钢琴卷轴背景着色",
   "prefs.diffsinger.phonemepanel": "DiffSinger 友好音素面板",
+  "prefs.diffsinger.phonemepanel.auto": "自动切换 DiffSinger 友好音素面板",
   "prefs.diffsinger.renderphraseboundaries": "显示渲染短语边界",
   "prefs.diffsinger.section.cache": "缓存",
   "prefs.diffsinger.section.debug": "调试",
