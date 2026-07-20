@@ -234,6 +234,43 @@
 
             </Grid>
 
+            <Grid Classes="prefSliderRow" ColumnDefinitions="Auto,8,44,8,*"
+                  IsEnabled="{Binding ShowNoteBorder}">
+
+              <TextBlock Grid.Column="0" VerticalAlignment="Center"
+
+                         Text="{DynamicResource prefs.appearance.noteborderthickness}"/>
+
+              <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right"
+
+                         Text="{Binding NoteBorderThickness, StringFormat={}{0:0.#} px}"/>
+
+              <Slider Grid.Column="4" VerticalAlignment="Center" Classes="fader"
+
+                      Minimum="0.5" Maximum="4" TickFrequency="0.5" IsSnapToTickEnabled="True"
+
+                      Value="{Binding NoteBorderThickness}"/>
+
+            </Grid>
+
+            <Grid Classes="prefSliderRow" ColumnDefinitions="Auto,8,44,8,*">
+
+              <TextBlock Grid.Column="0" VerticalAlignment="Center"
+
+                         Text="{DynamicResource prefs.appearance.noteopacity}"/>
+
+              <TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Right"
+
+                         Text="{Binding NoteOpacity, StringFormat={}{0:P0}}"/>
+
+              <Slider Grid.Column="4" VerticalAlignment="Center" Classes="fader"
+
+                      Minimum="0.05" Maximum="1" TickFrequency="0.01" IsSnapToTickEnabled="True"
+
+                      Value="{Binding NoteOpacity}"/>
+
+            </Grid>
+
             <Grid Classes="prefSliderRow" ColumnDefinitions="Auto,8,44,8,*">
 
               <TextBlock Grid.Column="0" VerticalAlignment="Center"

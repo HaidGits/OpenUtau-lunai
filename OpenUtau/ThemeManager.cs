@@ -52,6 +52,9 @@ namespace OpenUtau.App {
         public static IBrush NoteEmptyBrush = Brushes.White;
         public static IBrush NoteBrush = Brushes.White;
         public static IBrush NoteBrushPressed = Brushes.Gray;
+        /// <summary>Phoneme panel fill — same RGB as notes, opacity = NoteOpacity + 0.15.</summary>
+        public static IBrush PhonemeBrush = Brushes.White;
+        public static IBrush PhonemeEmptyBrush = Brushes.White;
         public static IBrush TickLineBrushLow = Brushes.Black;
         public static IBrush BarNumberBrush = Brushes.Black;
         public static IPen BarNumberPen = new Pen(Brushes.White);
@@ -192,11 +195,14 @@ namespace OpenUtau.App {
                 AccentBrush3Semi = (IBrush)outVar!;
             }
             if (resDict.TryGetResource("NoteBorderBrush", themeVariant, out outVar)) {
-                NoteBorderPen = new Pen((IBrush)outVar!, 1);
-                NoteBorderPenThickness3 = new Pen(NoteBorderPen.Brush, 3);
-            }
-            if (resDict.TryGetResource("NoteBorderBrushPressed", themeVariant, out outVar)) {
-                NoteBorderPenPressed = new Pen((IBrush)outVar!, 1);
+                var normalBrush = (IBrush)outVar!;
+                var pressedBrush = normalBrush;
+                if (resDict.TryGetResource("NoteBorderBrushPressed", themeVariant, out outVar)) {
+                    pressedBrush = (IBrush)outVar!;
+                }
+                SetNoteBorderPens(normalBrush, pressedBrush);
+            } else if (resDict.TryGetResource("NoteBorderBrushPressed", themeVariant, out outVar)) {
+                NoteBorderPenPressed = new Pen((IBrush)outVar!, GetNoteBorderThickness());
             }
             if (resDict.TryGetResource("TickLineBrushLow", themeVariant, out outVar)) {
                 TickLineBrushLow = (IBrush)outVar!;
@@ -249,6 +255,16 @@ namespace OpenUtau.App {
             MessageBus.Current.SendMessage(new ThemeChangedEvent());
         }
 
+        public static double GetNoteBorderThickness() =>
+            Math.Clamp(Preferences.Default.NoteBorderThickness, 0.5, 4);
+
+        static void SetNoteBorderPens(IBrush normal, IBrush pressed) {
+            double thickness = GetNoteBorderThickness();
+            NoteBorderPen = new Pen(normal, thickness);
+            NoteBorderPenPressed = new Pen(pressed, thickness);
+            NoteBorderPenThickness3 = new Pen(normal, thickness * 3);
+        }
+
         static void ApplyPianorollColorCore(string color) {
             if (Application.Current == null) {
                 return;
@@ -292,12 +308,22 @@ namespace OpenUtau.App {
                     if (s_defaultFinalPitchPen != null) { FinalPitchPen = s_defaultFinalPitchPen; }
                 }
 
-                NoteBrush = tcolor.NoteColor;
+                double noteOpacity = Math.Clamp(Preferences.Default.NoteOpacity, 0.05, 1);
+                double phonemeOpacity = Math.Clamp(noteOpacity + 0.15, 0.05, 1);
+                NoteBrush = new SolidColorBrush(tcolor.NoteColor.Color) {
+                    Opacity = noteOpacity
+                };
                 NoteBrushPressed = tcolor.NoteColorPressed;
-                NoteBorderPen = new Pen(tcolor.NoteBorderColor);
-                NoteBorderPenThickness3 = new Pen(NoteBorderPen.Brush, 3);
-                NoteBorderPenPressed = new Pen(tcolor.NoteBorderColorPressed);
-                NoteEmptyBrush = tcolor.NoteColorEmpty;
+                SetNoteBorderPens(tcolor.NoteBorderColor, tcolor.NoteBorderColorPressed);
+                NoteEmptyBrush = new SolidColorBrush(tcolor.NoteColorEmpty.Color) {
+                    Opacity = noteOpacity * TrackColor.EmptyNoteOpacityRatio
+                };
+                PhonemeBrush = new SolidColorBrush(tcolor.NoteColor.Color) {
+                    Opacity = phonemeOpacity
+                };
+                PhonemeEmptyBrush = new SolidColorBrush(tcolor.NoteColorEmpty.Color) {
+                    Opacity = phonemeOpacity * TrackColor.EmptyNoteOpacityRatio
+                };
 
                 SetKeyboardBrush();
             } catch { }
@@ -475,6 +501,9 @@ namespace OpenUtau.App {
     }
 
     public class TrackColor {
+        /// <summary>Historical empty-note alpha (0x1A) relative to normal note alpha (0x70).</summary>
+        public const double EmptyNoteOpacityRatio = 0x1A / (double)0x70;
+
         public string Name { get; set; } = "";
         public bool IsCustom { get; }
         public string? StoragePath { get; }
@@ -499,11 +528,16 @@ namespace OpenUtau.App {
             AccentColorLightSemi = SolidColorBrush.Parse(lightColor);
             AccentColorLightSemi.Opacity = 0.5;
             AccentColorCenterKey = SolidColorBrush.Parse(centerKey);
-            NoteColor = SolidColorBrush.Parse(noteColor);
+            NoteColor = OpaqueBrush(noteColor);
             NoteColorPressed = SolidColorBrush.Parse(noteColorPressed);
             NoteBorderColor = SolidColorBrush.Parse(noteBorderColor);
             NoteBorderColorPressed = SolidColorBrush.Parse(noteBorderColorPressed);
-            NoteColorEmpty = SolidColorBrush.Parse(noteColorEmpty);
+            NoteColorEmpty = OpaqueBrush(noteColorEmpty);
+        }
+
+        static SolidColorBrush OpaqueBrush(string color) {
+            var parsed = SolidColorBrush.Parse(color).Color;
+            return new SolidColorBrush(Color.FromRgb(parsed.R, parsed.G, parsed.B));
         }
 
         public static TrackColor FromCustomYaml(TrackColorYaml yaml, string storagePath) {

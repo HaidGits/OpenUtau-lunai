@@ -100,7 +100,7 @@
   <system:String x:Key="dialogs.about.caption">Об OpenUtau</system:String>
   <system:String x:Key="dialogs.about.message">OpenUtau это редактор с открытым исходным кодом для сообщества UTAU, с современным интерфейсом и поддержкой фонетики. Посетите нас на Github.</system:String>
   <system:String x:Key="dialogs.about.upstream.message">Редактор OpenUtau с открытым исходным кодом для сообщества UTAU, с современным интерфейсом и поддержкой фонетики.</system:String>
-  <system:String x:Key="dialogs.about.lunai.message">Вы используете OpenUtau Lunai, форк для DiffSinger и голосов LUNAI. В нём есть Singer Hub и другие доработки под LUNAI, добавленные поверх оригинального OpenUtau.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">Вы используете OpenUtau Lunai, форк, который делает работу с DiffSinger проще и удобнее. Классические банки UTAU и все остальные типы голосовых библиотек, которые уже поддерживает OpenUtau, работают как обычно. Также включены многие функции из пулл-реквестов оригинального репозитория, которые ещё не выпущены или не влиты в основной OpenUtau.</system:String>
   <system:String x:Key="dialogs.about.license">OpenUtau и OpenUtau Lunai распространяются как свободное ПО с открытым исходным кодом по лицензии MIT.</system:String>
   <system:String x:Key="dialogs.about.contributors.title">Контрибьюторы</system:String>
   <system:String x:Key="dialogs.about.contributors.intro">Ниже перечислены участники оригинального репозитория OpenUtau на GitHub. OpenUtau Lunai вырос из их работы. Спасибо всем из списка!</system:String>
@@ -692,7 +692,8 @@
   <system:String x:Key="prefs.appearance.diffsingerlangcodehide">Скрыть языковой префикс в фонемах</system:String>
   <system:String x:Key="prefs.appearance.lang">Язык</system:String>
   <system:String x:Key="prefs.appearance.showghostnotes">Отображать ноты других треков на пианоролле</system:String>
-  <system:String x:Key="prefs.appearance.shownoteborder">Обводка нот на пианоролле</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Обводка нот</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Толщина обводки нот</system:String>
   <system:String x:Key="prefs.appearance.section.theme">Тема</system:String>
   <system:String x:Key="prefs.appearance.theme.builtin">Встроенные</system:String>
   <system:String x:Key="prefs.appearance.theme.builtin.custom">Встроенные пресеты</system:String>
@@ -715,6 +716,7 @@
   <system:String x:Key="prefs.appearance.classicscrollbars">Классические ползунки прокрутки (отдельная полоса)</system:String>
   <system:String x:Key="prefs.appearance.overlayscrollbars">Наложенные ползунки (тонкие, поверх содержимого)</system:String>
   <system:String x:Key="prefs.appearance.notecornerradius">Скругление углов нот</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Непрозрачность нот</system:String>
   <system:String x:Key="prefs.appearance.showicon">Отображать иконку на пианоролле</system:String>
   <system:String x:Key="prefs.appearance.showportrait">Отображать портрет на пианоролле</system:String>
   <system:String x:Key="prefs.appearance.sortorder">Язык отображения имени вокалиста</system:String>
@@ -1006,7 +1008,7 @@
   <system:String x:Key="updater.status.available">Доступно обновление {0}!</system:String>
   <system:String x:Key="updater.status.checking">Проверка наличия обновлений...</system:String>
   <system:String x:Key="updater.status.notavailable">Установлена актуальная версия</system:String>
-  <system:String x:Key="updater.status.unknown">Не удалось проверить наличие обновлений</system:String>
+  <system:String x:Key="updater.status.unknown">Не удалось проверить обновления. Скачайте вручную с GitHub Releases или посмотрите лог.</system:String>
   <system:String x:Key="updater.update">Обновить</system:String>
 
   <system:String x:Key="warning">Предупреждение</system:String>

@@ -174,7 +174,7 @@ namespace OpenUtau.App.Controls {
                     IBrush brush;
 
                     if (diffSingerMode) {
-                        brush = selectedNotes.Contains(phoneme.Parent) ? ThemeManager.NoteBrush : ThemeManager.NoteEmptyBrush;
+                        brush = selectedNotes.Contains(phoneme.Parent) ? ThemeManager.PhonemeBrush : ThemeManager.PhonemeEmptyBrush;
                         double xLeft = viewModel.TickToneToPoint(phoneme.position, 0).X;
                         double xRight = viewModel.TickToneToPoint(phoneme.End, 0).X;
                         // Draw delta region (original → new position) when timing was moved, using NoteColor
@@ -183,7 +183,7 @@ namespace OpenUtau.App.Controls {
                             double xMin = Math.Min(xRaw, xLeft);
                             double xMax = Math.Max(xRaw, xLeft);
                             var deltaRect = new Rect(xMin, barY, xMax - xMin, barHeight);
-                            context.DrawRectangle(ThemeManager.NoteBrush, null, deltaRect);
+                            context.DrawRectangle(ThemeManager.PhonemeBrush, null, deltaRect);
                         }
                         var rect = new Rect(xLeft, barY, xRight - xLeft, barHeight);
                         context.DrawRectangle(brush, null, rect);
@@ -193,7 +193,7 @@ namespace OpenUtau.App.Controls {
                             context.DrawLine(penBar, new Point(xRight, barY), new Point(xRight, barY + barHeight));
                         }
                     } else {
-                        brush = selectedNotes.Contains(phoneme.Parent) ? ThemeManager.NoteBrushPressed : ThemeManager.NoteBrush;
+                        brush = selectedNotes.Contains(phoneme.Parent) ? ThemeManager.NoteBrushPressed : ThemeManager.PhonemeBrush;
                         // Standard UTAU mode: draw envelope shape with preutter/overlap points
                         double x0 = viewModel.TickToneToPoint(timeAxis.MsPosToTickPos(posMs + phoneme.envelope.data[0].X) - Part.position, 0).X;
                         double y0 = (1 - phoneme.envelope.data[0].Y / 100) * barHeight;

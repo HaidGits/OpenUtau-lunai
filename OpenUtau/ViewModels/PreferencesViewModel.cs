@@ -141,8 +141,10 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public bool ShowIcon { get; set; }
         [Reactive] public bool ShowGhostNotes { get; set; }
         [Reactive] public bool ShowNoteBorder { get; set; }
+        [Reactive] public double NoteBorderThickness { get; set; }
         [Reactive] public bool SolidTickGridLines { get; set; }
         [Reactive] public bool SolidExpPanelGridLines { get; set; }
+        [Reactive] public double NoteOpacity { get; set; }
         [Reactive] public double NoteCornerRadius { get; set; }
         [Reactive] public bool ThemeEditable { get; set; }
         public List<string> ThemeItems => ThemeManager.GetAvailableThemes();
@@ -569,8 +571,10 @@ namespace OpenUtau.App.ViewModels {
             ShowIcon = Preferences.Default.ShowIcon;
             ShowGhostNotes = Preferences.Default.ShowGhostNotes;
             ShowNoteBorder = Preferences.Default.ShowNoteBorder;
+            NoteBorderThickness = Math.Clamp(Preferences.Default.NoteBorderThickness, 0.5, 4);
             SolidTickGridLines = Preferences.Default.SolidTickGridLines;
             SolidExpPanelGridLines = Preferences.Default.SolidExpPanelGridLines;
+            NoteOpacity = Math.Clamp(Preferences.Default.NoteOpacity, 0.05, 1);
             NoteCornerRadius = Math.Clamp(Preferences.Default.NoteCornerRadius, 0, 12);
             Beta = Preferences.Default.Beta;
             LyricsHelper = LyricsHelpers.FirstOrDefault(option => option.klass.Equals(ActiveLyricsHelper.Inst.GetPreferred()));
@@ -771,6 +775,24 @@ namespace OpenUtau.App.ViewModels {
                 .Subscribe(showNoteBorder => {
                     Preferences.Default.ShowNoteBorder = showNoteBorder;
                     Preferences.Save();
+                    MessageBus.Current.SendMessage(new NotesRefreshEvent());
+                });
+            this.WhenAnyValue(vm => vm.NoteBorderThickness)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(thickness => {
+                    var c = Math.Clamp(thickness, 0.5, 4);
+                    Preferences.Default.NoteBorderThickness = c;
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PianorollRefreshEvent("TrackColor"));
+                    MessageBus.Current.SendMessage(new NotesRefreshEvent());
+                });
+            this.WhenAnyValue(vm => vm.NoteOpacity)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(opacity => {
+                    var c = Math.Clamp(opacity, 0.05, 1);
+                    Preferences.Default.NoteOpacity = c;
+                    Preferences.Save();
+                    MessageBus.Current.SendMessage(new PianorollRefreshEvent("TrackColor"));
                     MessageBus.Current.SendMessage(new NotesRefreshEvent());
                 });
             this.WhenAnyValue(vm => vm.SolidTickGridLines)

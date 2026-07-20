@@ -78,6 +78,26 @@
       <TextBlock Text="{DynamicResource prefs.appearance.shownoteborder}" HorizontalAlignment="Left"/>
       <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowNoteBorder}"/>
     </Grid>
+    <Grid ColumnDefinitions="Auto,8,40,8,*" Margin="0,2,0,0" IsEnabled="{Binding ShowNoteBorder}">
+      <TextBlock Grid.Column="0" Text="{DynamicResource prefs.appearance.noteborderthickness}"/>
+      <TextBlock Grid.Column="2">
+        <TextBlock.Text>
+          <Binding Path="NoteBorderThickness" StringFormat="{}{0:0.#} px"/>
+        </TextBlock.Text>
+      </TextBlock>
+      <Slider Grid.Column="4" Classes="fader" Minimum="0.5" Maximum="4" TickFrequency="0.5"
+              IsSnapToTickEnabled="true" Value="{Binding NoteBorderThickness}"/>
+    </Grid>
+    <Grid ColumnDefinitions="Auto,8,40,8,*" Margin="0,2,0,0">
+      <TextBlock Grid.Column="0" Text="{DynamicResource prefs.appearance.noteopacity}"/>
+      <TextBlock Grid.Column="2">
+        <TextBlock.Text>
+          <Binding Path="NoteOpacity" StringFormat="{}{0:P0}"/>
+        </TextBlock.Text>
+      </TextBlock>
+      <Slider Grid.Column="4" Classes="fader" Minimum="0.05" Maximum="1" TickFrequency="0.01"
+              IsSnapToTickEnabled="true" Value="{Binding NoteOpacity}"/>
+    </Grid>
     <Grid ColumnDefinitions="Auto,8,20,8,*" Margin="0,2,0,0">
       <TextBlock Grid.Column="0" Text="{DynamicResource prefs.appearance.notecornerradius}"/>
       <TextBlock Grid.Column="2">

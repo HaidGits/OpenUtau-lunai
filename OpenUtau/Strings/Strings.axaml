@@ -103,7 +103,7 @@
   <system:String x:Key="dialogs.about.caption">About OpenUTAU</system:String>
   <system:String x:Key="dialogs.about.message">OpenUtau aims to be an open source editing environment for UTAU community, with a modern user experience and intelligent phonological support. Visit us on Github.</system:String>
   <system:String x:Key="dialogs.about.upstream.message">OpenUtau aims to be an open source editing environment for the UTAU community, with a modern user experience and intelligent phonological support.</system:String>
-  <system:String x:Key="dialogs.about.lunai.message">You are running OpenUtau Lunai, a fork for DiffSinger and LUNAI voicebanks. It adds Singer Hub and other LUNAI-focused features on top of upstream OpenUtau.</system:String>
+  <system:String x:Key="dialogs.about.lunai.message">You are running OpenUtau Lunai, a fork aimed at making DiffSinger easier and more enjoyable to use. Classic UTAU banks and all other voicebank types OpenUtau already supports still work as usual. It also includes many features from upstream pull requests that are not yet released or merged into the original OpenUtau.</system:String>
   <system:String x:Key="dialogs.about.license">OpenUtau and OpenUtau Lunai are free open-source software under the MIT license.</system:String>
   <system:String x:Key="dialogs.about.contributors.title">Contributors</system:String>
   <system:String x:Key="dialogs.about.contributors.intro">These people contributed to the original OpenUtau repository on GitHub. OpenUtau Lunai builds on their work. Thank you to everyone listed!</system:String>
@@ -789,7 +789,8 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger-friendly phoneme panel</system:String>
   <system:String x:Key="prefs.appearance.lang">Language</system:String>
   <system:String x:Key="prefs.appearance.showghostnotes">Show other tracks' notes on piano roll</system:String>
-  <system:String x:Key="prefs.appearance.shownoteborder">Show note outlines in the piano roll</system:String>
+  <system:String x:Key="prefs.appearance.shownoteborder">Show note border</system:String>
+  <system:String x:Key="prefs.appearance.noteborderthickness">Note border thickness</system:String>
   <system:String x:Key="prefs.appearance.section.theme">Theme</system:String>
   <system:String x:Key="prefs.appearance.theme.builtin">Built-in</system:String>
   <system:String x:Key="prefs.appearance.theme.builtin.custom">Built-in presets</system:String>
@@ -812,6 +813,7 @@ Warning: this option removes custom presets.</system:String>
   <system:String x:Key="prefs.appearance.classicscrollbars">Classic scrollbars (dedicated track area)</system:String>
   <system:String x:Key="prefs.appearance.overlayscrollbars">Overlay scrollbars (thin, on top of content)</system:String>
   <system:String x:Key="prefs.appearance.notecornerradius">Note corner radius</system:String>
+  <system:String x:Key="prefs.appearance.noteopacity">Note opacity</system:String>
   <system:String x:Key="prefs.appearance.showicon">Show icon on piano roll</system:String>
   <system:String x:Key="prefs.appearance.showportrait">Show portrait on piano roll</system:String>
   <system:String x:Key="prefs.appearance.sortorder">Singer name display language</system:String>
@@ -1100,7 +1102,7 @@ General
   <system:String x:Key="updater.status.available">Update v{0} available!</system:String>
   <system:String x:Key="updater.status.checking">Checking for updates...</system:String>
   <system:String x:Key="updater.status.notavailable">Up to date</system:String>
-  <system:String x:Key="updater.status.unknown">Unable to check update</system:String>
+  <system:String x:Key="updater.status.unknown">Unable to check update. Open GitHub Releases to download manually, or see the log for details.</system:String>
   <system:String x:Key="updater.update">Update</system:String>
 
   <system:String x:Key="warning">Warning</system:String>

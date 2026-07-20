@@ -846,12 +846,19 @@ namespace OpenUtau.App.ViewModels {
         private void RefreshTrackColorBrushes(UPart? part, UProject? project) {
             if (part == null || project == null) {
                 TrackAccentColor = ThemeManager.GetTrackColor("Blue").AccentColor;
-                TrackNoteColor = new SolidColorBrush(ThemeManager.GetTrackColor("Blue").NoteColor.Color) { Opacity = 0.5 };
+                TrackNoteColor = CreateTrackNoteChromeBrush(ThemeManager.GetTrackColor("Blue"));
                 return;
             }
             var trackColor = ThemeManager.GetTrackColor(project.tracks[part.trackNo].TrackColor);
             TrackAccentColor = trackColor.AccentColor;
-            TrackNoteColor = new SolidColorBrush(trackColor.NoteColor.Color) { Opacity = 0.5 };
+            TrackNoteColor = CreateTrackNoteChromeBrush(trackColor);
+        }
+
+        static SolidColorBrush CreateTrackNoteChromeBrush(TrackColor trackColor) {
+            // Piano-roll chrome used Opacity=0.5 on top of the old baked ~0.44 note alpha.
+            return new SolidColorBrush(trackColor.NoteColor.Color) {
+                Opacity = Preferences.Default.NoteOpacity * 0.5
+            };
         }
 
         private void UnloadPart() {

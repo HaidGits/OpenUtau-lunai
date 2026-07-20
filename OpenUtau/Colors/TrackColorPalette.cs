@@ -26,11 +26,11 @@ public static class TrackColorPalette {
             DarkColor = ToRgbHex(dark),
             LightColor = ToRgbHex(bright),
             CenterKeyColor = ToRgbHex(centerKey),
-            NoteColor = ToArgbHex(0x70, noteBase),
+            NoteColor = ToRgbHex(noteBase),
             NoteColorPressed = ToRgbHex(Darken(normal, 0.32)),
             NoteBorderColor = ToRgbHex(Mix(normal, bright, 0.45)),
             NoteBorderColorPressed = ToRgbHex(Lighten(bright, 0.35)),
-            NoteColorEmpty = ToArgbHex(0x1A, noteBase),
+            NoteColorEmpty = ToRgbHex(noteBase),
         };
     }
 
@@ -55,6 +55,4 @@ public static class TrackColorPalette {
         (byte)Math.Clamp((int)Math.Round(a + (b - a) * t), 0, 255);
 
     static string ToRgbHex(Color color) => $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-
-    static string ToArgbHex(byte alpha, Color color) => $"#{alpha:X2}{color.R:X2}{color.G:X2}{color.B:X2}";
 }
