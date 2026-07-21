@@ -1282,7 +1282,8 @@
     <Setter Property="Background" Value="{DynamicResource PianoRollSideHoverBackgroundBrush}" />
     <Setter Property="CornerRadius" Value="4" />
   </Style>
-  <Style Selector="Border.pianoRollTopBar Button.topBarTextChip TextBlock">
+  <Style Selector="Border.pianoRollTopBar Button.topBarTextChip /template/ ContentPresenter#PART_ContentPresenter TextBlock,
+          Border.pianoRollTopBar Button.topBarTextChip TextBlock.topBarTextChipLabel">
     <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
     <Setter Property="FontSize" Value="10" />
     <Setter Property="VerticalAlignment" Value="Center" />

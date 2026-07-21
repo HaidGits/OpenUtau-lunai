@@ -2015,22 +2015,6 @@ namespace OpenUtau.App.Controls {
             }
         }
 
-        public void OnKeyMenuButton(object sender, RoutedEventArgs args) {
-            if (sender is not Control control || ViewModel?.NotesViewModel == null) {
-                return;
-            }
-            var notesVm = ViewModel.NotesViewModel;
-            var playbackVm = ViewModel.PlaybackViewModel;
-            if (playbackVm == null) {
-                return;
-            }
-            KeySignatureMenuHelper.OpenPicker(
-                control,
-                () => notesVm.Project.parts.OfType<UVoicePart>().SelectMany(part => part.notes),
-                key => playbackVm.SetKeySignature(key.Tonic, key.IsMajor),
-                MusicalKey.FromProject(notesVm.Project));
-        }
-
         void OnMenuGenerateHarmonies(object? sender, RoutedEventArgs e) {
             if (ViewModel?.NotesViewModel?.Part is UVoicePart voicePart) {
                 MainWindow.ShowGenerateHarmonyDialog(voicePart, TopLevel.GetTopLevel(this) as Window);
@@ -2064,14 +2048,6 @@ namespace OpenUtau.App.Controls {
             DocManager.Inst.ExecuteCmd(new LoadPartNotification(parts[index], notesVm.Project, tick));
             AttachExpressions();
             return true;
-        }
-
-        void OnKeyKeyDown(object sender, KeyEventArgs e) {
-            if (e.Key == Key.Enter && e.KeyModifiers == KeyModifiers.None) {
-                if (sender is ContextMenu menu && menu.SelectedItem is MenuItemViewModel item) {
-                    item.Command?.Execute(item.CommandParameter);
-                }
-            }
         }
 
         #region value tip

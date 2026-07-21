@@ -574,24 +574,16 @@
                 </ListBox.Items>
             </ListBox>
             <Border Width="12"/>
-            <Button Classes="topBarTextChip" Margin="0" Padding="0" Click="OnSnapDivMenuButton"
-              ToolTip.Tip="{DynamicResource pianoroll.snapdiv}">
-              <TextBlock Text="{Binding NotesViewModel.SnapDivText}"
-                         TextAlignment="Center" FontFamily="monospace"
+            <Button Classes="topBarTextChip" Margin="0" Padding="0" Click="OnSnapDivMenuButton">
+              <ToolTip.Tip>
+                <TextBlock Text="{DynamicResource pianoroll.snapdiv}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
+              </ToolTip.Tip>
+              <TextBlock Classes="topBarTextChipLabel" Text="{Binding NotesViewModel.SnapDivText}"
+                         TextAlignment="Center" FontFamily="monospace" FontSize="10"
                          VerticalAlignment="Center"/>
               <Button.ContextMenu>
                 <ContextMenu Name="SnapDivMenu" Classes="WithCommand" Placement="BottomEdgeAlignedLeft"
                              ItemsSource="{Binding NotesViewModel.SnapDivs}" KeyDown="OnSnapDivKeyDown"/>
-              </Button.ContextMenu>
-            </Button>
-            <Button Classes="topBarTextChip" Margin="0" Padding="0" Click="OnKeyMenuButton"
-              ToolTip.Tip="{DynamicResource pianoroll.key}">
-              <TextBlock Text="{Binding NotesViewModel.KeyText}"
-                         TextAlignment="Center" FontFamily="monospace"
-                         VerticalAlignment="Center"/>
-              <Button.ContextMenu>
-                <ContextMenu Name="KeyMenu" Classes="WithCommand" Placement="BottomEdgeAlignedLeft"
-                             ItemsSource="{Binding NotesViewModel.Keys}" KeyDown="OnKeyKeyDown"/>
               </Button.ContextMenu>
             </Button>
             <Border Width="12" IsVisible="{Binding UsesExpandedPianoRollLayout}"/>
