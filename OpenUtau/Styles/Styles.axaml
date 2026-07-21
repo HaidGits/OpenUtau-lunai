@@ -479,7 +479,18 @@
   <Style Selector="Border.workspaceDockPianoRollSide">
     <Setter Property="CornerRadius" Value="0,8,8,0" />
     <Setter Property="Margin" Value="0" />
-    <Setter Property="Padding" Value="8" />
+    <!-- No right padding: negative-margin scrollbar lives in the content slot and can
+         overlay the card edge / gap. Avalonia clips Border children to the padded
+         content rect, so padding-right would shave the thumb down to ~1px. -->
+    <Setter Property="Padding" Value="8,8,0,8" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="ZIndex" Value="500" />
+  </Style>
+  <!-- Beat workspaceCard ClipToBounds=True so the side scrollbar can draw past the card edge. -->
+  <Style Selector="Border.workspaceCard.workspaceDockPianoRollSide">
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="ZIndex" Value="500" />
+    <Setter Property="Padding" Value="8,8,0,8" />
   </Style>
   <Style Selector="Border.workspaceCard.workspaceDockAppearance,
                  Border.workspaceDockAppearance">

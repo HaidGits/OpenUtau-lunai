@@ -13,6 +13,7 @@
     <StyleInclude Source="/Styles/PianoRollStyles.axaml"/>
   </UserControl.Styles>
   <Grid Background="{DynamicResource WorkspaceCanvasBrush}"
+        ClipToBounds="False"
         PointerMoved="BackgroundPointerMoved">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="{Binding PianoRollSideColumnWidth}"/>
@@ -25,11 +26,14 @@
       <ColumnDefinition Width="{Binding NotesViewModel.NotePropsGapGridLength}"/>
       <ColumnDefinition Width="{Binding NotesViewModel.NotePropsColumnWidth}"/>
     </Grid.ColumnDefinitions>
-    <Border Grid.Column="0" Classes="workspaceCard workspaceDockPianoRollSide"
-            IsVisible="{Binding IsSidePanelVisible}"
-            VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-      <c:PianoRollViewToggles Classes="sideLayout"/>
-    </Border>
+    <Grid Grid.Column="0" ClipToBounds="False" ZIndex="500">
+      <Border Classes="workspaceCard workspaceDockPianoRollSide"
+              ClipToBounds="False"
+              IsVisible="{Binding IsSidePanelVisible}"
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <c:PianoRollViewToggles Classes="sideLayout" ClipToBounds="False"/>
+      </Border>
+    </Grid>
     <Border Grid.Column="2" Classes="workspaceCard workspaceDockAppearance"
             IsVisible="{Binding IsLeftDockPanelVisible}"
             VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
