@@ -136,6 +136,8 @@
 
       <StackPanel Classes="workspacePanelSections" Margin="0" HorizontalAlignment="Stretch">
 
+        <Separator Classes="workspacePanelSectionDivider"/>
+
         <Expander Classes="workspacePanelSectionExpander" IsExpanded="False"
 
                   Header="{DynamicResource prefs.appearance.section.theme}">

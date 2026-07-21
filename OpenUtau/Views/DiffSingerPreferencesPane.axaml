@@ -66,6 +66,7 @@
                   HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
                   AllowAutoHide="False">
       <StackPanel Classes="workspacePanelSections" Margin="0" HorizontalAlignment="Stretch">
+        <Separator Classes="workspacePanelSectionDivider"/>
         <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
                   Header="{DynamicResource prefs.diffsinger.section.general}">
           <StackPanel Classes="diffSingerSectionContent">
