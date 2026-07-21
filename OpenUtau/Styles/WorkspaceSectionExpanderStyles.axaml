@@ -89,7 +89,7 @@
                   IsVisible="{TemplateBinding IsExpanded}"
                   Background="Transparent"
                   BorderThickness="0"
-                  Padding="0,2,0,0">
+                  Padding="0,2,0,4">
             <ContentPresenter Content="{TemplateBinding Content}"
                               ContentTemplate="{TemplateBinding ContentTemplate}"/>
           </Border>
@@ -104,6 +104,9 @@
     <Setter Property="FontWeight" Value="SemiBold"/>
     <Setter Property="Margin" Value="0,2,0,0"/>
     <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+  </Style>
+  <Style Selector="Expander.workspacePanelSectionExpander:not(:expanded) /template/ ToggleButton#ExpanderHeader /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Foreground" Value="{DynamicResource TextControlForegroundDisabled}"/>
   </Style>
   <Style Selector="Expander.workspacePanelSectionExpander /template/ ToggleButton#ExpanderHeader /template/ Path">
     <Setter Property="Transitions" Value="{x:Null}"/>
