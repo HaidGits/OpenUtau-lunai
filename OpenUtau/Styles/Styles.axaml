@@ -208,7 +208,30 @@
   <Style Selector="Button.clear:pointerover:not(:disabled), Button.clear:pressed:not(:disabled)">
     <Setter Property="Background" Value="Transparent"/>
   </Style>
-  <Style Selector="Button.clear.trackHeaderTextButton">
+  <!-- Add-track (+) chip: white icon + card fill on hover, same fade as transport play. -->
+  <Style Selector="Button.clear.trackAdderChip">
+    <Setter Property="Margin" Value="0"/>
+    <Setter Property="Padding" Value="0"/>
+    <Setter Property="Height" Value="30"/>
+    <Setter Property="MinHeight" Value="30"/>
+  </Style>
+  <Style Selector="Button.clear.trackAdderChip Path.filled">
+    <Setter Property="Fill" Value="{DynamicResource NeutralAccentBrushSemi}"/>
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Fill" Duration="0:0:0.15"/>
+      </Transitions>
+    </Setter>
+  </Style>
+  <Style Selector="Button.clear.trackAdderChip:pointerover Path.filled,
+          Button.clear.trackAdderChip:pressed Path.filled">
+    <Setter Property="Fill" Value="{DynamicResource ToolbarToolIconOnAccentBrush}"/>
+  </Style>
+  <Style Selector="Button.clear.trackAdderChip:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          Button.clear.trackAdderChip:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource WorkspaceCardBrush}"/>
+    <Setter Property="CornerRadius" Value="6"/>
+  </Style>  <Style Selector="Button.clear.trackHeaderTextButton">
     <Setter Property="CornerRadius" Value="4" />
   </Style>
   <Style Selector="Button.clear.trackHeaderTextButton.muted">
