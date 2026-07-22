@@ -1,4 +1,4 @@
-﻿<!--Lunai overlay for uk-UA. Not managed by Crowdin.-->
+<!--Lunai overlay for uk-UA. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -215,12 +215,26 @@
   <system:String x:Key="prefs.appearance.theme.builtin">Вбудовані</system:String>
   <system:String x:Key="prefs.appearance.theme.builtin.custom">Вбудовані пресети</system:String>
   <system:String x:Key="prefs.appearance.theme.custom">Власні</system:String>
+  <system:String x:Key="prefs.appearance.theme.tint.reset.tip">ПКМ — скинути силу до 0</system:String>
+  <system:String x:Key="prefs.appearance.theme.tint.color">Колір відтінку</system:String>
+  <system:String x:Key="prefs.appearance.theme.tint">Колірний відтінок</system:String>
+  <system:String x:Key="prefs.appearance.theme.temperature.warm">Тепліше</system:String>
+  <system:String x:Key="prefs.appearance.theme.temperature.reset.tip">ПКМ — скинути до 0</system:String>
+  <system:String x:Key="prefs.appearance.theme.temperature.cold">Холодніше</system:String>
+  <system:String x:Key="prefs.appearance.theme.temperature">Температура кольору</system:String>
+  <system:String x:Key="prefs.appearance.theme.hub">Каталог</system:String>
   <system:String x:Key="prefs.appearance.theme.name.cold">Холодна</system:String>
   <system:String x:Key="prefs.appearance.theme.name.dark">Темна</system:String>
   <system:String x:Key="prefs.appearance.theme.name.light">Світла</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originaldark">Оригінальна темна</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">Оригінальна світла</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Тепла</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
+  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Підфарбовувати фон піаноролу кольором треку</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Зручна панель фонем для DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Автоматично перемикати зручну панель фонем для DiffSinger</system:String>
@@ -364,6 +378,21 @@
   <system:String x:Key="workspace.panel.expressions">Вирази проєкту</system:String>
   <system:String x:Key="workspace.panel.expressions.defaultcolor">Відтінок за замовчуванням</system:String>
   <system:String x:Key="workspace.panel.expressions.openinexppanel">Відкрити на панелі виразів</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles">Стилі виконавця</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.delete">Видалити стиль</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.delete.message">Видалити цей стиль виконавця?</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.empty">Назва стилю не може бути порожньою.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.empty.list">Ще немає збережених стилів. Налаштуйте значення вище й збережіть стиль.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.exists">Стиль з такою назвою вже існує.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.name">Назва стилю</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.novalues">Нічого зберігати — відкрийте трек DiffSinger з виразами.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.overwrite">Стиль з такою назвою вже є. Замінити його?</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save">Зберегти стиль</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save.prompt">Задайте назву стилю й перевірте значення нижче. Перед збереженням їх ще можна змінити.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save.tip">Зберегти поточні Project Expressions як стиль виконавця</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save.title">Зберегти стиль виконавця</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.savedwith">Збережено з</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.singer">Виконавець</system:String>
   <system:String x:Key="workspace.panel.expressions.parameters">Параметри</system:String>
   <system:String x:Key="workspace.panel.expressions.resettooltip">ПКМ — скинути до вбудованого значення за замовчуванням</system:String>
   <system:String x:Key="workspace.panel.expressions.voicecolors">Відтінки голосу</system:String>

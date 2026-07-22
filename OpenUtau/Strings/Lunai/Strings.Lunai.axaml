@@ -382,6 +382,21 @@
   <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
   <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
   <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles">Singer styles</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.delete">Delete style</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.delete.message">Delete this singer style?</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.empty">Style name cannot be empty.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.empty.list">No saved styles yet. Adjust the defaults above, then save a style.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.exists">A style with this name already exists.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.name">Style name</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.novalues">Nothing to save — open a DiffSinger track with expressions first.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.overwrite">A style with this name already exists. Replace it?</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save">Save style</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save.prompt">Name this singer style and confirm the expression defaults below. You can still adjust values before saving.</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save.tip">Save current Project Expressions as a reusable singer style</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.save.title">Save singer style</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.savedwith">Saved with</system:String>
+  <system:String x:Key="workspace.panel.expressions.styles.singer">Singer</system:String>
   <system:String x:Key="workspace.panel.view">View</system:String>
   <system:String x:Key="workspace.tracks">Tracks</system:String>
 </ResourceDictionary>
