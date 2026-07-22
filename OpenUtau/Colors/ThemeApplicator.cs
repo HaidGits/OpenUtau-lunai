@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
 using OpenUtau.App;
+using OpenUtau.Core.Util;
 
 namespace OpenUtau.Colors;
 
@@ -23,6 +24,8 @@ public static class ThemeApplicator {
             return;
         }
         yaml.ApplyToResources();
+        ThemeTemperature.ApplyToCurrentResources(Preferences.Default.ThemeTemperature);
+        ThemeTint.ApplyToCurrentResources(Preferences.Default.ThemeTintAmount, Preferences.Default.ThemeTintColor);
         Application.Current.RequestedThemeVariant = yaml.IsDarkMode
             ? ThemeVariant.Dark
             : ThemeVariant.Light;

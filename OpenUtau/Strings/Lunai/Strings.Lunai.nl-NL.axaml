@@ -1,4 +1,4 @@
-<!--Lunai overlay for nl-NL. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for nl-NL. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Licht</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Er bestaat al een thema met deze naam.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Nieuw</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Dit themabestand kon niet worden geïmporteerd.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Importeren</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">OpenUtau-thema importeren</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Basiskleur</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Heldere kleur</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">De naam van de spoorkleur mag niet leeg zijn.</system:String>

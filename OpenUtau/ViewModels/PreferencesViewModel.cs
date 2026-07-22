@@ -19,6 +19,7 @@ using Avalonia.Input;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using OpenUtau.Core.Editing;
+using Avalonia.Media;
 
 namespace OpenUtau.App.ViewModels {
     public class LyricsHelperOption {
@@ -133,6 +134,11 @@ namespace OpenUtau.App.ViewModels {
 
         // Appearance
         [Reactive] public string ThemeName { get; set; }
+        /// <summary>-100 cold … 0 … +100 warm. Stored as Preferences.ThemeTemperature.</summary>
+        [Reactive] public int ThemeColorTemperature { get; set; }
+        /// <summary>0…100 blend toward ThemeTintColor.</summary>
+        [Reactive] public int ThemeTintAmount { get; set; }
+        [Reactive] public Color ThemeTintColor { get; set; }
         [Reactive] public int DegreeStyle { get; set; }
         [Reactive] public bool UseTrackColor { get; set; }
         [Reactive] public bool TintPianoRollBackgroundWithTrackColor { get; set; }
@@ -150,6 +156,7 @@ namespace OpenUtau.App.ViewModels {
         public List<string> ThemeItems => ThemeManager.GetAvailableThemes();
         public ObservableCollection<ThemePickerItemViewModel> BuiltInThemePickerItems { get; } = new();
         public ObservableCollection<ThemePickerItemViewModel> BuiltInCustomThemePickerItems { get; } = new();
+        public ObservableCollection<ThemePickerItemViewModel> HubThemePickerItems { get; } = new();
         public ObservableCollection<ThemePickerItemViewModel> CustomThemePickerItems { get; } = new();
         public bool IsThemeEditorOpen => Views.ThemeEditorWindow.IsOpen || ThemeEditorDockState.IsOpen;
 
@@ -562,8 +569,16 @@ namespace OpenUtau.App.ViewModels {
             DiffSingerShowRenderPhraseBoundaries = Preferences.Default.DiffSingerShowRenderPhraseBoundaries;
             SkipRenderingMutedTracks = Preferences.Default.SkipRenderingMutedTracks;
             ThemeName = Preferences.Default.ThemeName;
-            ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(ThemeName) && !CustomTheme.IsPackageTheme(ThemeName);
+            ThemeColorTemperature = Preferences.Default.ThemeTemperature;
+            ThemeTintAmount = Preferences.Default.ThemeTintAmount;
+            ThemeTintColor = ThemeTint.ParseOrDefault(Preferences.Default.ThemeTintColor);
+            ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(ThemeName)
+                && !CustomTheme.IsPackageTheme(ThemeName)
+                && !CustomTheme.IsHubTheme(ThemeName);
             RefreshThemePickerItems();
+            MessageBus.Current.Listen<ThemeHubSyncedEvent>()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(_ => RefreshThemes());
             PenPlusDefault = Preferences.Default.PenPlusDefault;
             DegreeStyle = Preferences.Default.DegreeStyle;
             UseTrackColor = Preferences.Default.UseTrackColor;
@@ -724,11 +739,57 @@ namespace OpenUtau.App.ViewModels {
                 .Skip(1)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(themeName => {
-                    ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(themeName) && !CustomTheme.IsPackageTheme(themeName);
+                    ThemeEditable = !BuiltInThemeLoader.IsBuiltInTheme(themeName)
+                        && !CustomTheme.IsPackageTheme(themeName)
+                        && !CustomTheme.IsHubTheme(themeName);
                     if (!IsThemeEditorOpen) {
                         Preferences.Default.ThemeName = themeName;
                         Preferences.Save();
                         App.SetTheme();
+                    }
+                });
+            this.WhenAnyValue(vm => vm.ThemeColorTemperature)
+                .Skip(1)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(temp => {
+                    var clamped = ThemeTemperature.Clamp(temp);
+                    if (clamped != ThemeColorTemperature) {
+                        ThemeColorTemperature = clamped;
+                        return;
+                    }
+                    Preferences.Default.ThemeTemperature = clamped;
+                    Preferences.Save();
+                    if (!IsThemeEditorOpen) {
+                        App.SetTheme();
+                        RefreshThemePickerItems();
+                    }
+                });
+            this.WhenAnyValue(vm => vm.ThemeTintAmount)
+                .Skip(1)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(amount => {
+                    var clamped = ThemeTint.ClampAmount(amount);
+                    if (clamped != ThemeTintAmount) {
+                        ThemeTintAmount = clamped;
+                        return;
+                    }
+                    Preferences.Default.ThemeTintAmount = clamped;
+                    Preferences.Save();
+                    if (!IsThemeEditorOpen) {
+                        App.SetTheme();
+                        RefreshThemePickerItems();
+                    }
+                });
+            this.WhenAnyValue(vm => vm.ThemeTintColor)
+                .Skip(1)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(color => {
+                    Preferences.Default.ThemeTintColor = ThemeColorStorage.ToStorageString(
+                        Color.FromArgb(255, color.R, color.G, color.B));
+                    Preferences.Save();
+                    if (!IsThemeEditorOpen && Preferences.Default.ThemeTintAmount > 0) {
+                        App.SetTheme();
+                        RefreshThemePickerItems();
                     }
                 });
             this.WhenAnyValue(vm => vm.DegreeStyle)
@@ -1031,12 +1092,19 @@ namespace OpenUtau.App.ViewModels {
                 BuiltInCustomThemePickerItems.Add(ThemePickerItemViewModel.FromThemeName(name));
             }
 
-            CustomThemePickerItems.Clear();
             Colors.CustomTheme.ListThemes();
-            foreach (var name in Colors.CustomTheme.Themes.Keys.OrderBy(key => key, StringComparer.OrdinalIgnoreCase)) {
+
+            HubThemePickerItems.Clear();
+            foreach (var name in Colors.CustomTheme.HubThemeNames) {
+                HubThemePickerItems.Add(ThemePickerItemViewModel.FromThemeName(name));
+            }
+
+            CustomThemePickerItems.Clear();
+            foreach (var name in Colors.CustomTheme.LocalThemeNames) {
                 CustomThemePickerItems.Add(ThemePickerItemViewModel.FromThemeName(name));
             }
             CustomThemePickerItems.Add(ThemePickerItemViewModel.CreateAddTile());
+            CustomThemePickerItems.Add(ThemePickerItemViewModel.CreateImportTile());
             SyncThemePickerSelection();
         }
 
@@ -1047,8 +1115,11 @@ namespace OpenUtau.App.ViewModels {
             foreach (var item in BuiltInCustomThemePickerItems) {
                 item.IsSelected = item.Name == ThemeName;
             }
+            foreach (var item in HubThemePickerItems) {
+                item.IsSelected = item.Name == ThemeName;
+            }
             foreach (var item in CustomThemePickerItems) {
-                item.IsSelected = !item.IsCreateTile && item.Name == ThemeName;
+                item.IsSelected = !item.IsActionTile && item.Name == ThemeName;
             }
         }
 

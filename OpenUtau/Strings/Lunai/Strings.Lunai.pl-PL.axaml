@@ -1,4 +1,4 @@
-<!--Lunai overlay for pl-PL. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for pl-PL. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Jasny</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Motyw o tej nazwie już istnieje.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Nowy</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Nie udało się zaimportować tego pliku motywu.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Import</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Importuj motyw OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Kolor bazowy</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Jasny kolor</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Nazwa koloru ścieżki nie może być pusta.</system:String>

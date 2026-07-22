@@ -845,6 +845,17 @@ namespace OpenUtau.App.ViewModels {
         }
 
         private void RefreshTrackColorBrushes(UPart? part, UProject? project) {
+            if (!Preferences.Default.UseTrackColor) {
+                var noteBrush = ThemeManager.AccentBrush1Note as SolidColorBrush
+                    ?? ThemeManager.GetTrackColor("Blue").NoteColor;
+                var accentBrush = ThemeManager.AccentBrush2 as SolidColorBrush
+                    ?? ThemeManager.GetTrackColor("Blue").AccentColor;
+                TrackAccentColor = accentBrush;
+                TrackNoteColor = new SolidColorBrush(noteBrush.Color) {
+                    Opacity = Preferences.Default.NoteOpacity * 0.5
+                };
+                return;
+            }
             if (part == null || project == null) {
                 TrackAccentColor = ThemeManager.GetTrackColor("Blue").AccentColor;
                 TrackNoteColor = CreateTrackNoteChromeBrush(ThemeManager.GetTrackColor("Blue"));

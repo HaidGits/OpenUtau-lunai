@@ -914,7 +914,7 @@
           ToggleButton.sideToolbarToggle:checked.diffSingerLqPreset TextBlock.sideToolbarGlyph,
           ToggleButton.sideToolbarToggle:checked.diffSingerLqPreset:pointerover TextBlock.sideToolbarGlyph,
           ToggleButton.sideToolbarToggle:checked.diffSingerLqPreset:pressed TextBlock.sideToolbarGlyph">
-    <Setter Property="Foreground" Value="#FFFFFF" />
+    <Setter Property="Foreground" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.appearanceToggle Path.filled">
     <Setter Property="Fill" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />

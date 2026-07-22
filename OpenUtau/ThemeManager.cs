@@ -271,62 +271,124 @@ namespace OpenUtau.App {
             }
             try {
                 IResourceDictionary resDict = Application.Current.Resources;
-                TrackColor tcolor = GetTrackColor(color);
-                
-                resDict["SelectedTrackAccentBrush"] = tcolor.AccentColor;
-                var accentSemi = new SolidColorBrush(tcolor.AccentColor.Color);
-                accentSemi.Opacity = 0.5;
-                resDict["SelectedTrackAccentBrushSemi"] = accentSemi;
-                resDict["SelectedTrackAccentLightBrush"] = tcolor.AccentColorLight;
-                resDict["SelectedTrackAccentLightBrushSemi"] = tcolor.AccentColorLightSemi;
-                resDict["SelectedTrackAccentDarkBrush"] = tcolor.AccentColorDark;
-                resDict["SelectedTrackCenterKeyBrush"] = tcolor.AccentColorCenterKey;
+                var themeVariant = ThemeVariant.Default;
+                double noteOpacity = Math.Clamp(Preferences.Default.NoteOpacity, 0.05, 1);
+                double phonemeOpacity = Math.Clamp(noteOpacity + 0.15, 0.05, 1);
+
                 if (Preferences.Default.UseTrackColor) {
+                    TrackColor tcolor = GetTrackColor(color);
+
+                    resDict["SelectedTrackAccentBrush"] = tcolor.AccentColor;
+                    var accentSemi = new SolidColorBrush(tcolor.AccentColor.Color) { Opacity = 0.5 };
+                    resDict["SelectedTrackAccentBrushSemi"] = accentSemi;
+                    resDict["SelectedTrackAccentLightBrush"] = tcolor.AccentColorLight;
+                    resDict["SelectedTrackAccentLightBrushSemi"] = tcolor.AccentColorLightSemi;
+                    resDict["SelectedTrackAccentDarkBrush"] = tcolor.AccentColorDark;
+                    resDict["SelectedTrackCenterKeyBrush"] = tcolor.AccentColorCenterKey;
+
                     if (IsDarkMode) {
-                        resDict["CenterKeyNameColor"] = tcolor.AccentColorDark.Color;       // piano2; label darkening applied in SetKeyboardBrush
-                        resDict["CenterKeyColorLeft"] = BlendColors(tcolor.AccentColorLight.Color, Color.Parse("#C0C0C0"));   // piano3 + gray 50/50
-                        resDict["CenterKeyColorRight"] = BlendColors(tcolor.AccentColorCenterKey.Color, Color.Parse("#F0F0F0")); // piano4 + light gray 50/50
+                        resDict["CenterKeyNameColor"] = tcolor.AccentColorDark.Color;
+                        resDict["CenterKeyColorLeft"] = BlendColors(tcolor.AccentColorLight.Color, Color.Parse("#C0C0C0"));
+                        resDict["CenterKeyColorRight"] = BlendColors(tcolor.AccentColorCenterKey.Color, Color.Parse("#F0F0F0"));
                         if (s_defaultBlackKeyColorLeft is Color bkl) { resDict["BlackKeyColorLeft"] = bkl; }
                         if (s_defaultBlackKeyColorRight is Color bkr) { resDict["BlackKeyColorRight"] = bkr; }
                         if (s_defaultFinalPitchPen != null) { FinalPitchPen = s_defaultFinalPitchPen; }
                     } else {
-                        resDict["CenterKeyNameColor"] = tcolor.AccentColorDark.Color;       // piano2 (light theme)
-                        resDict["CenterKeyColorLeft"] = tcolor.AccentColorLight.Color;       // piano3 (light theme)
-                        resDict["CenterKeyColorRight"] = tcolor.AccentColorCenterKey.Color;  // piano4 (light theme)
+                        resDict["CenterKeyNameColor"] = tcolor.AccentColorDark.Color;
+                        resDict["CenterKeyColorLeft"] = tcolor.AccentColorLight.Color;
+                        resDict["CenterKeyColorRight"] = tcolor.AccentColorCenterKey.Color;
+                        resDict["BlackKeyColorLeft"] = tcolor.AccentColorDark.Color;
+                        resDict["BlackKeyColorRight"] = tcolor.AccentColorLight.Color;
+                        FinalPitchPen = new Pen(tcolor.AccentColorDark, 1);
                     }
-                    if (!IsDarkMode) {
-                        resDict["BlackKeyColorLeft"] = tcolor.AccentColorDark.Color;    // piano2 (light theme)
-                        resDict["BlackKeyColorRight"] = tcolor.AccentColorLight.Color;  // piano3 (light theme)
-                        FinalPitchPen = new Pen(tcolor.AccentColorDark, 1);             // pitch curve = piano2 (light theme)
-                    }
+
+                    NoteBrush = new SolidColorBrush(tcolor.NoteColor.Color) { Opacity = noteOpacity };
+                    NoteBrushPressed = tcolor.NoteColorPressed;
+                    SetNoteBorderPens(tcolor.NoteBorderColor, tcolor.NoteBorderColorPressed);
+                    NoteEmptyBrush = new SolidColorBrush(tcolor.NoteColorEmpty.Color) {
+                        Opacity = noteOpacity * TrackColor.EmptyNoteOpacityRatio
+                    };
+                    PhonemeBrush = new SolidColorBrush(tcolor.NoteColor.Color) { Opacity = phonemeOpacity };
+                    PhonemeEmptyBrush = new SolidColorBrush(tcolor.NoteColorEmpty.Color) {
+                        Opacity = phonemeOpacity * TrackColor.EmptyNoteOpacityRatio
+                    };
                 } else {
+                    // Theme note / accent colors (AccentColor1Note, NoteBorder*, AccentColor2)
                     if (s_defaultCenterKeyColorLeft is Color ckl) { resDict["CenterKeyColorLeft"] = ckl; }
                     if (s_defaultCenterKeyColorRight is Color ckr) { resDict["CenterKeyColorRight"] = ckr; }
                     if (s_defaultCenterKeyNameColor is Color ckn) { resDict["CenterKeyNameColor"] = ckn; }
                     if (s_defaultBlackKeyColorLeft is Color bkl) { resDict["BlackKeyColorLeft"] = bkl; }
                     if (s_defaultBlackKeyColorRight is Color bkr) { resDict["BlackKeyColorRight"] = bkr; }
                     if (s_defaultFinalPitchPen != null) { FinalPitchPen = s_defaultFinalPitchPen; }
-                }
 
-                double noteOpacity = Math.Clamp(Preferences.Default.NoteOpacity, 0.05, 1);
-                double phonemeOpacity = Math.Clamp(noteOpacity + 0.15, 0.05, 1);
-                NoteBrush = new SolidColorBrush(tcolor.NoteColor.Color) {
-                    Opacity = noteOpacity
-                };
-                NoteBrushPressed = tcolor.NoteColorPressed;
-                SetNoteBorderPens(tcolor.NoteBorderColor, tcolor.NoteBorderColorPressed);
-                NoteEmptyBrush = new SolidColorBrush(tcolor.NoteColorEmpty.Color) {
-                    Opacity = noteOpacity * TrackColor.EmptyNoteOpacityRatio
-                };
-                PhonemeBrush = new SolidColorBrush(tcolor.NoteColor.Color) {
-                    Opacity = phonemeOpacity
-                };
-                PhonemeEmptyBrush = new SolidColorBrush(tcolor.NoteColorEmpty.Color) {
-                    Opacity = phonemeOpacity * TrackColor.EmptyNoteOpacityRatio
-                };
+                    Color noteColor = TryGetResourceColor(resDict, themeVariant, "AccentColor1Note")
+                        ?? (AccentBrush1Note as SolidColorBrush)?.Color
+                        ?? Avalonia.Media.Colors.MediumPurple;
+                    Color notePressed = TryGetResourceColor(resDict, themeVariant, "AccentColor2")
+                        ?? TrackColorPaletteDarken(noteColor, 0.32);
+                    Color noteBorder = TryGetResourceColor(resDict, themeVariant, "NoteBorderColor")
+                        ?? noteColor;
+                    Color noteBorderPressed = TryGetResourceColor(resDict, themeVariant, "NoteBorderColorPressed")
+                        ?? notePressed;
+                    Color accent = TryGetResourceColor(resDict, themeVariant, "AccentColor2")
+                        ?? noteColor;
+                    Color accentLight = TryGetResourceColor(resDict, themeVariant, "AccentColor1")
+                        ?? TrackColorPaletteLighten(accent, 0.35);
+                    Color accentDark = TryGetResourceColor(resDict, themeVariant, "SystemAccentColorDark1")
+                        ?? TrackColorPaletteDarken(accent, 0.28);
+
+                    resDict["SelectedTrackAccentBrush"] = new SolidColorBrush(accent);
+                    resDict["SelectedTrackAccentBrushSemi"] = new SolidColorBrush(accent) { Opacity = 0.5 };
+                    resDict["SelectedTrackAccentLightBrush"] = new SolidColorBrush(accentLight);
+                    resDict["SelectedTrackAccentLightBrushSemi"] = new SolidColorBrush(accentLight) { Opacity = 0.5 };
+                    resDict["SelectedTrackAccentDarkBrush"] = new SolidColorBrush(accentDark);
+                    resDict["SelectedTrackCenterKeyBrush"] = new SolidColorBrush(accentLight);
+
+                    NoteBrush = new SolidColorBrush(noteColor) { Opacity = noteOpacity };
+                    NoteBrushPressed = new SolidColorBrush(notePressed);
+                    SetNoteBorderPens(new SolidColorBrush(noteBorder), new SolidColorBrush(noteBorderPressed));
+                    NoteEmptyBrush = new SolidColorBrush(noteColor) {
+                        Opacity = noteOpacity * TrackColor.EmptyNoteOpacityRatio
+                    };
+                    PhonemeBrush = new SolidColorBrush(noteColor) { Opacity = phonemeOpacity };
+                    PhonemeEmptyBrush = new SolidColorBrush(noteColor) {
+                        Opacity = phonemeOpacity * TrackColor.EmptyNoteOpacityRatio
+                    };
+
+                    // Keep cached theme note brush in sync for ExpressionCanvas etc.
+                    AccentBrush1Note = new SolidColorBrush(noteColor);
+                    AccentBrush1NoteSemi = new SolidColorBrush(noteColor) { Opacity = 0.5 };
+                }
 
                 SetKeyboardBrush();
             } catch { }
+        }
+
+        static Color? TryGetResourceColor(IResourceDictionary resDict, ThemeVariant themeVariant, string key) {
+            if (!resDict.TryGetResource(key, themeVariant, out var value) || value == null) {
+                return null;
+            }
+            if (value is Color color) {
+                return color;
+            }
+            if (value is SolidColorBrush brush) {
+                return brush.Color;
+            }
+            return null;
+        }
+
+        static Color TrackColorPaletteDarken(Color c, double amount) {
+            return Color.FromRgb(
+                (byte)Math.Clamp(c.R * (1 - amount), 0, 255),
+                (byte)Math.Clamp(c.G * (1 - amount), 0, 255),
+                (byte)Math.Clamp(c.B * (1 - amount), 0, 255));
+        }
+
+        static Color TrackColorPaletteLighten(Color c, double amount) {
+            return Color.FromRgb(
+                (byte)Math.Clamp(c.R + (255 - c.R) * amount, 0, 255),
+                (byte)Math.Clamp(c.G + (255 - c.G) * amount, 0, 255),
+                (byte)Math.Clamp(c.B + (255 - c.B) * amount, 0, 255));
         }
         private static void SetKeyboardBrush() {
             if (Application.Current == null) {

@@ -1,4 +1,4 @@
-<!--Lunai overlay for ro-RO. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for ro-RO. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Deschis</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Există deja o temă cu acest nume.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Nou</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Nu s-a putut importa acest fișier de temă.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Import</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Importă temă OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Culoare de bază</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Culoare luminoasă</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Numele culorii pistei nu poate fi gol.</system:String>

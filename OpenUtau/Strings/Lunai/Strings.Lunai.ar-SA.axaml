@@ -1,4 +1,4 @@
-<!--Lunai overlay for ar-SA. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for ar-SA. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">فاتحة</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">توجد سمة بهذا الاسم بالفعل.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">جديد</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Could not import this theme file.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Import</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Import OpenUtau theme</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">اللون الأساسي</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">اللون الساطع</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">لا يمكن أن يكون اسم لون المسار فارغًا.</system:String>

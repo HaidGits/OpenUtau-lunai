@@ -12,8 +12,6 @@ public static class BuiltInThemeLoader {
     public const string DarkThemeName = "Dark";
     public const string OriginalLightThemeName = "OriginalLight";
     public const string OriginalDarkThemeName = "OriginalDark";
-    public const string ColdThemeName = "Cold";
-    public const string WarmThemeName = "Warm";
 
     public static readonly string[] BaseThemeNames = [
         LightThemeName,
@@ -23,8 +21,6 @@ public static class BuiltInThemeLoader {
     public static readonly string[] BuiltInCustomThemeNames = [
         OriginalLightThemeName,
         OriginalDarkThemeName,
-        ColdThemeName,
-        WarmThemeName,
     ];
 
     public static ThemeYaml CreateFromBuiltIn(string baseTheme, string name) {
@@ -52,12 +48,6 @@ public static class BuiltInThemeLoader {
                 return true;
             case OriginalDarkThemeName:
                 yaml = CreateOriginalDark();
-                return true;
-            case ColdThemeName:
-                yaml = CreateCold();
-                return true;
-            case WarmThemeName:
-                yaml = CreateWarm();
                 return true;
             default:
                 yaml = default!;
@@ -295,84 +285,5 @@ public static class BuiltInThemeLoader {
             BlackKeyColorRight = "Transparent",
             BlackKeyNameColor = "#FFFFFF",
         };
-    }
-
-    public static ThemeYaml CreateCold() {
-        var yaml = CreateDark();
-        ApplyPresetTint(yaml, surfaceR: -1, surfaceG: -1, surfaceB: 2, accentR: 0, accentG: 0, accentB: 1);
-        return yaml;
-    }
-
-    public static ThemeYaml CreateWarm() {
-        var yaml = CreateDark();
-        ApplyPresetTint(yaml, surfaceR: 2, surfaceG: 0, surfaceB: -1, accentR: 1, accentG: 0, accentB: -1);
-        return yaml;
-    }
-
-    static readonly string[] SurfaceTintKeys = [
-        nameof(ThemeYaml.BackgroundColor),
-        nameof(ThemeYaml.BackgroundColorPointerOver),
-        nameof(ThemeYaml.BackgroundColorPressed),
-        nameof(ThemeYaml.BackgroundColorDisabled),
-        nameof(ThemeYaml.TextControlBorderColorDisabled),
-        nameof(ThemeYaml.TransportToolbarOffHoverColor),
-        nameof(ThemeYaml.ToolbarCheckedHoverColor),
-        nameof(ThemeYaml.WorkspaceCanvasColor),
-        nameof(ThemeYaml.WorkspaceCardColor),
-        nameof(ThemeYaml.WorkspaceElevatedSurfaceColor),
-        nameof(ThemeYaml.TrackBackgroundAltColor),
-        nameof(ThemeYaml.MutedIconColor),
-        nameof(ThemeYaml.PianoRollToolbarStripColor),
-        nameof(ThemeYaml.PianoRollToolbarButtonHoverColor),
-        nameof(ThemeYaml.PianoRollTimelineStripColor),
-        nameof(ThemeYaml.AppTopBarTransportStripColor),
-        nameof(ThemeYaml.AppTopBarTransportHoverColor),
-        nameof(ThemeYaml.AppTopBarValueStripColor),
-        nameof(ThemeYaml.AppTopBarValueDividerColor),
-        nameof(ThemeYaml.TickLineColor),
-        nameof(ThemeYaml.BarNumberColor),
-        nameof(ThemeYaml.PianoRollWaveformPeakColor),
-        nameof(ThemeYaml.WarningColor),
-    ];
-
-    static readonly string[] AccentTintKeys = [
-        nameof(ThemeYaml.SystemAccentColor),
-        nameof(ThemeYaml.SystemAccentColorLight1),
-        nameof(ThemeYaml.SystemAccentColorDark1),
-        nameof(ThemeYaml.NeutralAccentColor),
-        nameof(ThemeYaml.NeutralAccentColorPointerOver),
-        nameof(ThemeYaml.AccentColor1),
-        nameof(ThemeYaml.AccentColor1Note),
-        nameof(ThemeYaml.AccentColor2),
-        nameof(ThemeYaml.AccentColor3),
-        nameof(ThemeYaml.NoteBorderColor),
-        nameof(ThemeYaml.NoteBorderColorPressed),
-    ];
-
-    static void ApplyPresetTint(
-        ThemeYaml yaml,
-        int surfaceR, int surfaceG, int surfaceB,
-        int accentR, int accentG, int accentB) {
-        foreach (var key in SurfaceTintKeys) {
-            yaml.SetColor(key, TintHex(yaml.GetColor(key), surfaceR, surfaceG, surfaceB));
-        }
-        foreach (var key in AccentTintKeys) {
-            yaml.SetColor(key, TintHex(yaml.GetColor(key), accentR, accentG, accentB));
-        }
-    }
-
-    static string TintHex(string? color, int deltaR, int deltaG, int deltaB) {
-        if (string.IsNullOrWhiteSpace(color)
-            || string.Equals(color, "Transparent", StringComparison.OrdinalIgnoreCase)) {
-            return color ?? "#000000";
-        }
-        if (!ThemeColorStorage.TryParse(color, out var parsed)) {
-            return color;
-        }
-        return ThemeColorStorage.ToStorageString(Color.FromArgb(
-            parsed.A,
-            (byte)Math.Clamp(parsed.R + deltaR, 0, 255),
-            (byte)Math.Clamp(parsed.G + deltaG, 0, 255),
-            (byte)Math.Clamp(parsed.B + deltaB, 0, 255)));
     }
 }

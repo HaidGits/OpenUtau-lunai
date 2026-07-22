@@ -1,4 +1,4 @@
-<!--Lunai overlay for pt-BR. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for pt-BR. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Claro</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Já existe um tema com este nome.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Novo</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Não foi possível importar este arquivo de tema.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Importar</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Importar tema OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Cor base</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Cor brilhante</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">O nome da cor da faixa não pode ficar vazio.</system:String>

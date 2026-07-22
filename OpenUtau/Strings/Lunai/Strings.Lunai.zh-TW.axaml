@@ -1,4 +1,4 @@
-<!--Lunai overlay for zh-TW. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for zh-TW. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">淺色</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">已存在同名主題。</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">新增</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">無法匯入此主題檔案。</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">匯入</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">匯入 OpenUtau 主題</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">基礎色</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">亮色</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">音軌色彩名稱不能為空白。</system:String>

@@ -14,6 +14,11 @@ public static class ThemePreviewFactory {
 
     public static ThemePreviewColors GetPreviewColors(string name) {
         var yaml = LoadTheme(name);
+        ThemeTemperature.ApplyToYaml(yaml, OpenUtau.Core.Util.Preferences.Default.ThemeTemperature);
+        ThemeTint.ApplyToYaml(
+            yaml,
+            OpenUtau.Core.Util.Preferences.Default.ThemeTintAmount,
+            OpenUtau.Core.Util.Preferences.Default.ThemeTintColor);
         return new ThemePreviewColors(
             ToBrush(yaml.WorkspaceCanvasColor),
             ToBrush(yaml.BackgroundColor),

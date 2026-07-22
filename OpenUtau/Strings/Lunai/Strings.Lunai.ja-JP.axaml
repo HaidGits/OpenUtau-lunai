@@ -1,4 +1,4 @@
-<!--Lunai overlay for ja-JP. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for ja-JP. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">ライト</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">この名前のテーマはすでに存在します。</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">新規</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">テーマファイルをインポートできませんでした。</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">読込</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">OpenUtauテーマをインポート</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">ベースカラー</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">明るい色</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">トラックカラー名を空にはできません。</system:String>

@@ -130,10 +130,20 @@ namespace OpenUtau.App {
                 case BuiltInThemeLoader.LightThemeName:
                     ApplyTheme(light);
                     Current.RequestedThemeVariant = ThemeVariant.Light;
+                    OpenUtau.Colors.ThemeTemperature.ApplyToCurrentResources(
+                        Core.Util.Preferences.Default.ThemeTemperature);
+                    OpenUtau.Colors.ThemeTint.ApplyToCurrentResources(
+                        Core.Util.Preferences.Default.ThemeTintAmount,
+                        Core.Util.Preferences.Default.ThemeTintColor);
                     break;
                 case BuiltInThemeLoader.DarkThemeName:
                     ApplyTheme(dark);
                     Current.RequestedThemeVariant = ThemeVariant.Dark;
+                    OpenUtau.Colors.ThemeTemperature.ApplyToCurrentResources(
+                        Core.Util.Preferences.Default.ThemeTemperature);
+                    OpenUtau.Colors.ThemeTint.ApplyToCurrentResources(
+                        Core.Util.Preferences.Default.ThemeTintAmount,
+                        Core.Util.Preferences.Default.ThemeTintColor);
                     break;
                 default:
                     if (BuiltInThemeLoader.TryCreateThemeByName(Core.Util.Preferences.Default.ThemeName, out var builtInTheme)) {

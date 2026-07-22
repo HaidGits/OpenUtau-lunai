@@ -24,6 +24,7 @@ using OpenUtau.Core.DiffSinger;
 using OpenUtau.Core.Format;
 using OpenUtau.Core.Ustx;
 using OpenUtau.Core.Util;
+using OpenUtau.Colors;
 using ReactiveUI;
 using Serilog;
 using SharpCompress;
@@ -142,6 +143,7 @@ namespace OpenUtau.App.Views {
                 dialog => dialog.Show(this),
                 () => (Application.Current?.ApplicationLifetime as IControlledApplicationLifetime)?.Shutdown(),
                 TaskScheduler.FromCurrentSynchronizationContext());
+            _ = SyncThemeHubAsync();
             Log.Information("Created main window.");
             this.Cursor = null;
             Opened += (_, _) => Dispatcher.UIThread.Post(
@@ -151,6 +153,22 @@ namespace OpenUtau.App.Views {
 
         public void InitProject() {
             viewModel.InitProject(this);
+        }
+
+        static async Task SyncThemeHubAsync() {
+            try {
+                var result = await ThemeHubClient.SyncAsync().ConfigureAwait(false);
+                if (result.Changed) {
+                    await Dispatcher.UIThread.InvokeAsync(() => {
+                        MessageBus.Current.SendMessage(new ThemeHubSyncedEvent {
+                            Downloaded = result.Downloaded,
+                            Updated = result.Updated,
+                        });
+                    });
+                }
+            } catch (Exception ex) {
+                Log.Warning(ex, "ThemeHub sync failed");
+            }
         }
 
         void ScheduleApplyTracksScrollStyle() {

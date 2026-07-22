@@ -44,6 +44,28 @@ namespace OpenUtau.App.Views {
             }
         }
 
+        void OnThemeTemperaturePointerPressed(object? sender, PointerPressedEventArgs e) {
+            if (!e.GetCurrentPoint(this).Properties.IsRightButtonPressed) {
+                return;
+            }
+            if (DataContext is not PreferencesViewModel vm) {
+                return;
+            }
+            vm.ThemeColorTemperature = 0;
+            e.Handled = true;
+        }
+
+        void OnThemeTintAmountPointerPressed(object? sender, PointerPressedEventArgs e) {
+            if (!e.GetCurrentPoint(this).Properties.IsRightButtonPressed) {
+                return;
+            }
+            if (DataContext is not PreferencesViewModel vm) {
+                return;
+            }
+            vm.ThemeTintAmount = 0;
+            e.Handled = true;
+        }
+
         void OnThemeTilePointerPressed(object? sender, PointerPressedEventArgs e) {
             if (e.Source is Button) {
                 return;
@@ -53,6 +75,11 @@ namespace OpenUtau.App.Views {
             }
             if (item.IsCreateTile) {
                 OnCustomThemeCreate(sender, e);
+                e.Handled = true;
+                return;
+            }
+            if (item.IsImportTile) {
+                _ = OnCustomThemeImportAsync();
                 e.Handled = true;
                 return;
             }
@@ -144,6 +171,50 @@ namespace OpenUtau.App.Views {
                 dialog.ShowDialog(owner);
             } else {
                 dialog.Show();
+            }
+        }
+
+        async System.Threading.Tasks.Task OnCustomThemeImportAsync() {
+            var vm = ViewModel;
+            var owner = GetOwnerWindow();
+            if (owner == null) {
+                return;
+            }
+            var sourcePath = await FilePicker.OpenFile(
+                owner,
+                "prefs.appearance.customtheme.import.title",
+                FilePicker.ThemeYaml);
+            if (string.IsNullOrEmpty(sourcePath)) {
+                return;
+            }
+            try {
+                var themeYaml = ClassicOpenUtauThemeConverter.LoadAndConvert(sourcePath);
+                if (string.IsNullOrWhiteSpace(themeYaml.Name)) {
+                    themeYaml.Name = Path.GetFileNameWithoutExtension(sourcePath);
+                }
+                string baseFilename = string.Join("", themeYaml.Name.Where(c => char.IsLetterOrDigit(c) || c == ' '))
+                    .Replace(" ", "-").ToLowerInvariant();
+                if (string.IsNullOrWhiteSpace(baseFilename)) {
+                    baseFilename = "imported-theme";
+                }
+                Directory.CreateDirectory(PathManager.Inst.ThemesPath);
+                string themePath = Path.Join(PathManager.Inst.ThemesPath, baseFilename + ".yaml");
+                int dup = 1;
+                while (File.Exists(themePath)) {
+                    themePath = Path.Join(PathManager.Inst.ThemesPath, $"{baseFilename}-{dup}.yaml");
+                    dup++;
+                }
+                themeYaml.SaveToFile(themePath);
+                CustomTheme.ListThemes();
+                vm.RefreshThemes();
+                var themeKey = CustomTheme.Themes.FirstOrDefault(pair => pair.Value == themePath).Key;
+                if (!string.IsNullOrEmpty(themeKey)) {
+                    vm.ThemeName = themeKey;
+                }
+            } catch (Exception) {
+                MessageBox.ShowModal(owner,
+                    ThemeManager.GetString("prefs.appearance.customtheme.import.failed"),
+                    ThemeManager.GetString("prefs.appearance.customtheme.import.title"));
             }
         }
     }

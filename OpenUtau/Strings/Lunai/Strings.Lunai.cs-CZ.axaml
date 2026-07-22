@@ -1,4 +1,4 @@
-<!--Lunai overlay for cs-CZ. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for cs-CZ. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Světlý</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Motiv s tímto názvem již existuje.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Nový</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Tento soubor motivu se nepodařilo importovat.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Import</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Importovat motiv OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Základní barva</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Jasná barva</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Název barvy stopy nesmí být prázdný.</system:String>

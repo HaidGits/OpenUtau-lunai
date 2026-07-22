@@ -1,4 +1,4 @@
-<!--Lunai overlay for fi-FI. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for fi-FI. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Vaalea</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Tämänniminen teema on jo olemassa.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Uusi</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Tämän teemapedoston tuonti epäonnistui.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Tuo</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Tuo OpenUtau-teema</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Perusväri</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Kirkas väri</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Raidavärin nimi ei voi olla tyhjä.</system:String>

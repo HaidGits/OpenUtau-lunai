@@ -1,4 +1,4 @@
-<!--Lunai overlay for uk-UA. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for uk-UA. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Світла</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Тема з такою назвою вже існує.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Нова</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Не вдалося імпортувати цей файл теми.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Імпорт</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Імпорт теми OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Базовий колір</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Яскравий колір</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Назва кольору треку не може бути порожньою.</system:String>

@@ -1,4 +1,4 @@
-<!--Lunai overlay for de-DE. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for de-DE. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Hell</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Ein Thema mit diesem Namen existiert bereits.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Neu</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Dieses Theme konnte nicht importiert werden.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Import</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">OpenUtau-Thema importieren</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Basisfarbe</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Helle Farbe</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Der Spurfarbenname darf nicht leer sein.</system:String>

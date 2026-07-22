@@ -59,6 +59,9 @@ namespace OpenUtau.App {
         public static FilePickerFileType OUDEP { get; } = new("OpenUtau dependency") {
             Patterns = new[] { "*.oudep" },
         };
+        public static FilePickerFileType ThemeYaml { get; } = new("Theme YAML") {
+            Patterns = new[] { "*.yaml", "*.yml" },
+        };
         public static FilePickerFileType UnixExecutable { get; } = new("Executable") {
             MimeTypes = new[] { "application/x-executable" },
             AppleUniformTypeIdentifiers = new[] { "public.unix-executable" },

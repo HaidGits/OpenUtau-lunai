@@ -1,4 +1,4 @@
-<!--Lunai overlay for th-TH. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for th-TH. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">สว่าง</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">มีธีมชื่อนี้อยู่แล้ว</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">ใหม่</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">ไม่สามารถนำเข้าไฟล์ธีมนี้ได้</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">นำเข้า</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">นำเข้าธีม OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">สีฐาน</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">สีสว่าง</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">ชื่อสีแทร็กว่างไม่ได้</system:String>

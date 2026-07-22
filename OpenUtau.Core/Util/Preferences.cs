@@ -156,6 +156,23 @@ namespace OpenUtau.Core.Util {
                     Default.NoteCornerRadius = Math.Clamp(Default.NoteCornerRadius, 0, 12);
                     Default.NoteOpacity = Math.Clamp(Default.NoteOpacity, 0.05, 1);
                     Default.NoteBorderThickness = Math.Clamp(Default.NoteBorderThickness, 0.5, 4);
+                    Default.ThemeTemperature = Math.Clamp(Default.ThemeTemperature, -100, 100);
+                    Default.ThemeTintAmount = Math.Clamp(Default.ThemeTintAmount, 0, 100);
+                    if (string.IsNullOrWhiteSpace(Default.ThemeTintColor)) {
+                        Default.ThemeTintColor = "#7271C9";
+                    }
+                    // Warm/Cold presets replaced by ThemeTemperature slider.
+                    if (string.Equals(Default.ThemeName, "Warm", StringComparison.OrdinalIgnoreCase)) {
+                        Default.ThemeName = "Dark";
+                        if (Default.ThemeTemperature == 0) {
+                            Default.ThemeTemperature = 50;
+                        }
+                    } else if (string.Equals(Default.ThemeName, "Cold", StringComparison.OrdinalIgnoreCase)) {
+                        Default.ThemeName = "Dark";
+                        if (Default.ThemeTemperature == 0) {
+                            Default.ThemeTemperature = -50;
+                        }
+                    }
                     Default.PlaybackPitchFollowSemitoneThreshold = Math.Clamp(Default.PlaybackPitchFollowSemitoneThreshold, 0, 24);
                     Default.PlaybackPitchFollowVerticalPosition = Math.Clamp(Default.PlaybackPitchFollowVerticalPosition, 0.15, 0.85);
                     Default.PlaybackPitchFollowFrameSmoothing = Math.Clamp(Default.PlaybackPitchFollowFrameSmoothing, 0.05, 1);
@@ -208,6 +225,16 @@ namespace OpenUtau.Core.Util {
             public int MetronomeHighFrequency = 2200;
             public int MetronomeLowFrequency = 1320;
             public string ThemeName = "Dark";
+            /// <summary>Color temperature cast: -100 cold … 0 neutral … +100 warm.</summary>
+            public int ThemeTemperature = 0;
+            /// <summary>Blend toward <see cref="ThemeTintColor"/>: 0 off … 100 strong.</summary>
+            public int ThemeTintAmount = 0;
+            /// <summary>Target color for theme tint (#RRGGBB).</summary>
+            public string ThemeTintColor = "#7271C9";
+            /// <summary>
+            /// JSON catalog URL for remote themes (GitHub raw). Empty = default oulunai-themes repo.
+            /// </summary>
+            public string ThemeHubCatalogUrl = "";
             public bool PenPlusDefault = false;
             public int DegreeStyle;
             public bool ShowKeyScaleOnPianoRoll = false;

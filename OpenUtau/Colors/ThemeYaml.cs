@@ -15,10 +15,13 @@ namespace OpenUtau.Colors;
 public class ThemeYaml {
     static readonly Dictionary<string, FieldInfo> ColorFields = typeof(ThemeYaml)
         .GetFields(BindingFlags.Public | BindingFlags.Instance)
-        .Where(field => field.FieldType == typeof(string) && field.Name != nameof(Name))
+        .Where(field => field.FieldType == typeof(string)
+            && field.Name != nameof(Name)
+            && field.Name != nameof(Author))
         .ToDictionary(field => field.Name);
 
     public string Name = "Custom YAML";
+    public string Author = "";
     public bool IsDarkMode;
 
     public string BackgroundColor = "#FFFFFF";
@@ -142,20 +145,34 @@ public class ThemeYaml {
 
     public static ThemeYaml LoadFromFile(string path) {
         try {
-            var yaml = Yaml.DefaultDeserializer.Deserialize<ThemeYaml>(File.ReadAllText(path, Encoding.UTF8));
+            var text = File.ReadAllText(path, Encoding.UTF8);
+            var yaml = Yaml.DefaultDeserializer.Deserialize<ThemeYaml>(text);
             if (HasBrokenBasePalette(yaml)) {
                 var repaired = BuiltInThemeLoader.CreateFromBuiltIn(
                     yaml.IsDarkMode ? "Dark" : "Light",
                     yaml.Name);
                 yaml = repaired;
+            } else if (ClassicOpenUtauThemeConverter.LooksLikeClassicTheme(text)) {
+                yaml = ClassicOpenUtauThemeConverter.ConvertClassic(yaml, text);
+                TryRewriteConvertedTheme(path, yaml);
+            } else {
+                var defaults = BuiltInThemeLoader.CreateFromBuiltIn(yaml.IsDarkMode ? "Dark" : "Light", yaml.Name);
+                yaml.FillMissingFrom(defaults);
             }
-            var defaults = BuiltInThemeLoader.CreateFromBuiltIn(yaml.IsDarkMode ? "Dark" : "Light", yaml.Name);
-            yaml.FillMissingFrom(defaults);
             ThemePaletteNormalizer.Normalize(yaml);
             return yaml;
         } catch (Exception exception) {
             Log.Error(exception, "Failed to parse yaml in {Path}", path);
             return BuiltInThemeLoader.CreateFromBuiltIn("Light", "Custom YAML");
+        }
+    }
+
+    static void TryRewriteConvertedTheme(string path, ThemeYaml yaml) {
+        try {
+            yaml.SaveToFile(path);
+            Log.Information("Converted classic OpenUtau theme to Lunai format: {Path}", path);
+        } catch (Exception exception) {
+            Log.Warning(exception, "Could not rewrite converted theme {Path}", path);
         }
     }
 

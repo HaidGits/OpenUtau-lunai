@@ -1,4 +1,4 @@
-<!--Lunai overlay for vi-VN. Not managed by Crowdin.-->
+﻿<!--Lunai overlay for vi-VN. Not managed by Crowdin.-->
 <!--Professional UI translation of Lunai-only strings.-->
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -182,6 +182,9 @@
   <system:String x:Key="prefs.appearance.customtheme.create.baselight">Sáng</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.exists">Đã có chủ đề với tên này.</system:String>
   <system:String x:Key="prefs.appearance.customtheme.create.short">Mới</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.failed">Không thể nhập tệp chủ đề này.</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.short">Nhập</system:String>
+  <system:String x:Key="prefs.appearance.customtheme.import.title">Nhập chủ đề OpenUtau</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.base">Màu gốc</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.bright">Màu sáng</system:String>
   <system:String x:Key="prefs.appearance.customtrackcolor.create.empty">Tên màu track không được để trống.</system:String>
