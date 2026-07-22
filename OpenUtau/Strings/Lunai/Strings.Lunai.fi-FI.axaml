@@ -229,12 +229,6 @@
   <system:String x:Key="prefs.appearance.theme.name.originaldark">Alkuperäinen tumma</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">Alkuperäinen vaalea</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Lämmin</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Sävytä pianorullan tausta raidavärillä</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger-ystävällinen foneemipaneeli</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Vaihda DiffSinger-foneemipaneeli automaattisesti</system:String>

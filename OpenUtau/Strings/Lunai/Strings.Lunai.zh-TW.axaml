@@ -229,12 +229,6 @@
   <system:String x:Key="prefs.appearance.theme.name.originaldark">原始深色</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">原始淺色</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">暖色</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">以音軌色彩為鋼琴捲軸背景著色</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger 友善音標面板</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">自動切換 DiffSinger 友善音標面板</system:String>

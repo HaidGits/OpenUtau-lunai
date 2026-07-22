@@ -229,12 +229,6 @@
   <system:String x:Key="prefs.appearance.theme.name.originaldark">오리지널 다크</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">오리지널 라이트</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">웜</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">피아노 롤 배경을 트랙 색으로 칠하기</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger에 맞는 음소 패널</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">DiffSinger 음소 패널 자동 전환</system:String>

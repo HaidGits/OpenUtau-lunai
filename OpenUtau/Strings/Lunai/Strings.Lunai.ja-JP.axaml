@@ -229,12 +229,6 @@
   <system:String x:Key="prefs.appearance.theme.name.originaldark">オリジナルダーク</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">オリジナルライト</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">ウォーム</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">ピアノロール背景をトラックカラーで着色</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">DiffSinger向け音素パネル</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">DiffSinger向け音素パネルを自動切替</system:String>

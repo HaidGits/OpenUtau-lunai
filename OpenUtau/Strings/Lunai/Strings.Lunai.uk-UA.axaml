@@ -229,12 +229,6 @@
   <system:String x:Key="prefs.appearance.theme.name.originaldark">Оригінальна темна</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">Оригінальна світла</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Тепла</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Підфарбовувати фон піаноролу кольором треку</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Зручна панель фонем для DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Автоматично перемикати зручну панель фонем для DiffSinger</system:String>

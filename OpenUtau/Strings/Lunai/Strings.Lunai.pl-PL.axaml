@@ -229,12 +229,6 @@
   <system:String x:Key="prefs.appearance.theme.name.originaldark">Oryginalny ciemny</system:String>
   <system:String x:Key="prefs.appearance.theme.name.originallight">Oryginalny jasny</system:String>
   <system:String x:Key="prefs.appearance.theme.name.warm">Ciepły</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.violet dusk">Violet Dusk</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.olive blush">Olive Blush</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.mint ember">Mint Ember</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.ink parchment">Ink Parchment</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.forest sand">Forest Sand</system:String>
-  <system:String x:Key="prefs.appearance.theme.name.amber harbor">Amber Harbor</system:String>
   <system:String x:Key="prefs.appearance.tintpianorollbackgroundwithtrackcolor">Zabarw tło edytora pianinowego kolorem ścieżki</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel">Panel fonemów przyjazny dla DiffSinger</system:String>
   <system:String x:Key="prefs.diffsinger.phonemepanel.auto">Automatycznie przełączaj panel fonemów DiffSinger</system:String>
