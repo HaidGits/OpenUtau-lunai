@@ -72,6 +72,7 @@ namespace OpenUtau.App.Controls {
         private ReactiveCommand<Unit, Unit>? lyricsDialogCommand;
         private ReactiveCommand<Unit, Unit>? noteDefaultsCommand;
         private ReactiveCommand<BatchEdit, Unit>? noteBatchEditCommand;
+        private MenuItemViewModel? lengthenCrossfadeMenuItem;
 
         private Window RootWindow => (Window)TopLevel.GetTopLevel(this)!;
 
@@ -774,13 +775,16 @@ namespace OpenUtau.App.Controls {
                     RandomizeTuning();
                 })
             });
-            ViewModel.NoteBatchEdits.Add(new MenuItemViewModel() {
+            lengthenCrossfadeMenuItem = new MenuItemViewModel() {
                 Header = ThemeManager.GetString("pianoroll.menu.notes.lengthencrossfade"),
                 InputGesture = KeyTranslator.GetGesture("Lengthen Crossfade"),
                 Command = ReactiveCommand.Create(() => {
                     LengthenCrossfade();
                 })
-            });
+            };
+            ViewModel.WhenAnyValue(x => x.IsDiffSingerTrack)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(UpdateLengthenCrossfadeMenuVisibility);
             ViewModel.LyricBatchEdits.Add(new MenuItemViewModel() {
                 Header = ThemeManager.GetString("lyricsreplace.replace"),
                 InputGesture = KeyTranslator.GetGesture("lyricsreplace.replace"),
@@ -1146,9 +1150,23 @@ namespace OpenUtau.App.Controls {
             dialog.ShowDialog(RootWindow);
         }
 
+        void UpdateLengthenCrossfadeMenuVisibility(bool isDiffSingerTrack) {
+            if (lengthenCrossfadeMenuItem == null) {
+                return;
+            }
+            bool inMenu = ViewModel.NoteBatchEdits.Contains(lengthenCrossfadeMenuItem);
+            if (isDiffSingerTrack) {
+                if (inMenu) {
+                    ViewModel.NoteBatchEdits.Remove(lengthenCrossfadeMenuItem);
+                }
+            } else if (!inMenu) {
+                ViewModel.NoteBatchEdits.Add(lengthenCrossfadeMenuItem);
+            }
+        }
+
         void LengthenCrossfade() {
             var notesVM = ViewModel.NotesViewModel;
-            if (notesVM.Part == null) {
+            if (notesVM.Part == null || ViewModel.IsDiffSingerTrack) {
                 return;
             }
             var dialog = new SliderDialog(ThemeManager.GetString("pianoroll.menu.notes.lengthencrossfade"), 0.5, 0, 1, 0.1);
@@ -2338,7 +2356,11 @@ namespace OpenUtau.App.Controls {
                 case "Quantize Notes": QuantizeNotes(); return true;
                 case "lyricsreplace.replace": ReplaceLyrics(); return true;
                 case "Randomize Tuning": RandomizeTuning(); return true;
-                case "Lengthen Crossfade": LengthenCrossfade(); return true;
+                case "Lengthen Crossfade":
+                    if (!ViewModel.IsDiffSingerTrack) {
+                        LengthenCrossfade();
+                    }
+                    return true;
                 case "Add Breath": AddBreathNote(); return true; 
                 case "Edit Note Defaults": EditNoteDefaults(); return true;
                 case "Open Singers Window": OnMenuSingers(this, new RoutedEventArgs()); return true;
