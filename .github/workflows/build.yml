@@ -241,5 +241,5 @@ jobs:
             If you encountered issues, see [FAQ](https://github.com/stakira/OpenUtau/wiki/FAQ)
 
             ## macOS says "This app is damaged"
-            Open a terminal and run `xattr -rc "/Applications/OpenUtau Lunai.app"`. Try opening OpenUtau Lunai again.
+            Open a terminal and run `xattr -rc "/Applications/OpenUtau-Lunai.app"`. Try opening OpenUtau Lunai again.
         if: ${{ inputs.release }}

@@ -283,7 +283,7 @@ jobs:
             - Settings live in a Lunai-specific data folder (shared singers with stock OpenUtau when installed).
             - macOS users: If you see "This app is damaged", run:
               ```sh
-              xattr -rc "/Applications/OpenUtau Lunai.app"
+              xattr -rc "/Applications/OpenUtau-Lunai.app"
               ```
             
             ### Getting Started

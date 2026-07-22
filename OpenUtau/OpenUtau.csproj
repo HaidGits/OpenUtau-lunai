@@ -18,7 +18,8 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <CFBundleName>OpenUtau Lunai</CFBundleName>
+    <!-- CFBundleName also becomes the .app folder name (no spaces). -->
+    <CFBundleName>OpenUtau-Lunai</CFBundleName>
     <CFBundleDisplayName>OpenUtau Lunai</CFBundleDisplayName>
     <CFBundleIdentifier>com.keirokeer.openutau-lunai</CFBundleIdentifier>
     <CFBundleVersion>0.0.0</CFBundleVersion>
