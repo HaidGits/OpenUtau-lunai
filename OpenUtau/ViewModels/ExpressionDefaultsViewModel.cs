@@ -38,14 +38,36 @@ namespace OpenUtau.App.ViewModels {
         }
     }
 
+    public class ExpressionStyleItemViewModel : ViewModelBase {
+        public string Name { get; }
+        public string SingerName { get; }
+        public string ToolTipText { get; }
+        public ExpressionStyleYaml Style { get; }
+
+        public ExpressionStyleItemViewModel(ExpressionStyleYaml style) {
+            Style = style;
+            Name = style.Name;
+            SingerName = style.SingerName ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(SingerName)) {
+                ToolTipText = Name;
+            } else {
+                var savedWith = ThemeManager.GetString("workspace.panel.expressions.styles.savedwith");
+                ToolTipText = $"{Name}\n{savedWith} {SingerName}";
+            }
+        }
+    }
+
     public class ExpressionDefaultsViewModel : ViewModelBase, ICmdSubscriber {
         public ObservableCollectionExtended<ExpressionDefaultItem> ParameterItems { get; } = new();
         public ObservableCollectionExtended<ExpressionDefaultItem> VoiceColorItems { get; } = new();
         public ObservableCollectionExtended<string> VoiceColorOptions { get; } = new();
+        public ObservableCollectionExtended<ExpressionStyleItemViewModel> StyleItems { get; } = new();
 
         [Reactive] public bool HasParameters { get; private set; }
         [Reactive] public bool HasVoiceColors { get; private set; }
         [Reactive] public bool ShowDefaultVoiceColorPicker { get; private set; }
+        [Reactive] public bool HasStyles { get; private set; }
+        [Reactive] public bool CanSaveStyle { get; private set; }
         [Reactive] public int SelectedVoiceColorIndex { get; set; }
 
         UVoicePart? part;
@@ -65,6 +87,7 @@ namespace OpenUtau.App.ViewModels {
                     }
                 });
             RefreshList();
+            RefreshStyles();
             RefreshPlayheadValues();
         }
 
@@ -74,6 +97,110 @@ namespace OpenUtau.App.ViewModels {
             SyncSuggestionsForOpenTrack();
             RefreshList();
             RefreshPlayheadValues();
+        }
+
+        public string CurrentSingerDisplayName {
+            get {
+                var project = DocManager.Inst.Project;
+                if (trackNo < 0 || trackNo >= project.tracks.Count) {
+                    return string.Empty;
+                }
+                return project.tracks[trackNo].Singer?.Name?.Trim() ?? string.Empty;
+            }
+        }
+
+        public void RefreshStyles() {
+            StyleItems.Clear();
+            foreach (var style in ExpressionStyleStore.LoadAll()) {
+                StyleItems.Add(new ExpressionStyleItemViewModel(style));
+            }
+            HasStyles = StyleItems.Count > 0;
+        }
+
+        public void PrepareSaveDialog(SaveExpressionStyleViewModel dialogVm) {
+            var project = DocManager.Inst.Project;
+            UExpressionDescriptor? clr = null;
+            string[]? options = null;
+            if (ShowDefaultVoiceColorPicker
+                && trackNo >= 0
+                && trackNo < project.tracks.Count
+                && project.tracks[trackNo].VoiceColorExp != null) {
+                clr = project.tracks[trackNo].VoiceColorExp;
+                options = clr!.options;
+            }
+            dialogVm.LoadFromPanel(
+                suggestedName: string.Empty,
+                singerName: CurrentSingerDisplayName,
+                parameters: ParameterItems,
+                voiceColors: VoiceColorItems,
+                clrDescriptor: clr,
+                selectedVoiceColorIndex: SelectedVoiceColorIndex,
+                voiceColorOptions: options);
+        }
+
+        public bool TrySaveStyle(ExpressionStyleYaml style, bool overwrite) {
+            if (!ExpressionStyleStore.TrySave(style, out _, overwrite)) {
+                return false;
+            }
+            RefreshStyles();
+            return true;
+        }
+
+        public void ApplyStyle(ExpressionStyleYaml style) {
+            if (style?.Values == null || style.Values.Count == 0) {
+                return;
+            }
+            if (pendingAbbr != null) {
+                CommitPendingEdit();
+            }
+            var project = DocManager.Inst.Project;
+            if (trackNo >= 0 && trackNo < project.tracks.Count) {
+                ExpressionSuggestionSync.UpsertSuggested(project, project.tracks[trackNo]);
+            }
+
+            var changes = new System.Collections.Generic.List<(string abbr, float newValue, float oldValue)>();
+            foreach (var pair in style.Values) {
+                var abbr = pair.Key;
+                UExpressionDescriptor? descriptor = null;
+                if (string.Equals(abbr, Ustx.CLR, StringComparison.OrdinalIgnoreCase)
+                    && trackNo >= 0
+                    && trackNo < project.tracks.Count
+                    && project.tracks[trackNo].VoiceColorExp != null) {
+                    descriptor = project.tracks[trackNo].VoiceColorExp;
+                } else if (!project.expressions.TryGetValue(abbr, out descriptor)) {
+                    continue;
+                }
+                float min = descriptor!.min;
+                float max = descriptor.max;
+                float newValue = max < min ? pair.Value : Math.Clamp(pair.Value, min, max);
+                float oldValue = SetExpressionCustomDefaultCommand.GetEffectiveDefault(descriptor);
+                if (Math.Abs(oldValue - newValue) < 0.0001f) {
+                    continue;
+                }
+                changes.Add((descriptor.abbr, newValue, oldValue));
+            }
+
+            if (changes.Count == 0) {
+                return;
+            }
+
+            DocManager.Inst.StartUndoGroup();
+            foreach (var (abbr, newValue, oldValue) in changes) {
+                DocManager.Inst.ExecuteCmd(
+                    new SetExpressionCustomDefaultCommand(project, abbr, newValue, oldValue));
+            }
+            DocManager.Inst.EndUndoGroup();
+            MessageBus.Current.SendMessage(new NotesRefreshEvent());
+            RefreshList();
+            RefreshPlayheadValues();
+        }
+
+        public bool TryDeleteStyle(string name) {
+            if (!ExpressionStyleStore.TryDelete(name)) {
+                return false;
+            }
+            RefreshStyles();
+            return true;
         }
 
         public void BeginEdit(ExpressionDefaultItem item) {
@@ -215,6 +342,7 @@ namespace OpenUtau.App.ViewModels {
                 HasParameters = false;
                 HasVoiceColors = false;
                 ShowDefaultVoiceColorPicker = false;
+                CanSaveStyle = false;
                 return;
             }
             var track = project.tracks[trackNo];
@@ -240,6 +368,7 @@ namespace OpenUtau.App.ViewModels {
                 SelectedVoiceColorIndex = 0;
             }
             applyingVoiceColor = false;
+            CanSaveStyle = HasParameters || HasVoiceColors;
         }
 
         static void RebuildItemList(
@@ -319,6 +448,7 @@ namespace OpenUtau.App.ViewModels {
                 HasParameters = false;
                 HasVoiceColors = false;
                 ShowDefaultVoiceColorPicker = false;
+                CanSaveStyle = false;
                 return;
             }
             if (cmd is TrackChangeSingerCommand changeSinger) {

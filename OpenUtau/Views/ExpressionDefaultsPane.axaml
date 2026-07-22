@@ -40,6 +40,38 @@
     <Style Selector="StackPanel.expDefaultSectionContent">
       <Setter Property="Spacing" Value="2"/>
     </Style>
+    <Style Selector="Border.expStyleChip">
+      <Setter Property="Padding" Value="7,3"/>
+      <Setter Property="Margin" Value="0,0,4,4"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource WorkspaceCardBrush}"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="MinHeight" Value="24"/>
+    </Style>
+    <Style Selector="Border.expStyleChip:pointerover">
+      <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorDark1Brush}"/>
+    </Style>
+    <Style Selector="Border.expStyleChip TextBlock.expStyleChipName">
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="MaxWidth" Value="120"/>
+      <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.expStyleChipDelete">
+      <Setter Property="Width" Value="16"/>
+      <Setter Property="Height" Value="16"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="MinWidth" Value="16"/>
+      <Setter Property="MinHeight" Value="16"/>
+      <Setter Property="Margin" Value="4,0,0,0"/>
+      <Setter Property="Opacity" Value="0"/>
+    </Style>
+    <Style Selector="Border.expStyleChip:pointerover Button.expStyleChipDelete">
+      <Setter Property="Opacity" Value="0.85"/>
+    </Style>
   </UserControl.Styles>
   <Design.DataContext>
     <vm:ExpressionDefaultsViewModel/>
@@ -109,6 +141,47 @@
                     <TextBlock Classes="expDefaultValue" Grid.Column="2"
                                Text="{Binding DefaultValue, StringFormat={}{0:0}}"/>
                   </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Expander>
+
+        <Separator Classes="workspacePanelSectionDivider"/>
+        <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
+                  Header="{DynamicResource workspace.panel.expressions.styles}">
+          <StackPanel Classes="expDefaultSectionContent" Spacing="6">
+            <Button HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding CanSaveStyle}"
+                    Click="OnSaveStyleClick"
+                    Content="{DynamicResource workspace.panel.expressions.styles.save}"
+                    ToolTip.Tip="{DynamicResource workspace.panel.expressions.styles.save.tip}"/>
+            <TextBlock Opacity="0.55" FontSize="11" TextWrapping="Wrap"
+                       IsVisible="{Binding !HasStyles}"
+                       Text="{DynamicResource workspace.panel.expressions.styles.empty.list}"/>
+            <ItemsControl ItemsSource="{Binding StyleItems}" IsVisible="{Binding HasStyles}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:ExpressionStyleItemViewModel">
+                  <Border Classes="expStyleChip"
+                          ToolTip.Tip="{Binding ToolTipText}"
+                          PointerPressed="OnStyleChipPointerPressed">
+                    <StackPanel Orientation="Horizontal" Spacing="0">
+                      <TextBlock Classes="expStyleChipName" Text="{Binding Name}"/>
+                      <Button Classes="iconButton expStyleChipDelete"
+                              Click="OnStyleDeleteClick"
+                              ToolTip.Tip="{DynamicResource workspace.panel.expressions.styles.delete}">
+                        <Viewbox Width="10" Height="10">
+                          <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                        </Viewbox>
+                      </Button>
+                    </StackPanel>
+                  </Border>
                 </DataTemplate>
               </ItemsControl.ItemTemplate>
             </ItemsControl>

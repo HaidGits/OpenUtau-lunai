@@ -101,6 +101,7 @@ namespace OpenUtau.Core {
         public string PrefsFilePath => Path.Combine(DataPath, "prefs.json");
         public string ThemesPath => Path.Combine(DataPath, "Themes");
         public string TrackColorsPath => Path.Combine(DataPath, "TrackColors");
+        public string ExpressionStylesPath => Path.Combine(DataPath, "ExpressionStyles");
         public string NotePresetsFilePath => Path.Combine(DataPath, "notepresets.json");
         public string BackupsPath => Path.Combine(DataPath, "Backups");
 

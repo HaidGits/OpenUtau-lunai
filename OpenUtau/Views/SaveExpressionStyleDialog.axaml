@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:OpenUtau.App.ViewModels"
+        xmlns:c="using:OpenUtau.App.Controls"
+        mc:Ignorable="d"
+        x:Class="OpenUtau.App.Views.SaveExpressionStyleDialog"
+        x:DataType="vm:SaveExpressionStyleViewModel"
+        Icon="/Assets/open-utau.ico"
+        Title="{DynamicResource workspace.panel.expressions.styles.save.title}"
+        Width="420" Height="520" MinWidth="360" MinHeight="360"
+        WindowStartupLocation="CenterOwner">
+  <Grid Margin="{Binding $parent.WindowDecorationMargin}" RowDefinitions="Auto,Auto,Auto,*,Auto,Auto">
+    <TextBlock Grid.Row="0" Margin="14,14,14,6" TextWrapping="Wrap"
+               Text="{DynamicResource workspace.panel.expressions.styles.save.prompt}"/>
+
+    <StackPanel Grid.Row="1" Margin="14,0,14,8" Spacing="4">
+      <TextBlock Opacity="0.75" FontSize="11"
+                 Text="{DynamicResource workspace.panel.expressions.styles.name}"/>
+      <c:WorkspacePanelTextBox Name="NameBox" Classes="workspacePanelTextBox"
+                               Text="{Binding StyleName}"/>
+    </StackPanel>
+
+    <StackPanel Grid.Row="2" Margin="14,0,14,8" Spacing="2"
+                IsVisible="{Binding HasSingerName}">
+      <TextBlock Opacity="0.75" FontSize="11"
+                 Text="{DynamicResource workspace.panel.expressions.styles.singer}"/>
+      <TextBlock Text="{Binding SingerName}" TextWrapping="Wrap"/>
+    </StackPanel>
+
+    <Border Grid.Row="3" Margin="14,0,14,8" Padding="8"
+            Background="{DynamicResource WorkspaceElevatedSurfaceBrush}"
+            CornerRadius="6" BorderThickness="1"
+            BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}">
+      <ScrollViewer x:Name="ValuesScroll"
+                    Classes="workspaceScroll workspaceDockPanelScroll"
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto"
+                    AllowAutoHide="False">
+        <ItemsControl ItemsSource="{Binding Items}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:ExpressionStyleValueItem">
+              <Grid Margin="0,3" ColumnDefinitions="110,*,40" MinHeight="28">
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" TextWrapping="Wrap"
+                           Text="{Binding Name}" Margin="0,0,6,0"/>
+                <Panel Grid.Column="1" VerticalAlignment="Center">
+                  <c:WorkspacePanelComboBox Classes="workspacePanelCombo"
+                                            IsVisible="{Binding IsOptions}"
+                                            ItemsSource="{Binding Options}"
+                                            SelectedIndex="{Binding SelectedOptionIndex}"
+                                            ToolTip.Tip="{DynamicResource workspace.panel.expressions.resettooltip}"
+                                            PointerPressed="OnStyleValuePointerPressed"/>
+                  <Slider Classes="fader" Minimum="{Binding Min}" Maximum="{Binding Max}"
+                          IsVisible="{Binding !IsOptions}"
+                          Value="{Binding Value}"
+                          TickFrequency="1"
+                          ToolTip.Tip="{DynamicResource workspace.panel.expressions.resettooltip}"
+                          PointerPressed="OnStyleValuePointerPressed"/>
+                </Panel>
+                <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                           FontFamily="monospace" IsVisible="{Binding !IsOptions}"
+                           Text="{Binding Value, StringFormat={}{0:0}}"/>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </Border>
+
+    <TextBlock Grid.Row="4" Margin="14,0,14,6" Foreground="#C44" TextWrapping="Wrap"
+               Text="{Binding ErrorMessage}"
+               IsVisible="{Binding HasError}"/>
+
+    <StackPanel Grid.Row="5" Orientation="Horizontal" Spacing="10"
+                Margin="14,0,14,14" HorizontalAlignment="Right">
+      <Button Name="CancelButton" MinWidth="80" Content="{DynamicResource button.cancel}"/>
+      <Button Name="OkButton" MinWidth="80" Content="{DynamicResource button.save}"/>
+    </StackPanel>
+  </Grid>
+</Window>
