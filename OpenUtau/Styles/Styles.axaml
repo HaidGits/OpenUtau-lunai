@@ -1635,6 +1635,19 @@
     </Setter>
   </Style>
 
+  <!-- Expression defaults slider: own track layers; only the thumb stays from the fader. -->
+  <Style Selector="Slider.fader.expDefaultTrack">
+    <Setter Property="Background" Value="Transparent"/>
+  </Style>
+  <Style Selector="Slider.fader.expDefaultTrack /template/ RepeatButton#PART_DecreaseButton,
+                   Slider.fader.expDefaultTrack /template/ RepeatButton#PART_IncreaseButton">
+    <Setter Property="Background" Value="Transparent"/>
+  </Style>
+  <Style Selector="Slider.fader.expDefaultTrack:pointerover /template/ RepeatButton#PART_DecreaseButton,
+                   Slider.fader.expDefaultTrack:pressed /template/ RepeatButton#PART_DecreaseButton">
+    <Setter Property="Background" Value="Transparent"/>
+  </Style>
+
   <Style Selector="Expander" >
     <Setter Property="Margin" Value="4,2" />
     <Setter Property="Padding" Value="4" />

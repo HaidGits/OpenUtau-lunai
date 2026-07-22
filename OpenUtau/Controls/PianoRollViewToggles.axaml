@@ -66,7 +66,7 @@
       <Setter Property="Background" Value="#D9D9D9"/>
     </Style>
   </UserControl.Styles>
-  <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,Auto" ClipToBounds="False">
+  <Grid RowDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto" ClipToBounds="False">
     <Grid Grid.Row="0" ClipToBounds="False">
       <ScrollViewer x:Name="MainTogglesScroll"
                     HorizontalScrollBarVisibility="Disabled"
@@ -89,7 +89,20 @@
                                          IsVisible="{Binding IsDiffSingerTrack}"/>
     <Border Grid.Row="3" Height="1" Margin="2,6,2,4" Background="{DynamicResource TickLineBrushLow}"
             IsVisible="{Binding IsDiffSingerTrack}"/>
-    <ToggleButton Grid.Row="4" Classes="sideToolbarToggle diffSingerPanelToggle" Margin="0" Padding="0"
+    <ToggleButton Grid.Row="4" Classes="sideToolbarToggle expressionDefaultsPanelToggle" Margin="0" Padding="0"
+                  IsVisible="{Binding IsDiffSingerTrack}"
+                  IsChecked="{Binding ShowExpressionDefaultsPanel}">
+      <ToolTip.Tip>
+        <TextBlock Text="{DynamicResource pianoroll.toggle.projectexpressions}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>
+      </ToolTip.Tip>
+      <Grid Classes="toolbarIconHostSide">
+        <Grid Classes="toolbarIconHostSideLayout">
+          <Path Classes="stroked"
+                Data="M 3 3 H 15 V 15 H 3 Z M 5 7 H 6.5 M 9 7 H 13 M 5 11 H 9 M 11.5 11 H 13 M 6.5 7 A 1 1 0 1 1 9 7 A 1 1 0 1 1 6.5 7 M 9 11 A 1 1 0 1 1 11.5 11 A 1 1 0 1 1 9 11"/>
+        </Grid>
+      </Grid>
+    </ToggleButton>
+    <ToggleButton Grid.Row="5" Classes="sideToolbarToggle diffSingerPanelToggle" Margin="0" Padding="0"
                   IsVisible="{Binding IsDiffSingerTrack}"
                   IsChecked="{Binding ShowDiffSingerPanel}">
       <ToolTip.Tip>
@@ -101,7 +114,7 @@
         </Grid>
       </Grid>
     </ToggleButton>
-    <ToggleButton Grid.Row="5" Classes="sideToolbarToggle appearanceToggle" Margin="0" Padding="0"
+    <ToggleButton Grid.Row="6" Classes="sideToolbarToggle appearanceToggle" Margin="0" Padding="0"
                   IsChecked="{Binding ShowAppearancePanel}">
       <ToolTip.Tip>
         <TextBlock Text="{DynamicResource pianoroll.toggle.view}" Foreground="{DynamicResource ToolTipForegroundBrush}"/>

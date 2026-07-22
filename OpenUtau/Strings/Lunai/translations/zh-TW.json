@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "播放時垂直跟隨音符",
   "pianoroll.toggle.realcurves": "顯示真實曲線",
   "pianoroll.toggle.render": "DiffSinger 算繪設定",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "切換貼齊",
   "pianoroll.toggle.view": "檢視",
   "pianoroll.tool.drawpitch": "繪製音高工具 (4)\n    左鍵繪製\n    右鍵重設\n    按住 Ctrl 進行選取",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "開啟 Singer Hub",
   "workspace.panel.close": "關閉面板",
   "workspace.panel.render": "算繪",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "檢視",
   "workspace.tracks": "音軌"
 }

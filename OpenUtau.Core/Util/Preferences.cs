@@ -300,6 +300,7 @@ namespace OpenUtau.Core.Util {
             public bool ShowNoteParams = true;
             public bool ShowAppearancePanel = false;
             public bool ShowDiffSingerPanel = false;
+            public bool ShowExpressionDefaultsPanel = false;
             public double AppearancePanelWidth = 300;
             public double ThemeEditorPanelWidth = 300;
             public double NotePropertiesPanelWidth = 350;

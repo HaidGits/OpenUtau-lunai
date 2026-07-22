@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">Показать фонемы (O)</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Показать кривую питча (I)</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">Следовать за высотой нот при воспроизведении</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Выражения проекта</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">Показать реальные кривые</system:String>
   <system:String x:Key="pianoroll.toggle.render">Настройки рендера DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Привязка (P)</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Открыть центр исполнителей</system:String>
 
   <system:String x:Key="workspace.panel.close">Закрыть панель</system:String>
+  <system:String x:Key="workspace.panel.expressions">Выражения проекта</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Оттенок по умолчанию</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Открыть на панели выражений</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Параметры</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">ПКМ — сбросить к встроенному значению по умолчанию</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Оттенки голоса</system:String>
   <system:String x:Key="workspace.panel.render">Рендер</system:String>
   <system:String x:Key="workspace.panel.view">Вид</system:String>
   <system:String x:Key="workspace.tracks">Треки</system:String>

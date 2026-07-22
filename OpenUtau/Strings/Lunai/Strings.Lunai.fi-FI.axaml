@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">Näytä foneemit</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Näytä pitch-käyrä</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">Seuraa nuotteja pystysuunnassa toiston aikana</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">Näytä todelliset käyrät</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger-renderöintiasetukset</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Vaihda kohdistus</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Avaa Singer Hub</system:String>
 
   <system:String x:Key="workspace.panel.close">Sulje paneeli</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">Renderöi</system:String>
   <system:String x:Key="workspace.panel.view">Näytä</system:String>
   <system:String x:Key="workspace.tracks">Raidat</system:String>

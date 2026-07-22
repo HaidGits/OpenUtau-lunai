@@ -152,11 +152,11 @@ namespace OpenUtau.App.Controls {
                 : 0;
             if (descriptor.type == UExpressionType.Curve) {
                 var curve = Part.curves.FirstOrDefault(c => c.descriptor == descriptor);
-                double defaultHeight = Math.Round(Bounds.Height - Bounds.Height * (descriptor.defaultValue - descriptor.min) / (descriptor.max - descriptor.min));
+                float baseline = descriptor.CustomDefaultValue;
+                double defaultHeight = Math.Round(Bounds.Height - Bounds.Height * (baseline - descriptor.min) / (descriptor.max - descriptor.min));
                 Color curveFillColor = useTrackColor
                     ? tcolor.AccentColor.Color
                     : ((SolidColorBrush)ThemeManager.AccentBrush1).Color;
-                var lPenSelected = useTrackColorForCurve ? new Pen(tcolor.AccentColorDark, 1) : ThemeManager.AccentPen2;
                 var lPen2Selected = useTrackColorForCurve ? new Pen(tcolor.AccentColorDark, 2) : ThemeManager.AccentPen2Thickness2;
                 IBrush defaultLineBrush = Preferences.Default.SolidExpPanelGridLines
                     ? HalveEffectiveOpacity(ThemeManager.NeutralAccentBrush)
@@ -164,69 +164,63 @@ namespace OpenUtau.App.Controls {
                 var defaultValuePen = Preferences.Default.SolidExpPanelGridLines
                     ? new Pen(defaultLineBrush, 1)
                     : new Pen(ThemeManager.NeutralAccentBrush, 1, new DashStyle(new double[] { 4, 4 }, 0));
-                var brush = accentBrush;
                 double x3 = Math.Round(viewModel.TickToneToPoint(leftTick, 0).X);
                 double x4 = Math.Round(viewModel.TickToneToPoint(rightTick, 0).X);
+                // Project default baseline — always visible; authored curve is drawn only on real points.
                 context.DrawLine(defaultValuePen, new Point(x3, defaultHeight), new Point(x4, defaultHeight));
 
                 curveSelection.GetWholeCurveAndSelection(descriptor.abbr, curve, out List<int> xs, out List<int> ys);
-                if (curve == null) {
-                    xs.Insert(0, (int)leftTick);
-                    xs.Add((int)rightTick);
-                    for (int i = 0; i < xs.Count - 1; i++) {
-                        double x1 = Math.Round(viewModel.TickToneToPoint(xs[i], 0).X);
-                        double x2 = Math.Round(viewModel.TickToneToPoint(xs[i + 1], 0).X);
-                        if (curveSelection.HasValue(descriptor.abbr)) {
-                            if (curveSelection.StartPoint.x <= xs[i] && xs[i] <= curveSelection.EndPoint.x
-                                && curveSelection.StartPoint.x <= xs[i + 1] && xs[i + 1] <= curveSelection.EndPoint.x) {
-                                context.DrawLine(lPenSelected, new Point(x1, defaultHeight), new Point(x2, defaultHeight));
-                            } else {
-                                context.DrawLine(lPen, new Point(x1, defaultHeight), new Point(x2, defaultHeight));
-                            }
-                        } else {
-                            context.DrawLine(lPen, new Point(x1, defaultHeight), new Point(x2, defaultHeight));
-                        }
-                    }
+                if (xs.Count == 0) {
                     return;
                 }
 
                 int lTick = (int)Math.Floor(leftTick / 5) * 5;
                 int rTick = (int)Math.Ceiling(rightTick / 5) * 5;
-                int index = xs.BinarySearch(lTick);
-                if (index < 0) {
-                    index = -index - 1;
+                if (ShowRealCurve && xs.Count >= 2) {
+                    DrawCurveValueFill(context, viewModel, descriptor, xs, ys, defaultHeight, baseline, lTick, rTick, curveFillColor);
                 }
-                index = Math.Max(0, index) - 1;
-                if (ShowRealCurve) {
-                    DrawCurveValueFill(context, viewModel, descriptor, xs, ys, defaultHeight, lTick, rTick, index, curveFillColor);
-                }
-                while (index < xs.Count) {
-                    float tick1 = index < 0 ? lTick : xs[index];
-                    float value1 = index < 0 ? descriptor.defaultValue : ys[index];
+                // Only connect real control points — never invent edge points at the current default
+                // (that created long diagonals across empty regions after the default changed).
+                for (int i = 0; i < xs.Count - 1; i++) {
+                    int tick1 = xs[i];
+                    int tick2 = xs[i + 1];
+                    if (tick2 < lTick || tick1 > rTick) {
+                        continue;
+                    }
+                    float value1 = ys[i];
+                    float value2 = ys[i + 1];
+                    bool atDefault = Math.Abs(value1 - baseline) < 0.0001f && Math.Abs(value2 - baseline) < 0.0001f;
+                    if (atDefault) {
+                        // Flat on the baseline — already drawn as the default line.
+                        continue;
+                    }
                     double x1 = viewModel.TickToneToPoint(tick1, 0).X;
-                    double y1 = defaultHeight - Bounds.Height * (value1 - descriptor.defaultValue) / (descriptor.max - descriptor.min);
-                    float tick2 = index == xs.Count - 1 ? rTick : xs[index + 1];
-                    float value2 = index == xs.Count - 1 ? descriptor.defaultValue : ys[index + 1];
+                    double y1 = defaultHeight - Bounds.Height * (value1 - baseline) / (descriptor.max - descriptor.min);
                     double x2 = viewModel.TickToneToPoint(tick2, 0).X;
-                    double y2 = defaultHeight - Bounds.Height * (value2 - descriptor.defaultValue) / (descriptor.max - descriptor.min);
+                    double y2 = defaultHeight - Bounds.Height * (value2 - baseline) / (descriptor.max - descriptor.min);
                     IPen pen;
-                    if (curveSelection.HasValue(descriptor.abbr)) {
-                        if (curveSelection.StartPoint.x <= tick1 && tick1 <= curveSelection.EndPoint.x
-                            && curveSelection.StartPoint.x <= tick2 && tick2 <= curveSelection.EndPoint.x) {
-                            pen = value1 == descriptor.defaultValue && value2 == descriptor.defaultValue ? lPenSelected : lPen2Selected;
-                        } else {
-                            pen = value1 == descriptor.defaultValue && value2 == descriptor.defaultValue ? lPen : lPen2;
-                        }
+                    if (curveSelection.HasValue(descriptor.abbr) &&
+                        curveSelection.StartPoint.x <= tick1 && tick1 <= curveSelection.EndPoint.x &&
+                        curveSelection.StartPoint.x <= tick2 && tick2 <= curveSelection.EndPoint.x) {
+                        pen = lPen2Selected;
                     } else {
-                        pen = value1 == descriptor.defaultValue && value2 == descriptor.defaultValue ? lPen : lPen2;
+                        pen = lPen2;
                     }
                     context.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
-                    index++;
-                    if (tick2 >= rTick) {
-                        break;
+                }
+                if (xs.Count == 1) {
+                    int tick = xs[0];
+                    if (tick >= lTick && tick <= rTick) {
+                        float value = ys[0];
+                        double x = viewModel.TickToneToPoint(tick, 0).X;
+                        double y = defaultHeight - Bounds.Height * (value - baseline) / (descriptor.max - descriptor.min);
+                        bool selected = curveSelection.HasValue(descriptor.abbr) &&
+                            curveSelection.StartPoint.x <= tick && tick <= curveSelection.EndPoint.x;
+                        var pen = selected ? lPen2Selected : lPen2;
+                        context.DrawEllipse(null, pen, new Point(x, y), 2.5, 2.5);
                     }
                 }
-                if (ShowRealCurve) {
+                if (ShowRealCurve && curve != null) {
                     int baseIndexL = curve.realXs.BinarySearch(lTick);
                     if (baseIndexL < 0) {
                         baseIndexL = ~baseIndexL;
@@ -375,27 +369,25 @@ namespace OpenUtau.App.Controls {
         }
 
         void DrawCurveValueFill(DrawingContext context, NotesViewModel viewModel, UExpressionDescriptor descriptor,
-            List<int> xs, List<int> ys, double defaultHeight, int lTick, int rTick, int startIndex, Color fillColor) {
+            List<int> xs, List<int> ys, double defaultHeight, float baseline, int lTick, int rTick, Color fillColor) {
             const double eps = 0.5;
             var figures = new PathFigures();
-            int index = startIndex;
-            while (index < xs.Count) {
-                float tick1 = index < 0 ? lTick : xs[index];
-                float value1 = index < 0 ? descriptor.defaultValue : ys[index];
+            for (int i = 0; i < xs.Count - 1; i++) {
+                int tick1 = xs[i];
+                int tick2 = xs[i + 1];
+                if (tick2 < lTick || tick1 > rTick) {
+                    continue;
+                }
+                float value1 = ys[i];
+                float value2 = ys[i + 1];
                 double x1 = viewModel.TickToneToPoint(tick1, 0).X;
-                double y1 = defaultHeight - Bounds.Height * (value1 - descriptor.defaultValue) / (descriptor.max - descriptor.min);
-                float tick2 = index == xs.Count - 1 ? rTick : xs[index + 1];
-                float value2 = index == xs.Count - 1 ? descriptor.defaultValue : ys[index + 1];
+                double y1 = defaultHeight - Bounds.Height * (value1 - baseline) / (descriptor.max - descriptor.min);
                 double x2 = viewModel.TickToneToPoint(tick2, 0).X;
-                double y2 = defaultHeight - Bounds.Height * (value2 - descriptor.defaultValue) / (descriptor.max - descriptor.min);
+                double y2 = defaultHeight - Bounds.Height * (value2 - baseline) / (descriptor.max - descriptor.min);
                 var p1 = new Point(x1, y1);
                 var p2 = new Point(x2, y2);
                 if (Math.Abs(p1.Y - defaultHeight) >= eps || Math.Abs(p2.Y - defaultHeight) >= eps) {
                     AddCurveFillSegment(figures, p1, p2, defaultHeight);
-                }
-                index++;
-                if (tick2 >= rTick) {
-                    break;
                 }
             }
             if (figures.Count == 0) {

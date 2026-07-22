@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -664,52 +664,58 @@ namespace OpenUtau.Core.DiffSinger {
         }
 
         public UExpressionDescriptor[] GetSuggestedExpressions(USinger singer, URenderSettings renderSettings) {
-            var result = new List<UExpressionDescriptor> {
-                //velocity
-                new UExpressionDescriptor{
-                    name="velocity (curve)",
-                    abbr=VELC,
-                    type=UExpressionType.Curve,
-                    min=0,
-                    max=200,
-                    defaultValue=100,
-                    isFlag=false,
-                },
-                //energy
-                new UExpressionDescriptor{
-                    name="energy (curve)",
-                    abbr=ENE,
-                    type=UExpressionType.Curve,
-                    min=-100,
-                    max=100,
-                    defaultValue=0,
-                    isFlag=false,
-                },
-                //expressiveness
-                new UExpressionDescriptor {
+            var result = new List<UExpressionDescriptor>();
+            var dsSinger = singer as DiffSingerSinger;
+
+            //velocity
+            if (dsSinger == null || dsSinger.dsConfig.useSpeedEmbed) {
+                result.Add(new UExpressionDescriptor {
+                    name = "velocity (curve)",
+                    abbr = VELC,
+                    type = UExpressionType.Curve,
+                    min = 0,
+                    max = 200,
+                    defaultValue = 100,
+                    isFlag = false,
+                });
+            }
+            //energy
+            if (dsSinger == null || dsSinger.dsConfig.useEnergyEmbed) {
+                result.Add(new UExpressionDescriptor {
+                    name = "energy (curve)",
+                    abbr = ENE,
+                    type = UExpressionType.Curve,
+                    min = -100,
+                    max = 100,
+                    defaultValue = 0,
+                    isFlag = false,
+                });
+            }
+            //expressiveness
+            if (dsSinger == null || dsSinger.getPitchPredictor()?.UseExpr == true) {
+                result.Add(new UExpressionDescriptor {
                     name = "pitch expressiveness (curve)",
                     abbr = PEXP,
                     type = UExpressionType.Curve,
                     min = 0,
                     max = 100,
                     defaultValue = 100,
-                    isFlag = false
-                },
-            };
+                    isFlag = false,
+                });
+            }
             //speakers
-            var dsSinger = singer as DiffSingerSinger;
-            if(dsSinger!=null && dsSinger.dsConfig.speakers != null) {
+            if (dsSinger != null && dsSinger.dsConfig.speakers != null) {
                 result.AddRange(Enumerable.Zip(
                     dsSinger.Subbanks,
                     Enumerable.Range(1, dsSinger.Subbanks.Count),
-                    (subbank,index)=>new UExpressionDescriptor {
-                        name=$"voice color {subbank.Color}",
-                        abbr=VoiceColorHeader+index.ToString("D2"),
-                        type=UExpressionType.Curve,
-                        min=0,
-                        max=100,
-                        defaultValue=0,
-                        isFlag=false,
+                    (subbank, index) => new UExpressionDescriptor {
+                        name = $"voice color {subbank.Color}",
+                        abbr = VoiceColorHeader + index.ToString("D2"),
+                        type = UExpressionType.Curve,
+                        min = 0,
+                        max = 100,
+                        defaultValue = 0,
+                        isFlag = false,
                     }));
             }
 

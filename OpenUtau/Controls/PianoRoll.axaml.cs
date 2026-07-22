@@ -52,6 +52,7 @@ namespace OpenUtau.App.Controls {
         private int detachedLayoutGeneration;
         private AppearancePreferencesPane? appearancePane;
         private DiffSingerPreferencesPane? diffSingerPane;
+        private ExpressionDefaultsPane? expressionDefaultsPane;
         private ThemeEditorPane? themeEditorPane;
         private bool appearancePanelResizing;
         private bool themeEditorPanelResizing;
@@ -94,7 +95,7 @@ namespace OpenUtau.App.Controls {
             SetPenToolIcon();
             penTool.AddHandler(PointerPressedEvent, OnToolButtonPointerPressed, RoutingStrategies.Tunnel | RoutingStrategies.Bubble, true);
 
-            ViewModel.WhenAnyValue(x => x.ShowAppearancePanel, x => x.ShowDiffSingerPanel)
+            ViewModel.WhenAnyValue(x => x.ShowAppearancePanel, x => x.ShowDiffSingerPanel, x => x.ShowExpressionDefaultsPanel)
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => ScheduleUpdateDetachedLayout());
             ViewModel.WhenAnyValue(x => x.ShowThemeEditorPanel, x => x.ThemeEditorPath)
@@ -392,8 +393,21 @@ namespace OpenUtau.App.Controls {
             };
         }
 
+        void EnsureExpressionDefaultsPanePreloaded() {
+            expressionDefaultsPane ??= new ExpressionDefaultsPane {
+                DataContext = ViewModel.ExpressionDefaults,
+            };
+        }
+
         void UpdateLeftDockPane() {
             if (!WorkspaceScrollbarHelper.IsInVisualTree(this)) {
+                return;
+            }
+            if (ViewModel.ShowExpressionDefaultsPanel) {
+                EnsureExpressionDefaultsPanePreloaded();
+                if (AppearancePaneHost.Content != expressionDefaultsPane) {
+                    AppearancePaneHost.Content = expressionDefaultsPane;
+                }
                 return;
             }
             if (ViewModel.ShowDiffSingerPanel) {

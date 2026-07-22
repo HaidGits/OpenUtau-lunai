@@ -144,12 +144,14 @@ namespace OpenUtau.Core.Ustx {
                 return list;
             }
             foreach (var descriptor in project.expressions.Values) {
-                if (renderer.SupportsExpression(descriptor)) {
+                if (renderer.SupportsExpression(descriptor)
+                    && DiffSinger.DiffSingerUtils.IsExpressionAvailable(Singer, descriptor.abbr)) {
                     list.Add(descriptor);
                 }
             }
             foreach (var descriptor in TrackExpressions) {
                 if (renderer.SupportsExpression(descriptor)
+                    && DiffSinger.DiffSingerUtils.IsExpressionAvailable(Singer, descriptor.abbr)
                     && !list.Exists(d => d.abbr == descriptor.abbr)) {
                     list.Add(descriptor);
                 }

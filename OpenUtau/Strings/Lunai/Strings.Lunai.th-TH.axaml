@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">ดูโฟนีม</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">ดู Pitch Bend</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">ติดตามโน้ตในแนวตั้งระหว่างเล่น</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">ดูเส้นโค้งจริง</system:String>
   <system:String x:Key="pianoroll.toggle.render">การตั้งค่าเรนเดอร์ DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.snap">สลับการสแนป</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">เปิด Singer Hub</system:String>
 
   <system:String x:Key="workspace.panel.close">ปิดแผง</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">เรนเดอร์</system:String>
   <system:String x:Key="workspace.panel.view">มุมมอง</system:String>
   <system:String x:Key="workspace.tracks">แทร็ก</system:String>

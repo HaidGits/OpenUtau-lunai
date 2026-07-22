@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "Следовать за высотой нот при воспроизведении",
   "pianoroll.toggle.realcurves": "Показать реальные кривые",
   "pianoroll.toggle.render": "Настройки рендера DiffSinger",
+  "pianoroll.toggle.projectexpressions": "Выражения проекта",
   "pianoroll.toggle.snap": "Привязка (P)",
   "pianoroll.toggle.view": "Вид",
   "pianoroll.tool.drawpitch": "Инструмент для рисования питча (4)\n    ЛКМ, чтобы рисовать\n    ПКМ, чтобы сбросить\n    Удерживайте Ctrl, чтобы выделить",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Открыть центр исполнителей",
   "workspace.panel.close": "Закрыть панель",
   "workspace.panel.render": "Рендер",
+  "workspace.panel.expressions": "Выражения проекта",
+  "workspace.panel.expressions.defaultcolor": "Оттенок по умолчанию",
+  "workspace.panel.expressions.voicecolors": "Оттенки голоса",
+  "workspace.panel.expressions.parameters": "Параметры",
+  "workspace.panel.expressions.resettooltip": "ПКМ — сбросить к встроенному значению по умолчанию",
+  "workspace.panel.expressions.openinexppanel": "Открыть на панели выражений",
   "workspace.panel.view": "Вид",
   "workspace.tracks": "Треки"
 }

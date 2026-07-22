@@ -411,6 +411,12 @@
     </Style>
   </Style>
 
+  <!-- Keep expression-default track buttons invisible even on hover (thumb still highlights). -->
+  <Style Selector="Slider.fader.expDefaultTrack:pointerover /template/ RepeatButton#PART_DecreaseButton,
+                   Slider.fader.expDefaultTrack:pressed /template/ RepeatButton#PART_DecreaseButton">
+    <Setter Property="Background" Value="Transparent"/>
+  </Style>
+
   <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
     <Setter Property="BorderBrush" Value="{DynamicResource SelectedTrackAccentBrush}"/>
   </Style>
@@ -649,6 +655,11 @@
           ToggleButton.sideToolbarToggle.diffSingerPanelToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentLivePitchCheckedBrush}" />
   </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle.expressionDefaultsPanelToggle:checked /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.expressionDefaultsPanelToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter,
+          ToggleButton.sideToolbarToggle.expressionDefaultsPanelToggle:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource PianoRollSideAccentExpressionsCheckedBrush}" />
+  </Style>
   <Style Selector="Button.sideToolbarAction">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderThickness" Value="0" />
@@ -826,6 +837,16 @@
   <Style Selector="ToggleButton.sideToolbarToggle:checked.expressionsToggle Path.stroked,
           ToggleButton.sideToolbarToggle:checked.expressionsToggle Ellipse.stroked">
     <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentExpressionsBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.expressionDefaultsPanelToggle Path.stroked,
+          ToggleButton.sideToolbarToggle:checked.expressionDefaultsPanelToggle:pointerover Path.stroked,
+          ToggleButton.sideToolbarToggle:checked.expressionDefaultsPanelToggle:pressed Path.stroked">
+    <Setter Property="Stroke" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />
+  </Style>
+  <Style Selector="ToggleButton.sideToolbarToggle:checked.expressionDefaultsPanelToggle Path.filled,
+          ToggleButton.sideToolbarToggle:checked.expressionDefaultsPanelToggle:pointerover Path.filled,
+          ToggleButton.sideToolbarToggle:checked.expressionDefaultsPanelToggle:pressed Path.filled">
+    <Setter Property="Fill" Value="{DynamicResource ToolbarToolIconOnAccentBrush}" />
   </Style>
   <Style Selector="ToggleButton.sideToolbarToggle:checked.realCurvesToggle Path.stroked">
     <Setter Property="Stroke" Value="{DynamicResource PianoRollSideAccentRealCurvesBrush}" />

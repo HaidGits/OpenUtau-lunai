@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -295,9 +295,19 @@ namespace OpenUtau.App.ViewModels {
                     continue;
                 }
                 foreach (var suggestion in suggestions) {
-                    //Add if not already in the list
-                    if (!expressionsSourceProject.Any(builder => builder.Abbr == suggestion.abbr)) {
+                    var existing = expressionsSourceProject.FirstOrDefault(
+                        builder => string.Equals(builder.Abbr, suggestion.abbr, StringComparison.OrdinalIgnoreCase));
+                    if (existing == null) {
                         expressionsSourceProject.Add(new ExpressionBuilder(suggestion));
+                    } else {
+                        // Refresh labels/ranges from the current singer (fixes sticky voice-color names).
+                        existing.Name = suggestion.name;
+                        existing.ExpressionType = (int)suggestion.type;
+                        existing.Min = suggestion.min;
+                        existing.Max = suggestion.max;
+                        existing.DefaultValue = suggestion.defaultValue;
+                        existing.IsFlag = suggestion.isFlag;
+                        existing.Flag = suggestion.flag ?? string.Empty;
                     }
                 }
             }

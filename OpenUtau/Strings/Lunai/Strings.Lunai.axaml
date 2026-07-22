@@ -149,6 +149,7 @@
   <system:String x:Key="pianoroll.toggle.pitchfollow">Follow notes vertically during playback</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">View Real Curves</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger render settings</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Toggle Snap</system:String>
   <system:String x:Key="pianoroll.toggle.view">View</system:String>
   <system:String x:Key="pianoroll.tool.drawpitch">Draw Pitch Tool (4)
@@ -358,6 +359,12 @@
 
   <system:String x:Key="workspace.panel.close">Close panel</system:String>
   <system:String x:Key="workspace.panel.render">Render</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
   <system:String x:Key="workspace.panel.view">View</system:String>
   <system:String x:Key="workspace.tracks">Tracks</system:String>
 </ResourceDictionary>

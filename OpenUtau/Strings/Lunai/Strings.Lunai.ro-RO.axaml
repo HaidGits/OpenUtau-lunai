@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">Arată fonemele</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Arată variația înălțimii</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">Urmărește notele vertical în timpul redării</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">Arată curbele reale</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger setări de randare</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Comută alinierea</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Deschide Singer Hub</system:String>
 
   <system:String x:Key="workspace.panel.close">Închide panel</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">Randare</system:String>
   <system:String x:Key="workspace.panel.view">Vizualizare</system:String>
   <system:String x:Key="workspace.tracks">Piste</system:String>

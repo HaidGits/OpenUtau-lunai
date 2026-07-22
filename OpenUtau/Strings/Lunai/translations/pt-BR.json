@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "Seguir notas verticalmente durante a reprodução",
   "pianoroll.toggle.realcurves": "Exibir curvas reais",
   "pianoroll.toggle.render": "Configurações de renderização do DiffSinger",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "Alternar encaixe",
   "pianoroll.toggle.view": "Exibir",
   "pianoroll.tool.drawpitch": "Ferramenta Desenhar pitch (4)\n    Clique esquerdo para desenhar\n    Clique direito para redefinir\n    Segure Ctrl para selecionar",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Abrir Singer Hub",
   "workspace.panel.close": "Fechar painel",
   "workspace.panel.render": "Renderizar",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "Exibir",
   "workspace.tracks": "Faixas"
 }

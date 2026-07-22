@@ -10,7 +10,30 @@ ROOT = Path(__file__).resolve().parents[1]
 LUNAI = ROOT / "OpenUtau" / "Strings" / "Lunai"
 TRANS = LUNAI / "translations"
 APP = ROOT / "OpenUtau" / "App.axaml"
-EN = json.loads((LUNAI / "_en.json").read_text(encoding="utf-8"))
+
+
+def load_en_keys() -> dict[str, str]:
+    """English Lunai keys from Strings.Lunai.axaml (source of truth)."""
+    axaml = (LUNAI / "Strings.Lunai.axaml").read_text(encoding="utf-8")
+    pat = re.compile(
+        r'<system:String x:Key="([^"]+)">(.*?)</system:String>',
+        re.S,
+    )
+    en: dict[str, str] = {}
+    for m in pat.finditer(axaml):
+        text = (
+            m.group(2)
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&amp;", "&")
+        )
+        en[m.group(1)] = text
+    if not en:
+        raise SystemExit("no keys found in Strings.Lunai.axaml")
+    return en
+
+
+EN = load_en_keys()
 
 
 def write_axaml(locale: str, entries: dict[str, str]) -> None:

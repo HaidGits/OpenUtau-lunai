@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "再生中にノートを縦方向に追従",
   "pianoroll.toggle.realcurves": "実曲線を表示",
   "pianoroll.toggle.render": "DiffSinger レンダリング設定",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "スナップ切替",
   "pianoroll.toggle.view": "表示",
   "pianoroll.tool.drawpitch": "ピッチ描画ツール (4)\n    左クリックで描画\n    右クリックでリセット\n    Ctrl を押しながら選択",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Singer Hub を開く",
   "workspace.panel.close": "パネルを閉じる",
   "workspace.panel.render": "レンダー",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "表示",
   "workspace.tracks": "トラック"
 }

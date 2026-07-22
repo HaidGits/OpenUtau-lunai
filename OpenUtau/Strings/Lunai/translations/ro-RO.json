@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "Urmărește notele vertical în timpul redării",
   "pianoroll.toggle.realcurves": "Arată curbele reale",
   "pianoroll.toggle.render": "DiffSinger setări de randare",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "Comută alinierea",
   "pianoroll.toggle.view": "Vizualizare",
   "pianoroll.tool.drawpitch": "Instrument de desenare a înălțimii (4)\n    Faceți clic stânga pentru a desena\n    Faceți clic dreapta pentru a reseta\n    Ține Ctrl pentru a selecta",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Deschide Singer Hub",
   "workspace.panel.close": "Închide panel",
   "workspace.panel.render": "Randare",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "Vizualizare",
   "workspace.tracks": "Piste"
 }

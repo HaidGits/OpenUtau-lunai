@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">Показати фонеми</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Показати згин pitch</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">Слідувати за висотою нот під час відтворення</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Вирази проєкту</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">Показати реальні криві</system:String>
   <system:String x:Key="pianoroll.toggle.render">Налаштування рендеру DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Увімк./вимк. прив’язку</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Відкрити Центр виконавців</system:String>
 
   <system:String x:Key="workspace.panel.close">Закрити панель</system:String>
+  <system:String x:Key="workspace.panel.expressions">Вирази проєкту</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Відтінок за замовчуванням</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Відкрити на панелі виразів</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Параметри</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">ПКМ — скинути до вбудованого значення за замовчуванням</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Відтінки голосу</system:String>
   <system:String x:Key="workspace.panel.render">Рендер</system:String>
   <system:String x:Key="workspace.panel.view">Вигляд</system:String>
   <system:String x:Key="workspace.tracks">Треки</system:String>

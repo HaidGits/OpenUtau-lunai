@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "Noten tijdens afspelen verticaal volgen",
   "pianoroll.toggle.realcurves": "Werkelijke curven weergeven",
   "pianoroll.toggle.render": "DiffSinger renderinstellingen",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "Rastermagnetisme in-/uitschakelen",
   "pianoroll.toggle.view": "Weergave",
   "pianoroll.tool.drawpitch": "Hulpmiddel Toonhoogte tekenen (4)\n    Klik met links om te tekenen\n    Klik met rechts om te resetten\n    Ctrl vasthouden om te selecteren",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Singer Hub openen",
   "workspace.panel.close": "Sluiten panel",
   "workspace.panel.render": "Renderen",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "Weergave",
   "workspace.tracks": "Sporen"
 }

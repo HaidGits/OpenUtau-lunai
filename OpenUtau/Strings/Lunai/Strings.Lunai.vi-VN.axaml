@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">Xem âm vị</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Xem Pitch Bend</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">Theo dõi nốt theo chiều dọc khi phát</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">Xem đường cong thực</system:String>
   <system:String x:Key="pianoroll.toggle.render">Cài đặt render DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Bật/tắt Snap</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Mở Singer Hub</system:String>
 
   <system:String x:Key="workspace.panel.close">Đóng bảng</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">Kết xuất</system:String>
   <system:String x:Key="workspace.panel.view">Xem</system:String>
   <system:String x:Key="workspace.tracks">Track</system:String>

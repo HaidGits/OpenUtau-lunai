@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">音素を表示</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">ピッチベンドを表示</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">再生中にノートを縦方向に追従</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">実曲線を表示</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger レンダリング設定</system:String>
   <system:String x:Key="pianoroll.toggle.snap">スナップ切替</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Singer Hub を開く</system:String>
 
   <system:String x:Key="workspace.panel.close">パネルを閉じる</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">レンダー</system:String>
   <system:String x:Key="workspace.panel.view">表示</system:String>
   <system:String x:Key="workspace.tracks">トラック</system:String>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Newtonsoft.Json;
 using OpenUtau.Core.Render;
+using OpenUtau.Core.Ustx;
 
 namespace OpenUtau.Core.DiffSinger {
     public static class DiffSingerUtils {
@@ -13,6 +14,7 @@ namespace OpenUtau.Core.DiffSinger {
         public const string ENE = "ene";
         public const string PEXP = "pexp";
         public const string VoiceColorHeader = "cl";
+        public const string VoiceColorNamePrefix = "voice color ";
         public const int headFrames = 8;
         public const int tailFrames = 8;
 
@@ -23,6 +25,62 @@ namespace OpenUtau.Core.DiffSinger {
                 {Format.Ustx.VOIC, (x, y) => x + (y - 100) * 12 / 100},
                 {Format.Ustx.TENC, (x, y) => x + y / 20},
             };
+
+        /// <summary>
+        /// Whether this DiffSinger voicebank actually consumes the expression
+        /// (acoustic/pitch embeds), not merely whether the renderer knows the abbr.
+        /// Non-DiffSinger singers always return true.
+        /// </summary>
+        public static bool IsExpressionAvailable(USinger? singer, string abbr) {
+            if (singer is not DiffSingerSinger dsSinger || !dsSinger.Found) {
+                return true;
+            }
+            if (string.IsNullOrEmpty(abbr)) {
+                return false;
+            }
+            abbr = abbr.ToLowerInvariant();
+            if (IsVoiceColorAbbr(abbr, out int colorIndex)) {
+                if (dsSinger.dsConfig.speakers == null || dsSinger.dsConfig.speakers.Count == 0) {
+                    return false;
+                }
+                return colorIndex >= 1 && colorIndex <= dsSinger.Subbanks.Count;
+            }
+            return abbr switch {
+                Format.Ustx.DYN or Format.Ustx.PITD or Format.Ustx.CLR or Format.Ustx.SHFC => true,
+                Format.Ustx.BREC => dsSinger.dsConfig.useBreathinessEmbed,
+                ENE => dsSinger.dsConfig.useEnergyEmbed,
+                Format.Ustx.VOIC => dsSinger.dsConfig.useVoicingEmbed,
+                Format.Ustx.TENC => dsSinger.dsConfig.useTensionEmbed,
+                VELC => dsSinger.dsConfig.useSpeedEmbed,
+                Format.Ustx.GENC => dsSinger.dsConfig.useKeyShiftEmbed,
+                PEXP => dsSinger.getPitchPredictor()?.UseExpr == true,
+                Format.Ustx.OPEC => false,
+                _ => true,
+            };
+        }
+
+        public static bool IsVoiceColorAbbr(string? abbr) => IsVoiceColorAbbr(abbr, out _);
+
+        public static bool IsVoiceColorAbbr(string? abbr, out int colorIndex) {
+            colorIndex = 0;
+            if (string.IsNullOrEmpty(abbr) || abbr.Length < 3) {
+                return false;
+            }
+            if (!abbr.StartsWith(VoiceColorHeader, StringComparison.OrdinalIgnoreCase)) {
+                return false;
+            }
+            return int.TryParse(abbr.Substring(2), out colorIndex);
+        }
+
+        public static string FormatVoiceColorDisplayName(string? name) {
+            if (string.IsNullOrEmpty(name)) {
+                return string.Empty;
+            }
+            if (name.StartsWith(VoiceColorNamePrefix, StringComparison.OrdinalIgnoreCase)) {
+                return name.Substring(VoiceColorNamePrefix.Length);
+            }
+            return name;
+        }
 
         public static float GetHeadMs(double frameMs) {
             return (float)(frameMs * headFrames);

@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Linq;
+using OpenUtau.Core.Format;
 using OpenUtau.Core.Ustx;
 
 namespace OpenUtau.Core {
@@ -159,6 +160,82 @@ namespace OpenUtau.Core {
         public override void Unexecute() {
             project.key = oldKey;
             project.keyIsMajor = oldIsMajor;
+        }
+    }
+
+    public class SetExpressionCustomDefaultCommand : ProjectCommand {
+        readonly string abbr;
+        readonly float oldValue;
+        readonly float newValue;
+        public string Abbr => abbr;
+        public override ValidateOptions ValidateOptions => new ValidateOptions {
+            SkipTiming = true,
+        };
+        public SetExpressionCustomDefaultCommand(UProject project, string abbr, float newValue, float? oldValue = null) : base(project) {
+            this.abbr = abbr.ToLowerInvariant();
+            this.newValue = newValue;
+            this.oldValue = oldValue ?? (project.expressions.TryGetValue(this.abbr, out var descriptor)
+                ? GetEffectiveDefault(descriptor)
+                : newValue);
+        }
+        public override string ToString() => $"Set expression default {abbr.ToUpperInvariant()}";
+        public override void Execute() {
+            Apply(newValue);
+        }
+        public override void Unexecute() {
+            Apply(oldValue);
+        }
+        void Apply(float value) {
+            if (project.expressions.TryGetValue(abbr, out var descriptor)) {
+                float min = descriptor.min;
+                float max = descriptor.max;
+                if (abbr == Format.Ustx.CLR) {
+                    var voiceColor = project.tracks
+                        .Select(t => t.VoiceColorExp)
+                        .FirstOrDefault(exp => exp?.options != null && exp.options.Length > 0);
+                    if (voiceColor != null) {
+                        min = voiceColor.min;
+                        max = voiceColor.max;
+                        descriptor.min = min;
+                        descriptor.max = max;
+                    }
+                }
+                SetEffectiveDefault(descriptor, SafeClamp(value, min, max));
+            }
+            if (abbr == Format.Ustx.CLR) {
+                foreach (var track in project.tracks) {
+                    if (track.VoiceColorExp != null) {
+                        SetEffectiveDefault(
+                            track.VoiceColorExp,
+                            SafeClamp(value, track.VoiceColorExp.min, track.VoiceColorExp.max));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Project default used by phonemes/curves. Factory baseline stays in <see cref="UExpressionDescriptor.defaultValue"/>.
+        /// </summary>
+        public static float GetEffectiveDefault(UExpressionDescriptor descriptor) {
+            return descriptor.CustomDefaultValue;
+        }
+
+        public static void SetEffectiveDefault(UExpressionDescriptor descriptor, float value) {
+            descriptor.CustomDefaultValue = value;
+        }
+
+        /// <summary>
+        /// Built-in / singer-suggested default (not the project override from the EX panel).
+        /// </summary>
+        public static float GetFactoryDefault(UExpressionDescriptor descriptor) {
+            return descriptor.defaultValue;
+        }
+
+        static float SafeClamp(float value, float min, float max) {
+            if (max < min) {
+                return value;
+            }
+            return Math.Clamp(value, min, max);
         }
     }
 

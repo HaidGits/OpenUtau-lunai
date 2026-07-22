@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "متابعة النغمات رأسيًا أثناء التشغيل",
   "pianoroll.toggle.realcurves": "عرض المنحنيات الحقيقية",
   "pianoroll.toggle.render": "إعدادات تصيير DiffSinger",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "تبديل الالتقاط",
   "pianoroll.toggle.view": "عرض",
   "pianoroll.tool.drawpitch": "أداة رسم الطبقة (4)\n    نقرة يسار للرسم\n    نقرة يمين لإعادة التعيين\n    اضغط Ctrl للتحديد",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "فتح مركز المغنين",
   "workspace.panel.close": "إغلاق اللوحة",
   "workspace.panel.render": "تصيير",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "عرض",
   "workspace.tracks": "المسارات"
 }

@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">음소 보기</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">피치 벤드 보기</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">재생 중 노트를 세로로 따라가기</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">실제 커브 보기</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger 렌더 설정</system:String>
   <system:String x:Key="pianoroll.toggle.snap">스냅 전환</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Singer Hub 열기</system:String>
 
   <system:String x:Key="workspace.panel.close">패널 닫기</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">렌더</system:String>
   <system:String x:Key="workspace.panel.view">보기</system:String>
   <system:String x:Key="workspace.tracks">트랙</system:String>

@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">顯示音標</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">顯示音高彎曲</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">播放時垂直跟隨音符</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">顯示真實曲線</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger 算繪設定</system:String>
   <system:String x:Key="pianoroll.toggle.snap">切換貼齊</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">開啟 Singer Hub</system:String>
 
   <system:String x:Key="workspace.panel.close">關閉面板</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">算繪</system:String>
   <system:String x:Key="workspace.panel.view">檢視</system:String>
   <system:String x:Key="workspace.tracks">音軌</system:String>

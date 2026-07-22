@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">عرض الصوتيات</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">عرض انحناء الطبقة</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">متابعة النغمات رأسيًا أثناء التشغيل</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">عرض المنحنيات الحقيقية</system:String>
   <system:String x:Key="pianoroll.toggle.render">إعدادات تصيير DiffSinger</system:String>
   <system:String x:Key="pianoroll.toggle.snap">تبديل الالتقاط</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">فتح مركز المغنين</system:String>
 
   <system:String x:Key="workspace.panel.close">إغلاق اللوحة</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">تصيير</system:String>
   <system:String x:Key="workspace.panel.view">عرض</system:String>
   <system:String x:Key="workspace.tracks">المسارات</system:String>

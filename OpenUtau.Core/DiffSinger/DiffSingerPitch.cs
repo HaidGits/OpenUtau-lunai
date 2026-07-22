@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,6 +28,7 @@ namespace OpenUtau.Core.DiffSinger
         const string PEXP = DiffSingerUtils.PEXP;
 
         public float FrameMs => frameMs;
+        public bool UseExpr => dsConfig.use_expr;
 
         public DsPitch(string rootPath)
         {

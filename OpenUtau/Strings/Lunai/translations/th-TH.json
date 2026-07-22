@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "ติดตามโน้ตในแนวตั้งระหว่างเล่น",
   "pianoroll.toggle.realcurves": "ดูเส้นโค้งจริง",
   "pianoroll.toggle.render": "การตั้งค่าเรนเดอร์ DiffSinger",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "สลับการสแนป",
   "pianoroll.toggle.view": "มุมมอง",
   "pianoroll.tool.drawpitch": "เครื่องมือวาดระดับเสียง (4)\n    คลิกซ้ายเพื่อวาด\n    คลิกขวาเพื่อรีเซ็ต\n    กด Ctrl ค้างเพื่อเลือก",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "เปิด Singer Hub",
   "workspace.panel.close": "ปิดแผง",
   "workspace.panel.render": "เรนเดอร์",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "มุมมอง",
   "workspace.tracks": "แทร็ก"
 }

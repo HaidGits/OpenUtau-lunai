@@ -147,6 +147,7 @@
   <system:String x:Key="pianoroll.toggle.phoneme">Phoneme anzeigen</system:String>
   <system:String x:Key="pianoroll.toggle.pitch">Pitchbend anzeigen</system:String>
   <system:String x:Key="pianoroll.toggle.pitchfollow">Noten während der Wiedergabe vertikal folgen</system:String>
+  <system:String x:Key="pianoroll.toggle.projectexpressions">Project Expressions</system:String>
   <system:String x:Key="pianoroll.toggle.realcurves">Echte Kurven anzeigen</system:String>
   <system:String x:Key="pianoroll.toggle.render">DiffSinger-Render-Einstellungen</system:String>
   <system:String x:Key="pianoroll.toggle.snap">Einrasten umschalten</system:String>
@@ -357,6 +358,12 @@
   <system:String x:Key="welcome.singerhub.open">Singer Hub öffnen</system:String>
 
   <system:String x:Key="workspace.panel.close">Panel schließen</system:String>
+  <system:String x:Key="workspace.panel.expressions">Project Expressions</system:String>
+  <system:String x:Key="workspace.panel.expressions.defaultcolor">Default color</system:String>
+  <system:String x:Key="workspace.panel.expressions.openinexppanel">Open in expression panel</system:String>
+  <system:String x:Key="workspace.panel.expressions.parameters">Parameters</system:String>
+  <system:String x:Key="workspace.panel.expressions.resettooltip">Right click to reset to the built-in default</system:String>
+  <system:String x:Key="workspace.panel.expressions.voicecolors">Voice colors</system:String>
   <system:String x:Key="workspace.panel.render">Rendern</system:String>
   <system:String x:Key="workspace.panel.view">Ansicht</system:String>
   <system:String x:Key="workspace.tracks">Spuren</system:String>

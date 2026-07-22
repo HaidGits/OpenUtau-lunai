@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "재생 중 노트를 세로로 따라가기",
   "pianoroll.toggle.realcurves": "실제 커브 보기",
   "pianoroll.toggle.render": "DiffSinger 렌더 설정",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "스냅 전환",
   "pianoroll.toggle.view": "보기",
   "pianoroll.tool.drawpitch": "피치 그리기 도구 (4)\n    왼쪽 클릭으로 그리기\n    오른쪽 클릭으로 재설정\n    Ctrl을 누른 채 선택",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Singer Hub 열기",
   "workspace.panel.close": "패널 닫기",
   "workspace.panel.render": "렌더",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "보기",
   "workspace.tracks": "트랙"
 }

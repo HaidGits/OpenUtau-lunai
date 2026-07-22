@@ -1,0 +1,120 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OpenUtau.App.ViewModels"
+             xmlns:c="using:OpenUtau.App.Controls"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="600"
+             x:Class="OpenUtau.App.Views.ExpressionDefaultsPane"
+             x:Name="ExpressionDefaultsRoot">
+  <UserControl.Styles>
+    <Style Selector="TextBlock.expDefaultLabel">
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Border.expDefaultLabelHit">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Padding" Value="4,2"/>
+      <Setter Property="Margin" Value="0,0,4,0"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Border.expDefaultLabelHit:pointerover">
+      <Setter Property="Background" Value="{DynamicResource TransportToolbarOffHoverBrush}"/>
+    </Style>
+    <Style Selector="TextBlock.expDefaultValue">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="FontFamily" Value="monospace"/>
+      <Setter Property="MinWidth" Value="36"/>
+      <Setter Property="Margin" Value="8,0,0,0"/>
+    </Style>
+    <Style Selector="Slider.fader">
+      <Setter Property="Focusable" Value="True"/>
+    </Style>
+    <Style Selector="Grid.expDefaultRow">
+      <Setter Property="Margin" Value="0,4,0,4"/>
+    </Style>
+    <Style Selector="StackPanel.expDefaultSectionContent">
+      <Setter Property="Spacing" Value="2"/>
+    </Style>
+  </UserControl.Styles>
+  <Design.DataContext>
+    <vm:ExpressionDefaultsViewModel/>
+  </Design.DataContext>
+  <Grid>
+    <TextBlock Text="{DynamicResource workspace.panel.expressions}" Classes="notePropsPanelTitle"
+               Height="32" Margin="16,16,40,0"
+               HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <Button x:Name="ClosePanelButton" Classes="workspacePanelClose"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0"
+            IsVisible="False" Click="OnCloseDockedPanel"
+            ToolTip.Tip="{DynamicResource workspace.panel.close}">
+      <Path Classes="stroked"/>
+    </Button>
+    <ScrollViewer x:Name="ContentScroll" Classes="workspaceScroll workspaceDockPanelScroll"
+                  Margin="10,48,10,16"
+                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                  AllowAutoHide="False">
+      <StackPanel Classes="workspacePanelSections" Margin="0" HorizontalAlignment="Stretch">
+        <Separator Classes="workspacePanelSectionDivider"/>
+        <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
+                  IsVisible="{Binding HasParameters}"
+                  Header="{DynamicResource workspace.panel.expressions.parameters}">
+          <StackPanel Classes="expDefaultSectionContent">
+            <ItemsControl ItemsSource="{Binding ParameterItems}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:ExpressionDefaultItem">
+                  <Grid Classes="expDefaultRow" ColumnDefinitions="110,*,Auto">
+                    <Border Classes="expDefaultLabelHit" Grid.Column="0"
+                            ToolTip.Tip="{DynamicResource workspace.panel.expressions.openinexppanel}"
+                            PointerPressed="OnParameterNamePressed">
+                      <TextBlock Classes="expDefaultLabel" Text="{Binding Name}"/>
+                    </Border>
+                    <c:ExpressionDefaultSlider Grid.Column="1" Item="{Binding}"/>
+                    <TextBlock Classes="expDefaultValue" Grid.Column="2"
+                               Text="{Binding DefaultValue, StringFormat={}{0:0}}"/>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Expander>
+        <Separator Classes="workspacePanelSectionDivider" IsVisible="{Binding HasVoiceColors}"/>
+        <Expander Classes="workspacePanelSectionExpander" IsExpanded="True"
+                  IsVisible="{Binding HasVoiceColors}"
+                  Header="{DynamicResource workspace.panel.expressions.voicecolors}">
+          <StackPanel Classes="expDefaultSectionContent">
+            <Grid Classes="expDefaultRow" ColumnDefinitions="110,*"
+                  IsVisible="{Binding ShowDefaultVoiceColorPicker}">
+              <TextBlock Classes="expDefaultLabel" Margin="4,0,8,0"
+                         Text="{DynamicResource workspace.panel.expressions.defaultcolor}"
+                         Grid.Column="0"/>
+              <c:WorkspacePanelComboBox Grid.Column="1" Classes="workspacePanelCombo"
+                                        ItemsSource="{Binding VoiceColorOptions}"
+                                        SelectedIndex="{Binding SelectedVoiceColorIndex}"/>
+            </Grid>
+            <ItemsControl ItemsSource="{Binding VoiceColorItems}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:ExpressionDefaultItem">
+                  <Grid Classes="expDefaultRow" ColumnDefinitions="110,*,Auto">
+                    <Border Classes="expDefaultLabelHit" Grid.Column="0"
+                            ToolTip.Tip="{DynamicResource workspace.panel.expressions.openinexppanel}"
+                            PointerPressed="OnParameterNamePressed">
+                      <TextBlock Classes="expDefaultLabel" Text="{Binding Name}"/>
+                    </Border>
+                    <c:ExpressionDefaultSlider Grid.Column="1" Item="{Binding}"/>
+                    <TextBlock Classes="expDefaultValue" Grid.Column="2"
+                               Text="{Binding DefaultValue, StringFormat={}{0:0}}"/>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Expander>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

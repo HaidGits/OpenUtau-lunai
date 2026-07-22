@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenUtau.Core.Ustx;
@@ -127,7 +127,7 @@ namespace OpenUtau.Core.Editing {
                 }
                 else{
                     var selectedTickRanges = SelectionUtils.SelectedTickRanges(part, notes);
-                    int defaultValue = (int)part.curves.First(c => c.abbr == abbr).descriptor.defaultValue;
+                    int defaultValue = (int)part.curves.First(c => c.abbr == abbr).descriptor.CustomDefaultValue;
                     foreach(var range in selectedTickRanges){
                         docManager.ExecuteCmd(new PasteCurveCommand(project, part, Format.Ustx.PITD,
                             range.start, defaultValue,
@@ -286,7 +286,7 @@ namespace OpenUtau.Core.Editing {
                 }
                 else{
                     var selectedTickRanges = SelectionUtils.SelectedTickRanges(part, notes);
-                    int defaultValue = (int)part.curves.First(c => c.abbr == abbr).descriptor.defaultValue;
+                    int defaultValue = (int)part.curves.First(c => c.abbr == abbr).descriptor.CustomDefaultValue;
                     foreach(var range in selectedTickRanges){
                         docManager.ExecuteCmd(new PasteCurveCommand(project, part, abbr,
                             range.start, defaultValue,

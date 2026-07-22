@@ -290,6 +290,13 @@ namespace OpenUtau.Core {
         public override string ToString() => "Goto oto.";
     }
 
+    /// <summary>
+    /// Fired after silent ExpressionSuggestionSync upserts (no undo entry).
+    /// </summary>
+    public class ExpressionsSuggestedNotification : UNotification {
+        public override string ToString() => "Expressions suggested synced";
+    }
+
     public class NotePresetChangedNotification : UNotification {
         public NotePresetChangedNotification() {
 

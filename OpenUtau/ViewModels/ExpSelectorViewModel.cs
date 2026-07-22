@@ -33,6 +33,7 @@ namespace OpenUtau.App.ViewModels {
         ObservableCollection<UExpressionDescriptor> descriptors = new ObservableCollection<UExpressionDescriptor>();
         ObservableAsPropertyHelper<string> header;
         int currentTrackNo = -1;
+        bool rebuildingList;
 
         public ExpSelectorViewModel() {
             DocManager.Inst.AddSubscriber(this);
@@ -78,6 +79,9 @@ namespace OpenUtau.App.ViewModels {
         }
 
         void SelectionChanged(UExpressionDescriptor? descriptor) {
+            if (rebuildingList) {
+                return;
+            }
             if (descriptor != null) {
                 DocManager.Inst.ExecuteCmd(new SelectExpressionNotification(descriptor.abbr, Index, DisplayMode != ExpDisMode.Visible));
             }
@@ -102,6 +106,7 @@ namespace OpenUtau.App.ViewModels {
                     OnListChange();
                 }
             } else if (cmd is ConfigureExpressionsCommand ||
+                cmd is ExpressionsSuggestedNotification ||
                 cmd is ValidateProjectNotification ||
                 cmd is SingersRefreshedNotification) {
                 OnListChange();
@@ -111,21 +116,34 @@ namespace OpenUtau.App.ViewModels {
         }
 
         private void OnListChange() {
-            var selectedIndex = SelectedIndex;
-            var savedAbbr = Descriptor?.abbr ?? DocManager.Inst.Project.expSelectors[Index];
-            Descriptors.Clear();
-            foreach (var descriptor in GetVisibleDescriptors(currentTrackNo)) {
-                Descriptors.Add(descriptor);
-            }
-            if (Descriptors.Count == 0) {
-                return;
-            }
-            if (!string.IsNullOrEmpty(savedAbbr) && Descriptors.Any(d => d.abbr == savedAbbr)) {
-                SelectedIndex = Descriptors.IndexOf(Descriptors.First(d => d.abbr == savedAbbr));
-            } else if (selectedIndex >= Descriptors.Count) {
-                SelectedIndex = Math.Min(Index, Descriptors.Count - 1);
-            } else {
-                SelectedIndex = selectedIndex;
+            rebuildingList = true;
+            try {
+                var selectedIndex = SelectedIndex;
+                var savedAbbr = Descriptor?.abbr ?? DocManager.Inst.Project.expSelectors[Index];
+                Descriptors.Clear();
+                foreach (var descriptor in GetVisibleDescriptors(currentTrackNo)) {
+                    Descriptors.Add(descriptor);
+                }
+                if (Descriptors.Count == 0) {
+                    return;
+                }
+                if (!string.IsNullOrEmpty(savedAbbr) && Descriptors.Any(d => d.abbr == savedAbbr)) {
+                    SelectedIndex = Descriptors.IndexOf(Descriptors.First(d => d.abbr == savedAbbr));
+                    Descriptor = Descriptors[SelectedIndex];
+                } else if (selectedIndex >= Descriptors.Count) {
+                    SelectedIndex = Math.Min(Index, Descriptors.Count - 1);
+                    Descriptor = Descriptors[SelectedIndex];
+                } else {
+                    SelectedIndex = selectedIndex;
+                    if (SelectedIndex >= 0 && SelectedIndex < Descriptors.Count) {
+                        Descriptor = Descriptors[SelectedIndex];
+                    }
+                }
+                if (!string.IsNullOrEmpty(Abbr)) {
+                    DocManager.Inst.Project.expSelectors[Index] = Abbr;
+                }
+            } finally {
+                rebuildingList = false;
             }
         }
 
@@ -151,8 +169,9 @@ namespace OpenUtau.App.ViewModels {
                 return;
             }
             if (cmd.SelectorIndex == Index) {
-                if (Descriptors[SelectedIndex].abbr != cmd.ExpKey) {
-                    SelectedIndex = Descriptors.IndexOf(Descriptors.First(d => d.abbr == cmd.ExpKey));
+                var match = Descriptors.FirstOrDefault(d => d.abbr == cmd.ExpKey);
+                if (match != null && (SelectedIndex < 0 || SelectedIndex >= Descriptors.Count || Descriptors[SelectedIndex].abbr != cmd.ExpKey)) {
+                    SelectedIndex = Descriptors.IndexOf(match);
                 }
                 DisplayMode = ExpDisMode.Visible;
             } else if (cmd.UpdateShadow) {

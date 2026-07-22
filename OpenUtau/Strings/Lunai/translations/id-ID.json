@@ -137,6 +137,7 @@
   "pianoroll.toggle.pitchfollow": "Ikuti not secara vertikal saat pemutaran",
   "pianoroll.toggle.realcurves": "Lihat Kurva Nyata",
   "pianoroll.toggle.render": "Pengaturan render DiffSinger",
+  "pianoroll.toggle.projectexpressions": "Project Expressions",
   "pianoroll.toggle.snap": "Alihkan Jepret",
   "pianoroll.toggle.view": "Tampilan",
   "pianoroll.tool.drawpitch": "Alat Gambar Nada (4)\n    Klik kiri untuk menggambar\n    Klik kanan untuk mengatur ulang\n    Tahan Ctrl untuk memilih",
@@ -319,6 +320,12 @@
   "welcome.singerhub.open": "Buka Singer Hub",
   "workspace.panel.close": "Tutup panel",
   "workspace.panel.render": "Render",
+  "workspace.panel.expressions": "Project Expressions",
+  "workspace.panel.expressions.defaultcolor": "Default color",
+  "workspace.panel.expressions.voicecolors": "Voice colors",
+  "workspace.panel.expressions.parameters": "Parameters",
+  "workspace.panel.expressions.resettooltip": "Right click to reset to the built-in default",
+  "workspace.panel.expressions.openinexppanel": "Open in expression panel",
   "workspace.panel.view": "Tampilan",
   "workspace.tracks": "Trek"
 }
